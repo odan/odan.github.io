@@ -367,9 +367,9 @@ $.ajax({
 
 Remember the relationships.
 
-* Slim - As routing framerwork
-* Single Action Controllers - To invoke the correct service method (model layer)
+* Slim - As routing framework
+* Single Action Controllers - To invoke the correct service method (domain)
 * Dependency injection - For SOLID code and testability
 * Service classes - To handle business logic
-* Repositories - Data access
+* Repositories - Data access logic
 * Validation - User input handling
