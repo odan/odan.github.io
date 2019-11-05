@@ -16,8 +16,19 @@ This Tutorial shows everything you need to learn about working with a powerful, 
 * [Installation](#installation)
 * [Directory structure](#directory-structure)
 * [Apache URL rewriting](#apache-url-rewriting)
+* [Configuration](#configuration)
+* [The bootstrap process](#boostrapping)
+* [Routing](#routing-setup)
+* [Middleware](#middeware)
+  * [What is a middleware?](#what-is-a-middleware)
+  * [Routing and error middleware](#routing-and-error-middleware)
+* [Container](#container-setup)
+  * [A quick guide to the container](#a-quick-guide-to-the-container)
+  * [Definig container entries](#definig-container-entries)
 * [Your first route](#your-first-route)
+* [PSR-4 autoloading](#psr-4-autoloading)
 * [Actions](#actions)
+* [Writing JSON to the response](#writing-json-to-the-response)
 * [Domain](#domain)
 * [Repositories](#repositories)
 * [Validation](#validation)
@@ -148,8 +159,10 @@ to your slim application and handles all requests by channeling requests through
 
 ### Configuration
 
-The entire configuration of your application is stored and managed in 
-the `config/` directory.
+The directory for all configuration files is: `config/`
+
+The file `config/settings.php` is the main configuration file and combines 
+the default settings with environment specific settings. 
 
 * Create a directory: `config/`
 * Create a configuration file `config/settings.php` and copy/paste this content:
@@ -228,7 +241,13 @@ return static function (App $app) {
 
 ```
 
-#### Middeware setup
+### Middeware
+
+#### What is a middleware?
+
+*Under construction*
+
+#### Routing and error middleware
 
 Create a file to load global middleware handler `config/middleware.php` and copy/paste this content:
 
@@ -253,35 +272,9 @@ return static function (App $app) {
 };
 ```
 
-#### Container setup
+#### Container
 
-Slim 4 uses a dependency injection container to prepare, manage and inject application dependencies. 
-
-You can add any container library that implements the [PSR-11](https://www.php-fig.org/psr/psr-11/) interface.
-
-Create a new file for the container entries `config/container.php` and copy/paste this content:
-
-```php
-<?php
-
-use Psr\Container\ContainerInterface;
-use Slim\App;
-use Slim\Factory\AppFactory;
-
-return [
-    App::class => static function (ContainerInterface $container) {
-        AppFactory::setContainer($container);
-        $app = AppFactory::create();
-
-        // Optional: Set the base path to run the app in a subdirectory.
-        //$app->setBasePath('/slim4-tutorial');
-
-        return $app;
-    },
-];
-```
-
-### A quick guide to the container
+#### A quick guide to the container
 
 **[Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)** is passing dependency to other objects.
 Dependency injection makes testing easier. The injection can be done through a constructor.
@@ -309,19 +302,51 @@ and (explicit) **constructor dependency injection**.
 Dependency injection is a programming practice of passing into an object it’s collaborators, 
 rather the object itself creating them. 
 
-Since **Slim 4** you can use modern DIC like `PHP-DI` and `league/container` with the awesome 
-[autowire](http://php-di.org/doc/autowiring.html) feature. 
+Since **Slim 4** you can use modern tools like `PHP-DI` with the awesome [autowire](http://php-di.org/doc/autowiring.html) feature. 
 This means: Now you can declare all dependencies explicitly in your constructor and let the DIC inject these 
 dependencies for you. 
 
-To be more clear: "Composition" has nothing to do with the "Autowire" feature of the DIC. You can use composition 
+To be more clear: Composition has nothing to do with the "autowire" feature of the DIC. You can use composition 
 with pure classes and without a container or anything else. The autowire feature just uses the 
 [PHP Reflection](https://www.php.net/manual/en/book.reflection.php) classes to resolve and inject the 
 dependencies automatically for you.
 
+### Definig container entries
+ 
+Slim 4 uses a dependency injection container to prepare, manage and inject application dependencies. 
+
+You can add any container library that implements the [PSR-11](https://www.php-fig.org/psr/psr-11/) interface.
+
+Create a new file for the container entries `config/container.php` and copy/paste this content:
+
+```php
+<?php
+
+use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Slim\App;
+use Slim\Factory\AppFactory;
+
+return [
+    App::class => static function (ContainerInterface $container) {
+        AppFactory::setContainer($container);
+        $app = AppFactory::create();
+
+        // Optional: Set the base path to run the app in a subdirectory.
+        //$app->setBasePath('/slim4-tutorial');
+
+        return $app;
+    },
+
+    ResponseFactoryInterface::class => static function (ContainerInterface $container) {
+        return $container->get(App::class)->getResponseFactory();
+    },
+];
+```
+
 ## Your first route
 
-To add the first route we have to open the file `config/routes.php` and insert this example route for the home path `/`:
+To add the first open the file `config/routes.php` and insert this code:
 
 ```php
 <?php
@@ -340,25 +365,11 @@ return static function (App $app) {
 
 ```
 
-Now open your website, e.g. http://localhost and you should see a message `Hello, World!`.
-
-To add a second route for the path `/hello/{name}` insert this [closure](https://www.php.net/manual/en/class.closure.php) function into `config/routes.php`:
-
-```php
-$app->get('/hello/{name}', function (Request $request, Response $response, $args) {
-    $name = $args['name'];
-
-    $response->getBody()->write("Hello, $name");
-
-    return $response;
-});
-```
-
-Opening the url, e.g. http://localhost/hello/daniel, should display the message `Hello, daniel`.
+Now open your website, e.g. http://localhost and you should see the message `Hello, World!`.
 
 ## PSR-4 autoloading
 
-For the next steps we have to setup the `\App` namespace for the PSR-4 autoloader.
+For the next steps we have to register the `\App` namespace for the PSR-4 autoloader.
 
 Add this autoloading settings into `composer.json`:
 
@@ -402,9 +413,185 @@ The complete `composer.json` file should look like this:
 
 Run `composer update` for the changes to take effect.
 
-## Actions
+## Action
+
+In an [ADR](https://github.com/pmjones/adr/blob/master/ADR.md) system, a single Action is the main purpose of a class or closure. Each Action would be represented by a individual class or closure.
+
+The Action interacts with the Domain in the same way a Controller interacts with a Model but does not interact with a View or template system. It sends data to the Responder and invokes it so it can build the HTTP response.
+
+The *Action* mediates between the *Domain* and the *Responder*. 
+
+"Single Action Controllers" means: One action per class.
+
+The *Action* does only these things:
+
+* collects input from the HTTP request (if needed);
+* invokes the Domain with those inputs (if required) and retains the result;
+* invokes the Responder with any data the Responder needs to build an HTTP response (typically the HTTP Request and/or the Domain invocation results).
+
+All other logic, including all forms of input validation, error handling, and so on, are therefore pushed out of the Action and into the Domain (for domain logic concerns) or the Responder (for presentation logic concerns). 
+
+The Responder creates the response, not the Action.
+
+A Responder might be HTML-responder for a standard web request; or 
+it might be something like a JSON-responder for RESTful API requests.
+
+> Closures (functions) as routing handlers are quite "expensive" because PHP has to register all closures for each request. 
+The use of class names is more lightweight, faster and scales better for larger applications.
+
+* Create a directory: `src/`
+* Create a sub-directory: `src/Action`
+
+* Create this action class in: `src/Action/HomeAction.php`
+
+```php
+<?php
+
+namespace App\Action;
+
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+final class HomeAction
+{
+    private $responseFactory;
+    
+    public function __construct(ResponseFactoryInterface $responseFactory)
+    {
+        $this->responseFactory = $responseFactory;
+    }
+    
+    public function __invoke(ServerRequestInterface $request): ResponseInterface
+    {
+        $response = $this->responseFactory->createResponse();
+        $response->getBody()->write('Hello, Action!');
+
+        return $response;
+    }
+}
+```
+
+Then open `config/routes.php` and replace the route closure for `/` with this line:
+
+```php
+$app->get('/', \App\Action\HomeAction::class);
+```
+
+The complete `config/routes.php` should look like this now:
+
+```php
+<?php
+
+use Slim\App;
+
+return static function (App $app) {
+    $app->get('/', \App\Action\HomeAction::class);
+};
+```
+
+Now open your website, e.g. http://localhost and you should see the message `It works!`.
 
 ### Writing JSON to the response
+
+Instead of calling `json_encode` everytime we are using a specific JSON responder for this task.
+
+* Create a sub-directory: `src/Responder`
+
+* Create the JsonResponder class in: `src/Responder/JsonResponder.php`
+
+```php
+<?php
+
+namespace App\Responder;
+
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use UnexpectedValueException;
+
+/**
+ * A generic JSON responder.
+ */
+final class JsonResponder
+{
+    /**
+     * @var ResponseFactoryInterface
+     */
+    private $responseFactory;
+
+    /**
+     * Constructor.
+     *
+     * @param ResponseFactoryInterface $responseFactory The response factory
+     */
+    public function __construct(ResponseFactoryInterface $responseFactory)
+    {
+        $this->responseFactory = $responseFactory;
+    }
+
+    /**
+     * Generate a json response.
+     *
+     * @param array|null $data The data
+     *
+     * @throws UnexpectedValueException
+     *
+     * @return ResponseInterface
+     */
+    public function render(array $data = null): ResponseInterface
+    {
+        $json = json_encode($data);
+        if ($json === false) {
+            throw new UnexpectedValueException('Malformed UTF-8 characters, possibly incorrectly encoded.');
+        }
+
+        $response = $this->responseFactory->createResponse()->withHeader('Content-Type', 'application/json');
+
+        $response->getBody()->write($json);
+
+        return $response;
+    }
+}
+```
+
+Now replace the generic `ResponseFactoryInterface` with the `JsonResponder` in `src/Action/HomeAction.php`:
+
+```php
+<?php
+
+namespace App\Action;
+
+use App\Responder\JsonResponder;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+final class HomeAction
+{
+    private $responder;
+
+    public function __construct(JsonResponder $responder)
+    {
+        $this->responder = $responder;
+    }
+
+    public function __invoke(ServerRequestInterface $request): ResponseInterface
+    {
+        return $this->responder->render([
+            'success' => true,
+        ]);
+    }
+}
+```
+
+Open your website, e.g. http://localhost and you should see the JSON response `{"success":true}`.
+
+To change to http status code, just use the response `withStatus(x)` method:
+
+```php
+$result = ['error' => ['message' => 'Validation failed']];
+        
+return $this->responder->render($result)->withStatus(422);
+```
 
 ## Domain
 
