@@ -454,7 +454,7 @@ The Responder creates the response, not the Action.
 A Responder might be HTML-responder for a standard web request; or 
 it might be something like a JSON-responder for RESTful API requests.
 
-> Closures (functions) as routing handlers are quite "expensive" because PHP has to register all closures for each request. 
+Closures (functions) as routing handlers are quite "expensive" because PHP has to register all closures for each request. 
 The use of class names is more lightweight, faster and scales better for larger applications.
 
 * Create a directory: `src/`
