@@ -1,7 +1,7 @@
 plugins:
   - jekyll-include-cache
 
-remote_theme: "huangyz0918/moving"
+remote_theme: "rohanchandra/type-theme"
 
 # Name of your site (displayed in the header)
 name: Daniel Opitz
