@@ -1,7 +1,7 @@
 plugins:
   - jekyll-include-cache
 
-remote_theme: "nielsenramon/chalk"
+remote_theme: "Terminus2049/Terminus2049.github.io"
 
 # Name of your site (displayed in the header)
 name: Daniel Opitz
