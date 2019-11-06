@@ -914,17 +914,16 @@ final class CreateUserAction
 
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-        // Fetch json data
+        // Collect input from the HTTP request
         $data = (array)$request->getParsedBody();
 
-        // Collect input from the HTTP request
         $user = new UserData();
         $user->username = $data['username'];
         $user->firstName = $data['first_name'];
         $user->lastName = $data['last_name'];
         $user->email = $data['email'];
 
-        // Invoke the Domain with those inputs (if required) and retains the result
+        // Invoke the Domain with inputs and retain the result
         $userId = $this->userGenerator->createUser($user);
 
         // Invoke the Responder with any data the Responder needs to build an HTTP response
