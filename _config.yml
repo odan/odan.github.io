@@ -1,7 +1,7 @@
 plugins:
   - jekyll-remote-theme
 
-remote_theme: "daviddarnes/alembic"
+remote_theme: "mmistakes/minimal-mistakes@4.17.2"
 
 # Name of your site (displayed in the header)
 name: Daniel Opitz
