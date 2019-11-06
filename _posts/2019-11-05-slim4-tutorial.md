@@ -286,7 +286,7 @@ return static function (App $app) {
 **[Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)** is passing dependency to other objects.
 Dependency injection makes testing easier. The injection can be done through a constructor.
 
-A **dependencies injection container** (DIC) is a tool to help injecting dependencies.
+A **dependencies injection container** (DIC) is a tool for injecting dependencies.
 
 **A general rule:** The application itself should not use the container.
 Injecting the container into a class is an **anti-pattern**. Please declare all class dependencies in your 
@@ -309,7 +309,7 @@ and (explicit) **constructor dependency injection**.
 Dependency injection is a programming practice of passing into an object it’s collaborators, 
 rather the object itself creating them. 
 
-Since **Slim 4** you can use modern tools like `PHP-DI` with the awesome [autowire](http://php-di.org/doc/autowiring.html) feature. 
+Since **Slim 4** you can use modern tools like [PHP-DI](http://php-di.org/) with the awesome [autowire](http://php-di.org/doc/autowiring.html) feature. 
 This means: Now you can declare all dependencies explicitly in your constructor and let the DIC inject these 
 dependencies for you. 
 
@@ -357,7 +357,7 @@ return [
 
 ## Your first route
 
-To add the first open the file `config/routes.php` and insert this code:
+Open the file `config/routes.php` and insert the code for the first route:
 
 ```php
 <?php
@@ -377,6 +377,13 @@ return static function (App $app) {
 ```
 
 Now open your website, e.g. http://localhost and you should see the message `Hello, World!`.
+
+If you get a **404 error (not found)**, you should define the correct **basePath** in `config/container.php`.
+
+**Example:**
+```
+$app->setBasePath('/slim4-tutorial');
+```
 
 ## PSR-4 autoloading
 
