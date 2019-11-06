@@ -691,6 +691,7 @@ namespace App\Domain\User\Service;
 
 use App\Domain\User\Data\UserData;
 use App\Domain\User\Repository\UserGeneratorRepository;
+use UnexpectedValueException;
 
 /**
  * Service.
@@ -721,7 +722,10 @@ final class UserGenerator
      */
     public function createUser(UserData $user): int
     {
-        // Validation here...
+        // Validation
+        if (empty($user->username)) {
+            throw new UnexpectedValueException('Username required');
+        }
 
         // Insert user
         $userId = $this->repository->insertUser($user);
@@ -772,55 +776,54 @@ Create a new directory: `src/Domain/User/Repository`
 
 Create the file: `src/Domain/User/Repository/UserGeneratorRepository.php` and insert this content:
 
-```
+```php
 <?php
 
-namespace App\Domain\User\Service;
+namespace App\Domain\User\Repository;
 
 use App\Domain\User\Data\UserData;
-use App\Domain\User\Repository\UserGeneratorRepository;
-use UnexpectedValueException;
+use PDO;
 
 /**
- * Service.
+ * Repository.
  */
-final class UserGenerator
+class UserGeneratorRepository
 {
     /**
-     * @var UserGeneratorRepository
+     * @var PDO The database connection
      */
-    private $repository;
+    private $connection;
 
     /**
-     * The constructor.
+     * Constructor.
      *
-     * @param UserGeneratorRepository $repository The repository
+     * @param PDO $connection The database connection
      */
-    public function __construct(UserGeneratorRepository $repository)
+    public function __construct(PDO $connection)
     {
-        $this->repository = $repository;
+        $this->connection = $connection;
     }
 
     /**
-     * Create a new user.
+     * Insert user row.
      *
-     * @param UserData $user The user data
+     * @param UserData $user The user
      *
-     * @return int The new user ID
+     * @return int The new ID
      */
-    public function createUser(UserData $user): int
+    public function insertUser(UserData $user): int
     {
-        // Validation
-        if (empty($user->username)) {
-            throw new UnexpectedValueException('Username required');
-        }
+        $row = [
+            'username' => $user->username,
+            'first_name' => $user->firstName,
+            'last_name' => $user->lastName,
+            'email' => $user->email,
+        ];
 
-        // Insert user
-        $userId = $this->repository->insertUser($user);
+        $sql = "INSERT INTO users SET username=:username, first_name=:first_name, last_name=:last_name, email=:email;";
+        $this->connection->prepare($sql)->execute($row);
 
-        // Logging here: User created successfully
-
-        return $userId;
+        return (int)$this->connection->lastInsertId();
     }
 }
 ```
@@ -879,7 +882,7 @@ PDO::class => static function(ContainerInterface $container) {
 },
 ```
 
-From now on, PHP-DI will always inject this PDO instance as soon as we declare PDO in the 
+From now on, PHP-DI will always inject this PDO instance as soon as we declare PDO in a 
 constructor as a dependency.
 
 The last part is to register a new route for `POST /users`.
@@ -914,17 +917,17 @@ final class CreateUserAction
         // Fetch json data
         $data = (array)$request->getParsedBody();
 
-        // Map data to user dto
+        // Collect input from the HTTP request
         $user = new UserData();
         $user->username = $data['username'];
         $user->firstName = $data['first_name'];
         $user->lastName = $data['last_name'];
         $user->email = $data['email'];
 
-        // Create new user and return userId
+        // Invoke the Domain with those inputs (if required) and retains the result
         $userId = $this->userGenerator->createUser($user);
 
-        // Render to json
+        // Invoke the Responder with any data the Responder needs to build an HTTP response
         return $this->responder->render(['user_id' => $userId]);
     }
 }
