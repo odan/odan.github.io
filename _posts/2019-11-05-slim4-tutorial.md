@@ -2,7 +2,7 @@
 title: Slim 4 Tutorial
 layout: post
 comments: true
-published: false
+published: true
 description: 
 keywords: php slim tutorial
 ---
@@ -24,14 +24,19 @@ This Tutorial shows everything you need to learn about working with a powerful, 
   * [Routing and error middleware](#routing-and-error-middleware)
 * [Container](#container-setup)
   * [A quick guide to the container](#a-quick-guide-to-the-container)
-  * [Definig container entries](#definig-container-entries)
+  * [Container definitions](#container-definitions)
 * [Your first route](#your-first-route)
 * [PSR-4 autoloading](#psr-4-autoloading)
 * [Actions](#actions)
-* [Writing JSON to the response](#writing-json-to-the-response)
+  * [Writing JSON to the response](#writing-json-to-the-response)
 * [Domain](#domain)
-* [Repositories](#repositories)
-* [Validation](#validation)
+  * [Services](#services)
+  * [Repositories](#repositories)
+  * [Value Objects](#value-objects)
+  * [Data Transfer Objects](#data-transfer-objects-dto)
+  * [Parameter objects](#parameter-objects)
+  * [Types and enums](#types-and-enums)
+* [Deployment](#deployment)
 * [Conclusion](#conclusion)
 
 ## Requirements
@@ -311,7 +316,7 @@ with pure classes and without a container or anything else. The autowire feature
 [PHP Reflection](https://www.php.net/manual/en/book.reflection.php) classes to resolve and inject the 
 dependencies automatically for you.
 
-### Definig container entries
+### Container definitions
  
 Slim 4 uses a dependency injection container to prepare, manage and inject application dependencies. 
 
@@ -328,6 +333,10 @@ use Slim\App;
 use Slim\Factory\AppFactory;
 
 return [
+    'settings' => static function () {
+        return require __DIR__ . '/settings.php';
+    },
+
     App::class => static function (ContainerInterface $container) {
         AppFactory::setContainer($container);
         $app = AppFactory::create();
@@ -595,8 +604,461 @@ return $this->responder->render($result)->withStatus(422);
 
 ## Domain
 
-## Repositories
+### Services
 
-## Validation
+The [Domain](https://github.com/pmjones/adr/blob/master/ADR.md#model-versus-domain) is the place for the
+complex [business logic](https://en.wikipedia.org/wiki/Business_logic).
+
+Instead of putting the logic into gigantic (fat) "Models", we but the logic into smaller, 
+specialized [Service](https://en.wikipedia.org/wiki/Service_((systems_architecture) classes, aka (**Application Service**, Transaction Script etc.).
+
+A service provices a specific functionality or a set of functionalities, such as the retrieval of 
+specified information or the execution of a set of operations, with a purpose that different clients 
+can reuse for different purposes.
+
+There can be multiple clients for a service, e.g. the action (request), 
+another service, the CLI (console) and the unit-test environmet (phpunit).
+
+> A service class is not a "Manager" or "Utility" class.
+
+Each service class should have only one responsibility, e.g. to transfer money from A to B, and not more.
+
+Separate **data** from **behavior** by using services for the behavior and DTO's for the data.
+
+The directory for all (domain) modules and sub-modules is: `src/Domain`
+
+**Pseudo example:**
+
+```php
+use App\Domain\User\Data\UserData;
+use App\Domain\User\Service\UserGenerator;
+
+$user = new UserData();
+$user->username = 'john.doe';
+$user->firstName = 'John';
+$user->lastName = 'Doe';
+$user->email = 'john.doe@example.com';
+
+$service = new UserGenerator();
+$service->createUser($user);
+```
+
+The code for the service class `src/Domain/User/Service/UserGenerator.php` looks like this:
+
+```php
+<?php
+
+namespace App\Domain\User\Service;
+
+use App\Domain\User\Data\UserData;
+use App\Domain\User\Repository\UserGeneratorRepository;
+
+/**
+ * Service.
+ */
+final class UserGenerator
+{
+    /**
+     * @var UserGeneratorRepository
+     */
+    private $repository;
+
+    /**
+     * The constructor.
+     *
+     * @param UserGeneratorRepository $repository The repository
+     */
+    public function __construct(UserGeneratorRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * Create a new user.
+     *
+     * @param UserData $user The user data
+     *
+     * @return int The new user ID
+     */
+    public function createUser(UserData $user): int
+    {
+        // Validation here...
+
+        // Insert user
+        $userId = $this->repository->insertUser($user);
+
+        // Logging here: User created successfully
+
+        return $userId;
+    }
+}
+```
+
+Take a look at the **constructor**! You can see that we have declared the `UserGeneratorRepository` as a
+dependency, because the service can only interact with the database through the repository.
+
+### Repositories
+
+A repository is responsible for the data access logic, communication with database(s).
+
+There are two types of repositories: collection-oriented and persistence-oriented repositories. 
+In this case, we are talking about **persistence-oriented repositories**, since these are better 
+suited for processing large amounts of data.
+
+A repository is the source of all the data your application needs 
+and mediates between the service and the database. A repository improves code maintainability, testing and readability by separating **business logic** 
+from **data access logic** and provides centrally managed and consistent access rules for a data source. 
+Each public repository method represents a query. The return values represent the result set 
+of a query and can be primitive/object or list (array) of them. Database transactions must 
+be handled on a higher level (service) and not within a repository.
+
+#### Creating a repository
+
+For this tutorial we need a test database with a `users` table.
+Please execute this SQL statement in your test database.
+
+```sql
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+```
+
+Create a new directory: `src/Domain/User/Repository`
+
+Create the file: `src/Domain/User/Repository/UserGeneratorRepository.php` and insert this content:
+
+```
+<?php
+
+namespace App\Domain\User\Service;
+
+use App\Domain\User\Data\UserData;
+use App\Domain\User\Repository\UserGeneratorRepository;
+use UnexpectedValueException;
+
+/**
+ * Service.
+ */
+final class UserGenerator
+{
+    /**
+     * @var UserGeneratorRepository
+     */
+    private $repository;
+
+    /**
+     * The constructor.
+     *
+     * @param UserGeneratorRepository $repository The repository
+     */
+    public function __construct(UserGeneratorRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    /**
+     * Create a new user.
+     *
+     * @param UserData $user The user data
+     *
+     * @return int The new user ID
+     */
+    public function createUser(UserData $user): int
+    {
+        // Validation
+        if (empty($user->username)) {
+            throw new UnexpectedValueException('Username required');
+        }
+
+        // Insert user
+        $userId = $this->repository->insertUser($user);
+
+        // Logging here: User created successfully
+
+        return $userId;
+    }
+}
+```
+
+Note that we have declared `PDO` as a dependency, because the repository requires a database connection.
+
+The PDO object itself is created and injected by the dependency inject container (PHP-DI).
+For this we have to add the PDO settings and a container definition.
+
+Add the PDO settings to: `config/settings.php`:
+
+```php
+// Database settings
+$settings['db'] = [
+    'driver' => 'mysql',
+    'host' => 'localhost',
+    'username' => 'root',
+    'database' => 'test',
+    'password' => '',
+    'charset' => 'utf8mb4',
+    'collation' => 'utf8mb4_unicode_ci',
+    'flags' => [
+        PDO::ATTR_PERSISTENT => false,
+        // Enable exceptions
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        // Set default fetch mode
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    ],
+];
+```
+
+Insert a `PDO::class` container definition to `config/container.php`:
+
+```php
+PDO::class => static function(ContainerInterface $container) {
+    $settings = $container->get('settings');
+
+    $host = $settings['db']['host'];
+    $dbname = $settings['db']['database'];
+    $username = $settings['db']['username'];
+    $password = $settings['db']['password'];
+    $charset = $settings['db']['charset'];
+    $collate = $settings['db']['collation'];
+
+    $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+
+    $options = [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        PDO::ATTR_PERSISTENT => false,
+        PDO::ATTR_EMULATE_PREPARES => true,
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES $charset COLLATE $collate"
+    ];
+
+    return new PDO($dsn, $username, $password, $options);
+},
+```
+
+From now on, PDI-DI will always inject this PDO instance as soon as we declare PDO in the 
+constructor as a dependency.
+
+The last part is to register a new route for `POST /users`.
+
+Create a new action class in: `src/Action/RegisterUserAction.php`:
+
+```php
+<?php
+
+namespace App\Action;
+
+use App\Domain\User\Data\UserData;
+use App\Domain\User\Service\UserGenerator;
+use App\Responder\JsonResponder;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+final class CreateUserAction
+{
+    private $userGenerator;
+
+    private $responder;
+
+    public function __construct(UserGenerator $userGenerator, JsonResponder $responder)
+    {
+        $this->userGenerator = $userGenerator;
+        $this->responder = $responder;
+    }
+
+    public function __invoke(ServerRequestInterface $request): ResponseInterface
+    {
+        // Fetch json data
+        $data = (array)$request->getParsedBody();
+
+        // Map data to user dto
+        $user = new UserData();
+        $user->username = $data['username'];
+        $user->firstName = $data['first_name'];
+        $user->lastName = $data['last_name'];
+        $user->email = $data['email'];
+
+        // Create new user and return userId
+        $userId = $this->userGenerator->createUser($user);
+
+        // Render to json
+        return $this->responder->render(['user_id' => $userId]);
+    }
+}
+```
+
+Add the new route in `config/routes.php`:
+
+```php
+$app->post('/users', \App\Action\CreateUserAction::class);
+```
+
+The complete project structure should look like this now:
+
+![image](https://user-images.githubusercontent.com/781074/68299483-1080dc00-009c-11ea-9632-f68d6652907e.png)
+
+Now you can test the `POST /users` route with [Postman](https://www.getpostman.com/) to see if it works.
+
+If successful, the result should look like this:
+
+![image](https://user-images.githubusercontent.com/781074/68299379-ddd6e380-009b-11ea-9ead-4c3b12b62807.png)
+
+### Data Transfer Objects (DTO) 
+  
+A DTO contains only pure **data**. There is no business or domain specific logic, only simple validation logic. There is also no database access within a DTO. A service fetches data from a repository and  the repository (or the service) fills the DTO with data. A DTO can be used to transfer data inside or outside the domain.
+
+**Example:**
+
+Filename: `src/Domain/User/Data/UserData.php`
+
+```php
+<?php
+
+namespace App\Domain\User\Data;
+
+final class UserData
+{
+    /** @var string */
+    public $username;
+    
+    /** @var string */
+    public $firstName;
+
+    /** @var string */
+    public $lastName;
+
+    /** @var string */
+    public $email;
+}
+```
+
+### Value Objects
+
+Use it only for "small things" like Date, Money, CustomerId and as replacement for primitive data type like string, int, float, bool, array. 
+
+A value object must be **immutable** and is responsible for keeping their state consistent. 
+
+A value object should only be filled using the constructor.
+
+Wither methods are allowed, but `setter` methods are not allowed. 
+
+**Example:**
+
+```php
+public function withEmail(string $email): self { ... }
+```
+
+A getter method name does not contain a `get` prefix. 
+
+**Example:**
+
+```php
+public function email(): string { return $this->email; }`. 
+```
+
+All properties must be `protected` or `private` accessed by the getter methods.
+
+**Example:**
+
+```php
+<?php
+
+class CustomerId
+{
+    private $id;
+    
+    public function __construct(int $id)
+    {
+        $this->id = $id;
+    }
+    
+    public function equals(CustomerId $customerId): bool
+    {
+        return $this->id == $customerId->id;
+    }
+    
+    public function __toString()
+    {
+        return (string)$this->id;
+    }
+}
+```
+
+[Read more](https://kacper.gunia.me/validating-value-objects/)
+
+### Parameter objects
+
+If you have a lot of parameters that fit together, 
+you can replace them with a parameter object. See [DTO](#data-transfer-objects-dto)
+
+### Types and enums
+
+Don't use strings or fix integer codes as values. Instead use public class constants.
+
+**Example:**
+
+```php
+<?php
+
+final class LevelType
+{
+    public const LOW = 1;
+    public const MEDIUM = 2;
+    public const HIGH = 3;
+}
+```
+
+## Deployment
+
+For deployment on a productive server, there are some important settings and security releated things to consider.
+
+You can use composer to generate an optimized build of your application. 
+All dev-dependencies are removed and the Composer autoloader is optimized for performance. 
+
+Run this command in the same directory as the project’s composer.json file:
+
+```
+composer install --no-dev --optimize-autoloader
+```
+
+You don't have to run composer on your production server. Instread you should implement a [build pipeline](https://www.amazon.com/dp/B003YMNVC0) that creates
+an so called "artifact". An artifact is an ZIP file you can upload and deploy on your production server. 
+[selective-php/artifact](https://github.com/selective-php/artifact) is a tool to build artifacts from your source code.
+
+For security reason you should turn of all error details in production:
+
+```php
+$app->addErrorMiddleware(false, false, false);
+```
+
+If you have to run your Slim application in a sub-directory, you could try this library: [selective-php/basepath](https://github.com/selective-php/basepath)
+
+**Important**: It's very important to set the Apache `DocumentRoot` to the `public/` directory. 
+Otherwise, it may happen that someone else could access internal files from outside. [More details](https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-ubuntu-16-04)
+
+`/etc/apache2/sites-enabled/000-default.conf`
+
+```htacess
+DocumentRoot /var/www/example.com/htdocs/public
+```
+
+**Tip:** Never store secret passwords in your git / SVN repository. 
+Instead you could store them in a file like `env.php` and place this file one directory above your application directory. e.g.
+
+```
+/var/www/example.com/env.php
+```
 
 ## Conclusion
+
+Remember the relationships.
+
+* Slim - As routing framework
+* Single Action Controllers - To invoke the correct service method (domain)
+* Dependency injection - For SOLID code and testability
+* Service classes - To handle business logic
+* Repositories - Data access logic (database)
