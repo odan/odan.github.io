@@ -1,7 +1,8 @@
 plugins:
   - jekyll-remote-theme
+  - jekyll-include-cache
 
-remote_theme: "mmistakes/minimal-mistakes@4.17.2"
+remote_theme: "mmistakes/so-simple-theme@3.2.0"
 
 # Name of your site (displayed in the header)
 name: Daniel Opitz
