@@ -7,7 +7,7 @@ description:
 keywords: php slim tutorial
 ---
 
-This Tutorial shows everything you need to learn about working with a powerful, lightweight Slim 4 framework.
+This tutorial shows you how to work with the powerful and lightweight Slim 4 framework.
 
 ## Table of contents
 
@@ -162,7 +162,7 @@ RewriteRule (.*) public/$1 [L]
 The [front controller](https://en.wikipedia.org/wiki/Front_controller) is the entry point 
 to your slim application and handles all requests by channeling requests through a single handler object.
 
-### Configuration
+## Configuration
 
 The directory for all configuration files is: `config/`
 
@@ -193,7 +193,7 @@ $settings['public'] = $settings['root'] . '/public';
 return $settings;
 ```
 
-#### Boostrapping
+### Boostrapping
 
 Boostrapping is the first code that is executed when the application (request) is started. 
 
@@ -231,7 +231,7 @@ $app = $container->get(App::class);
 return $app;
 ```
 
-#### Routing setup
+### Routing setup
 
 Create a file for all routes `config/routes.php` and copy/paste this content:
 
@@ -246,13 +246,15 @@ return static function (App $app) {
 
 ```
 
-### Middeware
+## Middeware
 
-#### What is a middleware?
+### What is a middleware?
 
-*Under construction*
+A middleware can be executed before and after your Slim application to manipulate the request and response object according to your requirements.
 
-#### Routing and error middleware
+[Read more](http://www.slimframework.com/docs/v4/concepts/middleware.html)
+
+### Routing and error middleware
 
 Create a file to load global middleware handler `config/middleware.php` and copy/paste this content:
 
@@ -277,9 +279,9 @@ return static function (App $app) {
 };
 ```
 
-#### Container
+## Container
 
-#### A quick guide to the container
+### A quick guide to the container
 
 **[Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)** is passing dependency to other objects.
 Dependency injection makes testing easier. The injection can be done through a constructor.
@@ -612,7 +614,7 @@ complex [business logic](https://en.wikipedia.org/wiki/Business_logic).
 Instead of putting the logic into gigantic (fat) "Models", we but the logic into smaller, 
 specialized [Service](https://en.wikipedia.org/wiki/Service_((systems_architecture) classes, aka (**Application Service**, Transaction Script etc.).
 
-A service provices a specific functionality or a set of functionalities, such as the retrieval of 
+A service provides a specific functionality or a set of functionalities, such as the retrieval of 
 specified information or the execution of a set of operations, with a purpose that different clients 
 can reuse for different purposes.
 
@@ -712,7 +714,7 @@ Each public repository method represents a query. The return values represent th
 of a query and can be primitive/object or list (array) of them. Database transactions must 
 be handled on a higher level (service) and not within a repository.
 
-#### Creating a repository
+### Creating a repository
 
 For this tutorial we need a test database with a `users` table.
 Please execute this SQL statement in your test database.
@@ -995,7 +997,7 @@ class CustomerId
 If you have a lot of parameters that fit together, 
 you can replace them with a parameter object. See [DTO](#data-transfer-objects-dto)
 
-### Types and enums
+## Types and enums
 
 Don't use strings or fix integer codes as values. Instead use public class constants.
 
