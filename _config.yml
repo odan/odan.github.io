@@ -1,5 +1,4 @@
 plugins:
-  - jekyll-remote-theme
   - jekyll-include-cache
 
 remote_theme: "mmistakes/so-simple-theme@3.2.0"
