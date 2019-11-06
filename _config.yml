@@ -1,8 +1,4 @@
-plugins:
-  - jekyll-remote-theme
-  - jekyll-include-cache
-
-remote_theme: "wowthemesnet/mundana-theme-jekyll"
+theme: jekyll-theme-cayman
 
 # Name of your site (displayed in the header)
 name: Daniel Opitz
