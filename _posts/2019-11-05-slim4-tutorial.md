@@ -950,7 +950,8 @@ If successful, the result should look like this:
 
 ### Value Objects
 
-Use it only for "small things" like Date, Money, CustomerId and as replacement for primitive data type like string, int, float, bool, array. 
+Use it only for "small things" like Date, Money, CustomerId and as replacement for primitive data types
+ like string, int, float, bool and array. 
 
 A value object must be **immutable** and is responsible for keeping their state consistent. 
 
@@ -969,7 +970,7 @@ A getter method name does not contain a `get` prefix.
 **Example:**
 
 ```php
-public function email(): string { return $this->email; }`. 
+public function email(): string { return $this->email; } 
 ```
 
 All properties must be `protected` or `private` accessed by the getter methods.
@@ -979,7 +980,7 @@ All properties must be `protected` or `private` accessed by the getter methods.
 ```php
 <?php
 
-class CustomerId
+final class CustomerId
 {
     private $id;
     
@@ -990,7 +991,7 @@ class CustomerId
     
     public function equals(CustomerId $customerId): bool
     {
-        return $this->id == $customerId->id;
+        return $this->id === $customerId->id;
     }
     
     public function __toString()
