@@ -433,13 +433,15 @@ Run `composer update` for the changes to take effect.
 
 ## Action
 
-In an [ADR](https://github.com/pmjones/adr/blob/master/ADR.md) system, a single Action is the main purpose of a class or closure. Each Action would be represented by a individual class or closure.
+In an [ADR](https://github.com/pmjones/adr/blob/master/ADR.md) system, each Action is represented by a individual class or closure.
 
-The Action interacts with the Domain in the same way a Controller interacts with a Model but does not interact with a View or template system. It sends data to the Responder and invokes it so it can build the HTTP response.
+The Action mediates between the **Domain** and the **Responder**. 
 
-The *Action* mediates between the *Domain* and the *Responder*. 
+The Action interacts with the Domain in the same way a Controller interacts with a 
+Model but does not interact with a View or template system.
+It sends data to the Responder and invokes it so it can build the HTTP response.
 
-"Single Action Controllers" means: One action per class.
+> "Single Action Controllers" means: One action per class.
 
 The *Action* does only these things:
 
@@ -454,7 +456,7 @@ The Responder creates the response, not the Action.
 A Responder might be HTML-responder for a standard web request; or 
 it might be something like a JSON-responder for RESTful API requests.
 
-Closures (functions) as routing handlers are quite "expensive" because PHP has to register all closures for each request. 
+Closures (functions) as routing handlers are quite "expensive" because PHP has to create all closures for each request. 
 The use of class names is more lightweight, faster and scales better for larger applications.
 
 * Create a directory: `src/`
@@ -650,7 +652,37 @@ $service = new UserGenerator();
 $service->createUser($user);
 ```
 
-The code for the service class `src/Domain/User/Service/UserGenerator.php` looks like this:
+### Data Transfer Objects (DTO) 
+  
+A DTO contains only pure **data**. There is no business or domain specific logic, 
+only simple validation logic. There is also no database access within a DTO. 
+A service fetches data from a repository and  the repository (or the service) 
+fills the DTO with data. A DTO can be used to transfer data inside or outside the domain.
+
+Create a DTO class to hold the data in this file: `src/Domain/User/Data/UserData.php`
+
+```php
+<?php
+
+namespace App\Domain\User\Data;
+
+final class UserData
+{
+    /** @var string */
+    public $username;
+    
+    /** @var string */
+    public $firstName;
+
+    /** @var string */
+    public $lastName;
+
+    /** @var string */
+    public $email;
+}
+```
+
+Create the code for the service class `src/Domain/User/Service/UserGenerator.php`:
 
 ```php
 <?php
@@ -847,7 +879,7 @@ PDO::class => static function(ContainerInterface $container) {
 },
 ```
 
-From now on, PDI-DI will always inject this PDO instance as soon as we declare PDO in the 
+From now on, PHP-DI will always inject this PDO instance as soon as we declare PDO in the 
 constructor as a dependency.
 
 The last part is to register a new route for `POST /users`.
@@ -913,35 +945,6 @@ Now you can test the `POST /users` route with [Postman](https://www.getpostman.c
 If successful, the result should look like this:
 
 ![image](https://user-images.githubusercontent.com/781074/68299379-ddd6e380-009b-11ea-9ead-4c3b12b62807.png)
-
-### Data Transfer Objects (DTO) 
-  
-A DTO contains only pure **data**. There is no business or domain specific logic, only simple validation logic. There is also no database access within a DTO. A service fetches data from a repository and  the repository (or the service) fills the DTO with data. A DTO can be used to transfer data inside or outside the domain.
-
-**Example:**
-
-Filename: `src/Domain/User/Data/UserData.php`
-
-```php
-<?php
-
-namespace App\Domain\User\Data;
-
-final class UserData
-{
-    /** @var string */
-    public $username;
-    
-    /** @var string */
-    public $firstName;
-
-    /** @var string */
-    public $lastName;
-
-    /** @var string */
-    public $email;
-}
-```
 
 ### Value Objects
 
