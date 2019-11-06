@@ -459,7 +459,6 @@ The use of class names is more lightweight, faster and scales better for larger 
 
 * Create a directory: `src/`
 * Create a sub-directory: `src/Action`
-
 * Create this action class in: `src/Action/HomeAction.php`
 
 ```php
@@ -515,7 +514,6 @@ Now open your website, e.g. http://localhost and you should see the message `It 
 Instead of calling `json_encode` everytime we are using a specific JSON responder for this task.
 
 * Create a sub-directory: `src/Responder`
-
 * Create the JsonResponder class in: `src/Responder/JsonResponder.php`
 
 ```php
@@ -619,7 +617,7 @@ The [Domain](https://github.com/pmjones/adr/blob/master/ADR.md#model-versus-doma
 complex [business logic](https://en.wikipedia.org/wiki/Business_logic).
 
 Instead of putting the logic into gigantic (fat) "Models", we but the logic into smaller, 
-specialized [Service](https://en.wikipedia.org/wiki/Service_((systems_architecture) classes, aka (**Application Service**, Transaction Script etc.).
+specialized **Service** classes, aka (Application Service, Transaction Script etc).
 
 A service provides a specific functionality or a set of functionalities, such as the retrieval of 
 specified information or the execution of a set of operations, with a purpose that different clients 
