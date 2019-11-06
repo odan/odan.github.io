@@ -1,4 +1,7 @@
-theme: jekyll-theme-cayman
+plugins:
+  - jekyll-remote-theme
+
+remote_theme: daviddarnes/alembic
 
 # Name of your site (displayed in the header)
 name: Daniel Opitz
