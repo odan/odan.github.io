@@ -7,8 +7,10 @@ description:
 keywords: 
 ---
 
-As of XAMPP 5.5.30 and 5.6.14, XAMPP ships MariaDB instead of MySQL.
-[MariaDB is not 100% compatible with MySQL](https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-compatibility/) and can be replaced with the "orginal" MySQL server.
+The latest version of XAMPP contains [MariaDB](https://mariadb.org/) instead of [MySQL](https://www.mysql.com/).
+
+But [MariaDB is not 100% compatible with MySQL](https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-compatibility/) 
+and can be replaced with the "orginal" MySQL server.
 
 ## Requirements
 
@@ -18,7 +20,7 @@ As of XAMPP 5.5.30 and 5.6.14, XAMPP ships MariaDB instead of MySQL.
 
 ## Backup
 
-* Backup the old database into a sql dump file
+* Backup the old database into a SQL dump file
 * Stop the MariaDB service
 * Rename the folder: `c:\xampp\mysql` to `c:\xampp\mariadb`
 
@@ -93,6 +95,8 @@ Finished
 
 ### Answers
 
-* Make sure you have installed the 32-bit version of MySQL. The MySQL 64-bit version is not compatible with the XAMPP Control Panel.
-* This setup is not testet with MySQL 8.x
+* Make sure you have installed the 32-bit version of MySQL. 
+The MySQL 64-bit version is not compatible with the XAMPP Control Panel (32-bit).
+* This setup is not tested with MySQL 8.x.
+* MySQL 8.x is only available as 64-bit version
 * Try to fix the directory permissions with this [batch script](https://odan.github.io/2017/01/13/reset-windows-folder-permissions.html)
