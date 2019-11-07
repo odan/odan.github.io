@@ -90,7 +90,7 @@ Finished
 
 ### Questions
 
-* I can't start or stop mysql using the XAMPP control panel button
+* I can't start or stop MySQL using the XAMPP control panel button
 * The XAMPP control panel is crashing while shutting down
 
 ### Answers
@@ -100,3 +100,5 @@ The MySQL 64-bit version is not compatible with the XAMPP Control Panel (32-bit)
 * This setup is not tested with MySQL 8.x.
 * MySQL 8.x is only available as 64-bit version
 * Try to fix the directory permissions with this [batch script](https://odan.github.io/2017/01/13/reset-windows-folder-permissions.html)
+
+[Comments](https://gist.github.com/odan/c799417460470c3776ffa8adce57eece)
