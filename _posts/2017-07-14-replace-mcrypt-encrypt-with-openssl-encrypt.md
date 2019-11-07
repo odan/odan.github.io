@@ -1,5 +1,5 @@
 ---
-title: Replace mcrypt_encrypt with openssl_encrypt
+title: Replacing mcrypt_encrypt with openssl_encrypt
 layout: post
 comments: true
 published: true
@@ -7,9 +7,9 @@ description:
 keywords: php, mcrypt, openssl, encryption
 ---
 
-If you switch from PHP 5.x to 7.1 you will get the following message:
+When you switch from PHP 5.x to 7.1, you may get the following error message:
 
-**"Function mcrypt_encrypt() is deprecated"**
+> Function mcrypt_encrypt() is deprecated
 
 Now it is the right time to refactor this old function :-)
 

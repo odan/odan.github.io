@@ -1,5 +1,5 @@
 ---
-title: Create a PHP Phar file
+title: Creating a PHP Phar file
 layout: post
 comments: true
 published: true
@@ -9,11 +9,11 @@ keywords:
 
 Step by step
 
-Create a file: `app/index.php`
+Create a file: `src/index.php`
 
 ```php
 <?php 
-// Filename: app/index.php
+// Filename: src/index.php
 // Optional load composer autoloader
 //require_once __DIR__ . '/vendor/autoload.php';
 echo "App started";
@@ -38,7 +38,7 @@ if (file_exists($pharFile . '.gz')) {
 $p = new Phar($pharFile);
 
 // creating our library using whole directory  
-$p->buildFromDirectory('app/');
+$p->buildFromDirectory('src/');
 
 // pointing main file which requires all classes  
 $p->setDefaultStub('index.php', '/index.php');
