@@ -140,45 +140,26 @@ $pdo->prepare("DELETE FROM users WHERE id=:id")->execute($where);
 $pdo->prepare("DELETE FROM users")->execute();
 ```
 
-## PDO datatypes
+## PDO data types
 
-Getting dynamic (POST) data with null values can be difficult to handle with PDO. 
-Here is a helper function to detect the correct data type.
+You can set a explicit data type for the parameter using the `PDO::PARAM_*` constants.
 
 ```php
-function get_pdo_type($value)
-{
-    switch (true) {
-        case is_bool($value):
-            // Waring: bool works only in MySQL if ATTR_EMULATE_PREPARES is true
-            $dataType = PDO::PARAM_BOOL;
-            break;
-        case is_int($value):
-            $dataType = PDO::PARAM_INT;
-            break;
-        case is_null($value):
-            $dataType = PDO::PARAM_NULL;
-            break;
-        default:
-            $dataType = PDO::PARAM_STR;
-    }
-    return $dataType;
-}
-
 // Usage
-$email = $_POST['email'];
+$email = (string)$_POST['email'];
 
 $statement = $pdo->prepare('INSERT INTO users SET email=:email;');
-$statement->bindValue(':email', $email, get_pdo_type($email));
+$statement->bindValue(':email', $email, PDO::PARAM_STR);
 $statement->execute();
 ```
 
 ## Prepared statements using the IN clause
 
-It cannot be done with PDO, according to the PHP Manual's entry on PDO::prepare(), which says:
-"You cannot bind multiple values to a single named parameter in, for example, the IN() clause of an SQL statement."
+According to the [PHP manual](https://www.php.net/manual/en/pdo.prepare.php) it's not possible with PDO:
 
-This PDO helper function converts all array values into a (safe) quoted string. 
+> You cannot bind multiple values to a single named parameter in, for example, the IN() clause of an SQL statement.
+
+This helper function converts all array values into a (safe) quoted string. 
 
 ```php
 function quote_values(PDO $pdo, array $values) {
@@ -223,7 +204,7 @@ Generated SQL:
 SELECT id FROM users WHERE id IN('1','2','3','''',NULL,'string','123.456','1','0')
 ```
 
-Other solutions to create a IN clause:
+Other solutions to create IN clauses:
 
 * [PHP PDO Prepared Statements to Prevent SQL Injection](https://websitebeaver.com/php-pdo-prepared-statements-to-prevent-sql-injection#where-in-array)
 
