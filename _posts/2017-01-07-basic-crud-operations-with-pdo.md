@@ -40,7 +40,13 @@ $userRow = $statement->fetch();
 
 ## Select multiple rows
 
-With fetch for large results.
+Without parameters:
+
+```php
+$userRows = $pdo->query('SELECT * FROM users')->fetchAll();
+```
+
+With parameters (prepared statements):
 
 ```php
 $statement = $pdo->prepare("SELECT * FROM employees WHERE name = :name");
@@ -50,16 +56,10 @@ foreach ($statement as $row) {
     // do something with $row
 }
 
-// or with the fech method:
+// or with the fech method
 while ($row = $statement->fetch()) {
    // do something with $row
 }
-```
-
-With fetchAll for small results.
-
-```php
-$userRows = $pdo->query('SELECT * FROM users')->fetchAll();
 ```
 
 ## Insert a single row
