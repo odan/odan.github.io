@@ -39,29 +39,31 @@ This behavior has some disadvantages and offers not what I'm looking for.
 My concern (and experience) was that those records will be modified between the SELECT and UPDATE.
 A row lock does not prevent read access (e.g. a normal select without for update). Other process still could read and process this rows.
 
-## My solution
-
-A possible solution may be to first UPDATE the record, then read its data:
+A possible solution is to first UPDATE the record(s) with a UUID, then read the records with the same UUID.
 
 Each process will have a unique ID (UUID), and the table will have a new column named 'process_uuid' for that ID. Then the process will run something like:
 
-1. Generate a UUID: https://github.com/ramsey/uuid
+* Generate a UUID with: <https://github.com/ramsey/uuid>
 
-2. Update the desired records with this UUID.
+* Update the desired records with the generated UUID.
 
 ```sql
 UPDATE table SET status='processing', process_uuid='69c6a30e-bc77-498f-954d-1640bc394f74' WHERE status='new';
 ```
 
-3. SELECT only the process specific rows by UUID
+* SELECT only the process specific rows by UUID
 
-While the update runs the row is locked, so no other deamon can read it. After the update this row is owned by a specific process, then it can run a SELECT to fetch all necessary data from that row.
+While the update runs the row is locked, so no other process can read it. 
+After the update this row is owned by a specific process, 
+then it can run a SELECT to fetch all necessary data from that row(s).
 
 ```sql
 SELECT * FROM table WHERE status='processing' AND process_uuid='69c6a30e-bc77-498f-954d-1640bc394f74';
 ```
 
-Finally, the last UPDATE will set the row to 'processed', and may (or may not) remove the owner field (process_uuid). Keeping it there will also enable some statistics about the process work.
+Finally, the last UPDATE will set the row to 'processed', 
+and may (or may not) remove the owner field (process_uuid). 
+Keeping it there will also enable some statistics about the process work.
 
 ```sql
 UPDATE table SET status='processed' WHERE id=x;
