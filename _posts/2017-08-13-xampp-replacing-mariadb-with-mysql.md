@@ -71,6 +71,9 @@ Update structure to latest version:
 mysql_upgrade.exe -u root -p --force
 ```
 
+Restart the MySQL service, after the `mysql_upgrade.exe` command, 
+otherwise there might be [errors](https://stackoverflow.com/questions/6288103/native-table-performance-schema-has-the-wrong-structure).
+
 Check the tables for errors:
   
 ```cmd
