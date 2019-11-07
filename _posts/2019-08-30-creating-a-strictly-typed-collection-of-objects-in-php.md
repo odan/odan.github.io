@@ -20,9 +20,12 @@ keywords: php array generics
 
 Did you already know? You don't need generics, because PHP has everything to implement type-safe and future-proof collection classes.
 
-We only need the features everyone should know since PHP 7: Arrays and [Type declarations](https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration). 
+We only need the features everyone should know since PHP 7: [Classes](https://www.php.net/manual/en/language.oop5.php),
+ arrays and [type declarations](https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration). 
 
-Type declarations were also known as "type hints" in PHP 5. Type declarations allow functions to require that parameters are of a certain type at call time. If the given value is of the incorrect type, then an error is generated.
+Type declarations were also known as "type hints" in PHP 5. 
+Type declarations allow functions to require that parameters are of a certain type at call time. 
+If the specified value is of the wrong type, an error is generated.
 
 ## Creating a data object
 
@@ -42,6 +45,26 @@ final class User
      * @var string
      */
     public $username;
+}
+```
+
+**Note:** [Typed class properties](https://wiki.php.net/rfc/typed_properties_v2) have been added in PHP 7.4 and provide a major improvement 
+to PHP's type system. With PHP 7.4+ the same class should be implemented like this:
+
+```php
+<?php
+
+final class User
+{
+    /**
+     * @var int
+     */
+    public int $id;
+
+    /**
+     * @var string
+     */
+    public string $username;
 }
 ```
 

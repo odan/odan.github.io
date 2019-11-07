@@ -1,5 +1,5 @@
 ---
-title: How to use PHPStan in Travis CI
+title: Using PHPStan in Travis CI
 layout: post
 comments: true
 published: true
@@ -11,9 +11,8 @@ If you run PHPStan on every commit, you find errors in your code without actuall
 
 ## Requirements
 
-* PHP
+* PHP 7+
 * Travis CI (.travis.yml)
-* [PHPStan-Shim](https://github.com/phpstan/phpstan-shim)
 
 ## Installation
 
