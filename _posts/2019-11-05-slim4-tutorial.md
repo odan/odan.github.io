@@ -413,6 +413,9 @@ The complete `composer.json` file should look like this:
         "slim/psr7": "^0.6.0",
         "php-di/php-di": "^6.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    },
     "autoload": {
         "psr-4": {
             "App\\": "src"
@@ -426,12 +429,8 @@ The complete `composer.json` file should look like this:
     "config": {
         "process-timeout": 0,
         "sort-packages": true
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.4"
     }
 }
-
 ```
 
 Run `composer update` for the changes to take effect.

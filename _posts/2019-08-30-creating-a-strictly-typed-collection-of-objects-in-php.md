@@ -49,7 +49,7 @@ final class User
 ```
 
 **Note:** [Typed class properties](https://wiki.php.net/rfc/typed_properties_v2) have been added in PHP 7.4 and provide a major improvement 
-to PHP's type system. With PHP 7.4+ the same class should be implemented like this:
+to PHP's type system. In PHP 7.4+ the same class should be implemented like this:
 
 ```php
 <?php
