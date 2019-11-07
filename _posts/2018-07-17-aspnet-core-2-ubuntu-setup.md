@@ -188,8 +188,7 @@ sudo apt-get install mysql-server mysql-client libmysqlclient-dev -y
 
 A reverse proxy is a common setup for serving dynamic web apps. The reverse proxy terminates the HTTP request and forwards it to the ASP.NET app.
 
-You application could technically run only with the Kestrel web server and without a reverse proxy.
-But if you want to install and manage your own SSL (https://) certifactes you should use a reverse proxy server (Nginx, Apache, IIS).
+You application could technically run only with the Kestrel web server and without a reverse proxy. But if you want to install and manage your own SSL (https://) certifactes you should use a reverse proxy server (Nginx, Apache, IIS).
 
 Update Ubuntu packages to their latest stable versions:
 
@@ -343,7 +342,7 @@ sudo dotnet run
 
 If you open http://localhost/ you should be redirected to https://localhost/.
 
-After you have accepted the self-signed certificate you should the `Hello World!` message.
+After you have accepted the self-signed certificate you should see the `Hello World!` message.
 
 ### More reverse proxy setup informations
 
@@ -353,10 +352,10 @@ After you have accepted the self-signed certificate you should the `Hello World!
 
 ## Monitoring the app
 
-The website isn't up and running on localhost:5000 yet (unless you've run it yourself and kept it running!) 
-so we'll need an app or a monitor to run it and keep it running. 
+The website isn't up and running on localhost:5000 yet (unless you've run it yourself and kept it running!).
+So we'll need an service to start it and keep it running.
 
-There's an app called [Supervisor](http://supervisord.org/) that is good at that so I'll add it.
+There's an tool called [Supervisor](http://supervisord.org/) that is good at that so I'll add it.
 
 ```bash
 sudo apt-get install supervisor
