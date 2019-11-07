@@ -168,12 +168,12 @@ sudo mkdir /var/aspnetcore/
 cd /var/aspnetcore/
 ```
 
-Note: Under a production deployment scenario, a continuous integration workflow does the work of publishing the app and copying the assets to the server.
+Note: In a production deployment scenario, a continuous integration workflow does the work of publishing the app and copying the assets to the server.
 
 ### Test the app
 
 * From the command line, run the app: `dotnet <app_assembly>.dll`.
-* In a browser, navigate to http://<serveraddress>:<port> to verify the app works on Linux locally.
+* In a browser, navigate to `http://<serveraddress>:<port>` to verify the app works on Linux locally.
 
 ## Install MySQL
 
