@@ -1038,7 +1038,7 @@ Run this command in the same directory as the project’s composer.json file:
 composer install --no-dev --optimize-autoloader
 ```
 
-You don't have to run composer on your production server. Instread you should implement a [build pipeline](https://www.amazon.com/dp/B003YMNVC0) that creates
+You don't have to run composer on your production server. Instead you should implement a [build pipeline](https://www.amazon.com/dp/B003YMNVC0) that creates
 an so called "artifact". An artifact is an ZIP file you can upload and deploy on your production server. 
 [selective-php/artifact](https://github.com/selective-php/artifact) is a tool to build artifacts from your source code.
 
