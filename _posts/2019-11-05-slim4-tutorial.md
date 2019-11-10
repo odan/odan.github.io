@@ -850,11 +850,16 @@ $settings['db'] = [
     'charset' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     'flags' => [
+        // Turn off persistent connections
         PDO::ATTR_PERSISTENT => false,
         // Enable exceptions
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        // Set default fetch mode
+        // Emulate prepared statements
+        PDO::ATTR_EMULATE_PREPARES => true,
+        // Set default fetch mode to array
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        // Set character set
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci'
     ],
 ];
 ```
@@ -870,19 +875,10 @@ PDO::class => static function(ContainerInterface $container) {
     $username = $settings['db']['username'];
     $password = $settings['db']['password'];
     $charset = $settings['db']['charset'];
-    $collate = $settings['db']['collation'];
-
+    $flags = $settings['db']['flags'];
     $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
 
-    $options = [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_PERSISTENT => false,
-        PDO::ATTR_EMULATE_PREPARES => true,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES $charset COLLATE $collate"
-    ];
-
-    return new PDO($dsn, $username, $password, $options);
+    return new PDO($dsn, $username, $password, $flags);
 },
 ```
 
