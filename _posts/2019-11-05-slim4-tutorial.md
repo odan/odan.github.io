@@ -80,6 +80,12 @@ Run this command to install [PHP-DI](http://php-di.org/):
 composer require php-di/php-di
 ```
 
+To access the configuration data within the application, install the `zend-config` package.
+
+```
+composer require zendframework/zend-config
+```
+
 For testing purpose we are installing [phpunit](https://phpunit.de/) as development dependency with the `--dev` option:
 
 ```
@@ -207,7 +213,6 @@ Create the bootstrap file `config/bootstrap.php` and copy/paste this content:
 
 use DI\ContainerBuilder;
 use Slim\App;
-use Symfony\Component\Translation\Translator;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -333,10 +338,11 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\App;
 use Slim\Factory\AppFactory;
+use Zend\Config\Config;
 
 return [
-    'settings' => static function () {
-        return require __DIR__ . '/settings.php';
+    Config::class => static function () {
+        return new Config(require __DIR__ . '/settings.php');
     },
 
     App::class => static function (ContainerInterface $container) {
@@ -824,7 +830,12 @@ class UserCreatorRepository
             'email' => $user->email,
         ];
 
-        $sql = "INSERT INTO users SET username=:username, first_name=:first_name, last_name=:last_name, email=:email;";
+       $sql = "INSERT INTO users SET 
+               username=:username, 
+               first_name=:first_name, 
+               last_name=:last_name, 
+               email=:email;";
+
         $this->connection->prepare($sql)->execute($row);
 
         return (int)$this->connection->lastInsertId();
@@ -868,14 +879,14 @@ Insert a `PDO::class` container definition to `config/container.php`:
 
 ```php
 PDO::class => static function(ContainerInterface $container) {
-    $settings = $container->get('settings');
+    $config = $container->get(Config::class);
 
-    $host = $settings['db']['host'];
-    $dbname = $settings['db']['database'];
-    $username = $settings['db']['username'];
-    $password = $settings['db']['password'];
-    $charset = $settings['db']['charset'];
-    $flags = $settings['db']['flags'];
+    $host = $config->db->host;
+    $dbname = $config->db->database;
+    $username = $config->db->username;
+    $password = $config->db->password;
+    $charset = $config->db->charset;
+    $flags =$config->db->flags;
     $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
 
     return new PDO($dsn, $username, $password, $flags);
