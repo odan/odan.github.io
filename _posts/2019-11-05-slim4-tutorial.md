@@ -17,17 +17,17 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Directory structure](#directory-structure)
 * [Apache URL rewriting](#apache-url-rewriting)
 * [Configuration](#configuration)
-* [The bootstrap process](#boostrapping)
+* [Startup](#startup)
 * [Routing](#routing-setup)
-* [Middleware](#middeware)
+* [Middleware](#middleware)
   * [What is a middleware?](#what-is-a-middleware)
   * [Routing and error middleware](#routing-and-error-middleware)
-* [Container](#container-setup)
+* [Container](#container)
   * [A quick guide to the container](#a-quick-guide-to-the-container)
   * [Container definitions](#container-definitions)
 * [Your first route](#your-first-route)
 * [PSR-4 autoloading](#psr-4-autoloading)
-* [Actions](#actions)
+* [Actions](#action)
   * [Writing JSON to the response](#writing-json-to-the-response)
 * [Domain](#domain)
   * [Services](#services)
@@ -72,7 +72,7 @@ In our case we are installing the Slim PSR-7 implementations using this command:
 composer require slim/psr7
 ```
 
-As next we need a PSR-11 container implementtion for **dependency injection** and **autowiring**.
+As next we need a PSR-11 container implementation for **dependency injection** and **autowiring**.
 
 Run this command to install [PHP-DI](http://php-di.org/):
 
@@ -193,12 +193,12 @@ $settings['public'] = $settings['root'] . '/public';
 return $settings;
 ```
 
-### Boostrapping
+### Startup
 
-Boostrapping is the first code that is executed when the application (request) is started. 
+The app startup process contains the code that is executed when the application (request) is started. 
 
-The bootstrap procedure starts with the composer autoloader and then continues to
-build the container, create the app and register the routes + middleware entries.
+The bootstrap procedure includes the composer autoloader and then continues to
+build the container, creates the app and registers the routes + middleware entries.
 
 Create the bootstrap file `config/bootstrap.php` and copy/paste this content:
 
@@ -246,7 +246,7 @@ return static function (App $app) {
 
 ```
 
-## Middeware
+## Middleware
 
 ### What is a middleware?
 
@@ -887,7 +887,7 @@ constructor as a dependency.
 
 The last part is to register a new route for `POST /users`.
 
-Create a new action class in: `src/Action/RegisterUserAction.php`:
+Create a new action class in: `src/Action/UserCreateAction.php`:
 
 ```php
 <?php
@@ -895,20 +895,20 @@ Create a new action class in: `src/Action/RegisterUserAction.php`:
 namespace App\Action;
 
 use App\Domain\User\Data\UserData;
-use App\Domain\User\Service\UserGenerator;
+use App\Domain\User\Service\UserCreator;
 use App\Responder\JsonResponder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class CreateUserAction
+final class UserCreateAction
 {
-    private $userGenerator;
+    private $userCreator;
 
     private $responder;
 
-    public function __construct(UserGenerator $userGenerator, JsonResponder $responder)
+    public function __construct(UserCreator $userCreator, JsonResponder $responder)
     {
-        $this->userGenerator = $userGenerator;
+        $this->userCreator = $userCreator;
         $this->responder = $responder;
     }
 
@@ -924,7 +924,7 @@ final class CreateUserAction
         $user->email = $data['email'];
 
         // Invoke the Domain with inputs and retain the result
-        $userId = $this->userGenerator->createUser($user);
+        $userId = $this->userCreator->createUser($user);
 
         // Invoke the Responder with any data the Responder needs to build an HTTP response
         return $this->responder->render(['user_id' => $userId]);
@@ -935,7 +935,7 @@ final class CreateUserAction
 Add the new route in `config/routes.php`:
 
 ```php
-$app->post('/users', \App\Action\CreateUserAction::class);
+$app->post('/users', \App\Action\UserCreateAction::class);
 ```
 
 The complete project structure should look like this now:
