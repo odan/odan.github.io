@@ -886,7 +886,7 @@ PDO::class => static function(ContainerInterface $container) {
     $username = $config->db->username;
     $password = $config->db->password;
     $charset = $config->db->charset;
-    $flags =$config->db->flags;
+    $flags = $config->db->flags;
     $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
 
     return new PDO($dsn, $username, $password, $flags);
