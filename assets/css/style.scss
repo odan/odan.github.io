@@ -26,7 +26,7 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: Inter, arial, sans-serif, Segoe UI, Helvetica;
+  font-family: -apple-system,BlinkMacSystemFont,"helvetica neue",helvetica,roboto,noto,"segoe ui",arial,sans-serif;
   font-size: 16px;
   line-height: 1.5;
   color: #333333;
@@ -34,16 +34,4 @@ body {
 
 .blog-year {
   cursor: pointer;
-}
-
-/* The inter font family: https://rsms.me/inter/ */
-@import url('https://rsms.me/inter/inter.css');
-html {
-  font-family: 'Inter', sans-serif;
-}
-
-@supports (font-variation-settings: normal) {
-  html {
-    font-family: 'Inter var', sans-serif;
-  }
 }
