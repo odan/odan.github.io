@@ -644,7 +644,7 @@ The directory for all (domain) modules and sub-modules is: `src/Domain`
 
 ```php
 use App\Domain\User\Data\UserData;
-use App\Domain\User\Service\UserGenerator;
+use App\Domain\User\Service\UserCreator;
 
 $user = new UserData();
 $user->username = 'john.doe';
@@ -652,7 +652,7 @@ $user->firstName = 'John';
 $user->lastName = 'Doe';
 $user->email = 'john.doe@example.com';
 
-$service = new UserGenerator();
+$service = new UserCreator();
 $service->createUser($user);
 ```
 
@@ -686,7 +686,7 @@ final class UserData
 }
 ```
 
-Create the code for the service class `src/Domain/User/Service/UserGenerator.php`:
+Create the code for the service class `src/Domain/User/Service/UserCreator.php`:
 
 ```php
 <?php
@@ -694,25 +694,25 @@ Create the code for the service class `src/Domain/User/Service/UserGenerator.php
 namespace App\Domain\User\Service;
 
 use App\Domain\User\Data\UserData;
-use App\Domain\User\Repository\UserGeneratorRepository;
+use App\Domain\User\Repository\UserCreatorRepository;
 use UnexpectedValueException;
 
 /**
  * Service.
  */
-final class UserGenerator
+final class UserCreator
 {
     /**
-     * @var UserGeneratorRepository
+     * @var UserCreatorRepository
      */
     private $repository;
 
     /**
      * The constructor.
      *
-     * @param UserGeneratorRepository $repository The repository
+     * @param UserCreatorRepository $repository The repository
      */
-    public function __construct(UserGeneratorRepository $repository)
+    public function __construct(UserCreatorRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -741,7 +741,7 @@ final class UserGenerator
 }
 ```
 
-Take a look at the **constructor**! You can see that we have declared the `UserGeneratorRepository` as a
+Take a look at the **constructor**! You can see that we have declared the `UserCreatorRepository` as a
 dependency, because the service can only interact with the database through the repository.
 
 ### Repositories
@@ -778,7 +778,7 @@ CREATE TABLE `users` (
 
 Create a new directory: `src/Domain/User/Repository`
 
-Create the file: `src/Domain/User/Repository/UserGeneratorRepository.php` and insert this content:
+Create the file: `src/Domain/User/Repository/UserCreatorRepository.php` and insert this content:
 
 ```php
 <?php
@@ -791,7 +791,7 @@ use PDO;
 /**
  * Repository.
  */
-class UserGeneratorRepository
+class UserCreatorRepository
 {
     /**
      * @var PDO The database connection
