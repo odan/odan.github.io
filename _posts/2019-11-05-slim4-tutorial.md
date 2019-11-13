@@ -44,7 +44,6 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * PHP 7.1+
 * MySQL 5.7+
 * Apache webserver
-* Slim Framework 4
 * Composer
 
 ## Introduction
@@ -341,7 +340,7 @@ use Slim\App;
 use Slim\Factory\AppFactory;
 
 return [
-    Config::class => static function () {
+    Configuration::class => static function () {
         return new Configuration(require __DIR__ . '/settings.php');
     },
 
