@@ -80,10 +80,10 @@ Run this command to install [PHP-DI](http://php-di.org/):
 composer require php-di/php-di
 ```
 
-To access the configuration data within the application, install the `zend-config` package.
+To access the configuration data within the application, install the `selective/config` package.
 
 ```
-composer require zendframework/zend-config
+composer require selective/config
 ```
 
 For testing purpose we are installing [phpunit](https://phpunit.de/) as development dependency with the `--dev` option:
@@ -336,13 +336,13 @@ Create a new file for the container entries `config/container.php` and copy/past
 
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Factory\AppFactory;
-use Zend\Config\Config;
 
 return [
     Config::class => static function () {
-        return new Config(require __DIR__ . '/settings.php');
+        return new Configuration(require __DIR__ . '/settings.php');
     },
 
     App::class => static function (ContainerInterface $container) {
@@ -416,9 +416,9 @@ The complete `composer.json` file should look like this:
 {
     "require": {
         "php-di/php-di": "^6.0",
+        "selective/config": "^0.1.0",
         "slim/psr7": "^0.6.0",
-        "slim/slim": "^4.3",
-        "zendframework/zend-config": "^3.3"
+        "slim/slim": "^4.3"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.4"
@@ -438,6 +438,7 @@ The complete `composer.json` file should look like this:
         "sort-packages": true
     }
 }
+
 ```
 
 Run `composer update` for the changes to take effect.
@@ -879,15 +880,15 @@ $settings['db'] = [
 Insert a `PDO::class` container definition to `config/container.php`:
 
 ```php
-PDO::class => static function(ContainerInterface $container) {
-    $config = $container->get(Config::class);
+PDO::class => static function (ContainerInterface $container) {
+    $config = $container->get(Configuration::class);
 
-    $host = $config->db->host;
-    $dbname = $config->db->database;
-    $username = $config->db->username;
-    $password = $config->db->password;
-    $charset = $config->db->charset;
-    $flags = $config->db->flags;
+    $host = $config->getString('db.host');
+    $dbname =  $config->getString('db.database');
+    $username = $config->getString('db.username');
+    $password = $config->getString('db.password');
+    $charset = $config->getString('db.charset');
+    $flags = $config->getArray('db.flags');
     $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
 
     return new PDO($dsn, $username, $password, $flags);
