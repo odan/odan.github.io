@@ -415,9 +415,10 @@ The complete `composer.json` file should look like this:
 ```json
 {
     "require": {
-        "slim/slim": "^4.3",
+        "php-di/php-di": "^6.0",
         "slim/psr7": "^0.6.0",
-        "php-di/php-di": "^6.0"
+        "slim/slim": "^4.3",
+        "zendframework/zend-config": "^3.3"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.4"
