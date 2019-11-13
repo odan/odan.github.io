@@ -952,7 +952,7 @@ $app->post('/users', \App\Action\UserCreateAction::class);
 
 The complete project structure should look like this now:
 
-![image](https://user-images.githubusercontent.com/781074/68809370-15312b80-066c-11ea-8460-fe33951bf48a.png)
+![image](https://user-images.githubusercontent.com/781074/68809531-680ae300-066c-11ea-9926-e269cadd8e2f.png)
 
 Now you can test the `POST /users` route with [Postman](https://www.getpostman.com/) to see if it works.
 
