@@ -568,10 +568,10 @@ The directory for all (domain) modules and sub-modules is: `src/Domain`
 **Pseudo example:**
 
 ```php
-use App\Domain\User\Data\UserData;
+use App\Domain\User\Data\UserCreateData;
 use App\Domain\User\Service\UserCreator;
 
-$user = new UserData();
+$user = new UserCreateData();
 $user->username = 'john.doe';
 $user->firstName = 'John';
 $user->lastName = 'Doe';
@@ -588,18 +588,18 @@ There is also no database access within a DTO.
 A service fetches data from a repository and  the repository (or the service) 
 fills the DTO with data. A DTO can be used to transfer data inside or outside the domain.
 
-Create a DTO class to hold the data in this file: `src/Domain/User/Data/UserData.php`
+Create a DTO class to hold the data in this file: `src/Domain/User/Data/UserCreateData.php`
 
 ```php
 <?php
 
 namespace App\Domain\User\Data;
 
-final class UserData
+final class UserCreateData
 {
     /** @var string */
     public $username;
-    
+
     /** @var string */
     public $firstName;
 
@@ -618,7 +618,7 @@ Create the code for the service class `src/Domain/User/Service/UserCreator.php`:
 
 namespace App\Domain\User\Service;
 
-use App\Domain\User\Data\UserData;
+use App\Domain\User\Data\UserCreateData;
 use App\Domain\User\Repository\UserCreatorRepository;
 use UnexpectedValueException;
 
@@ -645,11 +645,11 @@ final class UserCreator
     /**
      * Create a new user.
      *
-     * @param UserData $user The user data
+     * @param UserCreateData $user The user data
      *
      * @return int The new user ID
      */
-    public function createUser(UserData $user): int
+    public function createUser(UserCreateData $user): int
     {
         // Validation
         if (empty($user->username)) {
@@ -710,7 +710,7 @@ Create the file: `src/Domain/User/Repository/UserCreatorRepository.php` and inse
 
 namespace App\Domain\User\Repository;
 
-use App\Domain\User\Data\UserData;
+use App\Domain\User\Data\UserCreateData;
 use PDO;
 
 /**
@@ -736,11 +736,11 @@ class UserCreatorRepository
     /**
      * Insert user row.
      *
-     * @param UserData $user The user
+     * @param UserCreateData $user The user
      *
      * @return int The new ID
      */
-    public function insertUser(UserData $user): int
+    public function insertUser(UserCreateData $user): int
     {
         $row = [
             'username' => $user->username,
@@ -749,17 +749,18 @@ class UserCreatorRepository
             'email' => $user->email,
         ];
 
-       $sql = "INSERT INTO users SET 
-               username=:username, 
-               first_name=:first_name, 
-               last_name=:last_name, 
-               email=:email;";
+        $sql = "INSERT INTO users SET 
+                username=:username, 
+                first_name=:first_name, 
+                last_name=:last_name, 
+                email=:email;";
 
         $this->connection->prepare($sql)->execute($row);
 
         return (int)$this->connection->lastInsertId();
     }
 }
+
 ```
 
 Note that we have declared `PDO` as a dependency, because the repository requires a database connection.
@@ -824,7 +825,7 @@ Create a new action class in: `src/Action/UserCreateAction.php`:
 
 namespace App\Action;
 
-use App\Domain\User\Data\UserData;
+use App\Domain\User\Data\UserCreateData;
 use App\Domain\User\Service\UserCreator;
 use Slim\Http\Response;
 use Slim\Http\ServerRequest;
@@ -843,8 +844,8 @@ final class UserCreateAction
         // Collect input from the HTTP request
         $data = (array)$request->getParsedBody();
 
-        // Mapping
-        $user = new UserData();
+        // Mapping (should be done in a mapper class)
+        $user = new UserCreateData();
         $user->username = $data['username'];
         $user->firstName = $data['first_name'];
         $user->lastName = $data['last_name'];
@@ -853,7 +854,7 @@ final class UserCreateAction
         // Invoke the Domain with inputs and retain the result
         $userId = $this->userCreator->createUser($user);
 
-        // Build an HTTP response
+        // Invoke the Responder with any data the Responder needs to build an HTTP response
         return $response->withJson(['user_id' => $userId]);
     }
 }
@@ -867,7 +868,7 @@ $app->post('/users', \App\Action\UserCreateAction::class);
 
 The complete project structure should look like this now:
 
-![image](https://user-images.githubusercontent.com/781074/68898551-f300e180-072f-11ea-90a4-767b8d22e0be.png)
+![image](https://user-images.githubusercontent.com/781074/68902256-1a5bac80-0738-11ea-8e7d-d106fe7e2368.png)
 
 Now you can test the `POST /users` route with [Postman](https://www.getpostman.com/) to see if it works.
 
