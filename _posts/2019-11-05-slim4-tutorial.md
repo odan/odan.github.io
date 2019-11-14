@@ -32,10 +32,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Domain](#domain)
   * [Services](#services)
   * [Repositories](#repositories)
-  * [Value Objects](#value-objects)
   * [Data Transfer Objects](#data-transfer-objects-dto)
-  * [Parameter objects](#parameter-objects)
-  * [Types and enums](#types-and-enums)
 * [Deployment](#deployment)
 * [Conclusion](#conclusion)
 
