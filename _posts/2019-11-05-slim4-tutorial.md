@@ -370,12 +370,12 @@ Open the file `config/routes.php` and insert the code for the first route:
 ```php
 <?php
 
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use Slim\Http\Response;
+use Slim\Http\ServerRequest;
 use Slim\App;
 
 return static function (App $app) {
-    $app->get('/', function (Request $request, Response $response) {
+    $app->get('/', function (ServerRequest $request, Response $response) {
         $response->getBody()->write('Hello, World!');
 
         return $response;
