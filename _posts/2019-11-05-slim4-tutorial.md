@@ -337,7 +337,6 @@ Create a new file for the container entries `config/container.php` and copy/past
 <?php
 
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\ResponseFactoryInterface;
 use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Factory\AppFactory;
@@ -357,9 +356,6 @@ return [
         return $app;
     },
 
-    ResponseFactoryInterface::class => static function (ContainerInterface $container) {
-        return $container->get(App::class)->getResponseFactory();
-    },
 ];
 ```
 
