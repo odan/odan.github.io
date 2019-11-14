@@ -450,30 +450,23 @@ Run `composer update` for the changes to take effect.
 
 ## Action
 
-In an [ADR](https://github.com/pmjones/adr/blob/master/ADR.md) system, each Action is represented by a individual class or closure.
-
-The Action mediates between the **Domain** and the **Responder**. 
-
-The Action interacts with the Domain in the same way a Controller interacts with a 
-Model but does not interact with a View or template system.
-It sends data to the Responder and invokes it so it can build the HTTP response.
-
-> "Single Action Controllers" means: One action per class.
+Each **Single Action Controller** is represented by a individual class or closure.
 
 The *Action* does only these things:
 
-* collects input from the HTTP request (if needed);
-* invokes the Domain with those inputs (if required) and retains the result;
-* invokes the Responder with any data the Responder needs to build an HTTP response (typically the HTTP Request and/or the Domain invocation results).
+* collects input from the HTTP request (if needed)
+* invokes the **Domain** with those inputs (if required) and retains the result
+* builds an HTTP response (typically with the Domain invocation results).
 
-All other logic, including all forms of input validation, error handling, and so on, are therefore pushed out of the Action and into the Domain (for domain logic concerns) or the Responder (for presentation logic concerns). 
+All other logic, including all forms of input validation, error handling, and so on, 
+are therefore pushed out of the Action and into the **Domain** 
+(for domain logic concerns) or the response renderer (for presentation logic concerns). 
 
-The Responder creates the response, not the Action.
+A response could be rendered to HTML (e.g with Twig) for a standard web request; or 
+it might be something like JSON for RESTful API requests.
 
-A Responder might be HTML-responder for a standard web request; or 
-it might be something like a JSON-responder for RESTful API requests.
-
-Closures (functions) as routing handlers are quite "expensive" because PHP has to create all closures for each request. 
+**Note:** [Closures](https://www.php.net/manual/en/class.closure.php) (functions) as routing 
+handlers are quite "expensive", because PHP has to create all closures for each request. 
 The use of class names is more lightweight, faster and scales better for larger applications.
 
 * Create a directory: `src/`
@@ -885,83 +878,6 @@ If successful, the result should look like this:
 
 ![image](https://user-images.githubusercontent.com/781074/68299379-ddd6e380-009b-11ea-9ead-4c3b12b62807.png)
 
-### Value Objects
-
-Use it only for "small things" like Date, Money, CustomerId and as replacement for primitive data types
- like string, int, float, bool and array. 
-
-A value object must be **immutable** and is responsible for keeping their state consistent. 
-
-A value object should only be filled using the constructor.
-
-Wither methods are allowed, but `setter` methods are not allowed. 
-
-**Example:**
-
-```php
-public function withEmail(string $email): self { ... }
-```
-
-A getter method name does not contain a `get` prefix. 
-
-**Example:**
-
-```php
-public function email(): string { return $this->email; } 
-```
-
-All properties must be `protected` or `private` accessed by the getter methods.
-
-**Example:**
-
-```php
-<?php
-
-final class CustomerId
-{
-    private $id;
-    
-    public function __construct(int $id)
-    {
-        $this->id = $id;
-    }
-    
-    public function equals(CustomerId $customerId): bool
-    {
-        return $this->id === $customerId->id;
-    }
-    
-    public function __toString()
-    {
-        return (string)$this->id;
-    }
-}
-```
-
-[Read more](https://kacper.gunia.me/validating-value-objects/)
-
-### Parameter objects
-
-If you have a lot of parameters that fit together, 
-you can replace them with a parameter object. See [DTO](#data-transfer-objects-dto)
-
-## Types and enums
-
-Don't use strings or fix integer codes as values. Instead use public class constants.
-
-**Example:**
-
-```php
-<?php
-
-final class LevelType
-{
-    public const LOW = 1;
-    public const MEDIUM = 2;
-    public const HIGH = 3;
-}
-```
-
 ## Deployment
 
 For deployment on a productive server, there are some important settings and security releated things to consider.
@@ -1010,7 +926,9 @@ Remember the relationships.
 * Slim - As routing framework
 * Single Action Controllers - To invoke the correct service method (domain)
 * Dependency injection - For SOLID code and testability
+* Domain - The core of your application
 * Service classes - To handle business logic
+* DTO - To carry data (no behavior, only data)
 * Repositories - Data access logic (database)
 
 [Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f)
