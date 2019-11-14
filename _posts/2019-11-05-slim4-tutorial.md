@@ -478,7 +478,7 @@ final class HomeAction
 {
     public function __invoke(ServerRequest $request, Response $response): Response
     {
-        $response->getBody()->write('Hello, Action!');
+        $response->getBody()->write('Hello, World!');
 
         return $response;
     }
@@ -503,7 +503,7 @@ return static function (App $app) {
 };
 ```
 
-Now open your website, e.g. http://localhost and you should see the message `It works!`.
+Now open your website, e.g. http://localhost and you should see the message `Hello, World!`.
 
 ### Writing JSON to the response
 
@@ -528,7 +528,7 @@ final class HomeAction
 
 Open your website, e.g. http://localhost and you should see the JSON response `{"success":true}`.
 
-To change to http status code, just use the response `withStatus(x)` method:
+To change to http status code, just use the `$response->withStatus(x)` method. Example:
 
 ```php
 $result = ['error' => ['message' => 'Validation failed']];
