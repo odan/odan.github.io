@@ -71,6 +71,12 @@ In our case we are installing the Slim PSR-7 implementations using this command:
 composer require slim/psr7
 ```
 
+Now we install a number of useful convenience methods such as `$response->withJson()`:
+
+```
+composer require slim/http
+```
+
 As next we need a PSR-11 container implementation for **dependency injection** and **autowiring**.
 
 Run this command to install [PHP-DI](http://php-di.org/):
@@ -79,7 +85,7 @@ Run this command to install [PHP-DI](http://php-di.org/):
 composer require php-di/php-di
 ```
 
-To access the configuration data within the application, install the `selective/config` package.
+To access the application configuration install the `selective/config` package:
 
 ```
 composer require selective/config
@@ -416,6 +422,7 @@ The complete `composer.json` file should look like this:
     "require": {
         "php-di/php-di": "^6.0",
         "selective/config": "^0.1.0",
+        "slim/http": "^0.8.0",
         "slim/psr7": "^0.6.0",
         "slim/slim": "^4.3"
     },
@@ -437,7 +444,6 @@ The complete `composer.json` file should look like this:
         "sort-packages": true
     }
 }
-
 ```
 
 Run `composer update` for the changes to take effect.
@@ -479,22 +485,13 @@ The use of class names is more lightweight, faster and scales better for larger 
 
 namespace App\Action;
 
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Slim\Http\Response;
+use Slim\Http\ServerRequest;
 
 final class HomeAction
 {
-    private $responseFactory;
-    
-    public function __construct(ResponseFactoryInterface $responseFactory)
+    public function __invoke(ServerRequest $request, Response $response): Response
     {
-        $this->responseFactory = $responseFactory;
-    }
-    
-    public function __invoke(ServerRequestInterface $request): ResponseInterface
-    {
-        $response = $this->responseFactory->createResponse();
         $response->getBody()->write('Hello, Action!');
 
         return $response;
@@ -524,90 +521,21 @@ Now open your website, e.g. http://localhost and you should see the message `It 
 
 ### Writing JSON to the response
 
-Instead of calling `json_encode` everytime we are using a specific JSON responder for this task.
-
-* Create a sub-directory: `src/Responder`
-* Create the JsonResponder class in: `src/Responder/JsonResponder.php`
-
-```php
-<?php
-
-namespace App\Responder;
-
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
-use UnexpectedValueException;
-
-/**
- * A generic JSON responder.
- */
-final class JsonResponder
-{
-    /**
-     * @var ResponseFactoryInterface
-     */
-    private $responseFactory;
-
-    /**
-     * Constructor.
-     *
-     * @param ResponseFactoryInterface $responseFactory The response factory
-     */
-    public function __construct(ResponseFactoryInterface $responseFactory)
-    {
-        $this->responseFactory = $responseFactory;
-    }
-
-    /**
-     * Generate a json response.
-     *
-     * @param array|null $data The data
-     *
-     * @throws UnexpectedValueException
-     *
-     * @return ResponseInterface
-     */
-    public function render(array $data = null): ResponseInterface
-    {
-        $json = json_encode($data);
-        if ($json === false) {
-            throw new UnexpectedValueException('Malformed UTF-8 characters, possibly incorrectly encoded.');
-        }
-
-        $response = $this->responseFactory->createResponse()->withHeader('Content-Type', 'application/json');
-
-        $response->getBody()->write($json);
-
-        return $response;
-    }
-}
-```
-
-Now replace the generic `ResponseFactoryInterface` with the `JsonResponder` in `src/Action/HomeAction.php`:
+Instead of calling `json_encode` everytime we are using a specific JSON method `withJson()` for this task.
 
 ```php
 <?php
 
 namespace App\Action;
 
-use App\Responder\JsonResponder;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Slim\Http\Response;
+use Slim\Http\ServerRequest;
 
 final class HomeAction
 {
-    private $responder;
-
-    public function __construct(JsonResponder $responder)
+    public function __invoke(ServerRequest $request, Response $response): Response
     {
-        $this->responder = $responder;
-    }
-
-    public function __invoke(ServerRequestInterface $request): ResponseInterface
-    {
-        return $this->responder->render([
-            'success' => true,
-        ]);
+        return $response->withJson(['success' => true]);
     }
 }
 ```
@@ -619,7 +547,7 @@ To change to http status code, just use the response `withStatus(x)` method:
 ```php
 $result = ['error' => ['message' => 'Validation failed']];
         
-return $this->responder->render($result)->withStatus(422);
+return $response->withJson($result)->withStatus(422);
 ```
 
 ## Domain
@@ -908,27 +836,24 @@ namespace App\Action;
 
 use App\Domain\User\Data\UserData;
 use App\Domain\User\Service\UserCreator;
-use App\Responder\JsonResponder;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Slim\Http\Response;
+use Slim\Http\ServerRequest;
 
 final class UserCreateAction
 {
     private $userCreator;
 
-    private $responder;
-
-    public function __construct(UserCreator $userCreator, JsonResponder $responder)
+    public function __construct(UserCreator $userCreator)
     {
         $this->userCreator = $userCreator;
-        $this->responder = $responder;
     }
 
-    public function __invoke(ServerRequestInterface $request): ResponseInterface
+    public function __invoke(ServerRequest $request, Response $response): Response
     {
         // Collect input from the HTTP request
         $data = (array)$request->getParsedBody();
 
+        // Mapping
         $user = new UserData();
         $user->username = $data['username'];
         $user->firstName = $data['first_name'];
@@ -939,7 +864,7 @@ final class UserCreateAction
         $userId = $this->userCreator->createUser($user);
 
         // Invoke the Responder with any data the Responder needs to build an HTTP response
-        return $this->responder->render(['user_id' => $userId]);
+        return $response->withJson(['user_id' => $userId]);
     }
 }
 ```
@@ -952,7 +877,7 @@ $app->post('/users', \App\Action\UserCreateAction::class);
 
 The complete project structure should look like this now:
 
-![image](https://user-images.githubusercontent.com/781074/68809531-680ae300-066c-11ea-9926-e269cadd8e2f.png)
+![image](https://user-images.githubusercontent.com/781074/68898551-f300e180-072f-11ea-90a4-767b8d22e0be.png)
 
 Now you can test the `POST /users` route with [Postman](https://www.getpostman.com/) to see if it works.
 
