@@ -854,7 +854,7 @@ final class UserCreateAction
         // Invoke the Domain with inputs and retain the result
         $userId = $this->userCreator->createUser($user);
 
-        // Invoke the Responder with any data the Responder needs to build an HTTP response
+        // Build the HTTP response
         return $response->withJson(['user_id' => $userId]);
     }
 }
