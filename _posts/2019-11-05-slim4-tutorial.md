@@ -28,11 +28,11 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Your first route](#your-first-route)
 * [PSR-4 autoloading](#psr-4-autoloading)
 * [Actions](#action)
-  * [Writing JSON to the response](#writing-json-to-the-response)
+* [Writing JSON to the response](#writing-json-to-the-response)
 * [Domain](#domain)
   * [Services](#services)
-  * [Repositories](#repositories)
   * [Data Transfer Objects](#data-transfer-objects-dto)
+  * [Repositories](#repositories)
 * [Deployment](#deployment)
 * [Conclusion](#conclusion)
 
@@ -583,8 +583,8 @@ $service->createUser($user);
 
 ### Data Transfer Objects (DTO) 
   
-A DTO contains only pure **data**. There is no business or domain specific logic, 
-only simple validation logic. There is also no database access within a DTO. 
+A DTO contains only pure **data**. There is no business or domain specific logic. 
+There is also no database access within a DTO. 
 A service fetches data from a repository and  the repository (or the service) 
 fills the DTO with data. A DTO can be used to transfer data inside or outside the domain.
 
@@ -812,7 +812,7 @@ PDO::class => static function (ContainerInterface $container) {
 },
 ```
 
-From now on, PHP-DI will always inject this PDO instance as soon as we declare PDO in a 
+From now on, PHP-DI will always inject the same PDO instance as soon as we declare PDO in a 
 constructor as a dependency.
 
 The last part is to register a new route for `POST /users`.
@@ -898,10 +898,10 @@ For security reason you should turn of all error details in production:
 $app->addErrorMiddleware(false, false, false);
 ```
 
-If you have to run your Slim application in a sub-directory, you could try this library: [selective-php/basepath](https://github.com/selective-php/basepath)
+If you have to run your Slim application in a sub-directory, you could try this library: [selective/basepath](https://github.com/selective-php/basepath)
 
 **Important**: It's very important to set the Apache `DocumentRoot` to the `public/` directory. 
-Otherwise, it may happen that someone else could access internal files from outside. [More details](https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-ubuntu-16-04)
+Otherwise, it may happen that someone else could access internal files from the web. [More details](https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-ubuntu-16-04)
 
 `/etc/apache2/sites-enabled/000-default.conf`
 
@@ -920,12 +920,11 @@ Instead you could store them in a file like `env.php` and place this file one di
 
 Remember the relationships.
 
-* Slim - As routing framework
+* Slim - To handle the routing
 * Single Action Controllers - To invoke the correct service method (domain)
-* Dependency injection - For SOLID code and testability
 * Domain - The core of your application
-* Service classes - To handle business logic
-* DTO - To carry data (no behavior, only data)
-* Repositories - Data access logic (database)
+* Services - To handle business logic
+* DTO - To carry data (no behavior)
+* Repositories - To execute database queries
 
 [Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f)
