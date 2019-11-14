@@ -918,7 +918,7 @@ Instead you could store them in a file like `env.php` and place this file one di
 
 ## Conclusion
 
-Remember the relationships.
+Remember the relationships:
 
 * Slim - To handle the routing
 * Single Action Controllers - To invoke the correct service method (domain)
