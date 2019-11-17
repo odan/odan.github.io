@@ -60,8 +60,9 @@ cd c:\xampp\mysql\bin
 mysqld.exe --initialize-insecure --default-authentication-plugin=mysql_native_password --basedir=c:\xampp\mysql --datadir=c:\xampp\mysql\data
 ```
 
-Start the MySQL service (in your XAMMP Control Panel)
+Start the MySQL service (in your XAMPP Control Panel)
 
+Done
 
 ### Data restore
 
