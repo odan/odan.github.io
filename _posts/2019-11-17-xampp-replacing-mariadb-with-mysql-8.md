@@ -48,6 +48,9 @@ innodb_buffer_pool_size = 1024M
 
 # In MySQL 8, caching_sha2_password is the default authentication
 default_authentication_plugin=mysql_native_password
+
+[client]
+ssl-mode=DISABLED
 ```
 
 ### Initializing the data directory
