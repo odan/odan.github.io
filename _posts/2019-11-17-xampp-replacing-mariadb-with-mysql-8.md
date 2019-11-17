@@ -65,11 +65,11 @@ mysqld.exe --initialize-insecure --default-authentication-plugin=mysql_native_pa
 
 Start the MySQL service (in your XAMPP Control Panel)
 
-Done
-
 ### Data restore
 
 Import the SQL dump file into the new database.
+
+Done.
 
 ## Known issues
 
