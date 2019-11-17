@@ -28,7 +28,6 @@ and can be replaced with the "orginal" MySQL server.
 ## Installation
 
 * Download MySQL Community Server 8.x from: <https://dev.mysql.com/downloads/mysql/>
-* Don't download the MySQL Installer
 * Scroll down to `Other Downloads:` and click **Download**.
 * Click [No thanks, just start my download.](https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.18-winx64.zip)
 * Create a new and empty folder: `c:\xampp\mysql`
