@@ -7,6 +7,8 @@ description:
 keywords: 
 ---
 
+> There is a new blog post about [moving from MariaDB to MySQL 8](https://odan.github.io/2019/11/17/xampp-replacing-mariadb-with-mysql-8.html).
+
 The latest version of XAMPP contains [MariaDB](https://mariadb.org/) instead of [MySQL](https://www.mysql.com/).
 
 But [MariaDB is not 100% compatible with MySQL](https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-compatibility/) 
