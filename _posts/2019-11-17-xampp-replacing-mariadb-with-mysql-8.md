@@ -55,7 +55,7 @@ default_authentication_plugin=mysql_native_password
 
 ```cmd
 cd c:\xampp\mysql\bin
-```cmd
+```
 
 ```cmd
 mysqld.exe --initialize-insecure --default-authentication-plugin=mysql_native_password --basedir=c:\xampp\mysql --datadir=c:\xampp\mysql\data
