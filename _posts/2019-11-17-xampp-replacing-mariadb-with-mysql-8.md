@@ -66,13 +66,7 @@ Start the MySQL service (in your XAMMP Control Panel)
 
 ### Data restore
 
-Import the SQL dump file into the new database:
-
-```
-mysql -h localhost -u root -p secret dbname --default-character-set=utf8 < mysqlbackup.sql
-```
-
-Finished
+Import the SQL dump file into the new database.
 
 ## Known issues
 
@@ -87,6 +81,7 @@ A: In MySQL 8, `caching_sha2_password` is the default authentication plugin.
 * Read more: [Connecting MySQL - 8.0 with MySQL Workbench](https://stackoverflow.com/questions/49194719/authentication-plugin-caching-sha2-password-cannot-be-loaded)
 
 Q: I get `mysqldump: Got error: 2026: SSL connection error: error:00000000:lib(0):func(0):reason(0) when trying to connect`
+
 A: Add the `[client] ssl-mode=DISABLED` option to your `my.ini` file
 
 [Comments](https://gist.github.com/odan/e022ffd8e30097566392eed6356750d1)
