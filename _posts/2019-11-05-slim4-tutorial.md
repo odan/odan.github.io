@@ -507,7 +507,7 @@ Now open your website, e.g. http://localhost and you should see the message `Hel
 
 ### Writing JSON to the response
 
-Instead of calling `json_encode` everytime we are using a specific JSON method `withJson()` for this task.
+Instead of calling `json_encode` everytime, you can use the `withJson()` method to render the respponse.
 
 ```php
 <?php
