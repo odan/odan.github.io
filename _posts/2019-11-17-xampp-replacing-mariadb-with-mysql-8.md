@@ -21,7 +21,7 @@ and can be replaced with the "orginal" MySQL server.
 
 ## Backup
 
-* Backup the old database into a SQL dump file
+* Backup the old databases into a SQL dump file (without the system databases)
 * Stop the MariaDB service
 * Rename the folder: `c:\xampp\mysql` to `c:\xampp\mariadb`
 
