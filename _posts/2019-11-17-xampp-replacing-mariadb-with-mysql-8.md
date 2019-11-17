@@ -80,7 +80,7 @@ Finished
 
 Q: I get `Authentication plugin 'caching_sha2_password' cannot be loaded`
 
-A: In MySQL 8, `caching_sha2_password` is the default authentication
+A: In MySQL 8, `caching_sha2_password` is the default authentication plugin.
 
 * Please follow the instructions (from above) and it should not happen.
 * Add the [--default-auth=mysql_native_password](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html#option_mysqldump_default-auth) option
@@ -89,4 +89,4 @@ A: In MySQL 8, `caching_sha2_password` is the default authentication
 Q: I get `mysqldump: Got error: 2026: SSL connection error: error:00000000:lib(0):func(0):reason(0) when trying to connect`
 A: Add the `[client] ssl-mode=DISABLED` option to your `my.ini` file
 
-[Comments](https://gist.github.com/odan/c799417460470c3776ffa8adce57eece)
+[Comments](https://gist.github.com/odan/e022ffd8e30097566392eed6356750d1)
