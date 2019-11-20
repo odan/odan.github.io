@@ -68,59 +68,46 @@
 </script>
 {% endif %}
 
-<style>
-    #canvas-wrapper.dark-mode {
-        background: #222;
-        color: #DDD;
-    }
-</style>
 <script>
-    // Dark mode
-    $(function() {
-        $("#dark-mode-switch").on('click', function(e) {
+    $(function () {
+        // Dark mode
+        $("#dark-mode-switch").on('click', function (e) {
             e.preventDefault();
-            debugger;
-            $("#canvas-wrapper").toggleClass("dark-mode");
+            $('body').css({
+                'background-color': '#444',
+                'color': '#e4e4e4'
+            });
+            $('a').css({
+                'color': '#e39777'
+            });
+            $('img').css({
+                'filter': 'grayscale(30%)'
+            });
+            $('.page-header').css({
+                'background-color': '#333',
+                'background': '#333'
+            });
+            $('.main-content h1,.main-content h2,.main-content h3,.main-content h4,.main-content h5,.main-content h6').css({
+                'color': '#d65a31'
+            });
+
+            $('.main-content pre').css({
+                'color': '#567482',
+                'background-color': '#272121',
+                'border': 'solid 1px #443737'
+            });
+            $('code').css({
+                'color': 'rgb(214, 90, 49)',
+                'background-color': '#272121'
+            });
+            $('.main-content .highlight pre,.main-content pre').css({
+                'border-radius': '0rem'
+            });
+            $('.main-content code').css({
+                'border-radius': '0rem'
+            });
         });
     });
-
-    var dt = new Date();
-    var time = dt.getHours();
-    if (false && time >= 18 || time <= 7) {
-        $('body').css({
-            'background-color': '#444',
-            'color': '#e4e4e4'
-        });
-        $('a').css({
-            'color': '#e39777'
-        });
-        $('img').css({
-            'filter': 'grayscale(30%)'
-        });
-        $('.page-header').css({
-            'background-color': '#333',
-            'background': '#333'
-        });
-        $('.main-content h1,.main-content h2,.main-content h3,.main-content h4,.main-content h5,.main-content h6').css({
-            'color': '#d65a31'
-        });
-
-        $('.main-content pre').css({
-            'color': '#567482',
-            'background-color': '#272121',
-            'border': 'solid 1px #443737'
-        });
-        $('code').css({
-            'color': 'rgb(214, 90, 49)',
-            'background-color': '#272121'
-        });
-        $('.main-content .highlight pre,.main-content pre').css({
-            'border-radius': '0rem'
-        });
-        $('.main-content code').css({
-            'border-radius': '0rem'
-        });
-    }
 </script>
 </body>
 </html>
