@@ -68,15 +68,29 @@
 </script>
 {% endif %}
 
+<style id="dark-mode-style" media="max-width: 1px">
+    body {
+        background-color: #444;
+        color: #e4e4e4;
+    }
+</style>
+
 <script>
     $(function () {
         // Dark mode
-        $("#dark-mode-switch").on('click', function (e) {
+        $('#dark-mode-switch').on('click', function (e) {
             e.preventDefault();
-            $('body').css({
+            let styleEl = document.getElementById('dark-mode-style');
+            if (styleEl.hasAttribute('media')) {
+                styleEl.removeAttribute('media')
+            } else {
+                styleEl.setAttribute('media', "max-width: 1px");
+            }
+
+            /*$('body').css({
                 'background-color': '#444',
                 'color': '#e4e4e4'
-            });
+            });*/
             $('a').css({
                 'color': '#e39777'
             });
