@@ -166,3 +166,5 @@ A: Use [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_
 Since **Slim 4** you can use modern [Dependency Injection Container (DIC)](http://fabien.potencier.org/do-you-need-a-dependency-injection-container.html) like [PHP-DI](http://php-di.org/) and [league/container](https://container.thephpleague.com/) with the awesome [autowire](https://container.thephpleague.com/3.x/auto-wiring/) feature. This means: Now you can declare all dependencies explicitly in your constructor and let the DIC inject these dependencies for you. 
 
 To be more clear: "Composition" has nothing to do with the "Autowire" feature of the DIC. You can use composition with pure classes and without a container or anything else. The autowire feature just uses the [PHP Reflection](https://www.php.net/manual/en/book.reflection.php) classes to resolve and inject the dependencies automatically for you.
+
+[Comments](https://gist.github.com/odan/38bd3086ef37df4ead1a7397ac8cf83b)
