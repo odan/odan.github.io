@@ -262,7 +262,7 @@ Create a file for all routes `config/routes.php` and copy/paste this content:
 
 use Slim\App;
 
-return static function (App $app) {
+return function (App $app) {
     // empty
 };
 
@@ -362,11 +362,11 @@ use Slim\App;
 use Slim\Factory\AppFactory;
 
 return [
-    Configuration::class => static function () {
+    Configuration::class => function () {
         return new Configuration(require __DIR__ . '/settings.php');
     },
 
-    App::class => static function (ContainerInterface $container) {
+    App::class => function (ContainerInterface $container) {
         AppFactory::setContainer($container);
         $app = AppFactory::create();
 
@@ -390,7 +390,7 @@ use Slim\Http\Response;
 use Slim\Http\ServerRequest;
 use Slim\App;
 
-return static function (App $app) {
+return function (App $app) {
     $app->get('/', function (ServerRequest $request, Response $response) {
         $response->getBody()->write('Hello, World!');
 
@@ -518,7 +518,7 @@ The complete `config/routes.php` should look like this now:
 
 use Slim\App;
 
-return static function (App $app) {
+return function (App $app) {
     $app->get('/', \App\Action\HomeAction::class);
 };
 ```
@@ -814,7 +814,7 @@ $settings['db'] = [
 Insert a `PDO::class` container definition to `config/container.php`:
 
 ```php
-PDO::class => static function (ContainerInterface $container) {
+PDO::class => function (ContainerInterface $container) {
     $config = $container->get(Configuration::class);
 
     $host = $config->getString('db.host');
