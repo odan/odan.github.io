@@ -15,7 +15,7 @@ and can be replaced with the "orginal" MySQL server.
 ## Requirements
 
 * Windows
-* [XAMPP](https://www.apachefriends.org) for Windows
+* The latest [XAMPP](https://www.apachefriends.org) for Windows v.7.1+ (**64-Bit**)
 * [The latest Visual C++ Redistributable Packages](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads), [How to install the Visual C++ Redistributable](https://www.groovypost.com/howto/fix-visual-c-plus-plus-redistributable-windows-10/)
 * Administrator privileges to restart Windows services
 
@@ -27,7 +27,7 @@ and can be replaced with the "orginal" MySQL server.
 
 ## Installation
 
-* Download MySQL Community Server 8.x from: <https://dev.mysql.com/downloads/mysql/>
+* Download MySQL Community Server 8.x (**64-Bit**) from: <https://dev.mysql.com/downloads/mysql/>
 * Scroll down to `Other Downloads:` and click **Download**.
 * Click [No thanks, just start my download.](https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.18-winx64.zip)
 * Create a new and empty folder: `c:\xampp\mysql`
@@ -75,16 +75,20 @@ Done.
 
 ### Questions
 
-Q: I get `Authentication plugin 'caching_sha2_password' cannot be loaded`
+**Q:** I get `Authentication plugin 'caching_sha2_password' cannot be loaded`
 
-A: In MySQL 8, `caching_sha2_password` is the default authentication plugin.
+**A:** In MySQL 8, `caching_sha2_password` is the default authentication plugin.
 
 * Please follow the instructions (from above) and it should not happen.
 * Add the [--default-auth=mysql_native_password](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html#option_mysqldump_default-auth) option
 * Read more: [Connecting MySQL - 8.0 with MySQL Workbench](https://stackoverflow.com/questions/49194719/authentication-plugin-caching-sha2-password-cannot-be-loaded)
 
-Q: I get `mysqldump: Got error: 2026: SSL connection error: error:00000000:lib(0):func(0):reason(0) when trying to connect`
+**Q:** I get `mysqldump: Got error: 2026: SSL connection error: error:00000000:lib(0):func(0):reason(0) when trying to connect`
 
-A: Add the `[client] ssl-mode=DISABLED` option to your `my.ini` file
+**A:** Add the `[client] ssl-mode=DISABLED` option to your `my.ini` file
+
+**Q:** I can't start or stop MySQL using the XAMPP control panel button.
+
+**A:** Make sure you have the 64-bit version of XAMPP and MySQL installed.
 
 [Comments](https://gist.github.com/odan/e022ffd8e30097566392eed6356750d1)

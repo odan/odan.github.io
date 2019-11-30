@@ -56,7 +56,7 @@ Standards like [PSR](https://www.php-fig.org/psr/) and best practices are very i
 Create a new project directory and run this command to install the Slim 4 core components:
 
 ```
-composer require slim/slim
+composer require slim/slim:4.*
 ```
 
 In Slim 4 the PSR-7 implementation is decoupled from the App core. 
@@ -527,7 +527,7 @@ Now open your website, e.g. http://localhost and you should see the message `Hel
 
 ### Writing JSON to the response
 
-Instead of calling `json_encode` everytime, you can use the `withJson()` method to render the respponse.
+Instead of calling `json_encode` everytime, you can use the `withJson()` method to render the response.
 
 ```php
 <?php
@@ -571,7 +571,7 @@ specified information or the execution of a set of operations, with a purpose th
 can reuse for different purposes.
 
 There can be multiple clients for a service, e.g. the action (request), 
-another service, the CLI (console) and the unit-test environmet (phpunit).
+another service, the CLI (console) and the unit-test environment (phpunit).
 
 > A service class is not a "Manager" or "Utility" class.
 
@@ -894,7 +894,7 @@ If successful, the result should look like this:
 
 ## Deployment
 
-For deployment on a productive server, there are some important settings and security releated things to consider.
+For deployment on a productive server, there are some important settings and security related things to consider.
 
 You can use composer to generate an optimized build of your application. 
 All dev-dependencies are removed and the Composer autoloader is optimized for performance. 
