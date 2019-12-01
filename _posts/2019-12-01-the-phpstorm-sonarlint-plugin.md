@@ -15,7 +15,7 @@ maybe you're already using one of these great tools to scan your codebase for is
 and possible bugs. But this time I want to show you another very cool 
 static code analyzer for PHP: 
 
-The [SonarLint Plugin](https://plugins.jetbrains.com/plugin/7973-sonarlint )
+The **[SonarLint Plugin](https://plugins.jetbrains.com/plugin/7973-sonarlint)**
 for PhpStorm.
 
 SonarLint is an IDE extension that helps you detect and fix quality issues as you 
