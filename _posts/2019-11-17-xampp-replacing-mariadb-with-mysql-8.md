@@ -89,6 +89,6 @@ Done.
 
 **Q:** I can't start or stop MySQL using the XAMPP control panel button.
 
-**A:** Make sure you have the 64-bit version of XAMPP and MySQL installed.
+**A:** Make sure you have installed the **64-bit** version of XAMPP and MySQL.
 
 [Comments](https://gist.github.com/odan/e022ffd8e30097566392eed6356750d1)
