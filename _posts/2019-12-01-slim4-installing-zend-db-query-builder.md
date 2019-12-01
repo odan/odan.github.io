@@ -7,8 +7,6 @@ description:
 keywords: php slim sql querybuilder
 ---
 
-This tutorial shows you how to work with the powerful and lightweight Slim 4 framework.
-
 ## Table of contents
 
 * [Requirements](#requirements)
