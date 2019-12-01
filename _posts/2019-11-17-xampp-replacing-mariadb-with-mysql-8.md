@@ -46,7 +46,7 @@ datadir=c:/xampp/mysql/data
 # New: 1024 MB
 innodb_buffer_pool_size = 1024M
 
-# In MySQL 8, caching_sha2_password is the default authentication
+# Default since MySQL 8: caching_sha2_password
 default_authentication_plugin=mysql_native_password
 
 [client]
@@ -60,7 +60,7 @@ cd c:\xampp\mysql\bin
 ```
 
 ```cmd
-mysqld.exe --initialize-insecure --default-authentication-plugin=mysql_native_password --basedir=c:\xampp\mysql --datadir=c:\xampp\mysql\data
+mysqld.exe --default-authentication-plugin=mysql_native_password --initialize-insecure --basedir=c:\xampp\mysql --datadir=c:\xampp\mysql\data
 ```
 
 Start the MySQL service (in your XAMPP Control Panel)
@@ -77,10 +77,10 @@ Done.
 
 **Q:** I get `Authentication plugin 'caching_sha2_password' cannot be loaded`
 
-**A:** In MySQL 8, `caching_sha2_password` is the default authentication plugin.
+**A:** MySQL 8 uses `caching_sha2_password` as default authentication plugin.
 
 * Please follow the instructions (from above) and it should not happen.
-* Add the [--default-auth=mysql_native_password](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html#option_mysqldump_default-auth) option
+* Add the command line option: [--default-auth=mysql_native_password](https://dev.mysql.com/doc/refman/8.0/en/mysqldump.html#option_mysqldump_default-auth)
 * Read more: [Connecting MySQL - 8.0 with MySQL Workbench](https://stackoverflow.com/questions/49194719/authentication-plugin-caching-sha2-password-cannot-be-loaded)
 
 **Q:** I get `mysqldump: Got error: 2026: SSL connection error: error:00000000:lib(0):func(0):reason(0) when trying to connect`
