@@ -7,11 +7,9 @@ description:
 keywords: PhpStorm php sonarlint phpstan
 ---
 
-I'm sure you've heard of [phpstan](https://github.com/phpstan/phpstan),  
-[psalm](https://github.com/vimeo/psalm), and the
+I'm sure you've heard of [phpstan](https://github.com/phpstan/phpstan), [psalm](https://github.com/vimeo/psalm), and the
 [PhpStorm Php Inspections (EA Extended)](https://plugins.jetbrains.com/plugin/7622-php-inspections-ea-extended-) Plugin. 
- 
-maybe you're already using one of these great tools to scan your codebase for issues
+Maybe you're already using one of these great tools to scan your codebase for issues
 and possible bugs. But this time I want to show you another very cool 
 static code analyzer for PHP: 
 
