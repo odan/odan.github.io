@@ -717,6 +717,54 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```
 
+Add the database settings into: `config/settings.php`:
+
+```php
+// Database settings
+$settings['db'] = [
+    'driver' => 'mysql',
+    'host' => 'localhost',
+    'username' => 'root',
+    'database' => 'test',
+    'password' => '',
+    'charset' => 'utf8mb4',
+    'collation' => 'utf8mb4_unicode_ci',
+    'flags' => [
+        // Turn off persistent connections
+        PDO::ATTR_PERSISTENT => false,
+        // Enable exceptions
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+        // Emulate prepared statements
+        PDO::ATTR_EMULATE_PREPARES => true,
+        // Set default fetch mode to array
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        // Set character set
+        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci'
+    ],
+];
+```
+
+Insert a `PDO::class` container definition to `config/container.php`:
+
+```php
+PDO::class => function (ContainerInterface $container) {
+    $config = $container->get(Configuration::class);
+
+    $host = $config->getString('db.host');
+    $dbname =  $config->getString('db.database');
+    $username = $config->getString('db.username');
+    $password = $config->getString('db.password');
+    $charset = $config->getString('db.charset');
+    $flags = $config->getArray('db.flags');
+    $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
+
+    return new PDO($dsn, $username, $password, $flags);
+},
+```
+
+From now on, PHP-DI will always inject the same PDO instance as soon as we declare PDO in a 
+constructor as dependency.
+
 Create a new directory: `src/Domain/User/Repository`
 
 Create the file: `src/Domain/User/Repository/UserCreatorRepository.php` and insert this content:
@@ -781,57 +829,6 @@ class UserCreatorRepository
 
 Note that we have declared `PDO` as a dependency, because the repository requires a database connection.
 
-The PDO object itself is created and injected by the dependency inject container (PHP-DI).
-For this we have to add the PDO settings and a container definition.
-
-Add the PDO settings to: `config/settings.php`:
-
-```php
-// Database settings
-$settings['db'] = [
-    'driver' => 'mysql',
-    'host' => 'localhost',
-    'username' => 'root',
-    'database' => 'test',
-    'password' => '',
-    'charset' => 'utf8mb4',
-    'collation' => 'utf8mb4_unicode_ci',
-    'flags' => [
-        // Turn off persistent connections
-        PDO::ATTR_PERSISTENT => false,
-        // Enable exceptions
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        // Emulate prepared statements
-        PDO::ATTR_EMULATE_PREPARES => true,
-        // Set default fetch mode to array
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        // Set character set
-        PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci'
-    ],
-];
-```
-
-Insert a `PDO::class` container definition to `config/container.php`:
-
-```php
-PDO::class => function (ContainerInterface $container) {
-    $config = $container->get(Configuration::class);
-
-    $host = $config->getString('db.host');
-    $dbname =  $config->getString('db.database');
-    $username = $config->getString('db.username');
-    $password = $config->getString('db.password');
-    $charset = $config->getString('db.charset');
-    $flags = $config->getArray('db.flags');
-    $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
-
-    return new PDO($dsn, $username, $password, $flags);
-},
-```
-
-From now on, PHP-DI will always inject the same PDO instance as soon as we declare PDO in a 
-constructor as a dependency.
-
 The last part is to register a new route for `POST /users`.
 
 Create a new action class in: `src/Action/UserCreateAction.php`:
@@ -870,11 +867,22 @@ final class UserCreateAction
         // Invoke the Domain with inputs and retain the result
         $userId = $this->userCreator->createUser($user);
 
+        // Transform the result into the JSON representation
+        $result = [
+            'user_id' => $userId
+        ];
+
         // Build the HTTP response
-        return $response->withJson(['user_id' => $userId]);
+        return $response->withJson($result)->withStatus(201);
     }
 }
 ```
+
+In this example, we create a "barrier" between source data and output 
+so that schema changes do not affect the clients. For the sake of 
+simplicity, this is done using the same method. In reality, you would 
+separate the input data mapping and output JSON conversion into 
+separate parts of your application.
 
 Add the new route in `config/routes.php`:
 
