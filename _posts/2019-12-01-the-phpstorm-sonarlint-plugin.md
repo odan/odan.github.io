@@ -7,15 +7,15 @@ description:
 keywords: PhpStorm php sonarlint phpstan
 ---
 
-I'm sure you've heard of [phpstan](https://github.com/phpstan/phpstan) or 
-[psalm](https://github.com/vimeo/psalm), and maybe you're already using
-one of these great tools to scan your codebase for issues
-and possible bugs. Maybe you've heard of the PhpStorm 
-[Php Inspections (EA Extended)](https://plugins.jetbrains.com/plugin/7622-php-inspections-ea-extended-), 
-which is also very usful.
+I'm sure you've heard of [phpstan](https://github.com/phpstan/phpstan),  
+[psalm](https://github.com/vimeo/psalm), and the
+[PhpStorm Php Inspections (EA Extended)](https://plugins.jetbrains.com/plugin/7622-php-inspections-ea-extended-) Plugin. 
+ 
+maybe you're already using one of these great tools to scan your codebase for issues
+and possible bugs. But this time I want to show you another very cool 
+static code analyzer for PHP: 
 
-But this time I want to show you another very cool 
-static code analyzer for PHP: The [SonarLint Plugin](https://plugins.jetbrains.com/plugin/7973-sonarlint )
+The [SonarLint Plugin](https://plugins.jetbrains.com/plugin/7973-sonarlint )
 for PhpStorm.
 
 SonarLint is an IDE extension that helps you detect and fix quality issues as you 
