@@ -188,7 +188,7 @@ sudo apt-get install mysql-server mysql-client libmysqlclient-dev -y
 
 A reverse proxy is a common setup for serving dynamic web apps. The reverse proxy terminates the HTTP request and forwards it to the ASP.NET app.
 
-You application could technically run only with the Kestrel web server and without a reverse proxy. But if you want to install and manage your own SSL (https://) certifactes you should use a reverse proxy server (Nginx, Apache, IIS).
+Your application could technically run only with the Kestrel web server and without a reverse proxy. But if you want to install and manage your own SSL (https://) certifactes you should use a reverse proxy server (Nginx, Apache, IIS).
 
 Update Ubuntu packages to their latest stable versions:
 
