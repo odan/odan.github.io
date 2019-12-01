@@ -12,9 +12,11 @@ keywords: php, mysql, css, html, bootstrap, slim, framework, c#, csharp, dotnet
 
 Hi, my name is Daniel Opitz
 
-I am a web developer located close to Basel, Switzerland. I am currently working at [ORCA](https://orca-services.ch/) in Pratteln as a Software Engineer.
+I am a web developer located close to Basel, Switzerland. I am currently working at [ORCA](https://orca-services.ch/) 
+in Pratteln as a Software Engineer.
 
-I am [@dopitz](https://twitter.com/dopitz) on Twitter which is a great way to reach me and if you prefer email you can always write to d.opitz (at) outlook.com.
+I am [@dopitz](https://twitter.com/dopitz) on Twitter which is a great way to reach me and if 
+you prefer email you can always write to d.opitz (at) outlook.com.
 
 You can find all my open source code on [GitHub](https://github.com/odan).
 
@@ -23,15 +25,14 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 * PHP, C#, ASP.NET Core, JavaScript, Node.js
 * MySQL, MS SQL, Oracle, SQLite, InterSystems Caché
 * HTML, CSS, jQuery, Bootstrap, Vue.js
-* Slim, Symfony, CakePHP
+* Slim, CakePHP, Symfony
 * REST, SOAP, XML, JSON
-* SOLID, Clean Code
+* SOLID, Clean Code, Hexagonal Architecture
 * IT-Security
 * SEO, E-Commerce
 
 ## My projects
 
-* [odan/psr7-skeleton](https://github.com/odan/psr7-skeleton) A PSR-7 / PSR-15 skeleton application
 * [odan/slim4-skeleton](https://github.com/odan/slim4-skeleton) A Slim 4 skeleton for apache
 * [odan/phinx-migrations-generator](https://github.com/odan/phinx-migrations-generator) Migration Code Generator for Phinx
 * [odan/twig-assets](https://github.com/odan/twig-assets) A Twig Assets Extension
@@ -58,10 +59,6 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 * [Media Downloader](https://odan-online.com/tools/media-download.php) - Download images from Twitter, Facebook and Instagram
 * [Random Domain Generator](https://odan-online.com/tools/domain-generator.php)
 
-## Links
-
-* [Tech Stack](https://stackshare.io/odan/my-stack)
-
 ## Conferences
 
 * [International PHP Conference - Berlin](https://phpconference.com/) (2015, 2016, 2017, 2018, 2019)
@@ -72,5 +69,7 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 * d.opitz (at) outlook.com
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
+* [Slim support forum](https://discourse.slimframework.com/u/odan/summary)
+* [Stack Overflow](https://stackoverflow.com/users/story/1461181)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
 * [Xing](https://www.xing.com/profile/Daniel_Opitz9)
