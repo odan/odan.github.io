@@ -24,7 +24,7 @@ keywords: php slim cakephp sql querybuilder
 
 ## Introduction
 
-This tutorial demonstrates how to install [Zend SQL Query Builder](https://docs.zendframework.com/zend-db/)
+This tutorial demonstrates how to install [CakePHP Query Builder](https://book.cakephp.org/3/en/orm/query-builder.html)
 and integrate it into a Slim 4 application.
 
 ## Installation
