@@ -2,7 +2,7 @@
 title: Slim 4 - CakePHP Query Builder Setup
 layout: post
 comments: true
-published: false
+published: true
 description: 
 keywords: php slim cakephp sql querybuilder
 ---
