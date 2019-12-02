@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - OAuth 2.0 and JSON Web Token (JWT) Setup.
+title: Slim 4 - OAuth 2.0 and JSON Web Token (JWT) Setup
 layout: post
 comments: true
 published: true
@@ -62,7 +62,7 @@ composer require cakephp/chronos
 First we have to create a **private key** for signature creation and a **public key** for verification.
 This means that it's fine to distribute your public key. However, the private key should remain secret.
 
-Generate the private key with this OpenSSL command and enter a password:
+Generate the private key with this OpenSSL command (enter a password):
 
 ```
 openssl genrsa -aes256 -out private.pem 4096
@@ -88,10 +88,18 @@ The public key is saved in a file named `public.pem` located in the same directo
 ## Configuration
 
 Copy the content of your private key `private.pem` into your application 
-configuration file, e.g. `config/settings.php:
+configuration file, e.g. `config/settings.php`:
 
 ```
 $settings['jwt'] = [
+
+    // The issuer name
+    'issuer' => 'www.example.com',
+
+    // Max lifetime in seconds
+    'lifetime' => 14400,
+
+    // The private key
     'private_key' => '-----BEGIN RSA PRIVATE KEY-----
     ...
     -----END RSA PRIVATE KEY-----',
@@ -114,10 +122,12 @@ namespace App\Auth;
 
 use Cake\Chronos\Chronos;
 use Cake\Core\Configure;
+use InvalidArgumentException;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
+use Lcobucci\JWT\Token;
 use Lcobucci\JWT\ValidationData;
 use Ramsey\Uuid\Uuid;
 use UnexpectedValueException;
@@ -176,10 +186,7 @@ final class JwtAuth
     {
         $issuedAt = Chronos::now()->getTimestamp();
 
-        // Algorithm: RS256
-        $signer = new Sha256();
-
-        $token = (new Builder())
+        return (new Builder())
             ->issuedBy($this->issuer)
             // (JWT ID) Claim, a unique identifier for the JWT
             ->identifiedBy(Uuid::uuid4()->toString(), true)
@@ -187,35 +194,51 @@ final class JwtAuth
             ->canOnlyBeUsedAfter($issuedAt)
             ->expiresAt($issuedAt + $this->lifetime)
             ->withClaim('uid', $uid)
-            ->getToken($signer, new Key($this->privateKey));
+            ->getToken(new Sha256(), new Key($this->privateKey));
+    }
 
-        if (!$this->validateJwt($token)) {
-            throw new UnexpectedValueException(__('The generated JWT is not valid'));
-        }
 
-        return $token;
+    /**
+     * Parse token.
+     *
+     * @param string $token The JWT
+     *
+     * @throws InvalidArgumentException
+     *
+     * @return Token The parsed token
+     */
+    public function createParsedToken(string $token): Token
+    {
+        return (new Parser())->parse($token);
     }
 
     /**
-     * Validate JWT.
+     * Create validation data.
+     *
+     * @return ValidationData The data
+     */
+    public function createValidationData(): ValidationData
+    {
+        $data = new ValidationData();
+        $data->setCurrentTime(Chronos::now()->getTimestamp());
+        $data->setIssuer($this->issuer);
+
+        return $data;
+    }
+
+    /**
+     * Validate token.
      *
      * @param string $token The JWT
      *
      * @return bool The status
      */
-    public function validateJwt(string $token): bool
+    public function validateToken(string $token): bool
     {
-        $currentTime = Chronos::now()->getTimestamp();
-
-        $token = (new Parser())->parse($token);
-
-        $data = new ValidationData();
-        $data->setCurrentTime($currentTime);
-        $data->setIssuer($this->issuer);
-
-        return $token->validate($data);
+        return $this->createParsedToken($token)->validate($this->createValidationData());
     }
 }
+
 
 ```
 
@@ -398,7 +421,7 @@ final class JwtMiddleware implements MiddlewareInterface
         // Append valid token
         $parsedToken = $this->jwtAuth->createParsedToken($token);
         $request = $request->withAttribute('token', $parsedToken);
-        
+
         // Append the user id as request attribute
         $request = $request->withAttribute('uid', $parsedToken->getClaim('uid'));
 
@@ -409,7 +432,14 @@ final class JwtMiddleware implements MiddlewareInterface
 
 ## Protecting routes with JWT
 
-If you want to protect a single route just add the `JwtMiddleware` to the route:
+If you want to protect a single route just add the `JwtMiddleware` to the route you want to protect:
+
+```php
+$app->post('/users', \App\Action\UserCreateAction::class)
+    ->add(\App\Middleware\JwtMiddleware::class);
+```
+
+If you want to protect a route group just add the `JwtMiddleware` to the route group you want to protect:
 
 ```php
 <?php
