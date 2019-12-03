@@ -952,4 +952,14 @@ Remember the relationships:
 * DTO - To carry data (no behavior)
 * Repositories - To execute database queries
 
+## Read more
+
+* [Slim 4 - Zend Query Builder Setup](https://odan.github.io/2019/12/01/slim4-zend-db-query-builder-setup.html)
+* [Slim 4 - CakePHP Query Builder Setup](https://odan.github.io/2019/12/03/slim4-cakephp-query-builder.html)
+* [Slim 4 - Eloquent Setup](https://odan.github.io/2019/12/03/slim4-eloquent.html)
+* [Slim 4 - OAuth 2.0 and JSON Web Token Setup](https://odan.github.io/2019/12/02/slim4-oauth2-jwt.html)
+* [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-4-cheatsheet-and-faq.html)
+* [Slim 4 - Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
+
+
 [Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f)
