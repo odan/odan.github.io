@@ -12,6 +12,7 @@ keywords: php slim cakephp sql querybuilder
 * [Requirements](#requirements)
 * [Introduction](#introduction)
 * [Installation](#installation)
+* [Configuration](#configuration)
 * [Usage](#usage)
 * [Repository](#repository)
 
@@ -29,6 +30,17 @@ and integrate it into a Slim 4 application.
 
 ## Installation
 
+As next we are installing [cakephp/database](https://github.com/cakephp/database) for 
+building SQL queries.
+
+To add the query builder to your application, run:
+
+```php
+composer require cakephp/database
+```
+
+## Configuration
+
 Add the database settings into your configuration file, e.g `config/settings.php`:
 
 ```php
@@ -36,6 +48,9 @@ Add the database settings into your configuration file, e.g `config/settings.php
 $settings['db'] = [
     'driver' => \Cake\Database\Driver\Mysql::class,
     'host' => 'localhost',
+    'database' => 'database',
+    'username' => 'root',
+    'password' => '',
     'encoding' => 'utf8mb4',
     'collation' => 'utf8mb4_unicode_ci',
     'flags' => [
@@ -51,15 +66,6 @@ $settings['db'] = [
         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci'
     ],
 ];
-```
-
-As next we are installing [cakephp/database](https://github.com/cakephp/database) for 
-building SQL queries.
-
-To install the query builder, run:
-
-```php
-composer require cakephp/database
 ```
 
 To configure the database connection we have to add a `\Cake\Database\Connection::class` 

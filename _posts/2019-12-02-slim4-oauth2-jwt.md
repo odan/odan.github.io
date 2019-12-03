@@ -279,7 +279,7 @@ return [
 
         $issuer = $config->getString('jwt.issuer');
         $lifetime = $config->getInt('jwt.lifetime');
-        $privateKey = $config->getString('jwt.privateKey');
+        $privateKey = $config->getString('jwt.private_key');
 
         return new JwtAuth($issuer, $lifetime, $privateKey);
     },
