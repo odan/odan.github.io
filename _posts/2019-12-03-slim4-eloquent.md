@@ -116,13 +116,12 @@ You can inject the capsule instance into your repository like this:
 
 namespace App\Domain\User\Repository;
 
-use App\Domain\User\Data\UserCreateData;
 use Illuminate\Database\Capsule\Manager;
 
 class UserRepository
 {
     /**
-     * @var Manager The query builder factory
+     * @var Manager The query builder
      */
     private $database;
 
@@ -144,21 +143,21 @@ class UserRepository
 
 Once the Capsule instance has been injected, you may use it like so:
 
-#### Query all rows
+### Query all rows
 
 ```php
 $rows = $this->database->table('users')->get();
 ```
 
-#### Query the table with where
+### Query the table with where
 
-Query searching for names matching foo:
+*Query searching for names matching foo*
 
 ```php
 $rows = $this->database->table('users')->where('username', 'like', '%root%')->get();
 ```
 
-#### Query the table by id
+### Query the table by id
 
 Selecting a row based on id:
 
@@ -166,7 +165,7 @@ Selecting a row based on id:
 $row = $this->database->table('users')->find(1);
 ```
 
-#### Insert a record
+### Insert a record
 
 ```php
 $values = [
@@ -184,7 +183,7 @@ Insert a record and get the last inserted id:
 $newId = $this->database->table('users')->insertGetId($values);
 ```
 
-#### Update a record
+### Update a record
 
 ```php
 $this->database->table('users')
@@ -192,7 +191,7 @@ $this->database->table('users')
     ->update(['email' => 'new@example.com']);
 ```
 
-#### Delete a record
+### Delete a record
 
 ```php
 $this->database->table('users')->delete(1);
@@ -206,7 +205,7 @@ $this->database->table('users')
     ->delete();
 ```
 
-**Read more:**
+## Read more
 
 * [Eloquent documentation](https://laravel.com/docs/master/eloquent)
 * [Illuminate Database on Github](https://github.com/illuminate/database)
