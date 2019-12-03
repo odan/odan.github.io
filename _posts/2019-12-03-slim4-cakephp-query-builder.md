@@ -286,7 +286,7 @@ Insert a record:
 ```php
 $row = [
     'first_name' => 'john',
-    'last_name' => 'doe,
+    'last_name' => 'doe',
     'email' => 'john.doe@example.com',
 ];
 
