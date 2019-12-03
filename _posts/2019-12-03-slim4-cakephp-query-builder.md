@@ -25,7 +25,7 @@ keywords: php slim cakephp sql querybuilder
 
 ## Introduction
 
-You can use a the [CakePHP Query Builder](https://book.cakephp.org/3/en/orm/query-builder.html)
+You can use the [CakePHP Query Builder](https://book.cakephp.org/3/en/orm/query-builder.html)
 to connect your Slim 4 application to a database.
 
 ## Installation
@@ -65,8 +65,7 @@ $settings['db'] = [
 ];
 ```
 
-To configure the database connection we have to add a `\Cake\Database\Connection::class` 
-container definition, e.g. into `config/container.php`:
+In your `config/container.php` or wherever you add your container definitions:
 
 ```php
 <?php
@@ -91,12 +90,12 @@ return [
         $driver = $db->getDriver();
         $driver->connect();
 
-        return $db->getDriver()->getConnection();
+        return $driver->getConnection();
     },
 ];
 ```
 
-Add the `QueryFactory` class file here: `src/Repository/QueryFactory.php` and copy / paste this content:
+Create a new PHP file: `src/Repository/QueryFactory.php` and copy / paste this content:
 
 ```php
 <?php
@@ -247,7 +246,7 @@ final class QueryFactory
 
 ## Repository
 
-You can inject the query builder instance into your repository like this:
+You can inject the query factory instance into your repository like this:
 
 ```php
 <?php
@@ -300,9 +299,6 @@ final class UserRepository implements RepositoryInterface
     }
 }
 ```
-
-Note that we have declared `QueryFactory` as a dependency, 
-because the repository requires a database connection.
 
 ## Usage
 
