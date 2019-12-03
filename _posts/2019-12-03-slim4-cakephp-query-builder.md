@@ -13,8 +13,8 @@ keywords: php slim cakephp sql querybuilder
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Configuration](#configuration)
-* [Usage](#usage)
 * [Repository](#repository)
+* [Usage](#usage)
 
 ## Requirements
 
@@ -25,15 +25,12 @@ keywords: php slim cakephp sql querybuilder
 
 ## Introduction
 
-This tutorial demonstrates how to install [CakePHP Query Builder](https://book.cakephp.org/3/en/orm/query-builder.html)
-and integrate it into a Slim 4 application.
+You can use a the [CakePHP Query Builder](https://book.cakephp.org/3/en/orm/query-builder.html)
+to connect your Slim 4 application to a database.
 
 ## Installation
 
-As next we are installing [cakephp/database](https://github.com/cakephp/database) for 
-building SQL queries.
-
-To add the query builder to your application, run:
+To add the [cakephp/database](https://github.com/cakephp/database) package to your application, run:
 
 ```php
 composer require cakephp/database
@@ -91,7 +88,8 @@ return [
 
     PDO::class => function (ContainerInterface $container) {
         $db = $container->get(Connection::class);
-        $db->getDriver()->connect();
+        $driver = $db->getDriver();
+        $driver->connect();
 
         return $db->getDriver()->getConnection();
     },
@@ -247,77 +245,9 @@ final class QueryFactory
 
 ```
 
-## Usage
-
-You can use the query builder to create `SELECT`, `UPDATE`, `INSERT` and `DELETE` statements.
-
-Here are some examples.
-
-Select all rows:
-
-```php
-$query = $this->queryFactory->newSelect('users')->select('*');
-$rows = $query->execute()->fetchAll('assoc');
-
-foreach ($rows as $row) {
-    print_r($row);
-}
-```
-
-Select all rows (for complex queries):
-
-```php
-$query = $this->queryFactory->newSelect('users');
-
-$query->select(['id', 'username']);
-$select->andWhere(['id' => 1]);
-
-$rows = $query->execute()->fetchAll('assoc');
-
-foreach ($rows as $row) {
-    print_r($row);
-}
-```
-
-Select only the first row:
-
-```php
-$query = $this->queryFactory->newSelect('users')->andWhere(['id' => 1]);
-
-$row = $query->execute()->fetch('assoc');
-```
-
-Insert a record:
-
-```php
-$row = [
-    'first_name' => 'john',
-    'last_name' => 'doe',
-    'email' => 'john.doe@example.com',
-];
-
-$newId = (int)$this->queryFactory->newInsert('users', $row)->execute()->lastInsertId();
-```
-
-Update a record:
-
-```php
-$data = ['email' => 'new@example.com'];
-
-$this->queryFactory->newUpdate('users', $data)->andWhere(['id' => 1])->execute();
-```
-
-Delete a record:
-
-```php
-$this->queryFactory->newUpdate('users')->andWhere(['id' => 1])->execute();
-```
-
 ## Repository
 
-Create a new directory: `src/Domain/User/Repository`
-
-Create the file: `src/Domain/User/Repository/UserCreatorRepository.php` and insert this content:
+You can inject the query builder instance into your repository like this:
 
 ```php
 <?php
@@ -341,7 +271,7 @@ final class UserRepository implements RepositoryInterface
     private $queryFactory;
 
     /**
-     * Constructor.
+     * The constructor.
      *
      * @param QueryFactory $queryFactory The query factory
      */
@@ -371,4 +301,75 @@ final class UserRepository implements RepositoryInterface
 }
 ```
 
-Note that we have declared `QueryFactory` as a dependency, because the repository requires a database connection.
+Note that we have declared `QueryFactory` as a dependency, 
+because the repository requires a database connection.
+
+## Usage
+
+Once the query factory instance has been injected, you may use it like so:
+
+### Query all rows
+
+```php
+$query = $this->queryFactory->newSelect('users')->select('*');
+$rows = $query->execute()->fetchAll('assoc');
+
+foreach ($rows as $row) {
+    print_r($row);
+}
+```
+
+### Query the table with where
+
+```php
+$query = $this->queryFactory->newSelect('users');
+
+$query->select(['id', 'username']);
+$select->andWhere(['id' => 1]);
+
+$rows = $query->execute()->fetchAll('assoc');
+
+foreach ($rows as $row) {
+    print_r($row);
+}
+```
+
+### Query the table by id
+
+```php
+$query = $this->queryFactory->newSelect('users')->andWhere(['id' => 1]);
+
+$row = $query->execute()->fetch('assoc');
+```
+
+### Insert a record
+
+```php
+$values = [
+    'first_name' => 'john',
+    'last_name' => 'doe',
+    'email' => 'john.doe@example.com',
+];
+
+$this->queryFactory->newInsert('users', $values)->execute();
+```
+
+Insert a record and get the last inserted id:
+
+```php
+$newId = (int)$this->queryFactory->newInsert('users', $values)->execute()->lastInsertId();
+```
+
+### Update a record
+
+```php
+$values = ['email' => 'new@example.com'];
+
+$this->queryFactory->newUpdate('users', $values)->andWhere(['id' => 1])->execute();
+```
+
+### Delete a record
+
+```php
+$this->queryFactory->newDelete('users')->andWhere(['id' => 1])->execute();
+```

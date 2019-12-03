@@ -12,8 +12,8 @@ keywords: php slim laravel eloquent orm sql querybuilder
 * [Requirements](#requirements)
 * [Introduction](#introduction)
 * [Installation](#installation)
-* [Usage](#usage)
 * [Repository](#repository)
+* [Usage](#usage)
 
 ## Requirements
 
@@ -159,8 +159,6 @@ $rows = $this->database->table('users')->where('username', 'like', '%root%')->ge
 
 ### Query the table by id
 
-Selecting a row based on id:
-
 ```php
 $row = $this->database->table('users')->find(1);
 ```
@@ -186,9 +184,11 @@ $newId = $this->database->table('users')->insertGetId($values);
 ### Update a record
 
 ```php
+$values = ['email' => 'new@example.com'];
+
 $this->database->table('users')
     ->where(['id' => 1])
-    ->update(['email' => 'new@example.com']);
+    ->update($values);
 ```
 
 ### Delete a record
