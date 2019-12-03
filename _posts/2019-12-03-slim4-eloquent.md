@@ -37,9 +37,7 @@ composer require illuminate/database
 
 ## Configuration
 
-Add the database settings to Slim’s settings array.
-
-, e.g `config/settings.php`:
+Add the database settings to Slim’s settings array, e.g `config/settings.php`:
 
 ```php
 // Database settings
@@ -59,6 +57,8 @@ $settings['db'] = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         // Emulate prepared statements
         PDO::ATTR_EMULATE_PREPARES => true,
+        // Set default fetch mode to array
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         // Set character set
         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci'
     ],
@@ -70,7 +70,7 @@ In your `config/container.php` or wherever you add your container definitions:
 ```php
 <?php
 
-use Cake\Database\Connection;
+use Illuminate\Database\Capsule\Manager;
 use Psr\Container\ContainerInterface;
 use Selective\Config\Configuration;
 use Slim\App;
@@ -82,20 +82,24 @@ return [
     
     // Database connection
     Manager::class => function (ContainerInterface $container) {
-        $capsule = new \Illuminate\Database\Capsule\Manager;
+        $capsule = new Manager();
+        
         $capsule->addConnection($container->get(Configuration::class)->getArray('db'));
 
+        // Prevent memory issues
+        $capsule->getConnection()->disableQueryLog();
+
+        // Optional: Make this Capsule instance available globally via static methods
         $capsule->setAsGlobal();
+
+        // Setup the Eloquent ORM
         $capsule->bootEloquent();
 
         return $capsule;
     },
 
     PDO::class => function (ContainerInterface $container) {
-        $db = $container->get(Connection::class);
-        $db->getDriver()->connect();
-
-        return $db->getDriver()->getConnection();
+        return $container->get(Manager::class)->getConnection()->getPdo();
     },
 ];
 ```
