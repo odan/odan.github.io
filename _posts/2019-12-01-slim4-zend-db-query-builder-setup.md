@@ -12,8 +12,9 @@ keywords: php slim sql querybuilder
 * [Requirements](#requirements)
 * [Introduction](#introduction)
 * [Installation](#installation)
-* [Usage](#usage)
+* [Configuration](#configuration)
 * [Repository](#repository)
+* [Usage](#usage)
 
 ## Requirements
 
@@ -24,10 +25,18 @@ keywords: php slim sql querybuilder
 
 ## Introduction
 
-This tutorial demonstrates how to install [Zend SQL Query Builder](https://docs.zendframework.com/zend-db/)
-and integrate it into a Slim 4 application.
+You can use the [Zend SQL Query Builder](https://docs.zendframework.com/zend-db/)
+to connect your Slim 4 application to a database.
 
 ## Installation
+
+To install the [zendframework/zend-db](https://docs.zendframework.com/zend-db/) package, run:
+
+```php
+composer require zendframework/zend-db
+```
+
+## Configuration
 
 Add the database settings into your configuration file, e.g `config/settings.php`:
 
@@ -56,19 +65,7 @@ $settings['db'] = [
 ];
 ```
 
-As next we are installing [zendframework/zend-db](https://docs.zendframework.com/zend-db/) for 
-building SQL queries.
-
-To install the query builder, run:
-
-```php
-composer require zendframework/zend-db
-```
-
-To configure the database connection we have to add an `\Zend\Db\Adapter\AdapterInterface` 
-container definition. 
-
-Add the following container definitions, e.g. into `config/container.php`:
+In your `config/container.php` or wherever you add your container definitions:
 
 ```php
 <?php
@@ -127,69 +124,9 @@ final class QueryFactory
 }
 ```
 
-## Usage
-
-You can use the query builder to create `SELECT`, `UPDATE`, `INSERT` and `DELETE` statements.
-
-Here are some examples.
-
-Select all rows (for simple queries):
-
-```php
-$rows = $this->queryFactory->table('users')->select( /* where */ );
-
-foreach ($rows as $row) {
-    print_r($row);
-}
-```
-
-Select all rows (for complex queries):
-
-```php
-$table = $this->queryFactory->table('users');
-
-$select = $table->getSql()->select();
-$select->columns(['id']);
-$select->where(['id' => 1]);
-
-$rows = $table->selectWith($select);
-
-foreach ($rows as $row) {
-    print_r($row);
-}
-```
-
-Select only the first row:
-
-```php
-$row = $this->queryFactory->table('users')
-    ->select(['id' => 1])->current();
-```
-
-Insert a record:
-
-```php
-$table = $this->queryFactory->table('users');
-$table->insert($values);
-
-$newId = (int)$table->getLastInsertValue();
-```
-
-Update a record:
-
-```php
-$this->queryFactory->table('users')
-    ->update(['email' => 'new@example.com'], ['id' => 1]);
-```
-
-Delete a record:
-
-```php
-$this->queryFactory->table('users')
-    ->delete(['id' => 1]);
-```
-
 ## Repository
+
+You can inject the query factory instance into your repository like this:
 
 Create a new directory: `src/Domain/User/Repository`
 
@@ -249,4 +186,66 @@ class UserCreatorRepository
 }
 ```
 
-Note that we have declared `QueryFactory` as a dependency, because the repository requires a database connection.
+## Usage
+
+Once the query factory instance has been injected, you may use it like so:
+
+### Query all rows
+
+A simple query:
+
+```php
+$rows = $this->queryFactory->table('users')->select( /* where */ );
+
+foreach ($rows as $row) {
+    print_r($row);
+}
+```
+
+A complex query:
+
+```php
+$table = $this->queryFactory->table('users');
+
+$select = $table->getSql()->select();
+$select->columns(['id']);
+$select->where(['id' => 1]);
+
+$rows = $table->selectWith($select);
+
+foreach ($rows as $row) {
+    print_r($row);
+}
+```
+
+### Query the table with where
+
+Select only the first row:
+
+```php
+$row = $this->queryFactory->table('users')
+    ->select(['id' => 1])->current();
+```
+
+### Insert a record
+
+```php
+$table = $this->queryFactory->table('users');
+$table->insert($values);
+
+$newId = (int)$table->getLastInsertValue();
+```
+
+### Update a record
+
+```php
+$values = ['email' => 'new@example.com'];
+
+$this->queryFactory->table('users')->update($values, ['id' => 1]);
+```
+
+### Delete a record
+
+```php
+$this->queryFactory->table('users')->delete(['id' => 1]);
+```
