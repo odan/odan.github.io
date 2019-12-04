@@ -133,7 +133,6 @@ You can inject the query factory instance into your repository like this:
 
 namespace App\Domain\User\Repository;
 
-use App\Domain\User\Data\UserCreateData;
 use App\Factory\QueryFactory;
 
 /**
@@ -156,29 +155,8 @@ class UserCreatorRepository
         $this->queryFactory = $queryFactory;
     }
 
-    /**
-     * Insert user row.
-     *
-     * @param UserCreateData $user The user
-     *
-     * @return int The new ID
-     */
-    public function insertUser(UserCreateData $user): int
-    {
-        $values = [
-            'username' => $user->username,
-            'first_name' => $user->firstName,
-            'last_name' => $user->lastName,
-            'email' => $user->email,
-        ];
+    // ...
 
-        // Insert record
-        $table = $this->queryFactory->table('users');
-        $table->insert($values);
-
-        // Return new primary key value (id)
-        return (int)$table->getLastInsertValue();
-    }
 }
 ```
 
