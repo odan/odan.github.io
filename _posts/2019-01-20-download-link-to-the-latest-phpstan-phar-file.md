@@ -44,13 +44,14 @@ Add this to your `build.xml` file:
 ```xml
 <target name="phpstan" description="PHP Static Analysis Tool - discover bugs in your code without running it">
     <mkdir dir="${basedir}/build"/>
+    <get src="https://github.com/phpstan/phpstan-shim/raw/master/phpstan.phar"
+         dest="${basedir}/build/phpstan.phar" skipexisting="true"/>
     <exec executable="php" searchpath="true" resolveexecutable="true" failonerror="true">
-        <arg value="${basedir}/vendor/phpstan/phpstan-shim/phpstan.phar"/>
+        <arg value="${basedir}/build/phpstan.phar"/>
         <arg value="analyse"/>
         <arg value="-l"/>
         <arg value="max"/>
         <arg value="src"/>
-        <arg value="tests"/>
         <arg value="--no-interaction"/>
         <arg value="--no-progress"/>
     </exec>
