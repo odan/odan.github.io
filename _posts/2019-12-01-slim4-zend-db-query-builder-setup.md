@@ -128,10 +128,6 @@ final class QueryFactory
 
 You can inject the query factory instance into your repository like this:
 
-Create a new directory: `src/Domain/User/Repository`
-
-Create the file: `src/Domain/User/Repository/UserCreatorRepository.php` and insert this content:
-
 ```php
 <?php
 

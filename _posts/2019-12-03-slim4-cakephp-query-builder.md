@@ -104,7 +104,6 @@ namespace App\Repository;
 
 use Cake\Database\Connection;
 use Cake\Database\Query;
-use RuntimeException;
 use UnexpectedValueException;
 
 /**
@@ -116,16 +115,6 @@ final class QueryFactory
      * @var Connection
      */
     private $connection;
-
-    /**
-     * @var callable
-     */
-    private $beforeUpdateCallback;
-
-    /**
-     * @var callable
-     */
-    private $beforeInsertCallback;
 
     /**
      * Constructor.
@@ -152,7 +141,7 @@ final class QueryFactory
      *
      * @param string $table The table name
      *
-     * @throws RuntimeException
+     * @throws UnexpectedValueException
      *
      * @return Query A new select query
      */
@@ -171,17 +160,12 @@ final class QueryFactory
      * Create an 'update' statement for the given table.
      *
      * @param string $table The table to update rows from
-     * @param array $data The values to be updated
      *
      * @return Query The new update query
      */
-    public function newUpdate(string $table, array $data): Query
+    public function newUpdate(string $table): Query
     {
-        if (isset($this->beforeUpdateCallback)) {
-            $data = (array)call_user_func($this->beforeUpdateCallback, $data, $table);
-        }
-
-        return $this->newQuery()->update($table)->set($data);
+        return $this->newQuery()->update($table);
     }
 
     /**
@@ -194,15 +178,7 @@ final class QueryFactory
      */
     public function newInsert(string $table, array $data): Query
     {
-        if (isset($this->beforeInsertCallback)) {
-            $data = (array)call_user_func($this->beforeInsertCallback, $data, $table);
-        }
-
-        $columns = array_keys($data);
-
-        return $this->newQuery()->insert($columns)
-            ->into($table)
-            ->values($data);
+        return $this->newQuery()->insert(array_keys($data))->into($table)->values($data);
     }
 
     /**
@@ -215,30 +191,6 @@ final class QueryFactory
     public function newDelete(string $table): Query
     {
         return $this->newQuery()->delete($table);
-    }
-
-    /**
-     * Before update event.
-     *
-     * @param callable $callback The callback (string $row, string $table)
-     *
-     * @return void
-     */
-    public function beforeUpdate(callable $callback): void
-    {
-        $this->beforeUpdateCallback = $callback;
-    }
-
-    /**
-     * Before insert event.
-     *
-     * @param callable $callback The callback (string $row, string $table)
-     *
-     * @return void
-     */
-    public function beforeInsert(callable $callback): void
-    {
-        $this->beforeInsertCallback = $callback;
     }
 }
 
@@ -255,14 +207,13 @@ namespace App\Domain\User\Repository;
 
 use App\Domain\User\Data\UserData;
 use App\Repository\QueryFactory;
-use App\Repository\RepositoryInterface;
 use App\Repository\TableName;
 use Cake\Database\StatementInterface;
 
 /**
  * Repository.
  */
-final class UserRepository implements RepositoryInterface
+class UserRepository
 {
     /**
      * @var QueryFactory The query factory
@@ -279,24 +230,7 @@ final class UserRepository implements RepositoryInterface
         $this->queryFactory = $queryFactory;
     }
 
-    /**
-     * Find all users.
-     *
-     * @return UserCreatorData[] A list of users
-     */
-    public function findAllUsers(): array
-    {
-        $query = $this->queryFactory->newSelect(TableName::USERS)->select('*');
-
-        $rows = $query->execute()->fetchAll(StatementInterface::FETCH_TYPE_ASSOC);
-
-        $result = [];
-        foreach ($rows as $row) {
-            $result[] = new UserData($row);
-        }
-
-        return $result;
-    }
+    // ...
 }
 ```
 
@@ -353,7 +287,9 @@ $this->queryFactory->newInsert('users', $values)->execute();
 Insert a record and get the last inserted id:
 
 ```php
-$newId = (int)$this->queryFactory->newInsert('users', $values)->execute()->lastInsertId();
+$newId = (int)$this->queryFactory->newInsert('users', $values)
+    ->execute()
+    ->lastInsertId();
 ```
 
 ### Update a record
@@ -361,11 +297,16 @@ $newId = (int)$this->queryFactory->newInsert('users', $values)->execute()->lastI
 ```php
 $values = ['email' => 'new@example.com'];
 
-$this->queryFactory->newUpdate('users', $values)->andWhere(['id' => 1])->execute();
+$this->queryFactory->newUpdate('users')
+    ->set($values)
+    ->andWhere(['id' => 1])
+    ->execute();
 ```
 
 ### Delete a record
 
 ```php
-$this->queryFactory->newDelete('users')->andWhere(['id' => 1])->execute();
+$this->queryFactory->newDelete('users')
+    ->andWhere(['id' => 1])
+    ->execute();
 ```
