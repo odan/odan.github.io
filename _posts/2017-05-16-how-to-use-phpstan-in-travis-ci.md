@@ -7,6 +7,9 @@ description:
 keywords: 
 ---
 
+> With PHPStan 0.12, the phpstan/phpstan-shim composer package will not be updated anymore. 
+  [Read more](https://medium.com/@ondrejmirtes/phpstan-0-12-released-f1a88036535d)
+
 If you run PHPStan on every commit, you find errors in your code without actually running it. It catches whole classes of bugs even before you write tests for the code.
 
 ## Requirements
