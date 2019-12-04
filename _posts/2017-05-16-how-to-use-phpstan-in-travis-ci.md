@@ -2,7 +2,7 @@
 title: Using PHPStan in Travis CI
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: 
 ---

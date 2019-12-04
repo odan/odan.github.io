@@ -10,9 +10,9 @@ keywords: php, phpstan
 With PHPStan 0.12, the phpstan/phpstan-shim composer package will not be updated anymore. 
 [Read more](https://medium.com/@ondrejmirtes/phpstan-0-12-released-f1a88036535d)
 
-But you still can download the latest phpstan PHAR file diretly from Github.
+But you still can download the latest phpstan.phar file directly from Github.
  
-The url ist: <https://github.com/phpstan/phpstan-shim/raw/master/phpstan.phar>
+The url is: <https://github.com/phpstan/phpstan-shim/raw/master/phpstan.phar>
 
 ## Composer
 
@@ -22,7 +22,7 @@ Add the following scripts to your `composer.json` file:
 "scripts": {
     "install-phpstan": "php -r \"@mkdir('build'); copy('https://github.com/phpstan/phpstan-shim/raw/master/phpstan.phar', 'build/phpstan.phar');\"",
     "phpstan": "php build/phpstan.phar analyse src --level=max --no-progress",
-},
+}
 ```
 
 **Installation**
