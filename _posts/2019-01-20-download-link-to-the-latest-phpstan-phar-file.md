@@ -7,32 +7,37 @@ description:
 keywords: php, phpstan
 ---
 
-I am using [Apache Ant](https://ant.apache.org/) to install my PHAR tools in my projects. Updating the PHAR tools for minor/bugfix versions in multiple projects can become quite an effort.
+With PHPStan 0.12, the phpstan/phpstan-shim composer package will not be updated anymore. 
+[Read more](https://medium.com/@ondrejmirtes/phpstan-0-12-released-f1a88036535d)
 
-It would be great if phpstan could provide a major-version download URL in addition to the GitHub release artifact download url.
+But you still can download the latest phpstan PHAR file diretly from Github.
+ 
+The url ist: <https://github.com/phpstan/phpstan-shim/raw/master/phpstan.phar>
 
-For example PHPUnit provides such an URL: <https://phar.phpunit.de/phpunit-7.phar> for the latest PHPUnit 7 PHAR version.
+## Composer
 
-Now it is very easy to download the latest copy the PHAR from the **[phpstan/phpstan-shim](https://github.com/phpstan/phpstan-shim)** package.
+Add the following scripts to your `composer.json` file: 
 
-The download link to the latest phpstan PHAR file is: <https://github.com/phpstan/phpstan-shim/raw/master/phpstan.phar>
-
-**Downside:** This link always points to the latest dev-master - an inherently unstable version with BC breaks.
-
-The **official** and "more stable" solution is to install the [phpstan/phpstan-shim](https://github.com/phpstan/phpstan-shim) as dev dependency and use the PHAR file from there.
-
-Install phpstan-shim with composer: 
-
-```bash
-composer require phpstan/phpstan-shim --dev
+```json
+"scripts": {
+    "install-phpstan": "php -r \"@mkdir('build'); copy('https://github.com/phpstan/phpstan-shim/raw/master/phpstan.phar', 'build/phpstan.phar');\"",
+    "phpstan": "php build/phpstan.phar analyse src --level=max --no-progress",
+},
 ```
 
-When you want a new version, you can just run `composer update` and copy the PHAR from:
- 
-* `{basedir}/vendor/phpstan/phpstan-shim/phpstan.phar`
+**Installation**
 
+```
+composer install-phpstan
+```
 
-## Using PHPStan with Apache Ant
+**Usage**
+
+```
+composer phpstan
+```
+
+## Apache Ant
 
 Add this to your `build.xml` file:
 
