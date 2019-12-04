@@ -2,7 +2,7 @@
 title: Debugging php command line scripts with xdebug
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: 
 ---
