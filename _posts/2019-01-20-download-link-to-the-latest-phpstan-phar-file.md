@@ -42,7 +42,7 @@ composer phpstan
 Add this to your `build.xml` file:
 
 ```xml
-<target name="phpstan" description="PHP Static Analysis Tool - discover bugs in your code without running it">
+<target name="phpstan" description="PHP Static Analysis Tool">
     <mkdir dir="${basedir}/build"/>
     <get src="https://github.com/phpstan/phpstan-shim/raw/master/phpstan.phar"
          dest="${basedir}/build/phpstan.phar" skipexisting="true"/>
