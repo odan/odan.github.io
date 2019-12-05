@@ -1,5 +1,5 @@
 ---
-title: PHP Best Practices 2019
+title: PHP - Best Practices 2019
 layout: post
 comments: true
 published: true

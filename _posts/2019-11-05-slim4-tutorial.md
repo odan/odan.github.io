@@ -1,5 +1,5 @@
 ---
-title: Slim 4 Tutorial
+title: Slim 4 - Tutorial
 layout: post
 comments: true
 published: true
