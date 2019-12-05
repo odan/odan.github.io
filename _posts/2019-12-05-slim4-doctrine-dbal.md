@@ -116,7 +116,7 @@ class UserRepository
     /**
      * The constructor.
      *
-     * @param Connection $database The database connection
+     * @param Connection $connection The database connection
      */
     public function __construct(Connection $connection)
     {
