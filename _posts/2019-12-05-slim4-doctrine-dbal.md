@@ -83,9 +83,9 @@ return [
     
     // Database connection
     Connection::class => function (ContainerInterface $container) {
-	    $config = new DoctrineConfiguration();
-	    $connectionParams = $container->get(Configuration::class)->getArray('db');
-	    
+        $config = new DoctrineConfiguration();
+        $connectionParams = $container->get(Configuration::class)->getArray('db');
+
         return DriverManager::getConnection($connectionParams, $config);
     },
 
@@ -97,7 +97,7 @@ return [
 
 ## Repository
 
-You can inject the capsule instance into your repository like this:
+You can inject the connection instance into your repository like this:
 
 ```php
 <?php
@@ -129,7 +129,7 @@ class UserRepository
 
 ## Usage
 
-Once the Capsule instance has been injected, you may use it like so:
+Once the connection instance has been injected, you may use it like so:
 
 ### Query all rows
 
