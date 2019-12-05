@@ -51,10 +51,10 @@ and [PSR-12](https://www.php-fig.org/psr/psr-12/). *PSR-2 is deprecated.*
 
 ## Tools
 
-Use static code analysis to detect bugs and errors. For example:
+Use a static code analyzer to detect bugs and errors. For example:
 
 * [phpstan](https://github.com/phpstan/phpstan)
-* [PhpStorm Code Inspector](https://plugins.jetbrains.com/plugin/7622-php-inspections-ea-extended-)
+* [Php Inspections EA Extended](https://plugins.jetbrains.com/plugin/7622-php-inspections-ea-extended-)
 * [SonarLint Plugin](https://odan.github.io/2019/12/01/the-phpstorm-sonarlint-plugin.html)
 
 ## Read more
