@@ -12,7 +12,7 @@ A lot has changed within the last time I have written about this topic in [2018]
 
 ## Principles and rules
 
-Here are the most importand rules:
+Here are the most important rules:
 
 * [KISS](https://odan.github.io/learn-php/#kiss) - Keep it simple, stupid
 * [YAGNI](https://odan.github.io/learn-php/#yagni) - You Arent Gonna Need It
@@ -24,12 +24,12 @@ Here are the most importand rules:
 
 * Code must follow [PSR-1](https://www.php-fig.org/psr/psr-1/) 
 and [PSR-12](https://www.php-fig.org/psr/psr-12/). *PSR-2 is deprecated.*
-* Always add full [PSR-5](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md) DocBlocks for all classes and all methods.
+* Add full [PSR-5](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md) DocBlocks for all classes and all methods.
 
 ## Naming
 
 * Use english names only (class names, method names, comments, variables names, database table and field names, etc...).
-* Use class suffixes / prefixes according to the [PSR Naming Conventions](https://www.php-fig.org/bylaws/psr-naming-conventions/).
+* Use class suffixes / prefixes according to [PSR Naming Conventions](https://www.php-fig.org/bylaws/psr-naming-conventions/).
 
 ## Common rules
 
@@ -47,7 +47,7 @@ and [PSR-12](https://www.php-fig.org/psr/psr-12/). *PSR-2 is deprecated.*
 * Declare all class dependencies only within the constructor.
 * Don't inject the container (PSR-11). The service locator is an anti-pattern.
 * A constructor can accept only dependencies as object.
-* Scalar data types (string, int, float, array) for the constructor is not allowed. Pass them as parameter object.
+* Scalar data types (string, int, float, array) are not allowed for the constructor. Pass them as parameter object.
 
 ## Tools
 
