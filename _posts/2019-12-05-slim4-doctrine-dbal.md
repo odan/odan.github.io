@@ -194,15 +194,14 @@ $newId = $this->connection->lastInsertId();
 
 ```php
 $values = ['email' => 'new@example.com'];
-$where = ['id' => 1];
 
-$this->connection->update('users', $values, $where);
+$this->connection->update('users', $values, ['id' => 1]);
 ```
 
 ### Delete a record
 
 ```php
-$this->connection->delete('users', $values, ['id' => 1]);
+$this->connection->delete('users', ['id' => 1]);
 ```
 
 ## Read more
