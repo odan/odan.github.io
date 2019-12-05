@@ -25,7 +25,7 @@ keywords: php slim laravel eloquent orm sql querybuilder
 ## Introduction
 
 You can use a database ORM such as [Eloquent](https://laravel.com/docs/eloquent) to connect 
-your SlimPHP application to a database.
+your Slim 4 application to a database.
 
 ## Installation
 
