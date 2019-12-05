@@ -23,8 +23,8 @@ Here are the most importand rules:
 ## Coding styles
 
 * Code must follow [PSR-1](https://www.php-fig.org/psr/psr-1/) 
-and [PSR-12](https://www.php-fig.org/psr/psr-12/). PSR-2 is deprecated.
-* Always add full [PSR-5](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md) DocBlock for all classes and all methods.
+and [PSR-12](https://www.php-fig.org/psr/psr-12/). *PSR-2 is deprecated.*
+* Always add full [PSR-5](https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md) DocBlocks for all classes and all methods.
 
 ## Naming
 
@@ -34,8 +34,8 @@ and [PSR-12](https://www.php-fig.org/psr/psr-12/). PSR-2 is deprecated.
 ## Common rules
 
 * All methods must have [type declaration](https://www.php.net/manual/en/migration70.new-features.php) and return type declaration.
-* Class propetries must have [typed properties](https://wiki.php.net/rfc/typed_properties_v2) (PHP 7.4+)
 * Methods without return statement must declared with `void` as their return type.
+* Class properties must have [typed properties](https://wiki.php.net/rfc/typed_properties_v2) (PHP 7.4+)
 * Don't mix data types for parameters and return types. (Except for `nullable`)
 * Create `final` classes by default, except you have to mock it (e.g. repositories).
 * Create `private` methods by default. Don't create `protected` methods.
@@ -44,17 +44,18 @@ and [PSR-12](https://www.php-fig.org/psr/psr-12/). PSR-2 is deprecated.
 ## Dependency injection
 
 * Use [composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance).
-* Declare all class dependencies only withinh the constructor.
+* Declare all class dependencies only within the constructor.
 * Don't inject the container (PSR-11). The service locator is an anti-pattern.
 * A constructor can accept only dependencies as object.
-* Scalar data types (string, int, float, array) are not allowed. Pass them as parameter object.
+* Scalar data types (string, int, float, array) for the constructor is not allowed. Pass them as parameter object.
 
 ## Tools
 
-* Use static code analysis to detect bugs and errors. For example:
-  * [phpstan](https://github.com/phpstan/phpstan)
-  * [PhpStorm Code Inspector](https://plugins.jetbrains.com/plugin/7622-php-inspections-ea-extended-)
-  * [SonarLint Plugin](https://odan.github.io/2019/12/01/the-phpstorm-sonarlint-plugin.html)
+Use static code analysis to detect bugs and errors. For example:
+
+* [phpstan](https://github.com/phpstan/phpstan)
+* [PhpStorm Code Inspector](https://plugins.jetbrains.com/plugin/7622-php-inspections-ea-extended-)
+* [SonarLint Plugin](https://odan.github.io/2019/12/01/the-phpstorm-sonarlint-plugin.html)
 
 ## Read more
 
