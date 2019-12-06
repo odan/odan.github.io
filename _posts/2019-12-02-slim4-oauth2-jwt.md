@@ -325,7 +325,8 @@ final class TokenCreateAction
         $password = (string)$data['password'];
 
         // Validate login (pseudo code)
-        // This should be done in an application service and not here
+        // Warning: This should be done in an application service and not here!
+        // e.g. $isValidLogin = $this->userAuth->checkLogin($username, $password); 
         $isValidLogin = ($username === 'user' && $password === 'secret');
 
         if (!$isValidLogin) {
@@ -412,7 +413,7 @@ final class JwtMiddleware implements MiddlewareInterface
         $authorization = $request->getHeaderLine('Authorization');
         $token = explode(' ', $authorization)[1];
 
-        if (!$this->jwtAuth->validateToken($token)) {
+        if (!$token || !$this->jwtAuth->validateToken($token)) {
             return $this->responseFactory->createResponse()
                 ->withHeader('Content-Type', 'application/json')
                 ->withStatus(401, 'Unauthorized');
@@ -449,6 +450,7 @@ use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app) {
+    // This route must not be protected
     $app->post('/api/tokens', \App\Action\TokenCreateAction::class);
 
     // Protect the whole group
