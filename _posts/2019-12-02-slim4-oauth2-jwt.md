@@ -213,20 +213,6 @@ final class JwtAuth
     }
 
     /**
-     * Create validation data.
-     *
-     * @return ValidationData The data
-     */
-    public function createValidationData(): ValidationData
-    {
-        $data = new ValidationData();
-        $data->setCurrentTime(Chronos::now()->getTimestamp());
-        $data->setIssuer($this->issuer);
-
-        return $data;
-    }
-
-    /**
      * Validate token.
      *
      * @param string $token The JWT
@@ -237,12 +223,24 @@ final class JwtAuth
     {
         return $this->createParsedToken($token)->validate($this->createValidationData());
     }
+
+    /**
+     * Create validation data.
+     *
+     * @return ValidationData The data
+     */
+    private function createValidationData(): ValidationData
+    {
+        $data = new ValidationData();
+        $data->setCurrentTime(Chronos::now()->getTimestamp());
+        $data->setIssuer($this->issuer);
+
+        return $data;
+    }
 }
-
-
 ```
 
-Add the the following container definiton, e.g. into `config/container.ph`:
+Add the the following container definitons, e.g. into `config/container.php`:
 
 ```php
 <?php
@@ -273,7 +271,7 @@ return [
         return $container->get(App::class)->getResponseFactory();
     },
 
-    // Add this entry
+    // And add this entry
     JwtAuth::class => function (ContainerInterface $container) {
         $config = $container->get(Configuration::class);
 
