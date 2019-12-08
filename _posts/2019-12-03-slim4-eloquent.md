@@ -102,7 +102,7 @@ return [
 
 ## Repository
 
-You can inject the capsule instance into your repository like this:
+You can inject the connection instance into your repository like this:
 
 ```php
 <?php
