@@ -109,7 +109,7 @@ You can inject the capsule instance into your repository like this:
 
 namespace App\Domain\User\Repository;
 
-use Illuminate\Database\Capsule\Manager;
+use Illuminate\Database\Connection;
 
 class UserRepository
 {
