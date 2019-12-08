@@ -134,7 +134,7 @@ class UserRepository
 
 ## Usage
 
-Once the Capsule instance has been injected, you may use it like so:
+Once the connection instance has been injected, you may use it as follows:
 
 ### Query all rows
 
