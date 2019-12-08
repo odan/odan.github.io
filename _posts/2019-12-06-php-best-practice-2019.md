@@ -30,6 +30,9 @@ and [PSR-12](https://www.php-fig.org/psr/psr-12/). *PSR-2 is deprecated.*
 
 * Use english names only (class names, method names, comments, variables names, database table and field names, etc...).
 * Use class suffixes / prefixes according to [PSR Naming Conventions](https://www.php-fig.org/bylaws/psr-naming-conventions/).
+* Follow industry best practices for your directory and file structure: 
+  * [thephpleague/skeleton](https://github.com/thephpleague/skeleton) - A skeleton repository for packages
+  * [pds/skeleton](https://github.com/php-pds/skeleton) - Names for your root-level directories
 
 ## Common rules
 
