@@ -70,7 +70,9 @@ In your `config/container.php` or wherever you add your container definitions:
 ```php
 <?php
 
-use Illuminate\Database\Capsule\Manager;
+use Illuminate\Container\Container as IlluminateContainer;
+use Illuminate\Database\Connection;
+use Illuminate\Database\Connectors\ConnectionFactory;
 use Psr\Container\ContainerInterface;
 use Selective\Config\Configuration;
 use Slim\App;
@@ -81,31 +83,22 @@ return [
     // ...
     
     // Database connection
-    Manager::class => function (ContainerInterface $container) {
-        $capsule = new Manager();
-        
-        $capsule->addConnection($container->get(Configuration::class)->getArray('db'));
+    Connection::class => function (ContainerInterface $container) {
+        $factory = new ConnectionFactory(new IlluminateContainer());
 
-        // Prevent memory issues
-        $capsule->getConnection()->disableQueryLog();
+        $connection = $factory->make($container->get(Configuration::class)->getArray('db'));
 
-        // Optional: Make this Capsule instance available globally via static methods
-        $capsule->setAsGlobal();
+        // Disable the query log to prevent memory issues
+        $connection->disableQueryLog();
 
-        // Setup the Eloquent ORM
-        $capsule->bootEloquent();
-
-        return $capsule;
+        return $connection;
     },
 
     PDO::class => function (ContainerInterface $container) {
-        return $container->get(Manager::class)->getConnection()->getPdo();
+        return $container->get(Connection::class)->getPdo();
     },
 ];
 ```
-
-Note: `composer require illuminate/events` is required when you need to use observers with Eloquent.
-
 
 ## Repository
 
@@ -121,18 +114,18 @@ use Illuminate\Database\Capsule\Manager;
 class UserRepository
 {
     /**
-     * @var Manager The query builder
+     * @var Connection
      */
-    private $database;
+    private $connection;
 
     /**
      * The constructor.
      *
-     * @param Manager $database The query builder
+     * @param Connection $connection The database connection
      */
-    public function __construct(Manager $database)
+    public function __construct(Connection $connection)
     {
-        $this->database = $database;
+        $this->connection = $connection;
     }
 
     // ...
@@ -146,7 +139,7 @@ Once the Capsule instance has been injected, you may use it like so:
 ### Query all rows
 
 ```php
-$rows = $this->database->table('users')->get();
+$rows = $this->connection->table('users')->get();
 ```
 
 ### Query the table with where
@@ -154,13 +147,13 @@ $rows = $this->database->table('users')->get();
 *Query searching for names matching foo*
 
 ```php
-$rows = $this->database->table('users')->where('username', 'like', '%root%')->get();
+$rows = $this->connection->table('users')->where('username', 'like', '%root%')->get();
 ```
 
 ### Query the table by id
 
 ```php
-$row = $this->database->table('users')->find(1);
+$row = $this->connection->table('users')->find(1);
 ```
 
 ### Insert a record
@@ -172,13 +165,13 @@ $values = [
     'email' => 'john.doe@example.com',
 ];
 
-$this->database->table('users')->insert($values);
+$this->connection->table('users')->insert($values);
 ```
 
 Insert a record and get the last inserted id:
 
 ```php
-$newId = $this->database->table('users')->insertGetId($values);
+$newId = $this->connection->table('users')->insertGetId($values);
 ```
 
 ### Update a record
@@ -186,7 +179,7 @@ $newId = $this->database->table('users')->insertGetId($values);
 ```php
 $values = ['email' => 'new@example.com'];
 
-$this->database->table('users')
+$this->connection->table('users')
     ->where(['id' => 1])
     ->update($values);
 ```
@@ -194,13 +187,13 @@ $this->database->table('users')
 ### Delete a record
 
 ```php
-$this->database->table('users')->delete(1);
+$this->connection->table('users')->delete(1);
 ```
 
 or
 
 ```php
-$this->database->table('users')
+$this->connection->table('users')
     ->where(['id' => 1])
     ->delete();
 ```
