@@ -20,7 +20,7 @@ Add the following scripts to your `composer.json` file:
 
 ```json
 "scripts": {
-    "install-phpstan": "php -r \"@mkdir('build'); copy('https://github.com/phpstan/phpstan-shim/raw/master/phpstan.phar', 'build/phpstan.phar');\"",
+    "install-phpstan": "php -r \"@mkdir('build'); if(!file_exists('build/phpstan.phar')) copy('https://github.com/phpstan/phpstan-shim/raw/master/phpstan.phar', 'build/phpstan.phar');\"",
     "phpstan": "php build/phpstan.phar analyse src --level=max --no-progress",
 }
 ```
