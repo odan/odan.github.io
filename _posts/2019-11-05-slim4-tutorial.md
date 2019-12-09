@@ -56,7 +56,7 @@ Standards like [PSR](https://www.php-fig.org/psr/) and best practices are very i
 Create a new project directory and run this command to install the Slim 4 core components:
 
 ```
-composer require slim/slim:4.*
+composer require slim/slim:"4.*"
 ```
 
 In Slim 4 the PSR-7 implementation is decoupled from the App core. 
