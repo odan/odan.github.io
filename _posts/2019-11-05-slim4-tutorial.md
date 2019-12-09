@@ -878,7 +878,7 @@ final class UserCreateAction
 }
 ```
 
-In this example, we create a "barrier" between source data and output 
+In this example, we create a "barrier" between source data and output, 
 so that schema changes do not affect the clients. For the sake of 
 simplicity, this is done using the same method. In reality, you would 
 separate the input data mapping and output JSON conversion into 
@@ -945,7 +945,7 @@ Instead you could store them in a file like `env.php` and place this file one di
 
 Remember the relationships:
 
-* Slim - To handle the routing
+* Slim - To handle routing and dispatching
 * Single Action Controllers - To invoke the correct service method (domain)
 * Domain - The core of your application
 * Services - To handle business logic
