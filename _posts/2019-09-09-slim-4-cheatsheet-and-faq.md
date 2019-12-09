@@ -129,7 +129,7 @@ Notice: The `BodyParsingMiddleware` will only parse the body if the request head
 * `application/xml`
 * `text/xml`
 
-The `BodyParsingMiddleware` also suports `PUT` requests.
+The `BodyParsingMiddleware` also supports `PUT` requests.
 
 More details: <https://akrabat.com/receiving-input-into-a-slim-4-application/>
 
@@ -141,7 +141,7 @@ Take a look a the "official" [Slim-CSRF](https://github.com/slimphp/Slim-Csrf) p
 
 With SameSite Cookies (available since PHP 7.3) you may no longer need CSRF protection:
 
-* [CSRF is (really) dead ](https://scotthelme.co.uk/csrf-is-really-dead/)
+* [CSRF is (really) dead](https://scotthelme.co.uk/csrf-is-really-dead/)
 * [SameSite Cookie Middlware](https://github.com/selective-php/samesite-cookie)
 
 ## Dependency Injection
