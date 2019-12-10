@@ -26,6 +26,7 @@ Create a new route:
 ```php
 <?php
 
+use PhpOffice\PhpSpreadsheet\Shared\File;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Slim\Http\Request;
@@ -42,8 +43,11 @@ $app->get('/excel', function (Request $request, Response $response) {
 
     $excelWriter = new Xlsx($excel);
 
-    $excelFileName = __DIR__ . '/file.xlsx';
-    $excelWriter->save($excelFileName);
+    // We have to create a real temp file here because the
+    // save() method doesn't support real memory streams.
+    $tempFile = tempnam(File::sysGetTempDir(), 'phpxltmp');
+    $tempFile = $tempFile ?: __DIR__ . '/temp.xlsx';
+    $excelWriter->save($tempFile);
 
     // For Excel2007 and above .xlsx files   
     $response = $response->withHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -53,6 +57,16 @@ $app->get('/excel', function (Request $request, Response $response) {
 
     return $response->withBody(new \Slim\Http\Stream($stream));
 });
+```
+
+If you want to return the entire content at once, you could use this workaround:
+
+```php
+$stream = fopen($excelFileName, 'r+');
+
+$response->getBody()->write(fread($stream, (int)fstat($stream)['size']));
+
+return $response;
 ```
 
 Then open the url: http://localhost/excel and the download should start automatically.
