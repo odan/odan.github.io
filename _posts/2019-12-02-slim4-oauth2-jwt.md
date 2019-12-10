@@ -71,7 +71,7 @@ openssl genrsa -aes256 -out private.pem 4096
 The private key is generated and saved in a file named "private.pem", located in the same directory.
 
 **Note** The number "4096" in the above command indicates the size of the private key. 
-You can choose one of five sizes: 512, 758, 1024, 1536, 2048 or 4096 (these numbers represent bits). 
+You can choose one of these sizes: 512, 758, 1024, 1536, 2048 or 4096 (these numbers represent bits). 
 The larger sizes offer greater security, but this is offset by a penalty in CPU performance. 
 
 **Generating the Public Key**
@@ -107,7 +107,7 @@ $settings['jwt'] = [
 ```
 
 Make sure that you not commit the private key into your version control (e.g git).
-In reality you could merge the private key from an external `env.php` file or load it
+In reality you could merge the private key from an external file (e.g. `env.php`) or load it
 from another (secure) source.
 
 ## Creating a JWT
