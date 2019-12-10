@@ -1,5 +1,5 @@
 ---
-title: Creating and downloading Excel files with Slim 3
+title: Creating and downloading Excel files in Slim 3
 layout: post
 comments: true
 published: true
