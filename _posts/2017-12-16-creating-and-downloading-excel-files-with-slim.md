@@ -53,7 +53,7 @@ $app->get('/excel', function (Request $request, Response $response) {
     $response = $response->withHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     $response = $response->withHeader('Content-Disposition', 'attachment; filename="file.xlsx"');
 
-    $stream = fopen($excelFileName, 'r+');
+    $stream = fopen($tempFile, 'r+');
 
     return $response->withBody(new \Slim\Http\Stream($stream));
 });
@@ -62,7 +62,7 @@ $app->get('/excel', function (Request $request, Response $response) {
 If you want to return the entire content at once, you could use this workaround:
 
 ```php
-$stream = fopen($excelFileName, 'r+');
+$stream = fopen($tempFile, 'r+');
 
 $response->getBody()->write(fread($stream, (int)fstat($stream)['size']));
 
