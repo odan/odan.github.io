@@ -65,7 +65,7 @@ This means that it's fine to distribute your public key. However, the private ke
 Generate the private key with this OpenSSL command (enter a password):
 
 ```
-openssl genrsa -aes256 -out private.pem 4096
+openssl genrsa -aes256 -out private.pem 2048
 ```
 
 The private key is generated and saved in a file named "private.pem", located in the same directory.
@@ -126,7 +126,7 @@ use InvalidArgumentException;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\Signer\Rsa\Sha256;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Token;
 use Lcobucci\JWT\ValidationData;
 use Ramsey\Uuid\Uuid;
@@ -194,6 +194,7 @@ final class JwtAuth
             ->canOnlyBeUsedAfter($issuedAt)
             ->expiresAt($issuedAt + $this->lifetime)
             ->withClaim('uid', $uid)
+            // AES256 CBC + HMAC SHA-256
             ->getToken(new Sha256(), new Key($this->privateKey));
     }
 
