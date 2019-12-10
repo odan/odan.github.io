@@ -352,6 +352,23 @@ final class TokenCreateAction
 }
 ```
 
+To get a new token the client must send a POST request to `/api/tokens` with a valid JSON request and a body like this:
+
+```json
+{
+    "username": "user",
+    "password": "secret"
+}
+```
+
+The Slim [BodyParsingMiddleware](http://www.slimframework.com/docs/v4/middleware/body-parsing.html) only 
+parses the request body if the request header is set correctly.
+Make sure that your client also sends this request header: 
+
+```
+Content-Type: application/json
+```
+
 ## Bearer Authentication Middleware
 
 Bearer authentication (also called token authentication) is an HTTP authentication 
