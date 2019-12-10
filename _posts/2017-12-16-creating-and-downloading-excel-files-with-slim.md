@@ -11,9 +11,9 @@ I would like to show you how to create Excel files and download them automatical
 
 To create Excel files I'm using [PhpSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet). 
 
-Here is a tiny example how to create and download the created file directly from your server.
-
 ## Installation
+
+To install PhpSpreadsheet run:
 
 ```bash
 composer require phpoffice/phpspreadsheet
@@ -25,6 +25,7 @@ Create a new route:
 
 ```php
 <?php
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Slim\Http\Request;
@@ -58,7 +59,7 @@ Then open the url: http://localhost/excel and the download should start automati
 
 ## Downloading CSV files
 
-Creating an CSV file is even simpler.
+Creating an CSV file is much simpler.
 
 ```php
 use Slim\Http\Request;
