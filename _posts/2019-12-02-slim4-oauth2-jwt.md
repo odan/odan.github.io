@@ -426,8 +426,8 @@ final class JwtMiddleware implements MiddlewareInterface
      */
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        $authorization = $request->getHeaderLine('Authorization');
-        $token = explode(' ', $authorization)[1];
+        $authorization = explode(' ', (string)$request->getHeaderLine('Authorization'));
+        $token = $authorization[1] ?? '';
 
         if (!$token || !$this->jwtAuth->validateToken($token)) {
             return $this->responseFactory->createResponse()
