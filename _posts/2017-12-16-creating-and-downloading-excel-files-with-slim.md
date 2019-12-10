@@ -44,7 +44,7 @@ $app->get('/excel', function (Request $request, Response $response) {
     $excelWriter = new Xlsx($excel);
 
     // We have to create a real temp file here because the
-    // save() method doesn't support real memory streams.
+    // save() method doesn't support in-memory streams.
     $tempFile = tempnam(File::sysGetTempDir(), 'phpxltmp');
     $tempFile = $tempFile ?: __DIR__ . '/temp.xlsx';
     $excelWriter->save($tempFile);
