@@ -352,7 +352,8 @@ final class TokenCreateAction
 }
 ```
 
-To get a new token the client must send a POST request to `/api/tokens` with a valid JSON request and a body like this:
+To create a new token, the client must send a POST request to `/api/tokens` with a valid JSON request
+and a body content like this:
 
 ```json
 {
