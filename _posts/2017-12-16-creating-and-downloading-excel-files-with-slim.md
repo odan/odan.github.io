@@ -7,9 +7,9 @@ description:
 keywords: 
 ---
 
-Maybe you need the possibility to create excel files and download it automatically.
+I would like to show you how to create Excel files and download them automatically.
 
-To be able to create Excel files I'm using [PhpSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet). 
+To create Excel files I'm using [PhpSpreadsheet](https://github.com/PHPOffice/PhpSpreadsheet). 
 
 Here is a tiny example how to create and download the created file directly from your server.
 
