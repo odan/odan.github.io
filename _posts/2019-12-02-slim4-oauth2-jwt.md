@@ -319,8 +319,8 @@ final class TokenCreateAction
     {
         $data = (array)$request->getParsedBody();
 
-        $username = (string)$data['username'];
-        $password = (string)$data['password'];
+        $username = (string)($data['username'] ?? '');
+        $password = (string)($data['password'] ?? '');
 
         // Validate login (pseudo code)
         // Warning: This should be done in an application service and not here!
