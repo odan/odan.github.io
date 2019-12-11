@@ -479,9 +479,11 @@ return function (App $app) {
 };
 ```
 
-## Read more
+## Other solutions
 
 Instead of implementing the JWT middleware yourself (which has some advantages), you can
 also try this [PSR-7 and PSR-15 JWT Authentication](https://github.com/tuupola/slim-jwt-auth) middleware.
+
+[Comments](https://gist.github.com/odan/2885ccd0d2f3a3df41bf5c3d6e9b4999)
 
 
