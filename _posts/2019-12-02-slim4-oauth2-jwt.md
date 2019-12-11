@@ -65,7 +65,7 @@ This means that it's fine to distribute your public key. However, the private ke
 Generate the private key with this OpenSSL command (enter a password):
 
 ```
-openssl genrsa -aes256 -out private.pem 2048
+openssl genrsa -out private.pem 2048
 ```
 
 The private key is generated and saved in a file named "private.pem", located in the same directory.
@@ -101,8 +101,13 @@ $settings['jwt'] = [
 
     // The private key
     'private_key' => '-----BEGIN RSA PRIVATE KEY-----
-    ...
-    -----END RSA PRIVATE KEY-----',
+        ...
+        -----END RSA PRIVATE KEY-----',
+
+    'public_key' => '-----BEGIN PUBLIC KEY-----
+        ...
+        -----END PUBLIC KEY-----',
+    
 ];
 ```
 
@@ -121,12 +126,11 @@ add the following class into this file: `src/Auth/JwtAuth.php`.
 namespace App\Auth;
 
 use Cake\Chronos\Chronos;
-use Cake\Core\Configure;
 use InvalidArgumentException;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Lcobucci\JWT\Token;
 use Lcobucci\JWT\ValidationData;
 use Ramsey\Uuid\Uuid;
@@ -150,17 +154,34 @@ final class JwtAuth
     private $privateKey;
 
     /**
+     * @var string The public key
+     */
+    private $publicKey;
+
+    /**
+     * @var The signer
+     */
+    private $signer;
+
+    /**
      * The constructor.
      *
      * @param string $issuer The issuer name
      * @param int $lifetime The max lifetime
      * @param string $privateKey The private key as string
+     * @param string $publicKey The public key as string
      */
-    public function __construct(string $issuer, int $lifetime, string $privateKey)
-    {
+    public function __construct(
+        string $issuer,
+        int $lifetime,
+        string $privateKey,
+        string $publicKey
+    ) {
         $this->issuer = $issuer;
         $this->lifetime = $lifetime;
         $this->privateKey = $privateKey;
+        $this->publicKey = $publicKey;
+        $this->signer = new Sha256();
     }
 
     /**
@@ -186,18 +207,15 @@ final class JwtAuth
     {
         $issuedAt = Chronos::now()->getTimestamp();
 
-        return (new Builder())
-            ->issuedBy($this->issuer)
-            // (JWT ID) Claim, a unique identifier for the JWT
+        // (JWT ID) Claim, a unique identifier for the JWT
+        return (new Builder())->issuedBy($this->issuer)
             ->identifiedBy(Uuid::uuid4()->toString(), true)
             ->issuedAt($issuedAt)
             ->canOnlyBeUsedAfter($issuedAt)
             ->expiresAt($issuedAt + $this->lifetime)
             ->withClaim('uid', $uid)
-            // AES256 CBC + HMAC SHA-256
-            ->getToken(new Sha256(), new Key($this->privateKey));
+            ->getToken($this->signer, new Key($this->privateKey));
     }
-
 
     /**
      * Parse token.
@@ -214,29 +232,28 @@ final class JwtAuth
     }
 
     /**
-     * Validate token.
+     * Validate the access token.
      *
-     * @param string $token The JWT
+     * @param string $accessToken The JWT
      *
      * @return bool The status
      */
-    public function validateToken(string $token): bool
+    public function validateToken(string $accessToken): bool
     {
-        return $this->createParsedToken($token)->validate($this->createValidationData());
-    }
+        $token = $this->createParsedToken($accessToken);
 
-    /**
-     * Create validation data.
-     *
-     * @return ValidationData The data
-     */
-    private function createValidationData(): ValidationData
-    {
+        if (!$token->verify($this->signer, $this->publicKey)) {
+            // Token signature is not valid
+            return false;
+        }
+
+        // Check whether the token has not expired
         $data = new ValidationData();
         $data->setCurrentTime(Chronos::now()->getTimestamp());
-        $data->setIssuer($this->issuer);
+        $data->setIssuer($token->getClaim('iss'));
+        $data->setId($token->getClaim('jti'));
 
-        return $data;
+        return $token->validate($data);
     }
 }
 ```
@@ -279,8 +296,9 @@ return [
         $issuer = $config->getString('jwt.issuer');
         $lifetime = $config->getInt('jwt.lifetime');
         $privateKey = $config->getString('jwt.private_key');
+        $publicKey = $config->getString('jwt.public_key');
 
-        return new JwtAuth($issuer, $lifetime, $privateKey);
+        return new JwtAuth($issuer, $lifetime, $privateKey, $publicKey);
     },
 ];
 
