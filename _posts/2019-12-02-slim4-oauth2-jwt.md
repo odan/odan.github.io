@@ -70,7 +70,7 @@ openssl genrsa -aes256 -out private.pem 2048
 
 The private key is generated and saved in a file named "private.pem", located in the same directory.
 
-**Note** The number "4096" in the above command indicates the size of the private key. 
+**Note** The number "2048" in the above command indicates the size of the private key. 
 You can choose one of these sizes: 512, 758, 1024, 2048 or 4096 (these numbers represent bits). 
 The larger sizes offer greater security, but this is offset by a penalty in CPU performance. 
 
