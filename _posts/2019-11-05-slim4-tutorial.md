@@ -25,6 +25,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Container](#container)
   * [A quick guide to the container](#a-quick-guide-to-the-container)
   * [Container definitions](#container-definitions)
+* [Base path](#base-path)
 * [Your first route](#your-first-route)
 * [PSR-4 autoloading](#psr-4-autoloading)
 * [Actions](#action)
@@ -384,6 +385,39 @@ return [
 
 ];
 ```
+
+## Base path
+
+If you run your Slim app in a sub-directory, resp. not directly within the 
+[DocumentRoot](https://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot)
+of your webserver, you must set the "correct" base path.
+
+Ideally the `DoumentRoot` of your production server points directly to the `public/` directory.
+
+In all other cases you have to make sure, that your base path is correct. For example,
+the DocumentRoot directory is `/var/www/domain.com/htdocs/`, but the application
+is stored under `/var/www/domain.com/htdocs/my-app/`, then you have to set `/my-app` as base path.
+
+Example:
+
+```php
+$app->setBasePath('/my-app');
+```
+
+Be careful: The `public/` directory is only the `DoumentRoot` of your webserver, 
+but it's never part of your base path and the official url.
+
+Bad urls
+* `http://www.example.com/public`
+* `http://www.example.com/public/users`
+* `http://www.example.com/my-app/public`
+* `http://www.example.com/my-app/public/users`
+
+Good urls:
+* `http://www.example.com`
+* `http://www.example.com/users`
+* `http://www.example.com/my-app`
+* `http://www.example.com/my-app/users`
 
 ## Your first route
 
