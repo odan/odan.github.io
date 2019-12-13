@@ -151,6 +151,8 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
 ```
 
+Note: Please **don't** change the `RewriteRule` directive. It must be exactly as shown above.
+
 * Create a second `.htaccess` file in your project root-directory and copy/paste this content:
 
 ```htaccess
@@ -158,6 +160,9 @@ RewriteEngine on
 RewriteRule ^$ public/ [L]
 RewriteRule (.*) public/$1 [L]
 ```
+
+Note: Don't skip this step. This second `.htaccess` file is important to run your Slim app in a sub-directory
+and within your development environment. 
 
 * Create the front-controller file `public/index.php` and copy/paste this content:
 
@@ -370,7 +375,8 @@ return [
         AppFactory::setContainer($container);
         $app = AppFactory::create();
 
-        // Optional: Set the base path to run the app in a subdirectory.
+        // Optional: Set the base path to run the app in a sub-directory
+        // The public directory must not be part of the base path
         //$app->setBasePath('/slim4-tutorial');
 
         return $app;
