@@ -1010,5 +1010,10 @@ Remember the relationships:
 * [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-4-cheatsheet-and-faq.html)
 * [Slim 4 - Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
 
+## Known issues
 
-[Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f)
+Q: The `Authorization` header missing in PHP POST request
+
+A: <https://stackoverflow.com/a/26791450/1461181>
+
+[Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f) | [Chat](https://gitter.im/dev-consulting/community) | [Donate](paypal.me/dopitz)
