@@ -151,7 +151,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [QSA,L]
 ```
 
-Note: Please **don't** change the `RewriteRule` directive. It must be exactly as shown above.
+Please **don't** change the `RewriteRule` directive. It must be exactly as shown above.
 
 * Create a second `.htaccess` file in your project root-directory and copy/paste this content:
 
@@ -161,7 +161,7 @@ RewriteRule ^$ public/ [L]
 RewriteRule (.*) public/$1 [L]
 ```
 
-Note: Don't skip this step. This second `.htaccess` file is important to run your Slim app in a sub-directory
+Don't skip this step. This second `.htaccess` file is important to run your Slim app in a sub-directory
 and within your development environment. 
 
 * Create the front-controller file `public/index.php` and copy/paste this content:
