@@ -295,12 +295,12 @@ return function (App $app) {
     // Parse json, form data and xml
     $app->addBodyParsingMiddleware();
 
-    // Add global middleware to app
+    // Add routing middleware
     $app->addRoutingMiddleware();
 
     $container = $app->getContainer();
     
-    // Error handler
+    // Add error handler middleware
     $settings = $container->get(Configuration::class)->getArray('error_handler_middleware');
     $displayErrorDetails = (bool)$settings['display_error_details'];
     $logErrors = (bool)$settings['log_errors'];
