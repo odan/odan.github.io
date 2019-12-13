@@ -522,6 +522,9 @@ it might be something like JSON for RESTful API requests.
 handlers are quite "expensive", because PHP has to create all closures for each request. 
 The use of class names is more lightweight, faster and scales better for larger applications.
 
+More details about the flow of everything that happens when arriving a route 
+and the communication between the different layers can be found here: [Action](https://odan.github.io/slim4-skeleton/action.html)
+
 * Create a directory: `src/`
 * Create a sub-directory: `src/Action`
 * Create this action class in: `src/Action/HomeAction.php`
@@ -597,6 +600,12 @@ return $response->withJson($result)->withStatus(422);
 ```
 
 ## Domain
+
+Forget CRUD! Your API should reflect the business [use cases](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) 
+and not the technical "database operations" aka. [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete). 
+Don't put business logic into actions. The action invokes the domain layer, 
+resp. the application service. If you want to reuse the same logic in another action, 
+then just invoke that application service you need in your action.
 
 ### Services
 
