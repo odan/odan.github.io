@@ -1014,6 +1014,6 @@ Remember the relationships:
 
 Q: The `Authorization` header missing in PHP POST request
 
-A: <https://stackoverflow.com/a/26791450/1461181>
+A: Try this solution: <https://stackoverflow.com/a/26791450/1461181>
 
-[Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f) | [Chat](https://gitter.im/dev-consulting/community) | [Donate](paypal.me/dopitz)
+[Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f) | [Chat](https://gitter.im/dev-consulting/community) | [Donate](https://paypal.me/dopitz)
