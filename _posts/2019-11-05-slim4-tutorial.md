@@ -320,9 +320,9 @@ Dependency injection makes testing easier. The injection can be done through a c
 
 A **dependencies injection container** (DIC) is a tool for injecting dependencies.
 
-**A general rule:** The application itself should not use the container.
-Injecting the container into a class is an **anti-pattern**. Please declare all class dependencies in your 
-constructor explicitly instead. 
+**A general rule:** The core application should not use the container.
+Injecting the container into a class is an **anti-pattern**. You should declare all class 
+dependencies in the constructor explicitly. 
 
 Why is injecting the container (in the most cases) an anti-pattern?
 
@@ -336,7 +336,7 @@ However, there are the following disadvantages:
 Q: How can I make it better? 
 
 A: Use [composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance) 
-and (explicit) **constructor dependency injection**. 
+and (constructor) **dependency injection**. 
 
 Dependency injection is a programming practice of passing into an object it’s collaborators, 
 rather the object itself creating them. 
