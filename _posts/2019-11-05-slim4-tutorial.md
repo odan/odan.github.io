@@ -35,6 +35,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
   * [Data Transfer Objects](#data-transfer-objects-dto)
   * [Repositories](#repositories)
 * [Deployment](#deployment)
+* [FAQ](#faq)
 * [Conclusion](#conclusion)
 
 ## Requirements
@@ -1001,6 +1002,14 @@ Remember the relationships:
 * DTO - To carry data (no behavior)
 * Repositories - To execute database queries
 
+## FAQ
+
+**The `Authorization` header missing in POST request**
+
+Some web servers might remove the `Authorization` header or do not forward it to PHP.
+
+Try this solution: <https://stackoverflow.com/a/26791450/1461181>
+
 ## Read more
 
 * [Slim 4 - Zend Query Builder Setup](https://odan.github.io/2019/12/01/slim4-zend-db-query-builder-setup.html)
@@ -1010,10 +1019,5 @@ Remember the relationships:
 * [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-4-cheatsheet-and-faq.html)
 * [Slim 4 - Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
 
-## Known issues
-
-Q: The `Authorization` header missing in PHP POST request
-
-A: Try this solution: <https://stackoverflow.com/a/26791450/1461181>
 
 [Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f) | [Chat](https://gitter.im/dev-consulting/community) | [Donate](https://paypal.me/dopitz)

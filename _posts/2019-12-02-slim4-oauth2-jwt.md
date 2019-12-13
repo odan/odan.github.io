@@ -17,6 +17,7 @@ keywords: php slim oauth jwt json authentication security
 * [Creating a JWT](#creating-a-jwt)
 * [Bearer Authentication Middleware](#bearer-authentication-middleware)
 * [Protecting routes with JWT](#protecting-routes-with-jwt)
+* [FAQ](#faq)
 
 ## Requirements
 
@@ -497,7 +498,27 @@ return function (App $app) {
 };
 ```
 
-## Other solutions
+## FAQ
+
+**Where to store the tokens?**
+
+Don't store tokens in local storage. Browser local storage (or session storage) 
+is not a secure place to store sensitive information. Any data stored there:
+
+* Can be accessed through JavaScript.
+* May be vulnerable to cross-site scripting.
+
+If an attacker steals a token, they can gain access to and make requests to your API.
+Treat tokens like credit card numbers or passwords: don’t store them in local storage.
+
+As far as I know a `SameSite Cookie` (stateless, client-side only) is the most secure place.
+
+**Read more**
+
+* [Where to Store Tokens](https://auth0.com/docs/security/store-tokens#don-t-store-tokens-in-local-storage)
+* [Do I have to store tokens in cookies or localstorage or session?](https://stackoverflow.com/a/54258744/1461181)
+
+**Any other solutions?**
 
 Instead of implementing the JWT middleware yourself (which has some advantages), you can
 also try this [PSR-7 and PSR-15 JWT Authentication](https://github.com/tuupola/slim-jwt-auth) middleware.
