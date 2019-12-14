@@ -511,7 +511,42 @@ is not a secure place to store sensitive information. Any data stored there:
 If an attacker steals a token, they can gain access to and make requests to your API.
 Treat tokens like credit card numbers or passwords: don’t store them in local storage.
 
-As far as I know a `SameSite Cookie` (stateless, client-side only) is the most secure place.
+As far as I know a client-side only `SameSite Cookie` is stateless and the most secure place.
+
+Storing the token:
+
+```js
+// The JWT from the response object
+const token = response.access_token;
+
+// Max age in seconds
+const maxAge = response.expires_in;
+
+// Set samesite cookie
+document.cookie = "token=" + token + "; path=/; SameSite=Lax; secure; max-age=" + maxAge;
+```
+
+Retrieving the token:
+
+```js
+const token = getCookie('token');
+
+function getCookie(cname) {
+    const name = cname + '=';
+    const ca = decodeURIComponent(document.cookie).split(';');
+
+    for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return '';
+}
+```
 
 **Read more**
 
