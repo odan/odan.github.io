@@ -39,26 +39,6 @@ final class User
     /**
      * @var int
      */
-    public $id;
-
-    /**
-     * @var string
-     */
-    public $username;
-}
-```
-
-**Note:** [Typed class properties](https://wiki.php.net/rfc/typed_properties_v2) have been added in PHP 7.4 and provide a major improvement 
-to PHP's type system. In PHP 7.4+ the same class should be implemented like this:
-
-```php
-<?php
-
-final class User
-{
-    /**
-     * @var int
-     */
     public int $id;
 
     /**
@@ -67,6 +47,9 @@ final class User
     public string $username;
 }
 ```
+
+**Note:** [Typed class properties](https://wiki.php.net/rfc/typed_properties_v2) have been added in PHP 7.4 and provide a major improvement 
+to PHP's type system. In PHP 7.4+ the same class should be implemented like this:
 
 ## Creating a collection class
 
