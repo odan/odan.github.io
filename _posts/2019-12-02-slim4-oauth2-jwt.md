@@ -548,6 +548,14 @@ function getCookie(cname) {
 }
 ```
 
+## FAQ
+
+**The `Authorization` header missing in POST request**
+
+Some web servers might remove the `Authorization` header or do not forward it to PHP.
+
+Try this solution: <https://stackoverflow.com/a/26791450/1461181>
+
 **Read more**
 
 * [Where to Store Tokens](https://auth0.com/docs/security/store-tokens#don-t-store-tokens-in-local-storage)
