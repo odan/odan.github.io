@@ -25,8 +25,8 @@ keywords: php slim fifo middleware
 
 ## Introduction
 
-You can change the default middleware order from LIFO to FIFO by replacing the Slim middlware
-runner with [Relay](https://relayphp.com/).
+You can change the default middleware order from [LIFO](https://github.com/slimphp/Slim/issues/2408)
+to FIFO by replacing the default `MiddlewareDispatcherInterface` with [Relay](https://relayphp.com/).
 
 > Warning: This approach is experimental and should not be used in production.
 
