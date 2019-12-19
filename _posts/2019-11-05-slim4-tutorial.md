@@ -35,7 +35,6 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
   * [Data Transfer Objects](#data-transfer-objects-dto)
   * [Repositories](#repositories)
 * [Deployment](#deployment)
-* [FAQ](#faq)
 * [Conclusion](#conclusion)
 
 ## Requirements
@@ -1001,14 +1000,6 @@ Remember the relationships:
 * Services - To handle business logic
 * DTO - To carry data (no behavior)
 * Repositories - To execute database queries
-
-## FAQ
-
-**The `Authorization` header missing in POST request**
-
-Some web servers might remove the `Authorization` header or do not forward it to PHP.
-
-Try this solution: <https://stackoverflow.com/a/26791450/1461181>
 
 ## Read more
 
