@@ -58,7 +58,7 @@ use Slim\Interfaces\MiddlewareDispatcherInterface;
 use UnexpectedValueException;
 
 /**
- * Html Error Renderer
+ * FIFO Middleware Dispatcher
  */
 class FifoMiddlewareDispatcher implements MiddlewareDispatcherInterface
 {
