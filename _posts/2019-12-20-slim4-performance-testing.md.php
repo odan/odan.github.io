@@ -34,7 +34,7 @@ Add `Connection: close` to the response, e.g.
 $response = $response->withHeader('Connection', 'close');
 ```
 
-2. Change the HTTP version to `1.0`, e.g.
+Change the HTTP version to `1.0`, e.g.
 
 ```php
 $response = $response->withProtocolVersion('1.0');
