@@ -37,7 +37,6 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 * [odan/phinx-migrations-generator](https://github.com/odan/phinx-migrations-generator) Migration Code Generator for Phinx
 * [odan/twig-assets](https://github.com/odan/twig-assets) A Twig Assets Extension
 * [odan/twig-translation](https://github.com/odan/twig-translation) A Twig Translation Extension
-* [odan/session](https://github.com/odan/session) A secure and flexible session handler
 * [Selective PHP](https://github.com/selective-php) A collection of awesome PHP packages
 * [Learn modern PHP](https://odan.github.io/learn-php/) A curated list of resources for PHP
 * [All projects](https://github.com/odan?tab=repositories)
@@ -48,10 +47,6 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 * [slimphp/slim-website](https://github.com/slimphp/Slim-Website) The Slim framework website
 * [cakephp/cakephp](https://github.com/cakephp/cakephp) A rapid development framework for PHP
 * [cakephp/chronos](https://github.com/cakephp/chronos) A standalone DateTime library
-
-## Services
-
-* PHP and Slim Framework consultancy
 
 ## Tools
 
