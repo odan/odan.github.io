@@ -29,7 +29,6 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 * REST, SOAP, XML, JSON
 * SOLID, Clean Code, Hexagonal Architecture
 * IT-Security
-* SEO, E-Commerce
 
 ## My projects
 
