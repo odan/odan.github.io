@@ -38,8 +38,9 @@ and [PSR-12](https://www.php-fig.org/psr/psr-12/). *PSR-2 is deprecated.*
 
 * All methods must have [type declaration](https://www.php.net/manual/en/migration70.new-features.php) and return type declaration.
 * Methods without return statement must declared with `void` as their return type.
-* Class properties must have [typed properties](https://wiki.php.net/rfc/typed_properties_v2) (PHP 7.4+)
-* Don't mix data types for parameters and return types. (Except for `nullable`)
+* Class properties must have [typed properties](https://wiki.php.net/rfc/typed_properties_v2) (PHP 7.4+).
+* Don't mix data types for parameters and return types, except for `nullable`.
+* Don't `extend` classes or create `abstract` classes for the sake of "code reuse", except for traits with test code only.
 * Create `final` classes by default, except you have to mock it (e.g. repositories).
 * Create `private` methods by default. Don't create `protected` methods.
 * All method parameters must be used.
