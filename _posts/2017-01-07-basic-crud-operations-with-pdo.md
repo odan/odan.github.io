@@ -30,14 +30,6 @@ $options = [
 $pdo = new PDO($dsn, $username, $password, $options);
 ```
 
-## Select a single row
-
-```php
-$statement = $pdo->prepare("SELECT * FROM users WHERE email = :email AND status=:status LIMIT 1");
-$statement->execute(['email' => $email, 'status' => $status]);
-$userRow = $statement->fetch();
-```
-
 ## Select multiple rows
 
 Without parameters:
@@ -60,6 +52,17 @@ foreach ($statement as $row) {
 while ($row = $statement->fetch()) {
    // do something with $row
 }
+```
+
+## Select a single row
+
+With parameters (prepared statements):
+
+```php
+$statement = $pdo->prepare("SELECT * FROM users WHERE email = :email AND status=:status LIMIT 1");
+$statement->execute(['email' => $email, 'status' => $status]);
+
+$userRow = $statement->fetch();
 ```
 
 ## Insert a single row
