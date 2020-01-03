@@ -10,6 +10,8 @@ keywords: php slim
 The Slim Framework is a great micro framework for web application, RESTful API's and websites. 
 This Tutorial shows how to create a very basic but flexible project for every use case.
 
+**Update:** Please check out the new **[Slim 4 tutorial](https://odan.github.io/2019/11/05/slim4-tutorial.html)**!
+
 ## Table of contents
 
 * [Requirements](#requirements)
