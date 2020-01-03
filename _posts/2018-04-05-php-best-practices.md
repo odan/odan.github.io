@@ -196,4 +196,5 @@ clearSometing()
 
 ## Links
 
+* [PHP - Best Practices 2019 / 2020](https://odan.github.io/2019/12/06/php-best-practice-2019.html)
 * <http://bestpractices.thecodingmachine.com/>
