@@ -36,6 +36,8 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
   * [Repositories](#repositories)
 * [Deployment](#deployment)
 * [Conclusion](#conclusion)
+* [FAQ](#faq)
+* [Read more](#read-more)
 
 ## Requirements
 
@@ -1001,14 +1003,52 @@ Remember the relationships:
 * DTO - To carry data (no behavior)
 * Repositories - To execute database queries
 
-## Read more
+## FAQ
+
+### How to add JSON Web Token (JWT) / Bearer authentication?
+
+Read this article: [Slim 4 - OAuth 2.0 and JSON Web Token Setup](https://odan.github.io/2019/12/02/slim4-oauth2-jwt.html) 
+
+### CORS
+
+Usually, problems with the CORS headers and preflight requests occur when implementing a SPA. 
+This can be solved by adding a CORS middleware and explicitly defining the options route or 
+simply letting the options routes pass through:
+
+Read more about [CORS](https://odan.github.io/2019/11/24/slim4-cors.html): 
+
+### Where can I find the code on github?
+
+Here: https://github.com/odan/slim4-skeleton
+
+### How to add a logger?
+
+You could inject a logger factory, e.g. like the [LoggerFactory](https://github.com/odan/slim4-skeleton/blob/master/src/Factory/LoggerFactory.php)
+The settings are defined [here](https://github.com/odan/slim4-skeleton/blob/master/config/defaults.php#L43). 
+
+### I get a 404 (not found) error
+
+Follow the instructions and define the correct base path with `$app->setBasePath('my-sub-directory/');`
+
+### Error message: Callable (...) does not exist
+
+Run `composer update` to fix it.
+
+### How to add a database connection?
+
+You can add a query builder as described here:
 
 * [Slim 4 - Zend Query Builder Setup](https://odan.github.io/2019/12/01/slim4-zend-db-query-builder-setup.html)
 * [Slim 4 - CakePHP Query Builder Setup](https://odan.github.io/2019/12/03/slim4-cakephp-query-builder.html)
 * [Slim 4 - Eloquent Setup](https://odan.github.io/2019/12/03/slim4-eloquent.html)
-* [Slim 4 - OAuth 2.0 and JSON Web Token Setup](https://odan.github.io/2019/12/02/slim4-oauth2-jwt.html)
-* [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-4-cheatsheet-and-faq.html)
+
+### How to build assets with webpack?
+
 * [Slim 4 - Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
 
+## Read more
 
-[Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f) | [Chat](https://gitter.im/dev-consulting/community) | [Donate](https://paypal.me/dopitz)
+* [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-4-cheatsheet-and-faq.html)
+
+
+[Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f) | [Donate](https://paypal.me/dopitz)
