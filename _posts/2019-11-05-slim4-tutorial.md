@@ -1019,7 +1019,8 @@ Read more about [CORS](https://odan.github.io/2019/11/24/slim4-cors.html):
 
 ### Where can I find the code on github?
 
-Here: https://github.com/odan/slim4-skeleton
+Here: <https://github.com/odan/slim4-tutorial>
+and here: <https://github.com/odan/slim4-skeleton>
 
 ### How to add a logger?
 
