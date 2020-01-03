@@ -7,7 +7,8 @@ description:
 keywords: php slim apache performance benchmark
 ---
 
-[Apache Bench](https://httpd.apache.org/docs/2.4/programs/ab.html) (ab) is a great tool to test the performance of your API.
+[Apache Bench](https://httpd.apache.org/docs/2.4/programs/ab.html) (ab) is a great tool 
+to test the performance of your API.
 
 The problem is that your first test might give this strange result:
 
@@ -16,7 +17,8 @@ $ ab -n 1 'http://localhost/my-slim-app'
 > 5.008 seconds
 ```
 
-Of course the loading time in the browser is extremely fast, but when testing the loading time with AB you should not get a loading time < 5 seconds.
+Of course the loading time in the browser is extremely fast, but when testing the loading 
+time with AB you should not get a loading time < 5 seconds.
 
 Using the switch `-k` (Use Keep-Alive) helps to solve the problem.
 
