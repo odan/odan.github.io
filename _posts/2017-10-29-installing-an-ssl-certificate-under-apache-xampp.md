@@ -16,7 +16,6 @@ keywords:
 Download and install the 32-Bit version of [OpenSSL](https://slproweb.com/products/Win32OpenSSL.html)
 
 * OpenSSL 32-Bit: [Win32OpenSSL-1_1_0L.exe](https://slproweb.com/download/Win32OpenSSL-1_1_0L.exe)
-* OpenSSL 34-Bit: [Win64OpenSSL-1_1_0L.exe](https://slproweb.com/download/Win64OpenSSL-1_1_0L.exe)
 
 ## Configuration
 
