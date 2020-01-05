@@ -74,8 +74,8 @@ use Psr\Container\ContainerInterface;
 use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Factory\AppFactory;
-use Zend\Db\Adapter\Adapter;
-use Zend\Db\Adapter\AdapterInterface;
+use Laminas\Db\Adapter\Adapter;
+use Laminas\Db\Adapter\AdapterInterface;
 
 return [
 
