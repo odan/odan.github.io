@@ -1,10 +1,10 @@
 ---
-title: Slim 4 - Zend Query Builder Setup
+title: Slim 4 - Laminas Query Builder Setup
 layout: post
 comments: true
 published: true
 description: 
-keywords: php slim sql querybuilder
+keywords: php slim sql laminas zend querybuilder
 ---
 
 ## Table of contents
@@ -25,15 +25,15 @@ keywords: php slim sql querybuilder
 
 ## Introduction
 
-You can use the [Zend SQL Query Builder](https://docs.zendframework.com/zend-db/)
+You can use the [Laminas SQL Query Builder](https://docs.laminas.dev/laminas-db/)
 to connect your Slim 4 application to a database.
 
 ## Installation
 
-To install the [zendframework/zend-db](https://docs.zendframework.com/zend-db/) package, run:
+To install the [laminas/laminas-db](https://docs.laminas.dev/laminas-db/) package, run:
 
 ```php
-composer require zendframework/zend-db
+composer require laminas/laminas-db
 ```
 
 ## Configuration
@@ -101,9 +101,9 @@ Add the `QueryFactory` class into: `src/Factory/QueryFactory.php` and copy / pas
 
 namespace App\Factory;
 
-use Zend\Db\Adapter\AdapterInterface;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\TableGateway\TableGateway;
+use Laminas\Db\Adapter\AdapterInterface;
+use Laminas\Db\ResultSet\ResultSet;
+use Laminas\Db\TableGateway\TableGateway;
 
 final class QueryFactory
 {
