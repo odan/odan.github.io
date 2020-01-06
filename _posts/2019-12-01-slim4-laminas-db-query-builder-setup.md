@@ -201,6 +201,8 @@ $row = $this->queryFactory->table('users')
     ->select(['id' => 1])->current();
 ```
 
+Read more: [Select](https://docs.laminas.dev/laminas-db/sql/#select)
+
 ### Insert a record
 
 ```php
@@ -210,6 +212,8 @@ $table->insert($values);
 $newId = (int)$table->getLastInsertValue();
 ```
 
+Read more: [Insert](https://docs.laminas.dev/laminas-db/sql/#insert)
+
 ### Update a record
 
 ```php
@@ -218,8 +222,12 @@ $values = ['email' => 'new@example.com'];
 $this->queryFactory->table('users')->update($values, ['id' => 1]);
 ```
 
+Read more: [Update](https://docs.laminas.dev/laminas-db/sql/#update)
+
 ### Delete a record
 
 ```php
 $this->queryFactory->table('users')->delete(['id' => 1]);
 ```
+
+Read more: [Delete](https://docs.laminas.dev/laminas-db/sql/#delete)
