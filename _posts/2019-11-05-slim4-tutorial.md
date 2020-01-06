@@ -968,10 +968,12 @@ You don't have to run composer on your production server. Instead you should imp
 an so called "artifact". An artifact is an ZIP file you can upload and deploy on your production server. 
 [selective-php/artifact](https://github.com/selective-php/artifact) is a tool to build artifacts from your source code.
 
-For security reason you should turn of all error details in production:
+For security reasons, you should switch off the output of all error details in production:
 
 ```php
-$app->addErrorMiddleware(false, false, false);
+$settings['error_handler_middleware'] = [
+    'display_error_details' => false,
+];
 ```
 
 If you have to run your Slim application in a sub-directory, you could try this library: [selective/basepath](https://github.com/selective-php/basepath)
@@ -1011,15 +1013,13 @@ Read this article: [Slim 4 - OAuth 2.0 and JSON Web Token Setup](https://odan.gi
 
 ### CORS
 
-Usually, problems with the CORS headers and preflight requests occur when implementing a SPA. 
-This can be solved by adding a CORS middleware and explicitly defining the options route or 
-simply letting the options routes pass through:
-
 Read more about [CORS](https://odan.github.io/2019/11/24/slim4-cors.html): 
 
 ### Where can I find the code on github?
 
 The source code with more examples (e.g. reading a user) can be found here: <https://github.com/odan/slim4-tutorial>
+
+A complete skeleton for slim 4 can be found here: <https://github.com/odan/slim4-skeleton>
 
 ### How to add a logger?
 
@@ -1030,6 +1030,8 @@ The settings are defined [here](https://github.com/odan/slim4-skeleton/blob/mast
 
 Follow the instructions and define the correct base path with `$app->setBasePath('my-sub-directory/');`
 
+If you have to run your Slim application in a sub-directory, you could try this library: [selective/basepath](https://github.com/selective-php/basepath)
+
 ### Error message: Callable (...) does not exist
 
 Run `composer update` to fix it.
@@ -1038,7 +1040,7 @@ Run `composer update` to fix it.
 
 You can add a query builder as described here:
 
-* [Slim 4 - Zend Query Builder Setup](https://odan.github.io/2019/12/01/slim4-zend-db-query-builder-setup.html)
+* [Slim 4 - Laminas Query Builder Setup](https://odan.github.io/2019/12/01/slim4-laminas-db-query-builder-setup.html)
 * [Slim 4 - CakePHP Query Builder Setup](https://odan.github.io/2019/12/03/slim4-cakephp-query-builder.html)
 * [Slim 4 - Eloquent Setup](https://odan.github.io/2019/12/03/slim4-eloquent.html)
 
