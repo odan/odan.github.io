@@ -9,14 +9,16 @@ keywords:
 
 ## Requirements
 
-This driver requires the Microsoft Visual C++ Redistributable. The redistributable can easily be downloaded on the Microsoft website as x86 or x64 edition. Notice: On a x64 computer the x86 **AND** the x64 version must be installed.
+This driver requires the Microsoft Visual C++ Redistributable. 
+The redistributable can easily be downloaded on the Microsoft website as x86 or x64 edition. 
+
+**Notice:** On a x64 computer the x86 **AND** the x64 version must be installed.
 
 [Visual C++ Redistributable for Visual Studio](https://support.microsoft.com/de-ch/help/2977003/the-latest-supported-visual-c-downloads)
 
-## Setup
+This setup is tested with PHP (32-Bit): 5.6, 7.0, 7.1, 7.2, 7.3 and with PHP (x64) 64-Bit: 7.4
 
-Testest with PHP (32-Bit): 5.6, 7.0, 7.1, 7.2, 7.3
-Testest with PHP (x64) 64-Bit: 7.4
+## Setup
 
 * For PHP, 32-Bit: Open the Oracle page: [Instant Client Downloads for Microsoft Windows 32-bit](https://www.oracle.com/database/technologies/instant-client/microsoft-windows-32-downloads.html)
 
