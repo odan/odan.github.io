@@ -14,7 +14,7 @@ Last update: 08.01.2020
 This driver requires the Microsoft Visual C++ Redistributable. 
 The redistributable can easily be downloaded on the Microsoft website as x86 or x64 edition. 
 
-**Notice:** On a x64 computer the x86 **AND** the x64 version must be installed.
+**Notice:** On a x64 computer the x86 **AND** the x64 version of the Visual C++ Redistributable setup must be installed.
 
 [Visual C++ Redistributable for Visual Studio](https://support.microsoft.com/de-ch/help/2977003/the-latest-supported-visual-c-downloads)
 
