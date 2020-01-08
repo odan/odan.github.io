@@ -11,18 +11,22 @@ keywords:
 
 This driver requires the Microsoft Visual C++ Redistributable. The redistributable can easily be downloaded on the Microsoft website as x86 or x64 edition. Notice: On a x64 computer the x86 **AND** the x64 version must be installed.
 
-[Visual C++ Redistributable für Visual Studio 2015](https://www.microsoft.com/en-us/download/details.aspx?id=52685)
+[Visual C++ Redistributable for Visual Studio](https://support.microsoft.com/de-ch/help/2977003/the-latest-supported-visual-c-downloads)
 
 ## Setup
 
-Testest with PHP 5.6, 7.0, 7.1, 7.2
+Testest with PHP (32-Bit): 5.6, 7.0, 7.1, 7.2, 7.3
+Testest with PHP (x64) 64-Bit: 7.4
 
-* Open the Oracle page: [Instant Client Downloads 
-for Microsoft Windows 32-bit](https://www.oracle.com/technetwork/topics/winsoft-085727.html)
+* For PHP, 32-Bit: Open the Oracle page: [Instant Client Downloads for Microsoft Windows 32-bit](https://www.oracle.com/database/technologies/instant-client/microsoft-windows-32-downloads.html)
+
+* For PHP, **x64, 64-Bit**: Open the Oracle page: [Instant Client Downloads for Microsoft Windows (x64) 64-bit](https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html)
+
 * Click: "Accept License Agreement"
+
 * Download and unzip the ZIP file `instantclient-basiclite-nt-12.2.0.1.0.zip`
-* Copy all *.dll files: to `c:\xampp\php`
-* Copy all *.dll files to `c:\xampp\apache\bin` (Yes, a second copy!)
+* Copy all `*.dll` files: to `c:\xampp\php`
+* Copy all `*.dll` files to `c:\xampp\apache\bin` (We need a second copy here for apache)
 * Make sure that the file `c:\xampp\php\ext\php_oci8_12c.dll` exists.
 * Enable php extension in php.ini: `extension=php_oci8_12c.dll` (For PHP 7.2+ use `extension=oci8_12c`)
 * Restart Apache
@@ -33,10 +37,15 @@ Especially the `WAMP` users reported that they still get the following error mes
 
 `PHP Warning: PHP Startup: Unable to load dynamic library 'oci8_12c'`.
 
-In this case try to download the correct dll files from this link:
+Make sure you downloaded the correct Oracle Instant Client, 32-bit or (x64) 64-bit.
 
-* PHP 7.2: <http://windows.php.net/downloads/pecl/releases/oci8/2.2.0/php_oci8-2.2.0-7.2-ts-vc15-x86.zip>
-* PHP 7.3: <https://windows.php.net/downloads/pecl/releases/oci8/2.2.0/php_oci8-2.2.0-7.3-ts-vc15-x86.zip>
+You can also try to download the correct php_oci8 dll files from this link:
+
+* PHP 7.2 (32-bit): <http://windows.php.net/downloads/pecl/releases/oci8/2.2.0/php_oci8-2.2.0-7.2-ts-vc15-x86.zip>
+* PHP 7.3 (32-bit): <https://windows.php.net/downloads/pecl/releases/oci8/2.2.0/php_oci8-2.2.0-7.3-ts-vc15-x86.zip>
+* PHP 7.4 (x64, 64-Bit): <https://windows.php.net/downloads/pecl/releases/oci8/2.2.0/php_oci8-2.2.0-7.4-ts-vc15-x64.zip>
+* [All releases](https://windows.php.net/downloads/pecl/releases/oci8/)
+
 
 ## Connection test
 ```php
