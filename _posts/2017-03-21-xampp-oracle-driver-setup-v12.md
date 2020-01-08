@@ -22,8 +22,8 @@ This setup is tested with PHP (32-Bit): 5.6, 7.0, 7.1, 7.2, 7.3 and with PHP (x6
 
 ## Setup
 
-* For PHP, 32-Bit: Open the Oracle page: [Instant Client Downloads for Microsoft Windows 32-bit](https://www.oracle.com/database/technologies/instant-client/microsoft-windows-32-downloads.html)
-* For PHP, **x64, 64-Bit**: Open the Oracle page: [Instant Client Downloads for Microsoft Windows (x64) 64-bit](https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html)
+* For PHP (**32-Bit**) open: [Instant Client Downloads for Microsoft Windows 32-bit](https://www.oracle.com/database/technologies/instant-client/microsoft-windows-32-downloads.html)
+* For PHP (**x64, 64-Bit**) open: [Instant Client Downloads for Microsoft Windows (x64) 64-bit](https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html)
 * Click: "Accept License Agreement"
 * Download and unzip the ZIP file `instantclient-basiclite-nt-12.2.0.1.0.zip`
 * Copy all `*.dll` files: to `c:\xampp\php`
