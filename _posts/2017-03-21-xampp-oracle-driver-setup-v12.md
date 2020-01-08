@@ -123,3 +123,6 @@ catch (Exception $e) {
 ### More infos and links
 
 * <https://blogs.oracle.com/opal/installing-xampp-for-php-and-oracle-database>
+
+
+[Comments](https://gist.github.com/odan/4edb46a44721f2ef3bdefe2ea999e2e8)
