@@ -7,6 +7,8 @@ description:
 keywords: 
 ---
 
+Last update: 08.01.2020
+
 ## Requirements
 
 This driver requires the Microsoft Visual C++ Redistributable. 
