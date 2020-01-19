@@ -277,6 +277,8 @@ $query = $this->queryFactory->newSelect('users')->andWhere(['id' => 1]);
 $row = $query->execute()->fetch('assoc');
 ```
 
+Read more: [Select](https://book.cakephp.org/3/en/orm/query-builder.html#selecting-data)
+
 ### Insert a record
 
 ```php
@@ -297,6 +299,8 @@ $newId = (int)$this->queryFactory->newInsert('users', $values)
     ->lastInsertId();
 ```
 
+Read more: [Insert](https://book.cakephp.org/3/en/orm/query-builder.html#inserting-data)
+
 ### Update a record
 
 ```php
@@ -308,6 +312,8 @@ $this->queryFactory->newUpdate('users')
     ->execute();
 ```
 
+Read more: [Insert](https://book.cakephp.org/3/en/orm/query-builder.html#updating-data)
+
 ### Delete a record
 
 ```php
@@ -315,3 +321,5 @@ $this->queryFactory->newDelete('users')
     ->andWhere(['id' => 1])
     ->execute();
 ```
+
+Read more: [Delete](https://book.cakephp.org/3/en/orm/query-builder.html#deleting-data)
