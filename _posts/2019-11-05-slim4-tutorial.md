@@ -476,10 +476,10 @@ The complete `composer.json` file should look like this:
 {
     "require": {
         "php-di/php-di": "^6.0",
-        "selective/config": "^0.1.0",
-        "slim/http": "^0.8.0",
-        "slim/psr7": "^0.6.0",
-        "slim/slim": "^4.3"
+        "selective/config": "^0.1.1",
+        "slim/http": "^1",
+        "slim/psr7": "^1",
+        "slim/slim": "^4.4"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.4"
