@@ -48,11 +48,11 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 
 ## Introduction
 
-Slim Framework is a great micro framework for web application, RESTful API's and websites.
+Slim Framework is a great microframework for web applications, RESTful API's and websites.
 
 Our aim is to create a RESTful API with routing, business logic and database operations.
 
-Standards like [PSR](https://www.php-fig.org/psr/) and best practices are very imported and integrated part of this tutorial.
+Standards like [PSR](https://www.php-fig.org/psr/) and best practices are very important and integrated part of this tutorial.
 
 ## Installation
 
@@ -108,7 +108,7 @@ vendor/
 
 ## Directory structure
 
-A good directory structure helps you organize your code, simplifies setup on the web server and increases the security of the entire application.
+A good directory structure helps you organize your code, simplifies setup on the webserver and increases the security of the entire application.
 
 Create the following directory structure in the root directory of your project:
 
@@ -327,7 +327,7 @@ A **dependencies injection container** (DIC) is a tool for injecting dependencie
 Injecting the container into a class is an **anti-pattern**. You should declare all class 
 dependencies in the constructor explicitly. 
 
-Why is injecting the container (in the most cases) an anti-pattern?
+Why is injecting the container (in most cases) an anti-pattern?
 
 In Slim 3 the [Service Locator](https://blog.ploeh.dk/2010/02/03/ServiceLocatorisanAnti-Pattern/) (anti-pattern) was the
 default "style" to inject the whole ([Pimple](https://pimple.symfony.com/)) container and fetch the dependencies from it. 
