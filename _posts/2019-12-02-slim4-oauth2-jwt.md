@@ -500,55 +500,16 @@ return function (App $app) {
 
 ## FAQ
 
+**How to handle CORS with OPTIONS preflight requests?**
+
+Read more: [Slim 4 - CORS Setup](https://odan.github.io/2019/11/24/slim4-cors.html)
+
 **Where to store the tokens?**
 
-Don't store tokens in local storage. Browser local storage (or session storage) 
-is not a secure place to store sensitive information. Any data stored there:
+Read more:
 
-* Can be accessed through JavaScript.
-* May be vulnerable to cross-site scripting.
-
-If an attacker steals a token, they can gain access to and make requests to your API.
-Treat tokens like credit card numbers or passwords: don’t store them in local storage.
-
-As far as I know a client-side only `SameSite Cookie` is stateless and the most secure place.
-
-Storing the token:
-
-```js
-// The JWT from the response object
-const token = response.access_token;
-
-// Max age in seconds
-const maxAge = response.expires_in;
-
-// Set samesite cookie
-document.cookie = "token=" + token + "; path=/; SameSite=Lax; secure; max-age=" + maxAge;
-```
-
-Retrieving the token:
-
-```js
-const token = getCookie('token');
-
-function getCookie(cname) {
-    const name = cname + '=';
-    const ca = decodeURIComponent(document.cookie).split(';');
-
-    for (let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return '';
-}
-```
-
-## FAQ
+* [Where to Store Tokens](https://auth0.com/docs/security/store-tokens#don-t-store-tokens-in-local-storage)
+* [Do I have to store tokens in cookies or localstorage or session?](https://stackoverflow.com/a/54258744/1461181)
 
 **The `Authorization` header missing in POST request**
 
@@ -556,15 +517,6 @@ Some web servers might remove the `Authorization` header or do not forward it to
 
 Try this solution: <https://stackoverflow.com/a/26791450/1461181>
 
-**Read more**
-
-* [Where to Store Tokens](https://auth0.com/docs/security/store-tokens#don-t-store-tokens-in-local-storage)
-* [Do I have to store tokens in cookies or localstorage or session?](https://stackoverflow.com/a/54258744/1461181)
-
-**Any other solutions?**
-
-Instead of implementing the JWT middleware yourself (which has some advantages), you can
-also try this [PSR-7 and PSR-15 JWT Authentication](https://github.com/tuupola/slim-jwt-auth) middleware.
 
 [Comments](https://gist.github.com/odan/2885ccd0d2f3a3df41bf5c3d6e9b4999)
 
