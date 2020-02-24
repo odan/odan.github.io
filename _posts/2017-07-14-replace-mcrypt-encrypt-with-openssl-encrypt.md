@@ -8,7 +8,7 @@ keywords: php, mcrypt, openssl, encryption
 ---
 
 > Note: This might help too:
-> <ttps://packagist.org/packages/phpseclib/mcrypt_compat>
+> <https://packagist.org/packages/phpseclib/mcrypt_compat>
 
 When you switch from PHP 5.x to 7.1, you may get the following error message:
 
