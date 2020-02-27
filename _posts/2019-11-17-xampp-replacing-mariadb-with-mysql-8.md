@@ -16,7 +16,8 @@ and can be replaced with the "orginal" MySQL server.
 
 * Windows
 * The latest [XAMPP](https://www.apachefriends.org) for Windows v.7.1+ (**64-Bit**)
-* [The latest Visual C++ Redistributable Packages](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads), [How to install the Visual C++ Redistributable](https://www.groovypost.com/howto/fix-visual-c-plus-plus-redistributable-windows-10/)
+* [The latest Visual C++ Redistributable Packages](https://support.microsoft.com/en-us/help/2977003/the-latest-supported-visual-c-downloads), 
+  * [How to install the Visual C++ Redistributable](https://www.groovypost.com/howto/fix-visual-c-plus-plus-redistributable-windows-10/)
 * Administrator privileges to restart Windows services
 
 ## Backup
