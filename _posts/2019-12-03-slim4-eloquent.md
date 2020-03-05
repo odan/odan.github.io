@@ -14,6 +14,7 @@ keywords: php slim laravel eloquent orm sql querybuilder
 * [Installation](#installation)
 * [Repository](#repository)
 * [Usage](#usage)
+* [Setup multiple connections](#setup-multiple-connections)
 
 ## Requirements
 
@@ -196,6 +197,96 @@ or
 $this->connection->table('users')
     ->where(['id' => 1])
     ->delete();
+```
+
+### Setup multiple connections
+
+The following example shows how you can use the Eloquent Query Builder to set up 
+multiple database connections and access them in a repository.
+
+1. Extend your second connection from `Illuminate\Database\Connection`:
+
+Create a new file: `src/App/Database/SecondConnection.php`
+
+```php
+<?php
+
+namespace App\Database;
+
+use Illuminate\Database\Connection;
+
+class SecondConnection extends Connection
+{
+
+}
+```
+
+2. Register a new container definition for the second database connection.
+
+Please note: You also need new connection configuration (e.g. db2) for the second connection parameters.
+
+```php
+
+// ...
+use App\Database\SecondConnection;
+// ...
+
+return [
+
+    // ...
+    
+    // Database connection
+    SecondConnection::class => function (ContainerInterface $container) {
+        $factory = new ConnectionFactory(new IlluminateContainer());
+
+        $connection = $factory->make($container->get(Configuration::class)->getArray('db2'));
+
+        // Disable the query log to prevent memory issues
+        $connection->disableQueryLog();
+
+        return $connection;
+    },
+];
+```
+
+3. Inject the database connections into the repository
+
+If you need multiple connections, define them in the constructor parameter list as follows:
+
+```php
+<?php
+
+namespace App\Domain\User\Repository;
+
+use Illuminate\Database\Connection;
+use App\Database\SecondConnection;
+
+class UserRepository
+{
+    /**
+     * @var Connection
+     */
+    private $connection;
+
+    /**
+     * @var SecondConnection
+     */
+    private $connection2;
+
+    /**
+     * The constructor.
+     *
+     * @param Connection $connection The database connection
+     * @param SecondConnection $connection2 The second database connection
+     */
+    public function __construct(Connection $connection, SecondConnection $connection2)
+    {
+        $this->connection = $connection;
+        $this->connection2 = $connection2;
+    }
+
+    // ...
+}
 ```
 
 ## Read more
