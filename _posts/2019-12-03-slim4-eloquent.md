@@ -213,9 +213,9 @@ Create a new file: `src/App/Database/SecondConnection.php`
 
 namespace App\Database;
 
-use Illuminate\Database\Connection;
+use Illuminate\Database\MySqlConnection;
 
-class SecondConnection extends Connection
+class SecondConnection extends MySqlConnection
 {
 
 }
@@ -223,12 +223,20 @@ class SecondConnection extends Connection
 
 2. Register a new container definition for the second database connection.
 
-Please note: You also need new connection configuration (e.g. db2) for the second connection parameters.
+Please note: You also need new connection configuration (e.g. db2) and a new driver name (e.g. mysql2) for the second connection parameters.
+
+```php
+// Database settings
+$settings['db2'] = [
+    'driver' => 'mysql2',
+    // ...
+```
 
 ```php
 
 // ...
 use App\Database\SecondConnection;
+use Illuminate\Database\Connection;
 // ...
 
 return [
@@ -239,6 +247,11 @@ return [
     SecondConnection::class => function (ContainerInterface $container) {
         $factory = new ConnectionFactory(new IlluminateContainer());
 
+        // Resolve the driver
+        Connection::resolverFor('mysql2', function ($connection, $database, $prefix, $config) {
+            return new SecondConnection($connection, $database, $prefix, $config);
+        });
+        
         $connection = $factory->make($container->get(Configuration::class)->getArray('db2'));
 
         // Disable the query log to prevent memory issues
