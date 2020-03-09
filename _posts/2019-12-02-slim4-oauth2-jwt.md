@@ -32,7 +32,8 @@ This tutorial demonstrates how to implement the [OAuth 2.0](https://oauth.net/2/
 standard in combination with a [JSON Web Token](https://oauth.net/2/jwt/) (JWT).
 
 Please note that a logout functionality with tokens is not feasible without 
-giving up the stateless principle.
+giving up the stateless principle. This is because you cannot invalidate a 
+token without keeping its status on a server. This would break the stateless principle.
 
 ## Installation
 
