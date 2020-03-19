@@ -57,7 +57,7 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 
 * [PHP Microframework Slim auch für größere Anwendungen geeignet](https://entwickler.de/online/php/php-microframework-slim-579928772.html)
 
-## Publikationen
+## Publications
 
 * Fachartikel zu Slim 4 im [PHP Magazin](https://entwickler.de/online/php) 4.20
 
