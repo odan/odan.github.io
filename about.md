@@ -53,6 +53,14 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 * [Media Downloader](https://odan-online.com/tools/media-download.php) - Download images from Twitter, Facebook and Instagram
 * [Random Domain Generator](https://odan-online.com/tools/domain-generator.php)
 
+## Interviews
+
+* [PHP Microframework Slim auch für größere Anwendungen geeignet](https://entwickler.de/online/php/php-microframework-slim-579928772.html)
+
+## Publikationen
+
+* Fachartikel zu Slim 4 im [PHP Magazin](https://entwickler.de/online/php) 4.20
+
 ## Conferences
 
 * [International PHP Conference - Berlin](https://phpconference.com/) (2015, 2016, 2017, 2018, 2019)
