@@ -2,7 +2,7 @@
 title: Slim 4 - FIFO Middleware Setup
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: php slim fifo middleware
 ---
