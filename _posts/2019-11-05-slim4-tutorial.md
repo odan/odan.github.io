@@ -41,7 +41,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 
 ## Requirements
 
-* PHP 7.1+
+* PHP 7.2+
 * MySQL 5.7+
 * Apache webserver
 * Composer
@@ -71,24 +71,12 @@ In our case we are installing the Slim PSR-7 implementations using this command:
 composer require slim/psr7
 ```
 
-Now we install a number of useful convenience methods such as `$response->withJson()`:
-
-```
-composer require slim/http
-```
-
 As next we need a PSR-11 container implementation for **dependency injection** and **autowiring**.
 
 Run this command to install [PHP-DI](http://php-di.org/):
 
 ```
 composer require php-di/php-di
-```
-
-To access the application configuration install the `selective/config` package:
-
-```
-composer require selective/config
 ```
 
 For testing purpose we are installing [phpunit](https://phpunit.de/) as development dependency with the `--dev` option:
@@ -282,7 +270,7 @@ return function (App $app) {
 
 A middleware can be executed before and after your Slim application to manipulate the request and response object according to your requirements.
 
-[Read more](http://www.slimframework.com/docs/v4/concepts/middleware.html)
+[Read more](https://www.slimframework.com/docs/v4/concepts/middleware.html)
 
 ### Routing and error middleware
 
@@ -291,7 +279,6 @@ Create a file to load global middleware handler `config/middleware.php` and copy
 ```php
 <?php
 
-use Selective\Config\Configuration;
 use Slim\App;
 
 return function (App $app) {
@@ -304,7 +291,7 @@ return function (App $app) {
     $container = $app->getContainer();
     
     // Add error handler middleware
-    $settings = $container->get(Configuration::class)->getArray('error_handler_middleware');
+    $settings = $container->get('settings')['error_handler_middleware'];
     $displayErrorDetails = (bool)$settings['display_error_details'];
     $logErrors = (bool)$settings['log_errors'];
     $logErrorDetails = (bool)$settings['log_error_details'];
@@ -365,13 +352,12 @@ Create a new file for the container entries `config/container.php` and copy/past
 <?php
 
 use Psr\Container\ContainerInterface;
-use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Factory\AppFactory;
 
 return [
-    Configuration::class => function () {
-        return new Configuration(require __DIR__ . '/settings.php');
+    'settings' => function () {
+        return require __DIR__ . '/settings.php';
     },
 
     App::class => function (ContainerInterface $container) {
@@ -409,7 +395,7 @@ $app->setBasePath('/my-app');
 Be careful: The `public/` directory is only the `DoumentRoot` of your webserver, 
 but it's never part of your base path and the official url.
 
-Bad urls
+Bad urls:
 * `http://www.example.com/public`
 * `http://www.example.com/public/users`
 * `http://www.example.com/my-app/public`
@@ -428,12 +414,12 @@ Open the file `config/routes.php` and insert the code for the first route:
 ```php
 <?php
 
-use Slim\Http\Response;
-use Slim\Http\ServerRequest;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
 
 return function (App $app) {
-    $app->get('/', function (ServerRequest $request, Response $response) {
+    $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response) {
         $response->getBody()->write('Hello, World!');
 
         return $response;
@@ -476,8 +462,6 @@ The complete `composer.json` file should look like this:
 {
     "require": {
         "php-di/php-di": "^6.0",
-        "selective/config": "^0.1.1",
-        "slim/http": "^1",
         "slim/psr7": "^1",
         "slim/slim": "^4.4"
     },
@@ -536,12 +520,12 @@ and the communication between the different layers can be found here: [Action](h
 
 namespace App\Action;
 
-use Slim\Http\Response;
-use Slim\Http\ServerRequest;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 final class HomeAction
 {
-    public function __invoke(ServerRequest $request, Response $response): Response
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $response->getBody()->write('Hello, World!');
 
@@ -579,14 +563,16 @@ Instead of calling `json_encode` everytime, you can use the `withJson()` method 
 
 namespace App\Action;
 
-use Slim\Http\Response;
-use Slim\Http\ServerRequest;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 final class HomeAction
 {
-    public function __invoke(ServerRequest $request, Response $response): Response
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        return $response->withJson(['success' => true]);
+        $response->getBody()->write(json_encode(['success' => true]));
+
+        return $response->withHeader('Content-Type', 'application/json');
     }
 }
 ```
@@ -597,8 +583,10 @@ To change to http status code, just use the `$response->withStatus(x)` method. E
 
 ```php
 $result = ['error' => ['message' => 'Validation failed']];
-        
-return $response->withJson($result)->withStatus(422);
+
+$response->getBody()->write(json_encode($result));
+
+return $response->withHeader('Content-Type', 'application/json')->withStatus(422);
 ```
 
 ## Domain
@@ -799,14 +787,14 @@ Insert a `PDO::class` container definition to `config/container.php`:
 
 ```php
 PDO::class => function (ContainerInterface $container) {
-    $config = $container->get(Configuration::class);
+    $settings = $container->get('settings');
 
-    $host = $config->getString('db.host');
-    $dbname =  $config->getString('db.database');
-    $username = $config->getString('db.username');
-    $password = $config->getString('db.password');
-    $charset = $config->getString('db.charset');
-    $flags = $config->getArray('db.flags');
+    $host = $settings['db']['host'];
+    $dbname = $settings['db']['database'];
+    $username = $settings['db']['username'];
+    $password = $settings['db']['password'];
+    $charset = $settings['db']['charset'];
+    $flags = $settings['db']['flags'];
     $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
 
     return new PDO($dsn, $username, $password, $flags);
@@ -891,8 +879,8 @@ namespace App\Action;
 
 use App\Domain\User\Data\UserCreateData;
 use App\Domain\User\Service\UserCreator;
-use Slim\Http\Response;
-use Slim\Http\ServerRequest;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 final class UserCreateAction
 {
@@ -903,7 +891,7 @@ final class UserCreateAction
         $this->userCreator = $userCreator;
     }
 
-    public function __invoke(ServerRequest $request, Response $response): Response
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterfacee
     {
         // Collect input from the HTTP request
         $data = (array)$request->getParsedBody();
@@ -924,7 +912,9 @@ final class UserCreateAction
         ];
 
         // Build the HTTP response
-        return $response->withJson($result)->withStatus(201);
+        $response->getBody()->write((string)json_encode($result));
+
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
     }
 }
 ```
