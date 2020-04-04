@@ -37,7 +37,6 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Deployment](#deployment)
 * [Conclusion](#conclusion)
 * [FAQ](#faq)
-* [Read more](#read-more)
 
 ## Requirements
 
