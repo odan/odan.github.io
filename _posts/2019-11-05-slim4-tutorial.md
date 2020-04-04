@@ -477,6 +477,7 @@ The complete `composer.json` file should look like this:
 {
     "require": {
         "php-di/php-di": "^6.0",
+        "selective/config": "^0.2.0",
         "slim/psr7": "^1",
         "slim/slim": "^4.4"
     },
