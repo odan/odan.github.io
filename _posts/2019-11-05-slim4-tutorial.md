@@ -287,7 +287,7 @@ return function (App $app) {
     // Parse json, form data and xml
     $app->addBodyParsingMiddleware();
 
-    // Add global middleware to app
+    // Add the Slim built-in routing middleware
     $app->addRoutingMiddleware();
 
     // Catch exceptions and errors
