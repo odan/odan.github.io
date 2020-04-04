@@ -973,8 +973,10 @@ composer install --no-dev --optimize-autoloader
 ```
 
 You don't have to run composer on your production server. Instead you should implement a [build pipeline](https://www.amazon.com/dp/B003YMNVC0) that creates
-an so called "artifact". An artifact is an ZIP file you can upload and deploy on your production server. 
-[selective-php/artifact](https://github.com/selective-php/artifact) is a tool to build artifacts from your source code.
+an so called "artifact". An artifact is an ZIP file you can upload and deploy on your production server.
+
+* [Apache Ant](https://ant.apache.org/bindownload.cgi) is a software great tool for automating software build processes.
+* [selective-php/artifact](https://github.com/selective-php/artifact) is a tool, written in PHP, to build artifacts from your source code.
 
 For security reasons, you should switch off the output of all error details in production:
 
@@ -1007,7 +1009,7 @@ Instead you could store them in a file like `env.php` and place this file one di
 Remember the relationships:
 
 * Slim - To handle routing and dispatching
-* Single Action Controllers - To invoke the correct service method (domain)
+* Single Action Controllers - Request, response handling. Invoking the domain (service method).
 * Domain - The core of your application
 * Services - To handle business logic
 * DTO - To carry data (no behavior)
@@ -1015,19 +1017,23 @@ Remember the relationships:
 
 ## FAQ
 
-### How to add JSON Web Token (JWT) / Bearer authentication?
+### General questions
 
-Read this article: [Slim 4 - OAuth 2.0 and JSON Web Token Setup](https://odan.github.io/2019/12/02/slim4-oauth2-jwt.html) 
-
-### CORS
-
-Read more about [CORS](https://odan.github.io/2019/11/24/slim4-cors.html): 
+Read more: [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-4-cheatsheet-and-faq.html)
 
 ### Where can I find the code on github?
 
 The source code with more examples (e.g. reading a user) can be found here: <https://github.com/odan/slim4-tutorial>
 
 A complete skeleton for slim 4 can be found here: <https://github.com/odan/slim4-skeleton>
+
+### How to add JSON Web Token (JWT) / Bearer authentication?
+
+Read this article: [Slim 4 - OAuth 2.0 and JSON Web Token Setup](https://odan.github.io/2019/12/02/slim4-oauth2-jwt.html) 
+
+### How to setup CORS?
+
+Read this article:  [Slim 4 - CORS setup](https://odan.github.io/2019/11/24/slim4-cors.html) 
 
 ### How to add a logger?
 
@@ -1052,13 +1058,22 @@ You can add a query builder as described here:
 * [Slim 4 - CakePHP Query Builder Setup](https://odan.github.io/2019/12/03/slim4-cakephp-query-builder.html)
 * [Slim 4 - Eloquent Setup](https://odan.github.io/2019/12/03/slim4-eloquent.html)
 
+### How to add multiple database connections?
+
+* [Slim 4 - Eloquent multiple connections setup](https://odan.github.io/2019/12/03/slim4-eloquent.html#setup-multiple-connections)
+
 ### How to build assets with webpack?
 
 * [Slim 4 - Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
 
-## Read more
+### Where can I donate?
 
-* [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-4-cheatsheet-and-faq.html)
+If you think this tutorial is useful for you, 
+I would appreciate a small donation: 
+**[paypal.me/dopitz](paypal.me/dopitz)** 
 
+### I have a very special question
 
-[Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f) | [Donate](https://paypal.me/dopitz)
+You can consult me by email: d.opitz (at) outlook.com
+
+[Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f)
