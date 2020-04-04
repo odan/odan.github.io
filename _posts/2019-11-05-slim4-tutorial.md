@@ -1069,7 +1069,7 @@ You can add a query builder as described here:
 
 If you think this tutorial is useful for you, 
 I would appreciate a small donation: 
-**[paypal.me/dopitz](paypal.me/dopitz)** 
+**[paypal.me/dopitz](https://www.paypal.me/dopitz)** 
 
 ### I have a very special question
 
