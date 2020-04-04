@@ -79,6 +79,12 @@ Run this command to install [PHP-DI](http://php-di.org/):
 composer require php-di/php-di
 ```
 
+To access the application configuration install the `selective/config` package:
+
+```
+composer require selective/config
+```
+
 For testing purpose we are installing [phpunit](https://phpunit.de/) as development dependency with the `--dev` option:
 
 ```
@@ -179,7 +185,7 @@ the default settings with environment specific settings.
 ```php
 <?php
 
-// Error reporting
+// Error reporting for production
 error_reporting(0);
 ini_set('display_errors', '0');
 
@@ -346,13 +352,14 @@ Create a new file for the container entries `config/container.php` and copy/past
 <?php
 
 use Psr\Container\ContainerInterface;
+use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 
 return [
-    'settings' => function () {
-        return require __DIR__ . '/settings.php';
+    Configuration::class => function () {
+        return new Configuration(require __DIR__ . '/settings.php');
     },
 
     App::class => function (ContainerInterface $container) {
@@ -368,7 +375,7 @@ return [
 
     ErrorMiddleware::class => function (ContainerInterface $container) {
         $app = $container->get(App::class);
-        $settings = $container->get('settings')['error_handler_middleware'];
+        $settings = $container->get(Configuration::class)->getArray('error_handler_middleware');
 
         return new ErrorMiddleware(
             $app->getCallableResolver(),
@@ -797,14 +804,14 @@ Insert a `PDO::class` container definition to `config/container.php`:
 
 ```php
 PDO::class => function (ContainerInterface $container) {
-    $settings = $container->get('settings');
+    $settings = $container->get(Configuration::class)->getArray('db');
 
-    $host = $settings['db']['host'];
-    $dbname = $settings['db']['database'];
-    $username = $settings['db']['username'];
-    $password = $settings['db']['password'];
-    $charset = $settings['db']['charset'];
-    $flags = $settings['db']['flags'];
+    $host = $settings['host'];
+    $dbname = $settings['database'];
+    $username = $settings['username'];
+    $password = $settings['password'];
+    $charset = $settings['charset'];
+    $flags = $settings['flags'];
     $dsn = "mysql:host=$host;dbname=$dbname;charset=$charset";
 
     return new PDO($dsn, $username, $password, $flags);
