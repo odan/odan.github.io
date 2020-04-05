@@ -167,4 +167,4 @@ Since **Slim 4** you can use modern [Dependency Injection Container (DIC)](http:
 
 To be more clear: "Composition" has nothing to do with the "Autowire" feature of the DIC. You can use composition with pure classes and without a container or anything else. The autowire feature just uses the [PHP Reflection](https://www.php.net/manual/en/book.reflection.php) classes to resolve and inject the dependencies automatically for you.
 
-[Comments](https://gist.github.com/odan/38bd3086ef37df4ead1a7397ac8cf83b)
+[Comments](https://gist.github.com/odan/38bd3086ef37df4ead1a7397ac8cf83b) | [Donate](../../../donate.html)

@@ -434,3 +434,4 @@ Remember the relationships.
 * ASP.NET Core - Runs your app / website
 * Supervisor - Keeps your app running
 
+[Comments](https://gist.github.com/odan/36b2ffde91102cf6c1b1170f104f8ba0) | [Donate](../../../donate.html)

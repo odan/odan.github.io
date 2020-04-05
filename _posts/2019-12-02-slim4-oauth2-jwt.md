@@ -519,6 +519,4 @@ Some web servers might remove the `Authorization` header or do not forward it to
 Try this solution: <https://stackoverflow.com/a/26791450/1461181>
 
 
-[Comments](https://gist.github.com/odan/2885ccd0d2f3a3df41bf5c3d6e9b4999)
-
-
+[Comments](https://gist.github.com/odan/2885ccd0d2f3a3df41bf5c3d6e9b4999) | [Donate](../../../donate.html)

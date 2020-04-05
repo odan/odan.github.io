@@ -92,4 +92,4 @@ Done.
 
 **A:** Make sure you have installed the **64-bit** version of XAMPP and MySQL.
 
-[Comments](https://gist.github.com/odan/e022ffd8e30097566392eed6356750d1)
+[Comments](https://gist.github.com/odan/e022ffd8e30097566392eed6356750d1) | [Donate](../../../donate.html)
