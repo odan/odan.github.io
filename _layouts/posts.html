@@ -12,7 +12,9 @@ layout: default
     <img src="https://user-images.githubusercontent.com/781074/67159940-7acf1800-f34b-11e9-9af5-ed3b571d90ff.png" width="32">
 </a>
 
-{% include adsense.html %}
+<p>
+    {% include adsense.html %}
+</p>
 
 {% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
 {% for year in postsByYear %}
