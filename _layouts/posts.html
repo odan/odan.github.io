@@ -34,7 +34,7 @@ layout: default
             var count = $(this).next('ul').find('li').length;
             $(this).html($(this).html() + ' (' + count + ')')
 
-            if(blogYear >= currentYear - 1) {
+            if(blogYear >= currentYear - 2) {
                 // show
                 $(this).next('ul').toggle();
             }
