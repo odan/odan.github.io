@@ -24,6 +24,8 @@ you prefer email you can always write to d.opitz (at) outlook.com.
 
 You can find all my open source code on [GitHub](https://github.com/odan).
 
+Here you can support me: [Donate](donate.md)
+
 ## Skills
 
 * PHP, C#, ASP.NET Core, JavaScript, Node.js
