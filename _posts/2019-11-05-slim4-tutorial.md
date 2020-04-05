@@ -1069,7 +1069,7 @@ You can add a query builder as described here:
 
 If you think this tutorial is useful for you, 
 I would appreciate a small donation: 
-**[Donate](../donate.md)** 
+**[Donate](../../../donate.md)** 
 
 ### I have a very special question
 
