@@ -79,17 +79,17 @@ The container definition:
 
 ```php
 return [
-    ConnectionProxy::class => function (ContainerInterface $c) {
+    ConnectionProxy::class => function (ContainerInterface $container) {
         return new ConnectionProxy(
-            $c->get('db1'),
-            $c->get('db2')
+            $container->get('db1'),
+            $container->get('db2')
         );
     },
-    'db1' => function (ContainerInterface $c) {
-        return new PDO();
+    'db1' => function (ContainerInterface $container) {
+        return new PDO(...);
     },
-    'db2' => function (ContainerInterface $c) {
-        return new PDO();
+    'db2' => function (ContainerInterface $container) {
+        return new PDO(...);
     },
 ];
 ```
@@ -113,6 +113,10 @@ class MyRepository
 
 ### 2. Extending PDO
 
+Instead of using another implicit "container" for multiple connections, you could
+extend a class from PDO to give each database connection a unique and
+fullly qualified name for the container definiton.
+
 Create a file: src/Database/PDO2.php and copy/paste this content:
 
 ```php
@@ -129,14 +133,16 @@ class PDO2 extends PDO
 
 Add the container definition for PDO2:
 
-```
+```php
 use App\Database\PDO2;
 
 // ...
 
 return [
-    PDO2::class => function (ContainerInterface $c) {
-        return new PDO2();
+    //...
+
+    PDO2::class => function (ContainerInterface $container) {
+        return new PDO2(...);
     },
 ];
 ```
@@ -334,7 +340,9 @@ use App\Database\ConnectionManager;
 ConnectionManager::class=> function (ContainerInterface $container) {
     // Get default database settings for the second connection
     // The database name is not required here
-    return new ConnectionManager($container->get(Configuration::class)->getArray('db2'));
+    $db2Settings = $container->get(Configuration::class)->getArray('db2');
+
+    return new ConnectionManager($db2Settings);
 },
 ```
 
