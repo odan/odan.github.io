@@ -13,6 +13,7 @@ keywords: php slim pdo database connection container phpdi
 * [Introduction](#introduction)
 * [Two database connections with fixed configuration](#two-database-connections-with-fixed-configuration)
 * [First database fixed, second database with dynamic configuration](#first-database-fixed-second-database-with-dynamic-configuration)
+* [Multiple dynamic database connections](#multiple-dynamic-database-connections)
 * [Read more](#read-more)
 
 ## Requirements
@@ -164,11 +165,11 @@ class UserRepository
 
 ### 3. Autowired objects
 
-See Matthieu Napoli's answer: https://stackoverflow.com/a/57758106/1461181
+See Matthieu Napoli's answer: <https://stackoverflow.com/a/57758106/1461181>
 
-Please note that I am not a fan of [DI\autowire()](https://stackoverflow.com/a/57758106/1461181), as this would require 
-too much effort in container configuration and maintenance is a nightmare in larger projects.
-I think that the DIC should do this job for us as automatically as possible.
+Please note that the use of [DI\autowire()](https://stackoverflow.com/a/57758106/1461181), 
+could cause too much effort in container configuration and maintenance can 
+become a nightmare in larger projects.
 
 ## First database fixed, second database with dynamic configuration
 
@@ -370,6 +371,26 @@ class UserRepository
     }
     
     // ...
+}
+```
+
+## Multiple dynamic database connections
+
+You can implement a ConnectionManager to handle multiple connections, 
+first in container you declare the manager and add the default connection to it, 
+then in a middleware at application level you get the user data from the request 
+and resolves the user specific connection adding it to the Manager, 
+you could implement an interface like this:
+
+```php
+namespace App\Database;
+
+use PDO;
+
+interface DbConnectionManagerInterface
+{
+    public function addConnection(string $name, PDO $pdo): void;
+    public function getConnection(string $name): PDO;
 }
 ```
 
