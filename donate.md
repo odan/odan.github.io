@@ -18,8 +18,12 @@ keywords: donate paypal stripe
 If you think my blog and support is useful for you, 
 I would appreciate a small donation:
 
-* **[paypal.me/dopitz](https://www.paypal.me/dopitz)** 
-* [Amazon eGift Card via email](https://www.amazon.com/dp/B01FIS82WQ)
+* **[paypal.me/dopitz](https://www.paypal.me/dopitz)**
+* [Beerpay](https://beerpay.io/odan/slim4-skeleton) 🍺
+
+You can send me an Amazon gift card to my email address: **d.opitz (at) outlook.com**
+
+* [Amazon eGift Card via email](https://www.amazon.com/dp/B01FIS82WQ) 
 * [Amazon Geschenkgutschein per E-Mail](https://www.amazon.de/dp/B07Q1JNC7R)
 
 Please note: PayPal doesn't accept Indian Rupee (INR). 
