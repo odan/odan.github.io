@@ -19,12 +19,6 @@ If you think my blog and support is useful for you,
 I would appreciate a small donation:
 
 * **[PayPal](https://www.paypal.me/dopitz)**
-* [Beerpay](https://beerpay.io/odan/odan.github.io) 🍺
-
-You can send me an Amazon gift card to my email address: **d.opitz (at) outlook.com**
-
-* [Amazon eGift Card via email](https://www.amazon.com/dp/B01FIS82WQ) 
-* [Amazon Geschenkgutschein per E-Mail](https://www.amazon.de/dp/B07Q1JNC7R)
 
 Please note: PayPal doesn't accept Indian Rupee (INR). 
 From india you can use Skrill or TransferWise to send money directly
@@ -32,6 +26,11 @@ to my email address: **d.opitz (at) outlook.com**
 
 * <https://www.skrill.com/>
 * <https://transferwise.com/>
+
+You can send me an Amazon gift card to my email address: **d.opitz (at) outlook.com**
+
+* [Amazon eGift Card via email](https://www.amazon.com/dp/B01FIS82WQ) 
+* [Amazon Geschenkgutschein per E-Mail](https://www.amazon.de/dp/B07Q1JNC7R)
 
 
 
