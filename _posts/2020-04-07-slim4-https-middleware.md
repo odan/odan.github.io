@@ -144,4 +144,4 @@ You should now be automatically redirected to the secure `https://` url.
 
 ## Other solutions
 
-You could also create use a `.htaccess` file to redirect the http traffic to https.
+You could also use a `.htaccess` file to redirect the http traffic to https.
