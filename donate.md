@@ -18,8 +18,8 @@ keywords: donate paypal stripe
 If you think my blog and support is useful for you, 
 I would appreciate a small donation:
 
-* **[paypal.me/dopitz](https://www.paypal.me/dopitz)**
-* [Beerpay](https://beerpay.io/odan/slim4-skeleton) 🍺
+* **[PayPal](https://www.paypal.me/dopitz)**
+* [Beerpay](https://beerpay.io/odan/odan.github.io) 🍺
 
 You can send me an Amazon gift card to my email address: **d.opitz (at) outlook.com**
 
