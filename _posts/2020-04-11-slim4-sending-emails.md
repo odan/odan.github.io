@@ -1,0 +1,154 @@
+---
+title: Slim 4 - Sending E-Mails
+layout: post
+comments: true
+published: true
+description: 
+keywords: php slim email smtp symfony
+---
+
+## Table of contents
+
+* [Requirements](#requirements)
+* [Introduction](#introduction)
+* [Installation](#installation)
+* [Repository](#repository)
+* [Usage](#usage)
+* [Setup multiple connections](#setup-multiple-connections)
+
+## Requirements
+
+* PHP 7.2+
+* [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
+
+## Introduction
+
+This tutorial explains how to integrate and use the [Symfony Mailer](https://symfony.com/doc/current/mailer.html)
+components for creating and sending emails.
+
+## Installation
+
+To install the component, run:
+
+```
+composer require symfony/mailer
+```
+
+## Configuration
+
+Emails are delivered via a "transport". For this tuorial we deliver emails over SMTP.
+
+Just for demo purpose I'm using a free [Mailtrap](https://mailtrap.io/) account. 
+You can create rules for automatic forwarding of your emails to real inboxes 
+for testing purposes. Mailtrap will keep a copy of your message anyway.
+
+Add the email settings to your Slim settings array, e.g `config/settings.php`:
+
+```php
+// E-Mail settings
+$settings['smtp'] = [
+    // use 'null' for the null adapter
+    'type' => 'smtp',
+    'host' => 'smtp.mailtrap.io',
+    'port' => '25',
+    'username' => 'my-username',
+    'password' => 'my-secret-password',
+];
+```
+
+Autowire the mailer using `MailerInterface`:
+
+```php
+<?php
+
+use Illuminate\Database\Connectors\ConnectionFactory;
+use Psr\Container\ContainerInterface;
+use Selective\Config\Configuration;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mailer\Transport;
+use Slim\App;
+use Slim\Factory\AppFactory;
+
+return [
+
+    // ...
+    
+    // SMTP transport
+    MailerInterface::class => function (ContainerInterface $container) {
+        $settings = $container->get(Configuration::class)->getArray('smtp');
+
+        // smtp://user:pass@smtp.example.com:25
+        $dsn = sprintf(
+            '%s://%s:%s@%s:%s',
+            $settings['type'],
+            $settings['username'],
+            $settings['password'],
+            $settings['host'],
+            $settings['port']
+        );
+
+        return new Mailer(Transport::fromDsn($dsn));
+    },
+];
+```
+
+## Creating & Sending Messages
+
+Let the DIC inject the `MailerInterface` object and create an new `Email` object:
+
+```php
+<?php
+
+namespace App\Domain\User\Service;
+
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
+
+final class UserMailer
+{
+    /**
+     * @var MailerInterface
+     */
+    private $mailer;
+
+    public function __construct(MailerInterface $mailer)
+    {
+        $this->mailer = $mailer;
+    }
+
+    public function sendEmail()
+    {
+        $email = (new Email())
+            ->from('hello@example.com')
+            ->to('you@example.com')
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('john.doe@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('Time for Symfony Mailer!')
+            ->text('Sending emails is fun again!')
+            ->html('<p>My HTML content</p>');
+
+        $this->mailer->send($email);
+    }
+}
+```
+
+## Error handling
+
+To catch all mailer errors, just add a try/catch block around the send method:
+
+```php
+try {
+    $this->mailer->send($email);
+} catch (Exception $exception) {
+   // handle error here...
+}
+```
+
+## Read more
+
+* [Symfony Mailer documentation](https://symfony.com/doc/current/mailer.html)
+* [Symfony Mailer on Github](https://github.com/symfony/mailer)
+
+[Donate](../../../donate.html)
