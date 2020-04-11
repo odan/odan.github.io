@@ -12,9 +12,10 @@ keywords: php slim email smtp symfony
 * [Requirements](#requirements)
 * [Introduction](#introduction)
 * [Installation](#installation)
-* [Repository](#repository)
-* [Usage](#usage)
-* [Setup multiple connections](#setup-multiple-connections)
+* [Configuration](#configuration)
+* [Creating & Sending Messages](#creating--sending-messages)
+* [Error handling](#error-handling)
+* [Read more](#read-more)
 
 ## Requirements
 
