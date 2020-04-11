@@ -64,7 +64,6 @@ Autowire the mailer using `MailerInterface`:
 ```php
 <?php
 
-use Illuminate\Database\Connectors\ConnectionFactory;
 use Psr\Container\ContainerInterface;
 use Selective\Config\Configuration;
 use Symfony\Component\Mailer\Mailer;
