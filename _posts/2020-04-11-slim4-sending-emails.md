@@ -24,8 +24,9 @@ keywords: php slim email smtp symfony
 
 ## Introduction
 
-This tutorial explains how to integrate and use the [Symfony Mailer](https://symfony.com/doc/current/mailer.html)
-components for creating and sending emails.
+This tutorial explains how to integrate and use the 
+[Symfony Mailer](https://symfony.com/doc/current/mailer.html)
+component for creating and sending emails.
 
 ## Installation
 
@@ -37,11 +38,12 @@ composer require symfony/mailer
 
 ## Configuration
 
-Emails are delivered via a "transport". For this tuorial we deliver emails over SMTP.
+Emails are delivered via a "transport". For this tutorial we deliver emails over SMTP.
 
-Just for demo purpose I'm using a free [Mailtrap](https://mailtrap.io/) account. 
-You can create rules for automatic forwarding of your emails to real inboxes 
-for testing purposes. Mailtrap will keep a copy of your message anyway.
+Only for demonstration purposes I use a free [Mailtrap](https://mailtrap.io/) account. 
+
+In Mailtrap you can create a forwarding rule to your real inbox.
+Mailtrap keeps a copy of your message in any case.
 
 Add the email settings to your Slim settings array, e.g `config/settings.php`:
 
@@ -65,6 +67,7 @@ Autowire the mailer using `MailerInterface`:
 use Illuminate\Database\Connectors\ConnectionFactory;
 use Psr\Container\ContainerInterface;
 use Selective\Config\Configuration;
+use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Transport;
 use Slim\App;
