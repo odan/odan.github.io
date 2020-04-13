@@ -571,7 +571,8 @@ Now open your website, e.g. http://localhost and you should see the message `Hel
 
 ### Writing JSON to the response
 
-Instead of calling `json_encode` everytime, you can use the `withJson()` method to render the response.
+To create a valid JSON response you can write the json encoded string to the response body
+and set the `Content-Type` header to  `application/json`:
 
 ```php
 <?php
