@@ -29,8 +29,8 @@ to my email address: **d.opitz (at) outlook.com**
 
 You can send me an Amazon gift card to my email address: **d.opitz (at) outlook.com**
 
-* [Amazon eGift Card via email](https://www.amazon.com/dp/B01FIS82WQ) 
-* [Amazon Geschenkgutschein per E-Mail](https://www.amazon.de/dp/B07Q1JNC7R)
+* [Amazon eGift Card via email](https://www.amazon.com/dp/B01FIS82WQ?tag=28031982-21) 
+* [Amazon Geschenkgutschein per E-Mail](https://amzn.to/2RDNesN)
 
 
 
