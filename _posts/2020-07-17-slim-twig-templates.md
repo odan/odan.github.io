@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Twig Template Engine
+title: Slim 4 - Twig Setup
 layout: post
 comments: true
 published: true
