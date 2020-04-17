@@ -286,13 +286,45 @@ a look at the [Twig Webpack extension](https://github.com/fullpipe/twig-webpack-
 
 The [symfony/twig-bridge](https://github.com/symfony/twig-bridge) provides a Twig 3 `TranslationExtension` 
 to translate messages with the [trans](https://symfony.com/doc/current/reference/twig_reference.html#trans)
-filter. 
+filter.
 
-To extract the messages you could use the [PoEdit Pro Version](https://poedit.net/pro) or 
-you "compile" the Twig templates to PHP and parse the Twig cache files with 
+To install the translator extension for Twig run:
+
+```
+composer require symfony/twig-bridge
+```
+
+The the Extension to Twig:
+
+```php
+use Symfony\Bridge\Twig\Extension\TranslationExtension;
+use Symfony\Component\Translation\Translator;
+
+// ...
+
+$translator = $container->get(Translator::class);
+$twig->addExtension(new TranslationExtension($translator));
+
+// ...
+```
+
+To extract the messages you could use the [PoEdit Pro Version](https://poedit.net/pro).
+
+If yout don't want to buy the Pro version, then you should "compile" the Twig
+templates to PHP and parse the Twig cache files with 
 [PoEdit](https://poedit.net/download) (free).
 
-In the next time I will write an article about this topic.
+A Twig compiler for the console can be found here: [TwigCompilerCommand](https://github.com/odan/slim4-skeleton/blob/master/src/Console/TwigCompilerCommand.php)
+
+In PoEdit add the twig cache path as additional sources path, e.g. `tmp/twig`: 
+
+![image](https://user-images.githubusercontent.com/781074/79620639-ca32ad00-8110-11ea-8582-d74707220dbc.png)
+
+Add `trans` as additional keyword to your po-file:
+
+![image](https://user-images.githubusercontent.com/781074/79620557-8b9cf280-8110-11ea-8f8c-3a49fdde5997.png)
+
+Then compile all Twig templates to php files and let PoEdit parse all PHP files for new messages.
 
 ## Read more
 
