@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Twig
+title: Slim 4 - Twig Template Engine
 layout: post
 comments: true
 published: true
@@ -241,7 +241,7 @@ final class HelloAction
             ],
         ];
         
-        $this->twig->render($response, 'hello.twig', $viewData);
+        return $this->twig->render($response, 'hello.twig', $viewData);
     }
 }
 ```
