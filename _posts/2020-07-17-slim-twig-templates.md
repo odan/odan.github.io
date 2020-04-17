@@ -101,7 +101,9 @@ composer require slim/twig-view
 
 Templates are stored by default in the `templates/` directory. 
 When a controller or action renders the `product/index.twig` template, 
-they are actually referring to the `{your-project}/templates/product/index.twig` file.
+they are actually referring to the file:
+
+`{your-project}/templates/product/index.twig`
 
 The default templates directory is configurable and you can add more template
 directories as explained later in this article.
@@ -194,11 +196,11 @@ return function (App $app) {
 
 ## Creating Templates
 
-Before explaining in detail how to create and render templates, 
-look at the following example for a quick overview of the whole process. 
-
 Symfony recommends `snake_case` for filenames and directories, e.g.
-`blog_posts.twig`, `admin/default_theme/blog/index.twig` etc.
+
+* `blog_posts.twig`
+* `admin/default_theme/blog/index.twig` 
+* etc...
 
 First, you need to create a new `hello.twig` file in the `templates/` directory 
 to store  the template contents:
@@ -254,9 +256,9 @@ Create a new route for the `HelloAction` in `src/config/routes.php`:
 $app->get('/hello', \App\Action\HelloAction::class);
 ```
 
-Now open the brwoser and navigate to the `/hello` route, e.g. `http://localhost/hello`.
+Now open the brwoser and navigate to the `/hello` route, e.g. `http://localhost/hello`
 
-You should the the rendered output like this:
+You should see the rendered output like this:
 
 > <h1>Hello World!</h1>
 > <p>You have 1 new notifications.</p>
@@ -264,23 +266,24 @@ You should the the rendered output like this:
 ## Linking to Pages
 
 The [Slim Twig View](https://github.com/slimphp/Twig-View) component 
-provides these functions to your Twig templates like `url_for()` etc.
+provides special functions to your Twig templates like `url_for()` etc.
 
  [Read more](https://github.com/slimphp/Twig-View#custom-template-functions)
 
 ## Linking to CSS, JavaScript and Image Assets
 
-In case you are using webpack to bundle your assets you should take
+In case you are using webpack to bundle your assets, you should take
 a look at the [Twig Webpack extension](https://github.com/fullpipe/twig-webpack-extension).
 
 ## Translations
 
-The ´symfony/twig-bridge´ provides a Twig 3 `TranslationExtension` 
+The [symfony/twig-bridge](https://github.com/symfony/twig-bridge) provides a Twig 3 `TranslationExtension` 
 to translation messages within a twig template. To extract the messages
 you could use the [PoEdit Pro Version](https://poedit.net/pro) or 
 you complile the Twig templates to PHP and parse the Twig cache files files with PoEdit (free).
 
-* <https://github.com/symfony/twig-bridge>
+**Read more**
+ 
 * <https://symfony.com/doc/current/reference/twig_reference.html#trans>
 
 In the next time I will write an article about this topic.
