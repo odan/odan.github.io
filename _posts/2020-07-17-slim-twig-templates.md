@@ -342,6 +342,11 @@ Add `trans` as additional keyword to your po-file:
 
 Then compile all Twig templates to php files and let PoEdit parse all PHP files for new messages.
 
+How to use the `trans` filter you can learn here:
+
+* <https://symfony.com/doc/current/translation.html>
+* <https://symfony.com/doc/current/reference/twig_reference.html#trans>
+
 ## Read more
 
 * [Twig](https://twig.symfony.com/)
