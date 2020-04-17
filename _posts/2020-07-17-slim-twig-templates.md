@@ -137,7 +137,10 @@ $settings['twig'] = [
 In production, the Twig cache should be enabled, e.g:
 
 ```php
-'cache' => __DIR__ . '/../tmp/twig',
+'settings' => [
+    // Enable twig cache
+   'cache' => __DIR__ . '/../tmp/twig',
+],
 ```
 
 ### Container setup
