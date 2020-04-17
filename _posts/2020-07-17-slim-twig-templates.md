@@ -83,9 +83,11 @@ then the value has to be [html attribute encoded](https://twig.symfony.com/doc/3
 
 **Example:**
 
+{% raw %}
 ```twig
 <a href="{{ var|e('html_attr') }}">Link</a>
 ```
+{% endraw %}
 
 At the end you still have to choose the right escaping strategy for the specific context.
 
