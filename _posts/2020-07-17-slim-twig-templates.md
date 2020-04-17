@@ -123,27 +123,22 @@ Add the following settings to your Slim settings array, e.g `config/settings.php
 
 ```php
 // Twig settings
-// Full reference: https://symfony.com/doc/current/reference/configuration/twig.html
+// Configuration reference: https://symfony.com/doc/current/reference/configuration/twig.html
 $settings['twig'] = [
-    // The directories where templates are stored
+    // Template paths
     'paths' => [
         __DIR__ . '/../templates',
     ],
-    'settings' => [
-        // The cache path as string or false
-        'cache' => false,
+    // Twig environment options
+    'options' => [
+        // Should be set to true in production
+        'cache_enabled' => false,
+        'cache_path' => __DIR__ . '/../tmp/twig',
     ],
 ];
 ```
 
-In production, the Twig cache should be enabled, e.g:
-
-```php
-'settings' => [
-    // Enable twig cache
-   'cache' => __DIR__ . '/../tmp/twig',
-],
-```
+Create the twig cache directory: `{project}/tmp/twig/`
 
 ### Container setup
 
@@ -168,7 +163,10 @@ return [
         $config = $container->get(Configuration::class);
         $settings = $config->getArray('twig');
 
-        $twig = Twig::create($settings['paths'], $settings['settings']);
+        $options = $settings['options'];
+        $options['cache'] = $options['cache_enabled'] ? $options['cache_path'] : false;
+
+        $twig = Twig::create($settings['paths'], $options);
 
         // Add more extension here
         // ...
