@@ -1,0 +1,290 @@
+---
+title: Slim 4 - Twig
+layout: post
+comments: true
+published: true
+description:
+keywords: php slim twig templates html engine symfony
+---
+
+## Table of contents
+
+* [Requirements](#requirements)
+* [Introduction](#introduction)
+* [Installation](#installation)
+* [Template Location](#installation)
+* [Configuration](#configuration)
+* [Creating Templates](#creating-templates)
+* [Rendering Templates](#rendering-templates)
+* [Linking to Pages](#linking-to-pages)
+* [Linking to CSS, JavaScript and Image Assets](#linking-to-css-javascript-and-image-assets)
+* [Translations](#translations)
+* [Read more](#read-more)
+
+## Requirements
+
+* PHP 7.2+
+* [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
+
+## Introduction
+
+This tutorial shows how to install and use the
+[Twig](https://symfony.com/doc/current/mailer.html)
+template engine within a Slim 4 project.
+
+### Performance
+
+Twig compiles templates down to plain optimized PHP code. 
+The overhead compared to regular PHP code was reduced to the very minimum.
+
+### Security
+
+I think one of the main benefits of Twig, over a
+native PHP templates, is the killer feature: 
+[automatic output escaping](https://twig.symfony.com/doc/3.x/filters/escape.html).
+This means, by default, Twig uses the PHP native `htmlspecialchars` function for the HTML output.
+
+> **HTML encoding** replaces certain characters that are semantically meaningful in HTML markup, 
+> with equivalent characters that can be displayed to the user without affecting parsing 
+> the markup.
+> 
+> The most significant and obvious characters are <, >, &, and " which are are replaced with 
+> &lt;, &gt;, &amp;, and &quot;, respectively. Additionally, an encoder may replace high-order 
+> characters with the equivalent HTML entity encoding, so content can be preserved and properly 
+> rendered even in the event the page is sent to the browser as ASCII.
+
+In a native PHP template you must manually encode the output like this:
+
+```php
+echo htmlspecialchars($var, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+```
+
+In Twig html encoding is enabled by default:
+
+```twig
+{{ var }}
+```
+
+But you still have to be carefull in Twig, because contextual 
+[escaping](https://twig.symfony.com/doc/3.x/filters/escape.html)
+in HTML documents is hard not possible for now.
+
+For example, if you want to put an value into an HTML attribute,
+then the value has to be [html attribute encoded](https://twig.symfony.com/doc/3.x/filters/escape.html).
+
+> **HTML attribute encoding**, on the other hand, only replaces a subset of those characters 
+> that are important to prevent a string of characters from breaking the attribute of an HTML 
+> element. Specifically, you'd typically just replace ", &, and < with &quot;, &amp;, and &lt;. 
+> This is because the nature of attributes, the data they contain, and how they are parsed and 
+> interpreted by a browser or HTML parser is different than how an HTML document and its 
+> elements are read.
+
+**Example:**
+
+```twig
+<a href="{{ var|e('html_attr') }}">Link</a>
+```
+
+At the end you still have to choose the right escaping strategy for the specific context.
+
+## Installation
+
+To install the Slim Twig component run the following command:
+
+```
+composer require slim/twig-view
+```
+
+## Template Location
+
+Templates are stored by default in the `templates/` directory. 
+When a controller or action renders the `product/index.twig` template, 
+they are actually referring to the `{your-project}/templates/product/index.twig` file.
+
+The default templates directory is configurable and you can add more template
+directories as explained later in this article.
+
+Create a new directory in your project root directory: `templates/`
+
+## Configuration
+
+Twig has several configuration options to define things like the format 
+used to display numbers and dates, the template caching, etc. 
+Read the [Twig configuration reference](https://symfony.com/doc/current/reference/configuration/twig.html)
+to learn about them.
+
+Add the following settings to your Slim settings array, e.g `config/settings.php`:
+
+```php
+// Twig settings
+// Full reference: https://symfony.com/doc/current/reference/configuration/twig.html
+$settings['twig'] = [
+    // The directories where templates are stored
+    'paths' => [
+        __DIR__ . '/../templates',
+    ],
+    'settings' => [
+        // The cache path as string or false
+        'cache' => false,
+    ],
+];
+```
+
+### Container setup
+
+Autowire the `Twig` component and the `TwigMiddleware` in `config/container.php`:
+
+```php
+<?php
+
+use Psr\Container\ContainerInterface;
+use Selective\Config\Configuration;
+use Slim\App;
+use Slim\Factory\AppFactory;
+use Slim\Views\Twig;
+use Slim\Views\TwigMiddleware;
+
+return [
+
+    // ...    
+
+    // Twig templates
+    Twig::class => function (ContainerInterface $container) {
+        $config = $container->get(Configuration::class);
+        $settings = $config->getArray('twig');
+
+        $twig = Twig::create($settings['paths'], $settings['settings']);
+
+        // Add more extension here
+        // ...
+        
+        return $twig;
+    },
+
+    TwigMiddleware::class => function (ContainerInterface $container) {
+        return TwigMiddleware::createFromContainer($container->get(App::class), Twig::class);
+    },
+];
+
+```
+
+### Middleware
+
+Add the `TwigMiddleware` into the middleware stack:
+
+```php
+<?php
+
+use Slim\App;
+use Slim\Middleware\ErrorMiddleware;
+use Slim\Views\TwigMiddleware;
+
+return function (App $app) {
+    $app->addBodyParsingMiddleware();
+
+    $app->add(TwigMiddleware::class); // <--- here
+
+    $app->addRoutingMiddleware();
+    $app->add(ErrorMiddleware::class);
+};
+
+```
+
+## Creating Templates
+
+Before explaining in detail how to create and render templates, 
+look at the following example for a quick overview of the whole process. 
+
+Symfony recommends `snake_case` for filenames and directories, e.g.
+`blog_posts.twig`, `admin/default_theme/blog/index.twig` etc.
+
+First, you need to create a new `hello.twig` file in the `templates/` directory 
+to store  the template contents:
+
+```twig
+<h1>Hello {{ name }}!</h1>
+<p>You have {{ notifications|length }} new notifications.</p>
+```
+
+## Rendering Templates
+
+Inject the twig instance into your own controller action and use its render() method.
+When using autowiring you only need to add an argument in the constructor 
+and type-hint it.
+
+Create the file `src/Action/HelloAction.php` and copy/paste this content:
+
+```php
+<?php
+
+namespace App\Action;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Views\Twig;
+
+final class HelloAction
+{
+    private $twig;
+
+    public function __construct(Twig $twig)
+    {
+        $this->twig = $twig;
+    }
+
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $viewData = [
+            'name' => 'World',
+            'notifications' => [
+                'message' => 'You are good!'
+            ],
+        ];
+        
+        $this->twig->render($response, 'hello.twig', $viewData);
+    }
+}
+```
+
+Create a new route for the `HelloAction` in `src/config/routes.php`:
+
+```php
+$app->get('/hello', \App\Action\HelloAction::class);
+```
+
+Now open the brwoser and navigate to the `/hello` route, e.g. `http://localhost/hello`.
+
+You should the the rendered output like this:
+
+> <h1>Hello World!</h1>
+> <p>You have 1 new notifications.</p>
+
+## Linking to Pages
+
+The [Slim Twig View](https://github.com/slimphp/Twig-View) component 
+provides these functions to your Twig templates like `url_for()` etc.
+ [Read more](https://github.com/slimphp/Twig-View#custom-template-functions)
+
+## Linking to CSS, JavaScript and Image Assets
+
+In case you are using webpack to bundle your assets you should take
+a look at the [Twig Webpack extension](https://github.com/fullpipe/twig-webpack-extension).
+
+## Translations
+
+The ´symfony/twig-bridge´ provides a Twig 3 `TranslationExtension` 
+to translation messages within a twig template. To extract the messages
+you could use the [PoEdit Pro Version](https://poedit.net/pro) or 
+you complile the Twig templates to PHP and parse the Twig cache files files with PoEdit (free).
+
+* https://github.com/symfony/twig-bridge
+* https://symfony.com/doc/current/reference/twig_reference.html#trans
+
+In the next time I will write an article about this topic.
+
+## Read more
+
+* [Twig](https://twig.symfony.com/)
+* [Creating and Using Templates](https://symfony.com/doc/current/templates.html)
+
+[Donate](../../../donate.html)
