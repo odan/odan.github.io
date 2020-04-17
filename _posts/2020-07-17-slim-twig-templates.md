@@ -282,6 +282,10 @@ provides special functions to your Twig templates like `url_for()` etc.
 In case you are using webpack to bundle your assets, you should take
 a look at the [Twig Webpack extension](https://github.com/fullpipe/twig-webpack-extension).
 
+**Read more**
+
+* [Twig Webpack extension setup](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html#twig-webpack-extension-setup)
+
 ## Translations
 
 The [symfony/twig-bridge](https://github.com/symfony/twig-bridge) provides a Twig 3 `TranslationExtension` 
