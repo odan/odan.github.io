@@ -291,7 +291,8 @@ to translate messages with the [trans](https://symfony.com/doc/current/reference
 filter. 
 
 To extract the messages you could use the [PoEdit Pro Version](https://poedit.net/pro) or 
-you complile the Twig templates to PHP and parse the Twig cache files files with PoEdit (free).
+you "compile" the Twig templates to PHP and parse the Twig cache files with 
+[PoEdit](https://poedit.net/download) (free).
 
 In the next time I will write an article about this topic.
 
