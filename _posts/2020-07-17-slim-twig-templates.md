@@ -267,19 +267,17 @@ Create a new route for the `HelloAction` in `src/config/routes.php`:
 $app->get('/hello', \App\Action\HelloAction::class);
 ```
 
-Now open the brwoser and navigate to the `/hello` route, e.g. `http://localhost/hello`
+Now open the browser and navigate to the `/hello` route, e.g. `http://localhost/hello`
 
-You should see the rendered output like this:
+You should see a rendered output like this:
 
 > <h1>Hello World!</h1>
 > <p>You have 1 new notifications.</p>
 
 ## Linking to Pages
 
-The [Slim Twig View](https://github.com/slimphp/Twig-View) component 
+The [Slim Twig View](https://github.com/slimphp/Twig-View#custom-template-functions) component 
 provides special functions to your Twig templates like `url_for()` etc.
-
- [Read more](https://github.com/slimphp/Twig-View#custom-template-functions)
 
 ## Linking to CSS, JavaScript and Image Assets
 
@@ -289,13 +287,11 @@ a look at the [Twig Webpack extension](https://github.com/fullpipe/twig-webpack-
 ## Translations
 
 The [symfony/twig-bridge](https://github.com/symfony/twig-bridge) provides a Twig 3 `TranslationExtension` 
-to translation messages within a twig template. To extract the messages
-you could use the [PoEdit Pro Version](https://poedit.net/pro) or 
-you complile the Twig templates to PHP and parse the Twig cache files files with PoEdit (free).
+to translate messages with the [trans](https://symfony.com/doc/current/reference/twig_reference.html#trans)
+filter. 
 
-**Read more**
- 
-* <https://symfony.com/doc/current/reference/twig_reference.html#trans>
+To extract the messages you could use the [PoEdit Pro Version](https://poedit.net/pro) or 
+you complile the Twig templates to PHP and parse the Twig cache files files with PoEdit (free).
 
 In the next time I will write an article about this topic.
 
