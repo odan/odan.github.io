@@ -288,24 +288,40 @@ The [symfony/twig-bridge](https://github.com/symfony/twig-bridge) provides a Twi
 to translate messages with the [trans](https://symfony.com/doc/current/reference/twig_reference.html#trans)
 filter.
 
+To install the translator component run:
+
+```
+composer require symfony/translation
+```
+
 To install the translator extension for Twig run:
 
 ```
 composer require symfony/twig-bridge
 ```
 
-The the Extension to Twig:
+Add the `TranslationExtension` to the Twig environment:
 
 ```php
 use Symfony\Bridge\Twig\Extension\TranslationExtension;
 use Symfony\Component\Translation\Translator;
+use Psr\Container\ContainerInterface;
 
 // ...
+return [
+    // ...
+    Twig::class => function (ContainerInterface $container) {
+        // ...
+        $twig = Twig::create($paths, $options);
 
-$translator = $container->get(Translator::class);
-$twig->addExtension(new TranslationExtension($translator));
-
-// ...
+        $translator = $container->get(Translator::class);
+        $twig->addExtension(new TranslationExtension($translator)); // <--- here
+        
+        // ...
+        
+        return $twig;
+    }
+];
 ```
 
 To extract the messages you could use the [PoEdit Pro Version](https://poedit.net/pro).
