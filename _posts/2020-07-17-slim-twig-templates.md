@@ -30,7 +30,7 @@ keywords: php slim twig templates html engine symfony
 
 This tutorial shows how to install and use the
 [Twig](https://symfony.com/doc/current/mailer.html)
-template engine within a Slim 4 project.
+template engine in a Slim 4 project.
 
 ### Performance
 
@@ -61,11 +61,13 @@ echo htmlspecialchars($var, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 
 In Twig html encoding is enabled by default:
 
+{% raw %}
 ```twig
 {{ var }}
 ```
+{% endraw %}
 
-But you still have to be carefull in Twig, because contextual 
+But you still have to be carefull, because contextual 
 [escaping](https://twig.symfony.com/doc/3.x/filters/escape.html)
 in HTML documents is hard not possible for now.
 
@@ -263,6 +265,7 @@ You should the the rendered output like this:
 
 The [Slim Twig View](https://github.com/slimphp/Twig-View) component 
 provides these functions to your Twig templates like `url_for()` etc.
+
  [Read more](https://github.com/slimphp/Twig-View#custom-template-functions)
 
 ## Linking to CSS, JavaScript and Image Assets
@@ -277,8 +280,8 @@ to translation messages within a twig template. To extract the messages
 you could use the [PoEdit Pro Version](https://poedit.net/pro) or 
 you complile the Twig templates to PHP and parse the Twig cache files files with PoEdit (free).
 
-* https://github.com/symfony/twig-bridge
-* https://symfony.com/doc/current/reference/twig_reference.html#trans
+* <https://github.com/symfony/twig-bridge>
+* <https://symfony.com/doc/current/reference/twig_reference.html#trans>
 
 In the next time I will write an article about this topic.
 
