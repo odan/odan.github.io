@@ -134,6 +134,12 @@ $settings['twig'] = [
 ];
 ```
 
+In production, the Twig cache should be enabled, e.g:
+
+```php
+'cache' => __DIR__ . '/../tmp/twig',
+```
+
 ### Container setup
 
 Autowire the `Twig` component and the `TwigMiddleware` in `config/container.php`:
