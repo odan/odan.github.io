@@ -69,7 +69,7 @@ In Twig html encoding is enabled by default:
 
 But you still have to be carefull, because contextual 
 [escaping](https://twig.symfony.com/doc/3.x/filters/escape.html)
-in HTML documents is hard not possible for now.
+in HTML documents is hard.
 
 For example, if you want to put an value into an HTML attribute,
 then the value has to be [html attribute encoded](https://twig.symfony.com/doc/3.x/filters/escape.html).
