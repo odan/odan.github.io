@@ -32,13 +32,6 @@ This tutorial shows how to install and use the
 [Twig](https://symfony.com/doc/current/mailer.html)
 template engine in a Slim 4 project.
 
-### Performance
-
-Twig compiles templates down to plain optimized PHP code. 
-The overhead compared to regular PHP code was reduced to the very minimum.
-
-### Security
-
 I think one of the main benefits of Twig, over a
 native PHP templates, is the killer feature: 
 [automatic output escaping](https://twig.symfony.com/doc/3.x/filters/escape.html).
@@ -91,6 +84,12 @@ then the value has to be [html attribute encoded](https://twig.symfony.com/doc/3
 
 At the end you still have to choose the right escaping strategy for the specific context.
 
+**Performance**
+
+Twig compiles templates down to plain optimized PHP code. 
+The overhead compared to regular PHP code is minimal.
+So Twig is nearly as fast as native PHP templates.
+
 ## Installation
 
 To install the Slim Twig component run the following command:
@@ -105,7 +104,7 @@ Templates are stored by default in the `templates/` directory.
 When a controller or action renders the `product/index.twig` template, 
 they are actually referring to the file:
 
-`{your-project}/templates/product/index.twig`
+`{project}/templates/product/index.twig`
 
 The default templates directory is configurable and you can add more template
 directories as explained later in this article.
@@ -214,10 +213,12 @@ Symfony recommends `snake_case` for filenames and directories, e.g.
 First, you need to create a new `hello.twig` file in the `templates/` directory 
 to store  the template contents:
 
+{% raw %}
 ```twig
 <h1>Hello {{ name }}!</h1>
 <p>You have {{ notifications|length }} new notifications.</p>
 ```
+{% endraw %}
 
 ## Rendering Templates
 
@@ -274,7 +275,7 @@ You should see a rendered output like this:
 
 ## Linking to Pages
 
-The [Slim Twig View](https://github.com/slimphp/Twig-View#custom-template-functions) component 
+The already installed [Slim Twig View](https://github.com/slimphp/Twig-View#custom-template-functions) component 
 provides special functions to your Twig templates like `url_for()` etc.
 
 ## Linking to CSS, JavaScript and Image Assets
@@ -292,13 +293,13 @@ The [symfony/twig-bridge](https://github.com/symfony/twig-bridge) provides a Twi
 to translate messages with the [trans](https://symfony.com/doc/current/reference/twig_reference.html#trans)
 filter.
 
-To install the translator component run:
+First you have to install the [Symfony translator](https://github.com/symfony/translation) component. Run:
 
 ```
 composer require symfony/translation
 ```
 
-To install the translator extension for Twig run:
+Then install the Twig bridge for the Symfony translator component:
 
 ```
 composer require symfony/twig-bridge
@@ -307,9 +308,12 @@ composer require symfony/twig-bridge
 Add the `TranslationExtension` to the Twig environment:
 
 ```php
+use Psr\Container\ContainerInterface;
 use Symfony\Bridge\Twig\Extension\TranslationExtension;
 use Symfony\Component\Translation\Translator;
-use Psr\Container\ContainerInterface;
+use Symfony\Component\Translation\Formatter\MessageFormatter;
+use Symfony\Component\Translation\IdentityTranslator;
+use Symfony\Component\Translation\Loader\MoFileLoader;
 
 // ...
 return [
@@ -324,7 +328,14 @@ return [
         // ...
         
         return $twig;
-    }
+    },
+
+    Translator::class => function (ContainerInterface $container) {
+        $translator = new Translator('en_US',new MessageFormatter(new IdentityTranslator()));
+        $translator->addLoader('mo', new MoFileLoader());
+
+        return $translator;
+    },
 ];
 ```
 
