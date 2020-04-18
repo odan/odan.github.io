@@ -368,7 +368,10 @@ final class TokenCreateAction
         ];
 
         // Build the HTTP response
-        return $response->withJson($result)->withStatus(201);
+        $response = $response->withHeader('Content-Type', 'application/json');
+        $response->getBody()->write((string)json_encode($result));
+
+        return $response->withStatus(201);
     }
 }
 ```
