@@ -20,10 +20,10 @@ The `responseChunkSize` settings is used as number of bytes to read from body un
 Here you can see a Slim route with a callback thats reads a ZIP file into the output buffer and flushes it directly into the response.
 
 ```php
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
-$app->get('/download', function (Request $request, Response $response) {
+$app->get('/download', function (ServerRequestInterface $request, ResponseInterface $response) {
     $stream = fopen('file.zip', 'r+');
     
     return $response->withBody(new \Slim\Http\Stream($stream));
@@ -39,7 +39,8 @@ You could use Guzzle to read bytes of the (response) stream until the end of the
 http://docs.guzzlephp.org/en/latest/request-options.html#stream
 
 ```php
-$client = new GuzzleHttp\Client()
+$client = new GuzzleHttp\Client();
+
 $response = $client->request('GET', '/stream/20', ['stream' => true]);
 
 // Read bytes off of the stream until the end of the stream is reached

@@ -29,10 +29,10 @@ Create a new route:
 use PhpOffice\PhpSpreadsheet\Shared\File;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
-$app->get('/excel', function (Request $request, Response $response) {
+$app->get('/excel', function (ServerRequestInterface $request, ResponseInterface $response) {
     $excel = new Spreadsheet();
 
     $sheet = $excel->setActiveSheetIndex(0);
@@ -76,10 +76,10 @@ Then open the url: http://localhost/excel and the download should start automati
 Creating an CSV file is much simpler.
 
 ```php
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
-$app->get('/csv', function (Request $request, Response $response) {
+$app->get('/csv', function (ServerRequestInterface $request, ResponseInterface $response) {
     $list = array(
         array('aaa', 'bbb', 'ccc', 'dddd'),
         array('123', '456', '789'),
@@ -106,10 +106,10 @@ $app->get('/csv', function (Request $request, Response $response) {
 Example:
 
 ```php
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
-$app->get('/image', function (Request $request, Response $response) {
+$app->get('/image', function (ServerRequestInterface $request, ResponseInterface $response) {
     $image = imagecreate(200, 80);
     imagecolorallocate($image, 255, 255, 255);
     $textColor = imagecolorallocate($image, 113, 158, 64);

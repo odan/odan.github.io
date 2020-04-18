@@ -20,8 +20,7 @@ namespace App\Controller;
 use App\Service\Product\ProductEditService;
 use App\Service\Product\ProductIndexService;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ServerRequestInterface;
 
 class ProductController extends AbstractController
 {
@@ -36,14 +35,14 @@ class ProductController extends AbstractController
         $this->productEditService = $productEditService;
     }
 
-    public function indexAction(Request $request, Response $response): ResponseInterface
+    public function indexAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $viewData = $this->productIndexService->calculateThings();
 
         return $this->render($response, 'Product/product-index.twig', $viewData);
     }
 
-    public function editAction(Request $request, Response $response): ResponseInterface
+    public function editAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $viewData = $this->productEditService->calculateThings();
 
@@ -84,8 +83,7 @@ namespace App\Action;
 
 use App\Service\Product\ProductService;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ServerRequestInterface;
 
 class ProductIndexAction extends AbstractAction
 {
@@ -96,7 +94,7 @@ class ProductIndexAction extends AbstractAction
         $this->productIndexService = $productIndexService;
     }
 
-    public function __invoke(Request $request, Response $response): ResponseInterface
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $viewData = $this->productIndexService->calculateThings();
         
@@ -114,8 +112,7 @@ namespace App\Action;
 
 use App\Service\Product\ProductEditService;
 use Psr\Http\Message\ResponseInterface;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ServerRequestInterface;
 
 class ProductEditAction extends AbstractAction
 {
@@ -126,7 +123,7 @@ class ProductEditAction extends AbstractAction
         $this->productEditService = $productEditService;
     }
 
-    public function __invoke(Request $request, Response $response): ResponseInterface
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $viewData = $this->productEditService->calculateThings();
         

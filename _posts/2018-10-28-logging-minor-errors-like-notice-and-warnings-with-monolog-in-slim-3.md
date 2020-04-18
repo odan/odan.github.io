@@ -43,14 +43,14 @@ Here is an example code to log all Exceptions in Slim 3 with Monolog.
 
 use Psr\Container\ContainerInterface as Container;
 use Psr\Log\LoggerInterface;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 // Slim Framework application error handler
 $container['errorHandler'] = function (Container $container) {
     $logger = $container->get(LoggerInterface::class);
 
-    return function(Request $request, Response $response, Throwable $exception) use ($logger) {
+    return function(ServerRequestInterface $request, ResponseInterface $response, Throwable $exception) use ($logger) {
         $logger->error($exception->getMessage());
         
         return $response->withStatus(500)
@@ -75,25 +75,22 @@ To fix this, just add new middleware to handle all errors that cannot be handled
 // middleware.php
 
 use Psr\Log\LoggerInterface;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 // Middleware to handle minor errors
-$app->add(function (Request $request, Response $response, $next) {
-    /** @var \Psr\Log\LoggerInterface $logger */
+$app->add(function (ServerRequestInterface $request, ResponseInterface $response, $next) {
+    /** @var LoggerInterface $logger */
     $logger = $this->get(LoggerInterface::class);
 
     // error handler function
-    $myHandlerForMinorErrors = function ($errno, $errstr, $errfile, $errline) use ($response, $logger) {
+    $myHandlerForMinorErrors = function ($errno, $errstr, $errfile, $errline) use ($logger) {
         switch ($errno) {
             case E_USER_ERROR:
                 $logger->error("Error number [$errno] $errstr on line $errline in file $errfile");
                 break;
             case E_USER_WARNING:
                 $logger->warning("Error number [$errno] $errstr on line $errline in file $errfile");
-                break;
-            case E_USER_NOTICE:
-                $logger->notice("Error number [$errno] $errstr on line $errline in file $errfile");
                 break;
             default:
                 $logger->notice("Error number [$errno] $errstr on line $errline in file $errfile");

@@ -324,8 +324,8 @@ Then create the following action class for the route: `src/Action/TokenCreateAct
 namespace App\Action;
 
 use App\Auth\JwtAuth;
-use Slim\Http\Response;
-use Slim\Http\ServerRequest;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 final class TokenCreateAction
 {
@@ -336,7 +336,7 @@ final class TokenCreateAction
         $this->jwtAuth = $jwtAuth;
     }
 
-    public function __invoke(ServerRequest $request, Response $response): Response
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $data = (array)$request->getParsedBody();
 

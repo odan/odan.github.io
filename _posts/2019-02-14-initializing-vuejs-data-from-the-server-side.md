@@ -37,13 +37,12 @@ Content of file: `HomeIndexAction.php`
 namespace App\Action;
 
 use Psr\Http\Message\ResponseInterface;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ServerRequestInterface;
 
 class HomeIndexAction extends BaseAction
 {
 
-    public function __invoke(Request $request, Response $response): ResponseInterface
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $user = [
             'id' => 1234,

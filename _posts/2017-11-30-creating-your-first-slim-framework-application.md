@@ -209,16 +209,16 @@ Content of file `config/routes.php`
 ```php
 <?php
 
-use Slim\Http\Request;
-use Slim\Http\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
-$app->get('/', function (Request $request, Response $response) {
+$app->get('/', function (ServerRequestInterface $request, ResponseInterface $response) {
     $response->getBody()->write("It works! This is the default welcome page.");
 
     return $response;
 })->setName('root');
 
-$app->get('/hello/{name}', function (Request $request, Response $response) {
+$app->get('/hello/{name}', function (ServerRequestInterface $request, ResponseInterface $response) {
     $name = $request->getAttribute('name');
     $response->getBody()->write("Hello, $name");
 
@@ -569,11 +569,11 @@ Generate and execute a query:
 
 ```php
 use Cake\Database\Connection;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Slim\Container;
-use Slim\Http\Request;
-use Slim\Http\Response;
 
-$app->get('/databases', function (Request $request, Response $response) {
+$app->get('/databases', function (ServerRequestInterface $request, ResponseInterface $response) {
     /** @var Container $this */
 
     $query = $this->get(Connection::class)->newQuery();
