@@ -28,20 +28,18 @@ Here you can support me: [Donate](donate.md)
 
 ## Skills
 
-* PHP, C#, ASP.NET Core, JavaScript, Node.js
+* PHP, C#, ASP.NET Core, JavaScript, TypeScript
 * MySQL, MS SQL, Oracle, SQLite, InterSystems Caché
 * HTML, CSS, jQuery, Bootstrap, Vue.js
 * Slim, CakePHP, Symfony
 * REST, SOAP, XML, JSON
-* SOLID, Clean Code, Hexagonal Architecture
+* SOLID, KISS, YAGNI, Clean Code, Hexagonal Architecture
 * IT-Security
 
 ## My projects
 
 * [odan/slim4-skeleton](https://github.com/odan/slim4-skeleton) A Slim 4 skeleton for apache
 * [odan/phinx-migrations-generator](https://github.com/odan/phinx-migrations-generator) Migration Code Generator for Phinx
-* [odan/twig-assets](https://github.com/odan/twig-assets) A Twig Assets Extension
-* [odan/twig-translation](https://github.com/odan/twig-translation) A Twig Translation Extension
 * [Selective PHP](https://github.com/selective-php) A collection of awesome PHP packages
 * [Learn modern PHP](https://odan.github.io/learn-php/) A curated list of resources for PHP
 * [All projects](https://github.com/odan?tab=repositories)
