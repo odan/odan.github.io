@@ -394,6 +394,9 @@ Make sure that your client also sends this request header:
 Content-Type: application/json
 ```
 
+> **Please note:** The [OAuth 2 spec](https://tools.ietf.org/html/rfc6749#section-2.3.1) states 
+> that the username and password MAY use the HTTP Basic authentication or form data (so, no JSON).
+
 ## Bearer Authentication Middleware
 
 Bearer authentication (also called token authentication) is an HTTP authentication 
