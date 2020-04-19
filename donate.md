@@ -18,7 +18,7 @@ keywords: donate paypal stripe
 If you think my blog and support is useful for you, 
 I would appreciate a small donation:
 
-* **[PayPal](https://www.paypal.me/dopitz)**
+* **[PayPal](https://www.paypal.me/dopitz/1)**
 
 Please note: PayPal doesn't accept Indian Rupee (INR). 
 From india you can use Skrill or TransferWise to send money directly
