@@ -50,7 +50,7 @@ composer require lcobucci/jwt
 For the JWT claim we are installing a UUID generator:
 
 ```
-composer require ramsey/uuid
+composer require symfony/polyfill-uuid
 ```
 
 For the issue date and better testability we are installing the chronos date time library:
@@ -211,7 +211,7 @@ final class JwtAuth
 
         // (JWT ID) Claim, a unique identifier for the JWT
         return (new Builder())->issuedBy($this->issuer)
-            ->identifiedBy(Uuid::uuid4()->toString(), true)
+            ->identifiedBy(uuid_create(), true)
             ->issuedAt($issuedAt)
             ->canOnlyBeUsedAfter($issuedAt)
             ->expiresAt($issuedAt + $this->lifetime)
