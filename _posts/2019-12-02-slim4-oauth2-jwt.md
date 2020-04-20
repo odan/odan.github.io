@@ -520,9 +520,19 @@ Read more:
 
 **The `Authorization` header missing in POST request**
 
-Some web servers might remove the `Authorization` header or do not forward it to PHP.
+If using Apache add the following to the `.htaccess` file. 
+Otherwise PHP won't have access to the `Authorization` header.
 
-Try this solution: <https://stackoverflow.com/a/26791450/1461181>
+```
+RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+```
+
+Read more: <https://stackoverflow.com/a/26791450/1461181>
+
+**Is there a working library?**
+
+* For JWT without public/private key managment you may try: [tuupola/slim-jwt-auth](https://github.com/tuupola/slim-jwt-auth)
+* For BasicAuth you can try: [tuupola/slim-basic-auth](https://github.com/tuupola/slim-basic-auth)
 
 
 [Comments](https://gist.github.com/odan/2885ccd0d2f3a3df41bf5c3d6e9b4999) | [Donate](../../../donate.html)
