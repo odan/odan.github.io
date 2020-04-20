@@ -135,7 +135,6 @@ use Lcobucci\JWT\Signer\Key;
 use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Lcobucci\JWT\Token;
 use Lcobucci\JWT\ValidationData;
-use Ramsey\Uuid\Uuid;
 use UnexpectedValueException;
 
 final class JwtAuth
