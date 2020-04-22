@@ -460,12 +460,12 @@ Add this autoloading settings into `composer.json`:
 ```json
 "autoload": {
     "psr-4": {
-        "App\\": "src"
+        "App\\": "src/"
     }
 },
 "autoload-dev": {
     "psr-4": {
-        "App\\Test\\": "tests"
+        "App\\Test\\": "tests/"
     }
 }
 ```
@@ -485,12 +485,12 @@ The complete `composer.json` file should look like this:
     },
     "autoload": {
         "psr-4": {
-            "App\\": "src"
+            "App\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "App\\Test\\": "tests"
+            "App\\Test\\": "tests/"
         }
     },
     "config": {

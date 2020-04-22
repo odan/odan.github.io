@@ -286,12 +286,12 @@ Content of `composer.json`
   },
   "autoload": {
     "psr-4": {
-      "App\\": "src"
+      "App\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "App\\Test\\": "tests"
+      "App\\Test\\": "tests/"
     }
   },
   "config": {
