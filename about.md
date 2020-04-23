@@ -77,7 +77,7 @@ Here you can support me: [Donate](donate.md)
 * [GitHub](https://github.com/odan)
 * [Slim support forum](https://discourse.slimframework.com/u/odan/summary)
 * [Slim slack channel](https://slimphp.slack.com/app_redirect?channel=U9G1CPG5C) (DM)
-* [Skype](skype://d.opitz) (DM)
+* Skype: d.opitz
 * [Skype slim community](https://join.skype.com/fgKuWxSrwOy8) (inofficially)
 * [Dev.to](https://dev.to/dopitz)
 * [Stack Overflow](https://stackoverflow.com/users/story/1461181)
