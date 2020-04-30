@@ -14,6 +14,7 @@ keywords: php slim email smtp symfony
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Creating & Sending Messages](#creating--sending-messages)
+* [Twig Integration](#twig-integration)
 * [Error handling](#error-handling)
 * [Read more](#read-more)
 
@@ -135,6 +136,54 @@ final class UserMailer
         $this->mailer->send($email);
     }
 }
+```
+
+## Twig Integration
+
+To render Ttwig templates in emails just add the a new container definition for 
+`BodyRendererInterface:class` in `config/container.php`
+
+```php
+use Symfony\Component\Mime\BodyRendererInterface;
+use Slim\Views\Twig;
+use Psr\Container\ContainerInterface;
+// ...
+
+BodyRendererInterface::class => function(ContainerInterface $container)
+{
+    return new BodyRenderer($container->get(Twig::class)->getEnvironment());
+},
+```
+
+To define the contents of your email with Twig, use the `TemplatedEmail` class (and not the `Email` class). 
+This class extends the normal `Email` class but adds some new methods for Twig templates.
+
+Then inject the `BodyRendererInterface` instance via constructor injection where you need it.
+
+## Usage
+
+```php
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+
+$email = (new TemplatedEmail())
+    ->from('from@example.com')
+    ->to(new Address('to@example.com'))
+    ->subject('Thanks for signing up!')
+
+    // path of the Twig template to render
+    ->htmlTemplate('emails/signup.html.twig')
+
+    // pass variables (name => value) to the template
+    ->context([
+        'username' => 'foo',
+    ])
+;
+
+ // Render the email twig template
+$this->bodyRenderer->render($mail);
+
+// Send email
+$this->mailer->send($mail);
 ```
 
 ## Error handling
