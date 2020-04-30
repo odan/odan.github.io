@@ -1074,6 +1074,6 @@ I would appreciate a small donation:
 
 ### I have a very special question
 
-You can consult me by email: d.opitz (at) outlook.com
+For technical questions please create an **issue** [here](https://github.com/odan/slim4-skeleton/issues).
 
 [Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f)
