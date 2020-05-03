@@ -2,7 +2,7 @@
 title: Slim 4 - League Container Setup
 layout: post
 comments: true
-published: true
+published: false
 description:
 keywords: php slim container psr11
 ---
