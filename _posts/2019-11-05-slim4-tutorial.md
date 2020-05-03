@@ -1066,6 +1066,13 @@ You can add a query builder as described here:
 
 * [Slim 4 - Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
 
+### How to fix abandoned messages?
+
+> Package jeremeamia/superclosure is abandoned, you should avoid using it. Use opis/closure instead.
+
+The `jeremeamia/superclosure` component is a dependency of PHP-DI (and not of Slim).
+There is an open issue here: https://github.com/PHP-DI/PHP-DI/issues/711
+
 ### Where can I donate?
 
 If you think this tutorial is useful for you, 
@@ -1074,6 +1081,8 @@ I would appreciate a small donation:
 
 ### I have a very special question
 
-You can consult me by email: d.opitz (at) outlook.com
+For technical questions create an issue [here](https://github.com/odan/slim4-skeleton/issues).
+
+If you have Slim framework specific questions use: https://discourse.slimframework.com/
 
 [Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f)
