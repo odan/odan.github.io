@@ -1087,6 +1087,6 @@ I would appreciate a small donation:
 
 For technical questions create an issue [here](https://github.com/odan/slim4-skeleton/issues).
 
-If you have Slim framework specific questions use: https://discourse.slimframework.com/
+If you have Slim framework specific questions use: <https://discourse.slimframework.com/>
 
 [Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f)
