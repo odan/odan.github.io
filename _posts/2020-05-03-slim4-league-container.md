@@ -75,13 +75,13 @@ use Symfony\Component\Translation\Translator;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$container = Container();
+$container = new Container();
 $container->defaultToShared(true);
 
 // Register the reflection container as a delegate to enable auto wiring
 $container->delegate(new ReflectionContainer());
 
-// Add container definnitions (closures)
+// Add container definitions (closures)
 foreach (require __DIR__ . '/container.php' as $key => $factory) {
     $container->add($key, $factory)->addArgument($container);
 }
