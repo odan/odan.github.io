@@ -1073,6 +1073,10 @@ You can add a query builder as described here:
 The `jeremeamia/superclosure` component is a dependency of PHP-DI (and not of Slim).
 There is an open issue here: https://github.com/PHP-DI/PHP-DI/issues/711
 
+In case you are looking for a faster container try this:
+
+* https://github.com/selective-php/container
+
 ### Where can I donate?
 
 If you think this tutorial is useful for you, 
