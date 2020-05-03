@@ -99,5 +99,5 @@ $app->run();
 
 * The performance is quite bad. Up to 12x slower then PHP-DI.
 * The support takes a long time to answer (sometimes never).
-* A closoure factory doesn't get the container automatically. You have to pass it manually with `addArgument`.
+* A closure factory doesn't get the container automatically. You have to pass it manually with `addArgument`.
 * Constructor parameters with optional / nullable values are not supported.
