@@ -180,10 +180,10 @@ $email = (new TemplatedEmail())
 ;
 
  // Render the email twig template
-$this->bodyRenderer->render($mail);
+$this->bodyRenderer->render($email);
 
 // Send email
-$this->mailer->send($mail);
+$this->mailer->send($email);
 ```
 
 ## Error handling
