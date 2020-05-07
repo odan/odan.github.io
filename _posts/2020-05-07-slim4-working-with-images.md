@@ -103,15 +103,12 @@ final class ImageExampleAction
         // Sends HTTP response with current image in given format (PNG) and quality (100%)
         $data = $image->encode('png', 100)->getEncoded();
 
-        // Set content-type
+        // Detect and set the correct content-type, e.g. image/png
         $mime = finfo_buffer(finfo_open(FILEINFO_MIME_TYPE), $data);
         $response = $response->withHeader('Content-Type', $mime);
 
         // Output image as stream
-        $streamFactory = new StreamFactory();
-        $stream = $streamFactory->createStream($data);
-
-        return $response->withBody($stream);
+        return $response->withBody((new StreamFactory())->createStream($data));
     }
 }
 ```
@@ -153,7 +150,7 @@ final class ImageCreateAction
 {
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        // Create image in memmory
+        // Create image in memory
         $image = imagecreate(200, 80);
         imagecolorallocate($image, 255, 255, 255);
         $textColor = imagecolorallocate($image, 113, 158, 64);
@@ -168,7 +165,7 @@ final class ImageCreateAction
         $data = ob_get_clean();
         imagedestroy($image);
 
-        // Detect the correct content-type, e.g. image/png
+        // Detect and set the correct content-type, e.g. image/png
         $mime = finfo_buffer(finfo_open(FILEINFO_MIME_TYPE), $data);
         $response = $response->withHeader('Content-Type', $mime);
 
