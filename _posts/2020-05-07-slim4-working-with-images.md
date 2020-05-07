@@ -48,7 +48,7 @@ Add the email settings to your Slim settings array, e.g `config/settings.php`:
 
 ```php
 $settings['image_manager'] = [
-    // configure with favored image driver (gd by default)
+    // configure image driver (gd by default)
     'driver' => 'gd',
 ];
 ```
