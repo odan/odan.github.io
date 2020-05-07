@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Working with images
+title: Slim 4 - Working with Images
 layout: post
 comments: true
 published: true
@@ -41,10 +41,7 @@ composer require intervention/image
 
 ## Integration in Slim
 
-Intervention uses static method for the configuration, which is not so good 
-for the container setup, but lucculy we can configure and autowire the `` class.
-
-Add the email settings to your Slim settings array, e.g `config/settings.php`:
+Add the image manager settings to your Slim settings array, e.g in `config/settings.php`:
 
 ```php
 $settings['image_manager'] = [
@@ -74,7 +71,7 @@ return [
 
 ## Creating & Sending Images
 
-Let the `ImageManager` instance, create the image and send it to the client:
+This single action controller shows how to create an image (in memory) and send it to the client:
 
 ```php
 <?php
