@@ -14,7 +14,7 @@ keywords: php slim files images png jpg gif
 * [Installation](#installation)
 * [Integration in Slim](#integration-in-slim)
 * [Creating & Sending Images](#creating--sending-images)
-* [Creating images GD and Image functions](#creating-images-gd-and-image-functions)
+* [Creating images using the GD and Image functions](#creating-images-using-the-gd-and-image-functions)
 
 ## Requirements
 
@@ -132,7 +132,7 @@ If you want to stream an existing file the just use the `make($filename)` method
 $image = $this->imageManager->make('public/foo.png');
 ```
 
-## Creating images GD and Image functions
+## Creating images using the GD and Image functions
 
 If you want to use the native [GD and image function](https://www.php.net/manual/en/ref.image.php)
 from PHP, then you don't have to install the Intervention Image component. The trick here is that we
