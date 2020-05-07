@@ -16,20 +16,22 @@ keywords: php array generics
 
 ## Intro
 
-[Generics](https://wiki.php.net/rfc/generic-arrays) are still a long way off and whether they will ever come like this is questionable.
+[Generics](https://wiki.php.net/rfc/generic-arrays) are still a long way off and whether 
+they'll ever come like that is questionable.
 
-Did you already know? You don't need generics, because PHP has everything to implement type-safe and future-proof collection classes.
+Did you know that we actually do not need generics, because PHP 7.4+ has everything to 
+implement type-safe and future-proof collection classes.
 
 We only need the features everyone should know since PHP 7: [Classes](https://www.php.net/manual/en/language.oop5.php),
  arrays and [type declarations](https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration). 
 
 Type declarations were also known as "type hints" in PHP 5. 
-Type declarations allow functions to require that parameters are of a certain type at call time. 
-If the specified value is of the wrong type, an error is generated.
+With type declarations, methods can require that parameters be of a certain type at the time of the invocation. 
+If the specified value is of the wrong type, an error occurred.
 
 ## Creating a data object
 
-First, we create a struct to store our data in-memory:
+First, we create a data object to store our data in-memory:
 
 ```php
 <?php
@@ -48,8 +50,8 @@ final class User
 }
 ```
 
-**Note:** [Typed class properties](https://wiki.php.net/rfc/typed_properties_v2) have been added in PHP 7.4 and provide a major improvement 
-to PHP's type system. In PHP 7.4+ the same class should be implemented like this:
+**Note:** [Typed class properties](https://wiki.php.net/rfc/typed_properties_v2) have been 
+added in PHP 7.4 and provide a major improvement to PHP's type system.
 
 ## Creating a collection class
 
