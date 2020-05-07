@@ -46,16 +46,16 @@ While in .NET it's very simple, in PHP you need some extra work to get a SOAP AP
 
 * PHP 7+
 * Enable `extension=php_soap.dll` in your `php.ini` file
-* [zend-soap](https://docs.zendframework.com/zend-soap/)
+* [laminas-soap](https://docs.laminas.dev/laminas-soap/)
 
-I chose the Zend SOAP library because it's compatible with .NET clients.
+I chose the Laminas SOAP library because it's compatible with .NET clients.
 
 ### Installation
 
-Install the zend-soap library:
+Install the laminas-soap library:
 
 ```
-composer require zendframework/zend-soap
+composer require laminas/laminas-soap
 ```
 
 Let's create a simple hello world webservice.
@@ -119,7 +119,7 @@ File content:
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$client = new Zend\Soap\Client('http://localhost/api.php?wsdl');
+$client = new Laminas\Soap\Client('http://localhost/api.php?wsdl');
 $result = $client->sayHello(['firstName' => 'World']);
 
 echo $result->sayHelloResult;
@@ -156,7 +156,7 @@ This example leads to the following error:
 
 > Fatal error: Uncaught SoapFault exception: [env:Receiver] Too few arguments 
 > to function Hello::sayHello(), 0 passed and exactly 1 expected in 
-> zendframework\zend-soap\src\Client.php on line 1166
+> laminas\laminas-soap\src\Client.php on line 1166
 
 In this way, the `call` method is used correctly:
 
@@ -199,12 +199,6 @@ If you'll encounter any issues, please create a detailed error description in th
 > It doesn't work on my machine
 
 or
-
-> this code sample never Runs!!!
-
-* This is a very unspecific description. Please give me more details about the issue.
-* Make sure you have installed composer.
-* You just need to copy/paste the code from the tutorial. Then run `composer require zendframework/zend-soap`
 
 > I want to use GET/PUT/PATCH methods
 
