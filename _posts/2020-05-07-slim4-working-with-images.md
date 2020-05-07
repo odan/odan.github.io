@@ -100,7 +100,7 @@ final class ImageExampleAction
         // Create image in memory
         $image = $this->imageManager->canvas(800, 600, '#719e40');
 
-        // Sends HTTP response with current image in given format (PNG) and quality (100%)
+        // Encode image into given format (PNG) and quality (100%)
         $data = $image->encode('png', 100)->getEncoded();
 
         // Detect and set the correct content-type, e.g. image/png
