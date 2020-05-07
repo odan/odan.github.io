@@ -2,7 +2,7 @@
 title: Download link to the latest PHPStan PHAR file
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: php, phpstan
 ---
