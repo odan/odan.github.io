@@ -88,10 +88,10 @@ $serverUrl = "http://localhost/api.php";
 $options = [
     'uri' => $serverUrl,
 ];
-$server = new Zend\Soap\Server(null, $options);
+$server = new \Laminas\Soap\Server(null, $options);
 
 if (isset($_GET['wsdl'])) {
-    $soapAutoDiscover = new \Zend\Soap\AutoDiscover(new \Zend\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence());
+    $soapAutoDiscover = new \Laminas\Soap\AutoDiscover(new \Laminas\Soap\Wsdl\ComplexTypeStrategy\ArrayOfTypeSequence());
     $soapAutoDiscover->setBindingStyle(array('style' => 'document'));
     $soapAutoDiscover->setOperationBodyStyle(array('use' => 'literal'));
     $soapAutoDiscover->setClass('Hello');
@@ -100,8 +100,8 @@ if (isset($_GET['wsdl'])) {
     header("Content-Type: text/xml");
     echo $soapAutoDiscover->generate()->toXml();
 } else {
-    $soap = new \Zend\Soap\Server($serverUrl . '?wsdl');
-    $soap->setObject(new \Zend\Soap\Server\DocumentLiteralWrapper(new Hello()));
+    $soap = new \Laminas\Soap\Server($serverUrl . '?wsdl');
+    $soap->setObject(new \Laminas\Soap\Server\DocumentLiteralWrapper(new Hello()));
     $soap->handle();
 }
 ```
