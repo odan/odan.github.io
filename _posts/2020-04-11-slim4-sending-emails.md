@@ -140,7 +140,7 @@ final class UserMailer
 
 ## Twig Integration
 
-To render Ttwig templates in emails just add the a new container definition for 
+To render Twig templates in emails just add the a new container definition for 
 `BodyRendererInterface:class` in `config/container.php`
 
 ```php
