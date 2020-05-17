@@ -11,6 +11,7 @@ keywords: php slim oauth jwt json authentication security
 
 * [Requirements](#requirements)
 * [Introduction](#introduction)
+* [Limitations](#limitations)
 * [Installation](#installation)
 * [Generating Public and Private Keys](#generating-public-and-private-keys)
 * [Configuration](#configuration)
