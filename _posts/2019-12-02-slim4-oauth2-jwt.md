@@ -21,19 +21,45 @@ keywords: php slim oauth jwt json authentication security
 
 ## Requirements
 
-* PHP 7.1+
+* PHP 7.2+
 * Composer
 * [OpenSSL](https://www.openssl.org/)
 * [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
 
 ## Introduction
 
-This tutorial demonstrates how to implement the [OAuth 2.0](https://oauth.net/2/) authentication 
-standard in combination with a [JSON Web Token](https://oauth.net/2/jwt/) (JWT).
+This tutorial demonstrates how signed JSON Web Tokens (JWTs) can be used as [OAuth 2.0](https://oauth.net/2/)
+[Bearer Tokens](https://tools.ietf.org/html/rfc6750).
 
-Please note that a logout functionality with tokens is not feasible without 
-giving up the stateless principle. This is because you cannot invalidate a 
+Please note that OAuth 2.0 is a **Authorization Framework** and not an [authentication protocol](https://oauth.net/articles/authentication/). 
+
+Clients may use the HTTP Basic authentication scheme, as defined in [RFC2617](https://tools.ietf.org/html/rfc2617),
+to authenticate with the server. In this tutorial we will use a RESTful approach to implement the authentication protocol.
+
+## Limitations
+
+Before you dig deeper, you should know when and especially when **NOT** to use OAuth 2.0 and JWTs.
+
+The advantage of token-based authorization is that the client usually only needs to log-in once and doesn't have 
+to submit its credentials again for each request. A token requires no state on the server and
+therefore scales better across server boundaries.
+
+Because a token is time-limited, the client must take care of the renewal itself. This can be quiete tricky.
+
+A **logout** functionality with tokens is not feasible without 
+giving up the [stateless principle](https://restfulapi.net/statelessness/). This is because you cannot invalidate a 
 token without keeping its status on a server. This would break the stateless principle.
+
+Try to [avoid JWT for session management](http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/) 
+or server-side storage for sessions. 
+
+Do not include sensitive information in JWT tokens.
+
+Think carefully about where to store the tokens:
+
+* [Where to Store Tokens](https://auth0.com/docs/security/store-tokens#don-t-store-tokens-in-local-storage)
+* [Do I have to store tokens in cookies or localstorage or session?](https://stackoverflow.com/a/54258744/1461181)
+* If you store a JWT as a cookie, make it "HttpOnly" and "Secure".
 
 ## Installation
 
@@ -509,13 +535,6 @@ return function (App $app) {
 **How to handle CORS with OPTIONS preflight requests?**
 
 Read more: [Slim 4 - CORS Setup](https://odan.github.io/2019/11/24/slim4-cors.html)
-
-**Where to store the tokens?**
-
-Read more:
-
-* [Where to Store Tokens](https://auth0.com/docs/security/store-tokens#don-t-store-tokens-in-local-storage)
-* [Do I have to store tokens in cookies or localstorage or session?](https://stackoverflow.com/a/54258744/1461181)
 
 **The `Authorization` header missing in POST request**
 
