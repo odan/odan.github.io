@@ -45,7 +45,7 @@ The advantage of token-based authorization is that the client usually only needs
 to submit its credentials again for each request. A token requires no state on the server and
 therefore scales better across server boundaries.
 
-Because a token is time-limited, the client must take care of the renewal itself. This can be quiete tricky.
+Because a token is time-limited, the client must take care of the renewal itself. This can be tricky sometimes.
 
 A **logout** functionality with tokens is not feasible without 
 giving up the [stateless principle](https://restfulapi.net/statelessness/). This is because you cannot invalidate a 
@@ -550,8 +550,8 @@ Read more: <https://stackoverflow.com/a/26791450/1461181>
 
 **Is there a working library?**
 
-* For JWT without public/private key managment you may try: [tuupola/slim-jwt-auth](https://github.com/tuupola/slim-jwt-auth)
-* For BasicAuth you can try: [tuupola/slim-basic-auth](https://github.com/tuupola/slim-basic-auth)
+* For JWT auth you may try: [tuupola/slim-jwt-auth](https://github.com/tuupola/slim-jwt-auth)
+* For BasicAuth try: [tuupola/slim-basic-auth](https://github.com/tuupola/slim-basic-auth)
 
 
 [Comments](https://gist.github.com/odan/2885ccd0d2f3a3df41bf5c3d6e9b4999) | [Donate](../../../donate.html)
