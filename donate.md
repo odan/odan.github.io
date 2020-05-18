@@ -19,13 +19,5 @@ Please note: PayPal doesn't accept Indian Rupee (INR).
 From india you can use Skrill or TransferWise to send money directly
 to my email address: **d.opitz (at) outlook.com**
 
-* <https://www.skrill.com/>
-* <https://transferwise.com/>
-
-You can send me an Amazon gift card to my email address: **d.opitz (at) outlook.com**
-
-* [Amazon eGift Card via email](https://www.amazon.com/dp/B01FIS82WQ?tag=28031982-21) 
-* [Amazon Geschenkgutschein per E-Mail](https://amzn.to/2RDNesN)
-
-
-
+* [Skrill](https://www.skrill.com/)
+* [TransferWise](https://transferwise.com/)
