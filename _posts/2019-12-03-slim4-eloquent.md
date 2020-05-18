@@ -208,7 +208,7 @@ You still have at least two options to change the fetch mode to array.
 
 ### Option 1: Extending MySqlConnection
 
-You can extends a from `\Illuminate\Database\MySqlConnection` and define a resolver for it:
+You can extend from `\Illuminate\Database\MySqlConnection` and define a resolver for it.
 
 ```php
 \Illuminate\Database\Connection::resolverFor('mysql', function($connection, $database, $prefix, $config) {
