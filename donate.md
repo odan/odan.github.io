@@ -10,11 +10,6 @@ keywords: donate paypal stripe
 
 # Donate
 
-<p>
-<img src="https://i.imgflip.com/1jtwei.jpg" />
-</p>
-
-
 If you think my blog and support is useful for you, 
 I would appreciate a small donation:
 
