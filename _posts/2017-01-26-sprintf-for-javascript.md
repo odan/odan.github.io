@@ -2,7 +2,7 @@
 title: sprintf for JavaScript
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: 
 ---

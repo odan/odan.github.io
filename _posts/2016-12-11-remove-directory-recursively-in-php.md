@@ -7,6 +7,9 @@ description:
 keywords: php, vfsStream
 ---
 
+> Update: Better use the remove `method` of the 
+> [symfony/filesystem](https://symfony.com/doc/current/components/filesystem.html#remove) component.
+
 The code:
 
 ```php
