@@ -234,7 +234,7 @@ class MySqlConnectionAssocArray extends \Illuminate\Database\MySqlConnection
 
 Installation: `composer require illuminate/events`
 
-Then register this event handler in your container:
+Register this event handler in your container definiton for `Connection::class`:
 
 ```php
 $dispatcher = new \Illuminate\Events\Dispatcher();
