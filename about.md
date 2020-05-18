@@ -11,7 +11,7 @@ keywords: php, mysql, css, html, bootstrap, slim, framework, c#, csharp, dotnet
 # About me
 
 <p>
-<img src="https://avatars0.githubusercontent.com/u/781074?s=400&u=3c4f76d3ef43b4b5d8d2ff967b945e479767fd5d&v=4" width="120" />
+<img src="https://odan.github.io/assets/images/dopitz.png" width="120" alt="Daniel Opitz" class="avatar">
 </p>
 
 Hi, my name is Daniel Opitz
