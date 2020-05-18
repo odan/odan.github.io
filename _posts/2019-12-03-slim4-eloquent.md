@@ -14,6 +14,7 @@ keywords: php slim laravel eloquent orm sql querybuilder
 * [Installation](#installation)
 * [Repository](#repository)
 * [Usage](#usage)
+* [Fetching arrays](#fetching-arrays)
 * [Setup multiple connections](#setup-multiple-connections)
 
 ## Requirements
@@ -198,6 +199,62 @@ $this->connection->table('users')
     ->where(['id' => 1])
     ->delete();
 ```
+
+### Fetching arrays
+
+In Laravel 5.4, the default (and only) fetch mode is `PDO::FETCH_OBJ`. The only global way to change this is to now rely on events.
+
+You still have at least two options to change the fetch mode to array.
+
+### Option 1: Extending MySqlConnection
+
+You can extends a from `\Illuminate\Database\MySqlConnection` and define a resolver for it:
+
+```php
+\Illuminate\Database\Connection::resolverFor('mysql', function($connection, $database, $prefix, $config) {
+    return new \App\Database\MySqlConnectionAssocArray($connection, $database, $prefix, $config);
+});
+```
+
+```php
+class MySqlConnectionAssocArray extends \Illuminate\Database\MySqlConnection
+{
+    public function __construct($connection, $database, $prefix, $config)
+    {
+        parent::__construct($connection, $database, $prefix, $config);
+
+        $this->fetchMode = \PDO::FETCH_ASSOC;
+    }
+}
+```
+
+*Thanks to devinim for this tip.*
+
+### Option 2: Using events
+
+Installation: `composer require illuminate/events`
+
+Then register this event handler in your container:
+
+```php
+$dispatcher = new \Illuminate\Events\Dispatcher();
+$db->setEventDispatcher($dispatcher);
+
+$dispatcher->listen(\Illuminate\Database\Events\StatementPrepared::class, function ($event) {
+    $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+});
+```
+
+**Usage:**
+
+```php
+$db = $this->get('db');
+$rows = $db->table('information_schema.schemata')->get()->toArray();
+```
+
+Downside: Events are a poor workaround for this, as mocking an event for testing will 
+then prevent the fetch mode event from firing, and if your app relies on a different 
+fetch mode you now may get issues with your tests.
 
 ### Setup multiple connections
 
