@@ -158,7 +158,7 @@ The complete `composer.json` file should look like this:
 {
     "require": {
         "php-di/php-di": "^6.0",
-        "selective/basepath": "^0.2.0",
+        "selective/basepath": "^1",
         "selective/config": "^1",
         "slim/psr7": "^1",
         "slim/slim": "^4.4"
