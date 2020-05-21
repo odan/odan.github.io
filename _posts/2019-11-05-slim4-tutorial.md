@@ -1066,7 +1066,7 @@ Remember the relationships:
 
 * Slim - To handle routing and dispatching
 * Single Action Controllers - Request, response handling. Invoking the domain (service method).
-* Domain - The core of your application
+* Domain - The core layer of your application
 * Services - To handle business logic
 * DTO - To carry data (no behavior)
 * Repositories - To execute database queries
