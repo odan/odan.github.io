@@ -510,7 +510,7 @@ your webservers `DocumentRoot`, you could try to add the [BasePathMiddleware](ht
 To be more clear: In this context “sub-directory” means a sub-directory of the project, not the `public/` directory.
 For example when you place your app not directly under the webservers `DocumentRoot`.
 For security reasons you should always place your front-controller (index.php) into the `public/`
-directory. Don't place your front controller direclty into the project root directory.
+directory. Don't place your front controller directly into the project root directory.
 
 To install the `BasePathMiddleware` run:
 
