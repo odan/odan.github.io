@@ -451,6 +451,60 @@ If you get a **404 error (not found)**, you should define the correct **basePath
 $app->setBasePath('/slim4-tutorial');
 ```
 
+If you still get a 404 error, e.g. when you run your Slim application in a sub-directory of
+your webservers `DocumentRoot`, you could try to add the [BasePathMiddleware](https://github.com/selective-php/basepath).
+
+To be more clear: In this context “sub-directory” means a sub-directory of the project, not the `public/` directory.
+For example when you place your app not directly under the webservers `DocumentRoot`.
+For security reasons you should always place your front-controller (index.php) into the `public/`
+directory. Don't place your front controller direclty into the project root directory.
+
+To install the `BasePathMiddleware` run:
+
+```
+composer require selective/basepath
+```
+
+Add the following container definition into `config/container.php`:
+
+```
+use Selective\BasePath\BasePathMiddleware;
+// ...
+
+return [
+    // ...
+
+    BasePathMiddleware::class => function (ContainerInterface $container) {
+        return new BasePathMiddleware($container->get(App::class));
+    },
+];
+``` 
+
+Now that you have insalled the `BasePathMiddleware` remove this line: `$app->setBasePath('...');`.
+
+Then add the `BasePathMiddleware::class` to the middleware stack in `config/middleware.php`:
+
+```php
+<?php
+
+use Selective\BasePath\BasePathMiddleware;
+use Slim\App;
+use Slim\Middleware\ErrorMiddleware;
+
+return function (App $app) {
+    // Parse json, form data and xml
+    $app->addBodyParsingMiddleware();
+
+    // Add the Slim built-in routing middleware
+    $app->addRoutingMiddleware();
+
+    $app->add(BasePathMiddleware::class); // <--- here
+
+    // Catch exceptions and errors
+    $app->add(ErrorMiddleware::class);
+};
+```
+
 ## PSR-4 autoloading
 
 For the next steps we have to register the `\App` namespace for the PSR-4 autoloader.
@@ -476,7 +530,7 @@ The complete `composer.json` file should look like this:
 {
     "require": {
         "php-di/php-di": "^6.0",
-        "selective/config": "^0.2.0",
+        "selective/config": "^1",
         "slim/psr7": "^1",
         "slim/slim": "^4.4"
     },
