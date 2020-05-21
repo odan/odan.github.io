@@ -15,6 +15,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Directory structure](#directory-structure)
+* [PSR-4 autoloading](#psr-4-autoloading)
 * [Apache URL rewriting](#apache-url-rewriting)
 * [Configuration](#configuration)
 * [Startup](#startup)
@@ -27,7 +28,6 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
   * [Container definitions](#container-definitions)
 * [Base path](#base-path)
 * [Your first route](#your-first-route)
-* [PSR-4 autoloading](#psr-4-autoloading)
 * [Actions](#action)
 * [Writing JSON to the response](#writing-json-to-the-response)
 * [Domain](#domain)
@@ -128,6 +128,44 @@ All other folders are not public and must not be accessible online.
 This can be done by defining the `public` folder in Apache as `DocumentRoot` 
 of your website. But more about that later.
 
+## PSR-4 autoloading
+
+One of the most fundamental and important thing is to have a working PSR-4 autoloader.
+
+For our project we are defining the `src/` directory as root for the `\App` namespace.
+
+Add the following content into the `composer.json` file:
+
+```json
+{
+    "require": {
+        "php-di/php-di": "^6.0",
+        "selective/basepath": "^0.2.0",
+        "selective/config": "^1",
+        "slim/psr7": "^1",
+        "slim/slim": "^4.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Test\\": "tests/"
+        }
+    },
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true
+    }
+}
+```
+
+Run `composer update` for the changes to take effect.
 
 ## Apache URL rewriting
 
@@ -499,58 +537,6 @@ return function (App $app) {
     $app->add(ErrorMiddleware::class);
 };
 ```
-
-## PSR-4 autoloading
-
-For the next steps we have to register the `\App` namespace for the PSR-4 autoloader.
-
-Add this autoloading settings into `composer.json`:
-
-```json
-"autoload": {
-    "psr-4": {
-        "App\\": "src/"
-    }
-},
-"autoload-dev": {
-    "psr-4": {
-        "App\\Test\\": "tests/"
-    }
-}
-```
-
-The complete `composer.json` file should look like this:
-
-```json
-{
-    "require": {
-        "php-di/php-di": "^6.0",
-        "selective/basepath": "^0.2.0",
-        "selective/config": "^1",
-        "slim/psr7": "^1",
-        "slim/slim": "^4.4"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.4"
-    },
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "App\\Test\\": "tests/"
-        }
-    },
-    "config": {
-        "process-timeout": 0,
-        "sort-packages": true
-    }
-}
-```
-
-Run `composer update` for the changes to take effect.
 
 ## Action
 
