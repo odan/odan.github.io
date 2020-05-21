@@ -467,7 +467,7 @@ but it's never part of your base path and the official url.
 * `http://www.example.com/my-app/public`
 * `http://www.example.com/my-app/public/users`
 
-<span style="color:gree">Good urls:</span>
+<span style="color:green">Good urls:</span>
 
 * `http://www.example.com`
 * `http://www.example.com/users`
