@@ -21,7 +21,7 @@ layout: default
 <h2 class="blog-year" id="{{ year.name }}">{{ year.name }}</h2>
 <ul aria-label="posts from {{ year.name }}" style="display: none;">
     {% for post in year.items %}
-    <li><a href="{{ post.url }}" target="_blank">{{ post.title }}</a> ({{ post.date | date: "%Y-%m-%d" }})</li>
+    <li><a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date | date: "%Y-%m-%d" }})</li>
     {% endfor %}
 </ul>
 {% endfor %}
