@@ -475,7 +475,7 @@ return [
 ];
 ``` 
 
-Now that you have insalled the `BasePathMiddleware` remove this line: `$app->setBasePath('...');`.
+Now that you have installed the `BasePathMiddleware` remove this line (if exists): `$app->setBasePath('...');`.
 
 Then add the `BasePathMiddleware::class` to the middleware stack in `config/middleware.php`:
 
