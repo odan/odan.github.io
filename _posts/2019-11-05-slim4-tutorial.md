@@ -116,7 +116,8 @@ Create the following directory structure in the root directory of your project:
 ├── tmp/                Temporary files (cache and logfiles)
 ├── vendor/             Reserved for composer
 ├── .htaccess           Internal redirect to the public/ directory
-└── .gitignore          Git ignore rules
+├── .gitignore          Git ignore rules
+└── composer.json       Project dependencies and autoloader
 ```
 
 In a web application, it is important to distinguish between the public and 
@@ -130,7 +131,8 @@ of your website. But more about that later.
 
 ## PSR-4 autoloading
 
-One of the most fundamental and important thing is to have a working PSR-4 autoloader.
+One of the most fundamental and important thing is to have a 
+working [PSR-4 autoloader](https://www.php-fig.org/psr/psr-4/).
 
 For our project we are defining the `src/` directory as root for the `\App` namespace.
 
