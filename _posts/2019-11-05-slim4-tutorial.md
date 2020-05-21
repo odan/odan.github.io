@@ -1081,7 +1081,7 @@ Read more: [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-
 
 The source code with more examples (e.g. reading a user) can be found here: <https://github.com/odan/slim4-tutorial>
 
-A complete skeleton for slim 4 can be found here: <https://github.com/odan/slim4-skeleton>
+A complete skeleton for Slim 4 can be found here: <https://github.com/odan/slim4-skeleton>
 
 ### How to add JSON Web Token (JWT) / Bearer authentication?
 
@@ -1098,9 +1098,7 @@ The settings are defined [here](https://github.com/odan/slim4-skeleton/blob/mast
 
 ### I get a 404 (not found) error
 
-Follow the instructions and define the correct base path with `$app->setBasePath('my-sub-directory/');`
-
-If you have to run your Slim application in a sub-directory, you could try this library: [selective/basepath](https://github.com/selective-php/basepath)
+Follow the instructions and use the [BasePathMiddleware](https://github.com/selective-php/basepath).
 
 ### Error message: Callable (...) does not exist
 
@@ -1110,17 +1108,18 @@ Run `composer update` to fix it.
 
 You can add a query builder as described here:
 
-* [Slim 4 - Laminas Query Builder Setup](https://odan.github.io/2019/12/01/slim4-laminas-db-query-builder-setup.html)
-* [Slim 4 - CakePHP Query Builder Setup](https://odan.github.io/2019/12/03/slim4-cakephp-query-builder.html)
-* [Slim 4 - Eloquent Setup](https://odan.github.io/2019/12/03/slim4-eloquent.html)
+* [CakePHP Query Builder Setup](https://odan.github.io/2019/12/03/slim4-cakephp-query-builder.html)
+* [Eloquent Query Builder Setup](https://odan.github.io/2019/12/03/slim4-eloquent.html)
+* [Laminas Query Builder Setup](https://odan.github.io/2019/12/01/slim4-laminas-db-query-builder-setup.html)
 
 ### How to add multiple database connections?
 
-* [Slim 4 - Eloquent multiple connections setup](https://odan.github.io/2019/12/03/slim4-eloquent.html#setup-multiple-connections)
+* [Eloquent multiple connections setup](https://odan.github.io/2019/12/03/slim4-eloquent.html#setup-multiple-connections)
+* [Multiple PDO database connections](https://odan.github.io/2020/04/05/slim4-multiple-pdo-database-connections.html)
 
 ### How to build assets with webpack?
 
-* [Slim 4 - Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
+* [Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
 
 ### How to fix abandoned messages?
 
@@ -1129,15 +1128,14 @@ You can add a query builder as described here:
 The `jeremeamia/superclosure` component is a dependency of PHP-DI (and not of Slim).
 There is an open issue here: <https://github.com/PHP-DI/PHP-DI/issues/711>
 
-In case you are looking for a faster container try this:
+In case you are looking for a similar and faster container try this:
 
 * <https://github.com/selective-php/container>
 
 ### Where can I donate?
 
 If you think this tutorial is useful for you, 
-I would appreciate a small donation: 
-**[Donate](../../../donate.html)** 
+I would appreciate a **[donation](../../../donate.html)**.
 
 ### I have a very special question
 
