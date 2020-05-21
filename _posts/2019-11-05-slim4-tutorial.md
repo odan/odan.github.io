@@ -460,13 +460,15 @@ $app->setBasePath('/my-app');
 Be careful: The `public/` directory is only the `DoumentRoot` of your webserver, 
 but it's never part of your base path and the official url.
 
-Bad urls:
+<span style="color:red">Bad urls:</span>
+ 
 * `http://www.example.com/public`
 * `http://www.example.com/public/users`
 * `http://www.example.com/my-app/public`
 * `http://www.example.com/my-app/public/users`
 
-Good urls:
+<span style="color:gree">Good urls:</span>
+
 * `http://www.example.com`
 * `http://www.example.com/users`
 * `http://www.example.com/my-app`
