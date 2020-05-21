@@ -363,13 +363,8 @@ return [
 
     App::class => function (ContainerInterface $container) {
         AppFactory::setContainer($container);
-        $app = AppFactory::create();
 
-        // Optional: Set the base path to run the app in a sub-directory
-        // The public directory must not be part of the base path
-        //$app->setBasePath('/slim4-tutorial');
-
-        return $app;
+        return AppFactory::create();
     },
 
     ErrorMiddleware::class => function (ContainerInterface $container) {
