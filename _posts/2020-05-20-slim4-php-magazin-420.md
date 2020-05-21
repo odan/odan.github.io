@@ -7,7 +7,7 @@ description:
 keywords: php slim magazin
 ---
 
-You can find a new article about Slim 4 in the german PHP Magazin 4.20:
+You can find my new article about Slim 4 in the german PHP Magazin 4.20:
 
 **Slim 4 Framework, Websites testen – Neu im Kiosk: PHP Magazin 4.20**
 
