@@ -134,9 +134,25 @@ of your website. But more about that later.
 One of the most fundamental and important thing is to have a 
 working [PSR-4 autoloader](https://www.php-fig.org/psr/psr-4/).
 
-For our project we are defining the `src/` directory as root for the `\App` namespace.
+For the next steps we have to define the `src/` directory as root for the `\App` namespace.
 
-Add the following content into the `composer.json` file:
+Add this autoloading settings into `composer.json`:
+
+```json
+"autoload": {
+    "psr-4": {
+        "App\\": "src/"
+    }
+},
+"autoload-dev": {
+    "psr-4": {
+        "App\\Test\\": "tests/"
+    }
+}
+```
+
+The complete `composer.json` file should look like this:
+
 
 ```json
 {
