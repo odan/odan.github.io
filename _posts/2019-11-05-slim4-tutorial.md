@@ -541,14 +541,14 @@ Now open your website, e.g. http://localhost and you should see the message `Hel
 Be careful: The `public/` directory is only the `DoumentRoot` of your webserver, 
 but it's never part of your base path and the official url.
 
-<span style="color:green">Good urls:</span>
+<span style="color:green">Good URLs:</span>
 
 * `http://www.example.com`
 * `http://www.example.com/users`
 * `http://www.example.com/my-app`
 * `http://www.example.com/my-app/users`
 
-<span style="color:red">Bad urls:</span>
+<span style="color:red">Bad URLs:</span>
  
 * `http://www.example.com/public`
 * `http://www.example.com/public/users`
