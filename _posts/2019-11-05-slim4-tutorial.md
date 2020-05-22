@@ -28,6 +28,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
   * [Container definitions](#container-definitions)
 * [Base path](#base-path)
 * [Your first route](#your-first-route)
+* [Good URLs](#good-urls)
 * [Actions](#action)
 * [Writing JSON to the response](#writing-json-to-the-response)
 * [Domain](#domain)
@@ -158,7 +159,6 @@ The complete `composer.json` file should look like this:
 {
     "require": {
         "php-di/php-di": "^6.0",
-        "selective/basepath": "^1",
         "selective/config": "^1",
         "slim/psr7": "^1",
         "slim/slim": "^4.4"
@@ -451,68 +451,23 @@ In all other cases you have to make sure, that your base path is correct. For ex
 the DocumentRoot directory is `/var/www/domain.com/htdocs/`, but the application
 is stored under `/var/www/domain.com/htdocs/my-app/`, then you have to set `/my-app` as base path.
 
-Example:
-
-```php
-$app->setBasePath('/my-app');
-```
-
-Be careful: The `public/` directory is only the `DoumentRoot` of your webserver, 
-but it's never part of your base path and the official url.
-
-<span style="color:green">Good urls:</span>
-
-* `http://www.example.com`
-* `http://www.example.com/users`
-* `http://www.example.com/my-app`
-* `http://www.example.com/my-app/users`
-
-<span style="color:red">Bad urls:</span>
- 
-* `http://www.example.com/public`
-* `http://www.example.com/public/users`
-* `http://www.example.com/my-app/public`
-* `http://www.example.com/my-app/public/users`
-
-## Your first route
-
-Open the file `config/routes.php` and insert the code for the first route:
-
-```php
-<?php
-
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Slim\App;
-
-return function (App $app) {
-    $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response) {
-        $response->getBody()->write('Hello, World!');
-
-        return $response;
-    });
-};
-
-```
-
-Now open your website, e.g. http://localhost and you should see the message `Hello, World!`.
-
-If you get a **404 error (not found)**, you should define the correct **basePath** in `config/container.php`.
-
-**Example:**
-```
-$app->setBasePath('/slim4-tutorial');
-```
-
-If you still get a 404 error, e.g. when you run your Slim application in a sub-directory of
-your webservers `DocumentRoot`, you could try to add the [BasePathMiddleware](https://github.com/selective-php/basepath).
-
 To be more clear: In this context “sub-directory” means a sub-directory of the project, not the `public/` directory.
 For example when you place your app not directly under the webservers `DocumentRoot`.
 For security reasons you should always place your front-controller (index.php) into the `public/`
 directory. Don't place your front controller directly into the project root directory.
 
-To install the `BasePathMiddleware` run:
+Most people will get a **404 error (not found)**, because the basePath is not set corretly.
+
+You can manually set the base path in Slim using the `setBasePath` method:
+
+```php
+$app->setBasePath('/slim4-tutorial');
+```
+
+But the problem is, that the basePath can be different for each host (dev, prod etc...).
+
+To fix this we are installing the [BasePathMiddleware](https://github.com/selective-php/basepath) now.
+Run:
 
 ```
 composer require selective/basepath
@@ -557,6 +512,48 @@ return function (App $app) {
     $app->add(ErrorMiddleware::class);
 };
 ```
+
+## Your first route
+
+Open the file `config/routes.php` and insert the code for the first route:
+
+```php
+<?php
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\App;
+
+return function (App $app) {
+    $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response) {
+        $response->getBody()->write('Hello, World!');
+
+        return $response;
+    });
+};
+
+```
+
+Now open your website, e.g. http://localhost and you should see the message `Hello, World!`.
+
+## Good URLs
+
+Be careful: The `public/` directory is only the `DoumentRoot` of your webserver, 
+but it's never part of your base path and the official url.
+
+<span style="color:green">Good urls:</span>
+
+* `http://www.example.com`
+* `http://www.example.com/users`
+* `http://www.example.com/my-app`
+* `http://www.example.com/my-app/users`
+
+<span style="color:red">Bad urls:</span>
+ 
+* `http://www.example.com/public`
+* `http://www.example.com/public/users`
+* `http://www.example.com/my-app/public`
+* `http://www.example.com/my-app/public/users`
 
 ## Action
 
