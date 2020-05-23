@@ -7,7 +7,11 @@ description:
 keywords: php slim tutorial
 ---
 
+![slim](https://user-images.githubusercontent.com/781074/82730649-87608800-9d01-11ea-83ea-6112f973b051.png)
+
 This tutorial shows you how to work with the powerful and lightweight Slim 4 framework.
+
+**[Download as PDF](download/slim4-tutorial.pdf)**
 
 ## Table of contents
 
@@ -525,7 +529,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
 
 return function (App $app) {
-    $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response) {
+    $app->get('/', function (
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ) {
         $response->getBody()->write('Hello, World!');
 
         return $response;
@@ -593,8 +600,10 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class HomeAction
 {
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function __invoke(
+        ServerRequestInterface $request, 
+        ResponseInterface $response
+    ): ResponseInterface {
         $response->getBody()->write('Hello, World!');
 
         return $response;
@@ -637,8 +646,10 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class HomeAction
 {
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function __invoke(
+        ServerRequestInterface $request, 
+        ResponseInterface $response
+    ): ResponseInterface {
         $response->getBody()->write(json_encode(['success' => true]));
 
         return $response->withHeader('Content-Type', 'application/json');
@@ -858,7 +869,8 @@ Insert a `PDO::class` container definition to `config/container.php`:
 
 ```php
 PDO::class => function (ContainerInterface $container) {
-    $settings = $container->get(Configuration::class)->getArray('db');
+    $settings = $container->get(Configuration::class)
+        ->getArray('db');
 
     $host = $settings['host'];
     $dbname = $settings['database'];
@@ -962,8 +974,10 @@ final class UserCreateAction
         $this->userCreator = $userCreator;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterfacee
-    {
+    public function __invoke(
+        ServerRequestInterface $request, 
+        ResponseInterface $response
+    ): ResponseInterface {
         // Collect input from the HTTP request
         $data = (array)$request->getParsedBody();
 
@@ -1120,24 +1134,23 @@ You can add a query builder as described here:
 
 ### How to fix abandoned messages?
 
-> Package jeremeamia/superclosure is abandoned, you should avoid using it. Use opis/closure instead.
+`Package jeremeamia/superclosure is abandoned, you should avoid using it. Use opis/closure instead.`
 
 The `jeremeamia/superclosure` component is a dependency of PHP-DI (and not of Slim).
 There is an open issue here: <https://github.com/PHP-DI/PHP-DI/issues/711>
 
-In case you are looking for a similar and faster container try this:
+In case you are looking for a similar (and faster) container try this PSR-11 container implementation:
 
 * <https://github.com/selective-php/container>
 
-### Where can I donate?
+### Support
 
-If you think this tutorial is useful for you, 
-I would appreciate a **[donation](../../../donate.html)**.
+For technical questions create an issue here:
 
-### I have a very special question
+* <https://github.com/odan/slim4-skeleton/issues>
 
-For technical questions create an issue [here](https://github.com/odan/slim4-skeleton/issues).
+If you have Slim framework specific questions can visit:
 
-If you have Slim framework specific questions use: <https://discourse.slimframework.com/>
+* <https://discourse.slimframework.com/>
 
 [Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f)
