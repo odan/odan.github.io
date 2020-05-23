@@ -7,9 +7,9 @@ description:
 keywords: php slim tutorial
 ---
 
-![slim](https://user-images.githubusercontent.com/781074/82730649-87608800-9d01-11ea-83ea-6112f973b051.png)
-
 This tutorial shows you how to work with the powerful and lightweight Slim 4 framework.
+
+![slim](https://user-images.githubusercontent.com/781074/82730649-87608800-9d01-11ea-83ea-6112f973b051.png)
 
 **[Download as PDF](/download/slim4-tutorial.pdf)**
 
