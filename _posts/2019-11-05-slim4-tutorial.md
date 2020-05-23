@@ -11,7 +11,7 @@ keywords: php slim tutorial
 
 This tutorial shows you how to work with the powerful and lightweight Slim 4 framework.
 
-**[Download as PDF](download/slim4-tutorial.pdf)**
+**[Download as PDF](/download/slim4-tutorial.pdf)**
 
 ## Table of contents
 
@@ -138,7 +138,6 @@ of your website. But more about that later.
 
 One of the most fundamental and important thing is to have a 
 working [PSR-4 autoloader](https://www.php-fig.org/psr/psr-4/).
-
 For the next steps we have to define the `src/` directory as root for the `\App` namespace.
 
 Add this autoloading settings into `composer.json`:
@@ -157,7 +156,6 @@ Add this autoloading settings into `composer.json`:
 ```
 
 The complete `composer.json` file should look like this:
-
 
 ```json
 {
@@ -429,7 +427,8 @@ return [
 
     ErrorMiddleware::class => function (ContainerInterface $container) {
         $app = $container->get(App::class);
-        $settings = $container->get(Configuration::class)->getArray('error_handler_middleware');
+        $settings = $container->get(Configuration::class)
+            ->getArray('error_handler_middleware');
 
         return new ErrorMiddleware(
             $app->getCallableResolver(),
@@ -869,8 +868,7 @@ Insert a `PDO::class` container definition to `config/container.php`:
 
 ```php
 PDO::class => function (ContainerInterface $container) {
-    $settings = $container->get(Configuration::class)
-        ->getArray('db');
+    $settings = $container->get(Configuration::class)->getArray('db');
 
     $host = $settings['host'];
     $dbname = $settings['database'];
