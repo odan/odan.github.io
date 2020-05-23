@@ -1147,7 +1147,7 @@ For technical questions create an issue here:
 
 * <https://github.com/odan/slim4-skeleton/issues>
 
-If you have Slim framework specific questions can visit:
+If you have Slim-Framework specific questions, visit:
 
 * <https://discourse.slimframework.com/>
 
