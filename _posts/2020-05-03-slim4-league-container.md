@@ -2,7 +2,7 @@
 title: Slim 4 - League Container Setup
 layout: post
 comments: true
-published: false
+published: true
 description:
 keywords: php slim container psr11
 ---
@@ -97,7 +97,5 @@ $app->run();
 
 ## Known issues
 
-* The performance is quite bad. Up to 12x slower then PHP-DI.
-* The support takes a long time to answer (sometimes never).
 * A closure factory doesn't get the container automatically. You have to pass it manually with `addArgument`.
 * Constructor parameters with optional / nullable values are not supported.
