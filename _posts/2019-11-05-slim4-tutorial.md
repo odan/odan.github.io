@@ -699,52 +699,6 @@ Separate **data** from **behavior** by using services for the behavior and DTO's
 
 The directory for all (domain) modules and sub-modules is: `src/Domain`
 
-**Pseudo example:**
-
-```php
-use App\Domain\User\Data\UserCreateData;
-use App\Domain\User\Service\UserCreator;
-
-$user = new UserCreateData();
-$user->username = 'john.doe';
-$user->firstName = 'John';
-$user->lastName = 'Doe';
-$user->email = 'john.doe@example.com';
-
-$service = new UserCreator();
-$service->createUser($user);
-```
-
-### Data Transfer Objects (DTO) 
-  
-A DTO contains only pure **data**. There is no business or domain specific logic. 
-There is also no database access within a DTO. 
-A service fetches data from a repository and  the repository (or the service) 
-fills the DTO with data. A DTO can be used to transfer data inside or outside the domain.
-
-Create a DTO class to hold the data in this file: `src/Domain/User/Data/UserCreateData.php`
-
-```php
-<?php
-
-namespace App\Domain\User\Data;
-
-final class UserCreateData
-{
-    /** @var string */
-    public $username;
-
-    /** @var string */
-    public $firstName;
-
-    /** @var string */
-    public $lastName;
-
-    /** @var string */
-    public $email;
-}
-```
-
 Create the code for the service class `src/Domain/User/Service/UserCreator.php`:
 
 ```php
@@ -752,9 +706,8 @@ Create the code for the service class `src/Domain/User/Service/UserCreator.php`:
 
 namespace App\Domain\User\Service;
 
-use App\Domain\User\Data\UserCreateData;
 use App\Domain\User\Repository\UserCreatorRepository;
-use InvalidArgumentException;
+use App\Exception\ValidationException;
 
 /**
  * Service.
@@ -779,31 +732,127 @@ final class UserCreator
     /**
      * Create a new user.
      *
-     * @param UserCreateData $user The user data
-     *
-     * @throws InvalidArgumentException
+     * @param array $data The form data
      *
      * @return int The new user ID
      */
-    public function createUser(UserCreateData $user): int
+    public function createUser(array $data): int
     {
-        // Validation
-        if (empty($user->username)) {
-            throw new InvalidArgumentException('Username required');
-        }
+        // Input validation
+        $this->validateNewUser($data);
 
         // Insert user
-        $userId = $this->repository->insertUser($user);
+        $userId = $this->repository->insertUser($data);
 
         // Logging here: User created successfully
+        //$this->logger->info(sprintf('User created successfully: %s', $userId));
 
         return $userId;
+    }
+
+    /**
+     * Input validation.
+     *
+     * @param array $data The form data
+     *
+     * @throws ValidationException
+     *
+     * @return void
+     */
+    private function validateNewUser(array $data): void
+    {
+        $errors = [];
+
+        // Here you can also use your preferred validation library
+
+        if (empty($data['username'])) {
+            $errors['username'] = 'Input required';
+        }
+
+        if (empty($data['email'])) {
+            $errors['email'] = 'Input required';
+        } elseif (filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
+            $errors['email'] = 'Invalid email address';
+        }
+
+        if ($errors) {
+            throw new ValidationException('Please check your input', $errors);
+        }
     }
 }
 ```
 
 Take a look at the **constructor**! You can see that we have declared the `UserCreatorRepository` as a
 dependency, because the service can only interact with the database through the repository.
+
+### Validation
+
+To validate the clients input we have to check the data and collect all errors 
+into a collection (array) of errors. 
+This pattern is called [notification pattern](https://martinfowler.com/articles/replaceThrowWithNotification.html).  
+
+Create a new file in `src/Exception/ValidationException.php` and copy/paste this content: 
+
+```php
+<?php
+
+namespace App\Exception;
+
+use RuntimeException;
+use Throwable;
+
+final class ValidationException extends RuntimeException
+{
+    private $errors;
+
+    public function __construct(string $message, array $errors = [], int $code, Throwable $previous)
+    {
+        parent::__construct($message, $code, $previous);
+
+        $this->errors = $errors;
+    }
+
+    public function getErrors(): array
+    {
+        return $this->errors;
+    }
+}
+```
+
+### Data Transfer Objects (DTO) 
+  
+A DTO contains only pure **data**. There is no business or domain specific logic. 
+There is also no database access within a DTO. 
+A service fetches data from a repository and  the repository (or the service) 
+fills the DTO with data. A DTO can be used to transfer data inside or outside the domain.
+
+Example of a DTO:
+
+```php
+<?php
+
+namespace App\Domain\User\Data;
+
+final class UserData
+{
+    /**
+     * @var int
+     */
+    public $id;
+
+    /** @var string */
+    public $username;
+
+    /** @var string */
+    public $firstName;
+
+    /** @var string */
+    public $lastName;
+
+    /** @var string */
+    public $email;
+}
+```
 
 ### Repositories
 
@@ -894,7 +943,6 @@ Create the file: `src/Domain/User/Repository/UserCreatorRepository.php` and inse
 
 namespace App\Domain\User\Repository;
 
-use App\Domain\User\Data\UserCreateData;
 use PDO;
 
 /**
@@ -920,17 +968,17 @@ class UserCreatorRepository
     /**
      * Insert user row.
      *
-     * @param UserCreateData $user The user
+     * @param array $user The user
      *
      * @return int The new ID
      */
-    public function insertUser(UserCreateData $user): int
+    public function insertUser(array $user): int
     {
         $row = [
-            'username' => $user->username,
-            'first_name' => $user->firstName,
-            'last_name' => $user->lastName,
-            'email' => $user->email,
+            'username' => $user['username'],
+            'first_name' => $user['first_name'],
+            'last_name' => $user['last_name'],
+            'email' => $user['email'],
         ];
 
         $sql = "INSERT INTO users SET 
@@ -958,7 +1006,6 @@ Create a new action class in: `src/Action/UserCreateAction.php`:
 
 namespace App\Action;
 
-use App\Domain\User\Data\UserCreateData;
 use App\Domain\User\Service\UserCreator;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -979,15 +1026,8 @@ final class UserCreateAction
         // Collect input from the HTTP request
         $data = (array)$request->getParsedBody();
 
-        // Mapping (should be done in a mapper class)
-        $user = new UserCreateData();
-        $user->username = $data['username'];
-        $user->firstName = $data['first_name'];
-        $user->lastName = $data['last_name'];
-        $user->email = $data['email'];
-
         // Invoke the Domain with inputs and retain the result
-        $userId = $this->userCreator->createUser($user);
+        $userId = $this->userCreator->createUser($data);
 
         // Transform the result into the JSON representation
         $result = [
