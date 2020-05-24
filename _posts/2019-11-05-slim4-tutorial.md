@@ -37,6 +37,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Writing JSON to the response](#writing-json-to-the-response)
 * [Domain](#domain)
   * [Services](#services)
+  * [Validation](#validation)
   * [Data Transfer Objects](#data-transfer-objects-dto)
   * [Repositories](#repositories)
 * [Deployment](#deployment)
