@@ -62,7 +62,7 @@ Now imagine what a mess it would be if all your modules would log everything
 to the same file. Of course you could add a `RotatingFileHandler`, but
 it's still not very clean in the long run. To make our logging system more flexible,
 and compatible with a container we add a special `LoggerFactory` class
-to create one custom logger per class.
+to create a custom logger per class.
 
 Create a new file `src/Factory/LoggerFactory.php` and copy/paste this content:
 
@@ -191,7 +191,7 @@ return [
 
 ## Usage
 
-Ok great! From now on you can create your custom error per class by injeting the 
+Okay, great! From now on you can create your custom logfile per class by using the 
 `LoggerFactory` instance. 
 
 Here is an example:
@@ -242,8 +242,8 @@ final class UserCreator
 
 ## Logging to the console
 
-If you want to show the logging messaes in the console, you just have to
-add the console handler:
+If you want to display the log messages in the console, 
+you only need to add the console handler:
 
 ```php
 public function __construct(LoggerFactory $logger) {
@@ -253,7 +253,7 @@ public function __construct(LoggerFactory $logger) {
 }
 ```
 
-You can also combine the file- and the console handler:
+You can also combine the file and console handlers:
 
 ```php
 public function __construct(LoggerFactory $logger) {
