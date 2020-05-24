@@ -70,10 +70,10 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 
 ## Contact me
 
-* d.opitz (at) outlook.com
+* **E-Mail:** d.opitz (at) outlook.com
+* **Discord:** odan#9242
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
 * [Slim support forum](https://discourse.slimframework.com/u/odan/summary) (Direct message)
-* [Stack Overflow](https://stackoverflow.com/users/story/1461181)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
 * [Xing](https://www.xing.com/profile/Daniel_Opitz9)

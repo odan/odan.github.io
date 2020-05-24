@@ -31,11 +31,3 @@ You can also **buy** all Slim articles bundled into a eBook (PDF).
 <input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
 <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
 </form>
-
-
-Please note: PayPal doesn't accept Indian Rupee (INR). 
-From india you can use Skrill or TransferWise to send money directly
-to my email address: **d.opitz (at) outlook.com**
-
-* [Skrill](https://www.skrill.com/)
-* [TransferWise](https://transferwise.com/)
