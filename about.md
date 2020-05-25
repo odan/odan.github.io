@@ -70,8 +70,8 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 
 ## Contact me
 
-* **E-Mail:** d.opitz (at) outlook.com
-* **Discord:** odan#9242
+* [Discord](https://discord.com/): odan#9242
+* E-Mail: d.opitz (at) outlook.com
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
 * [Slim support forum](https://discourse.slimframework.com/u/odan/summary) (Direct message)
