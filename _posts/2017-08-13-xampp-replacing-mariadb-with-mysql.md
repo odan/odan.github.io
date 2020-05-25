@@ -115,5 +115,3 @@ The MySQL 64-bit version is not compatible with the XAMPP Control Panel (32-bit)
 ### Answer
 
 * The file MSVCR120.dll should be part of the [Microsoft Visual C++ 2013 Redistributable Package](https://www.microsoft.com/en-us/download/details.aspx?id=40784)
-
-[Comments](https://gist.github.com/odan/c799417460470c3776ffa8adce57eece) | [Donate](../../../donate.html)

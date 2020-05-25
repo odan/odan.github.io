@@ -1191,5 +1191,3 @@ For technical questions create an issue here:
 If you have Slim-Framework specific questions, visit:
 
 * <https://discourse.slimframework.com/>
-
-[Comments](https://gist.github.com/odan/c8bee474b0054a06776481a6c8de1d8f)

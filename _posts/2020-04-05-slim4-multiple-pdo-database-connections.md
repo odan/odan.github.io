@@ -406,5 +406,3 @@ interface DbConnectionManagerInterface
 
 * Stackoverflow: <https://stackoverflow.com/a/57769575/1461181>
 
-[Comments](https://gist.github.com/odan/5843e4e69141501e4d3ba8ff99c0b1d9) | 
-[Donate](../../../donate.html)

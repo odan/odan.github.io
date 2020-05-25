@@ -552,6 +552,3 @@ Read more: <https://stackoverflow.com/a/26791450/1461181>
 
 * For JWT auth you may try: [tuupola/slim-jwt-auth](https://github.com/tuupola/slim-jwt-auth)
 * For BasicAuth try: [tuupola/slim-basic-auth](https://github.com/tuupola/slim-basic-auth)
-
-
-[Comments](https://gist.github.com/odan/2885ccd0d2f3a3df41bf5c3d6e9b4999) | [Donate](../../../donate.html)
