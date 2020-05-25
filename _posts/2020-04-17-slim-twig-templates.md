@@ -366,5 +366,3 @@ How to use the `trans` filter you can learn here:
 
 * [Twig](https://twig.symfony.com/)
 * [Creating and Using Templates](https://symfony.com/doc/current/templates.html)
-
-[Donate](../../../donate.html)
