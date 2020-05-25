@@ -83,6 +83,8 @@ share-links-active:
   facebook: true
   google: false
   linkedin: true
- 
+
+# Disqus comments
+comments: true
 
 google_analytics: UA-135908404-1
