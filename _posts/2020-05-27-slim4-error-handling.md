@@ -169,7 +169,7 @@ PS: Another way to achieve the same effect is to register a custom shutdown hand
 ## Catching 404 not found errors
 
 In Slim 3 you could add acustom "Not Found Handler" to handle routes that are not defined.
-Since Slim 4 this is possible to add a custom error handler to the `ErrorMiddleware`.
+Since Slim 4 it's possible to add a custom error handler to the `ErrorMiddleware`.
 
 Here you can find some examples how to add a custom error handler
 
