@@ -201,7 +201,7 @@ $app->add(function (ServerRequestInterface $request, RequestHandlerInterface $ha
     }
 });
 
-$app->addErrorMiddleware(true, true, false, $logger);
+$app->addErrorMiddleware(true, true, true, $logger);
 ```
 
 Of course this example is very limited in its functionality. To catch
