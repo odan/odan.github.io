@@ -14,6 +14,7 @@ If you think my blog and support is useful for you,
 I would appreciate a small donation:
 
 * **[PayPal](https://www.paypal.me/dopitz/1)**
+* [Buy a Coffee](https://ko-fi.com/dopitz)
 
 You can also **buy** all Slim articles bundled into a eBook (PDF). 
 
