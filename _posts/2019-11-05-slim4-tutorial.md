@@ -11,7 +11,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 
 ![slim](https://user-images.githubusercontent.com/781074/82730649-87608800-9d01-11ea-83ea-6112f973b051.png)
 
-**[You can buy this document as PDF](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FUPLB6BD8447W)**
+**[You can buy this document as PDF](../../../donate.html)**
 
 ## Table of contents
 
