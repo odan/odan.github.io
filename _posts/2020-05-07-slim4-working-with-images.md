@@ -175,6 +175,3 @@ final class ImageCreateAction
 }
 
 ```
-
-
-[Donate](../../../donate.html)

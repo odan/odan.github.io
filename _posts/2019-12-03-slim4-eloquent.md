@@ -363,5 +363,3 @@ class UserRepository
 
 * [Eloquent documentation](https://laravel.com/docs/master/eloquent)
 * [Illuminate Database on Github](https://github.com/illuminate/database)
-
-[Donate](../../../donate.html)

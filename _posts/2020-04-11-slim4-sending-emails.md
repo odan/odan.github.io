@@ -202,5 +202,3 @@ try {
 
 * [Symfony Mailer documentation](https://symfony.com/doc/current/mailer.html)
 * [Symfony Mailer on Github](https://github.com/symfony/mailer)
-
-[Donate](../../../donate.html)
