@@ -206,9 +206,10 @@ $app->addErrorMiddleware(true, true, true, $logger);
 
 Of course this example is very limited in its functionality. To catch
 all http errors you could use the `HttpException` within the catch block.
+
 If you want to log all http errors or render Twig templates
 then you should implement a custom Slim DefaultErrorHandler or a 
-`HttpExceptionMiddleware` that handles all http errors.
+`HttpExceptionMiddleware`.
 
 **Example**
 
