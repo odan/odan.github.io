@@ -565,13 +565,32 @@ final class JwtClaimMiddleware implements MiddlewareInterface
 
             // Append the user id as request attribute
             $request = $request->withAttribute('uid', $parsedToken->getClaim('uid'));
-            $request = $request->withAttribute('locale', $parsedToken->getClaim('locale'));
+
+            // Add more claim values...
+            //$request = $request->withAttribute('locale', $parsedToken->getClaim('locale'));
         }
 
         return $handler->handle($request);
     }
 }
 
+```
+
+Add the `JwtClaimMiddleware` into your middleware stack, e.g. in `config/middleware.php`:
+
+```php
+<?php
+
+use App\Middleware\JwtClaimMiddleware;
+// ...
+
+return function (App $app) {
+    // ...
+
+    $app->add(JwtClaimMiddleware::class);
+
+    // ...
+};
 ```
 
 ## Protecting routes with JWT
