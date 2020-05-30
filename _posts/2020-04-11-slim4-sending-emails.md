@@ -80,7 +80,9 @@ return [
     // SMTP transport
     MailerInterface::class => function (ContainerInterface $container) {
         $settings = $container->get(Configuration::class)->getArray('smtp');
-
+        // or
+        // $settings = $container->get('settings')['smtp'];
+        
         // smtp://user:pass@smtp.example.com:25
         $dsn = sprintf(
             '%s://%s:%s@%s:%s',
@@ -94,6 +96,12 @@ return [
         return new Mailer(Transport::fromDsn($dsn));
     },
 ];
+```
+
+If you don't use the Configuration class, just use `settings` as container entry:
+
+```php
+$settings = $container->get('settings')['smtp'];
 ```
 
 ## Creating & Sending Messages
