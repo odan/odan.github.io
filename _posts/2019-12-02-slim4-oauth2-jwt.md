@@ -340,15 +340,15 @@ The http client requires a special route to create a new token: `POST /api/token
 Add the following route into your routing configuration file, e.g. `config/routes.php`
 
 ```php
-$app->post('/api/tokens', \App\Action\TokenCreateAction::class);
+$app->post('/tokens', \App\Action\Auth\TokenCreateAction::class);
 ```
 
-Then create the following action class for the route: `src/Action/TokenCreateAction.php`
+Then create the following action class for the route: `src/Action/Auth/TokenCreateAction.php`
 
 ```php
 <?php
 
-namespace App\Action;
+namespace App\Action\Auth;
 
 use App\Routing\JwtAuth;
 use Psr\Http\Message\ResponseInterface;
