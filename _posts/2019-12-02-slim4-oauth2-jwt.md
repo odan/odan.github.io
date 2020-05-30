@@ -628,6 +628,27 @@ return function (App $app) {
 
 ## FAQ
 
+### Where to store the token?
+
+The client can store the token in a cookie.
+If you store a JWT as a cookie, make it `HttpOnly` and `Secure`.
+
+A cookie with the `HttpOnly` attribute is inaccessible 
+to the JavaScript `Document.cookie` API; it is sent only to the server.
+
+### How to implement a logout?
+
+JSON Web Tokens are stateless. You can’t change a token to be invalid in 
+a straightforward way. The easiest way to implement logging out is just 
+to remove the token from the browser. Since the cookies that we designed are 
+`HttpOnly`, you need to create an endpoint that clears it.
+
+A logout route, e.g. `GET /logout`:
+
+```php
+$response = $response->withHeader('Set-Cookie', 'Authentication=; HttpOnly; Secure; Path=/; Max-Age=0');
+```
+
 **How to handle CORS with OPTIONS preflight requests?**
 
 Read more: [Slim 4 - CORS Setup](https://odan.github.io/2019/11/24/slim4-cors.html)
