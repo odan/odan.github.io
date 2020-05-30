@@ -630,7 +630,6 @@ return function (App $app) {
 
 ### Where to store the token?
 
-The client can store the token in a cookie.
 If you store a JWT as a cookie, make it `HttpOnly` and `Secure`.
 
 A cookie with the `HttpOnly` attribute is inaccessible 
