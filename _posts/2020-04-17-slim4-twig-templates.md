@@ -146,7 +146,6 @@ Autowire the `Twig` component and the `TwigMiddleware` in `config/container.php`
 <?php
 
 use Psr\Container\ContainerInterface;
-use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
@@ -158,10 +157,10 @@ return [
 
     // Twig templates
     Twig::class => function (ContainerInterface $container) {
-        $config = $container->get(Configuration::class);
-        $settings = $config->getArray('twig');
+        $settings = $container->get('settings');
+        $twigSettings = $settings['twig'];
 
-        $options = $settings['options'];
+        $options = $twigSettings['options'];
         $options['cache'] = $options['cache_enabled'] ? $options['cache_path'] : false;
 
         $twig = Twig::create($settings['paths'], $options);

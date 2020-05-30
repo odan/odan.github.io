@@ -77,7 +77,6 @@ In your `config/container.php` or wherever you add your container definitions:
 
 use Cake\Database\Connection;
 use Psr\Container\ContainerInterface;
-use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Factory\AppFactory;
 
@@ -87,8 +86,7 @@ return [
     
     // Database connection
     Connection::class => function (ContainerInterface $container) {
-        return new Connection($container->get(Configuration::class)
-            ->getArray('db'));
+        return new Connection($container->get('settings')['db']);
     },
 
     PDO::class => function (ContainerInterface $container) {

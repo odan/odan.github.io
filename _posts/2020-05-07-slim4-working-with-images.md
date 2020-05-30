@@ -57,14 +57,13 @@ Autowire the image manager using the `ImageManager` class:
 
 use Intervention\Image\ImageManager;
 use Psr\Container\ContainerInterface;
-use Selective\Config\Configuration;
 
 return [
 
     // ...
     
     ImageManager::class => function (ContainerInterface $container) {
-        return new ImageManager($container->get(Configuration::class)->getArray('image_manager'));
+        return new ImageManager($container->get('settings')['image_manager']);
     },
 ];
 ```

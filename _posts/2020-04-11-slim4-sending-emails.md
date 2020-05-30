@@ -66,7 +66,6 @@ Autowire the mailer using `MailerInterface`:
 <?php
 
 use Psr\Container\ContainerInterface;
-use Selective\Config\Configuration;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mailer\Transport;
@@ -79,7 +78,7 @@ return [
     
     // SMTP transport
     MailerInterface::class => function (ContainerInterface $container) {
-        $settings = $container->get(Configuration::class)->getArray('smtp');
+        $settings = $container->get('settings')['smtp'];
         // or
         // $settings = $container->get('settings')['smtp'];
         

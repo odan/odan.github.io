@@ -73,7 +73,6 @@ use Doctrine\DBAL\Configuration as DoctrineConfiguration;
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Psr\Container\ContainerInterface;
-use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Factory\AppFactory;
 
@@ -84,7 +83,7 @@ return [
     // Database connection
     Connection::class => function (ContainerInterface $container) {
         $config = new DoctrineConfiguration();
-        $connectionParams = $container->get(Configuration::class)->getArray('db');
+        $connectionParams = $container->get('settings')['db'];
 
         return DriverManager::getConnection($connectionParams, $config);
     },

@@ -184,7 +184,6 @@ Add a new container definition for the `LoggerFactory::class` in `config/contain
 
 use Psr\Container\ContainerInterface;
 use Selective\BasePath\BasePathMiddleware;
-use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
@@ -193,8 +192,7 @@ return [
     // ...
 
     LoggerFactory::class => function (ContainerInterface $container) {
-        return new LoggerFactory($container->get(Configuration::class)
-            ->getArray('logger'));
+        return new LoggerFactory($container->get('settings')['logger']);
     },
 ];
 ```

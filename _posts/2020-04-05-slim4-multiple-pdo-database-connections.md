@@ -342,7 +342,7 @@ use App\Database\ConnectionManager;
 ConnectionManager::class=> function (ContainerInterface $container) {
     // Get default database settings for the second connection
     // The database name is not required here
-    $db2Settings = $container->get(Configuration::class)->getArray('db2');
+    $db2Settings = $container->get('settings')['db2'];
 
     return new ConnectionManager($db2Settings);
 },
