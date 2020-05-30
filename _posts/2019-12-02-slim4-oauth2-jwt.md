@@ -426,9 +426,6 @@ Make sure that your client also sends this request header:
 Content-Type: application/json
 ```
 
-> **Please note:** The [OAuth 2 spec](https://tools.ietf.org/html/rfc6749#section-2.3.1) states 
-> that the username and password MAY use the HTTP Basic authentication or form data (so, no JSON).
-
 ## Bearer Authentication Middleware
 
 Bearer authentication (also called token authentication) is an HTTP authentication 
@@ -556,17 +553,19 @@ final class JwtClaimMiddleware implements MiddlewareInterface
         ServerRequestInterface $request,
         RequestHandlerInterface $handler
     ): ResponseInterface {
-        $token = explode(' ', (string)$request->getHeaderLine('Authorization'))[1] ?? '';
+        $authorization = explode(' ', (string)$request->getHeaderLine('Authorization'));
+        $type = $authorization[0] ?? '';
+        $credentials = $authorization[1] ?? '';
 
-        if ($token && $this->jwtAuth->validateToken($token)) {
+        if ($type === 'Bearer' && $this->jwtAuth->validateToken($credentials)) {
             // Append valid token
-            $parsedToken = $this->jwtAuth->createParsedToken($token);
+            $parsedToken = $this->jwtAuth->createParsedToken($credentials);
             $request = $request->withAttribute('token', $parsedToken);
 
             // Append the user id as request attribute
             $request = $request->withAttribute('uid', $parsedToken->getClaim('uid'));
 
-            // Add more claim values...
+            // Add more claim values as attribute...
             //$request = $request->withAttribute('locale', $parsedToken->getClaim('locale'));
         }
 
@@ -651,11 +650,18 @@ $response = $response->withHeader(
 );
 ```
 
-**How to handle CORS with OPTIONS preflight requests?**
+### How to implement a authentication with HTTP Basic authentication or form data?
+
+The [OAuth 2 spec](https://tools.ietf.org/html/rfc6749#section-2.3.1) states 
+that the username and password MAY use the HTTP Basic authentication or form data.
+
+Please write into the comments if you need more information about this topic.
+
+### How to handle CORS with OPTIONS preflight requests?
 
 Read more: [Slim 4 - CORS Setup](https://odan.github.io/2019/11/24/slim4-cors.html)
 
-**The `Authorization` header missing in POST request**
+### The `Authorization` header missing in POST request
 
 If using Apache add the following to the `.htaccess` file. 
 Otherwise PHP won't have access to the `Authorization` header.
@@ -666,7 +672,7 @@ RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
 Read more: <https://stackoverflow.com/a/26791450/1461181>
 
-**Is there a working library?**
+### Is there a working library?
 
 * For JWT auth you may try: [tuupola/slim-jwt-auth](https://github.com/tuupola/slim-jwt-auth)
 * For BasicAuth try: [tuupola/slim-basic-auth](https://github.com/tuupola/slim-basic-auth)
