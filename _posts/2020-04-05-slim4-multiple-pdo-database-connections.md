@@ -173,7 +173,7 @@ class UserRepository
 
 See Matthieu Napoli's answer: <https://stackoverflow.com/a/57758106/1461181>
 
-Please note that the use of [DI\autowire()](https://stackoverflow.com/a/57758106/1461181), 
+Please note that the use of [DI/autowire()](https://stackoverflow.com/a/57758106/1461181), 
 could cause too much effort in container configuration and maintenance can 
 become a nightmare in larger projects.
 
@@ -304,8 +304,10 @@ final class DatabaseMiddleware implements MiddlewareInterface
         $this->connectionManager = $connectionFactory;
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
+    public function process(
+        ServerRequestInterface $request, 
+        RequestHandlerInterface $handler
+    ): ResponseInterface {
         // fetch the database name from the JWT
         $databaseName = $request->getAttribute('database');
 

@@ -139,10 +139,19 @@ final class LoggerFactory
     public function addFileHandler(string $filename, int $level = null): self
     {
         $filename = sprintf('%s/%s', $this->path, $filename);
-        $rotatingFileHandler = new RotatingFileHandler($filename, 0, $level ?? $this->level, true, 0777);
+
+        $rotatingFileHandler = new RotatingFileHandler(
+            $filename, 
+            0,
+            $level ?? $this->level,
+            true,
+            0777
+        );
 
         // The last "true" here tells monolog to remove empty []'s
-        $rotatingFileHandler->setFormatter(new LineFormatter(null, null, false, true));
+        $rotatingFileHandler->setFormatter(
+            new LineFormatter(null, null, false, true)
+        );
 
         $this->handler[] = $rotatingFileHandler;
 
@@ -184,7 +193,8 @@ return [
     // ...
 
     LoggerFactory::class => function (ContainerInterface $container) {
-        return new LoggerFactory($container->get(Configuration::class)->getArray('logger'));
+        return new LoggerFactory($container->get(Configuration::class)
+            ->getArray('logger'));
     },
 ];
 ```

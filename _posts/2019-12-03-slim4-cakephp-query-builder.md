@@ -87,7 +87,8 @@ return [
     
     // Database connection
     Connection::class => function (ContainerInterface $container) {
-        return new Connection($container->get(Configuration::class)->getArray('db'));
+        return new Connection($container->get(Configuration::class)
+            ->getArray('db'));
     },
 
     PDO::class => function (ContainerInterface $container) {
@@ -183,7 +184,10 @@ final class QueryFactory
      */
     public function newInsert(string $table, array $data): Query
     {
-        return $this->newQuery()->insert(array_keys($data))->into($table)->values($data);
+        return $this->newQuery()
+            ->insert(array_keys($data))
+            ->into($table)
+            ->values($data);
     }
 
     /**

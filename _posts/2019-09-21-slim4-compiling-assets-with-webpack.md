@@ -27,7 +27,7 @@ keywords: slim4 php webpack assets js css
 
 ## Requirements
 
-* [Slim 4](http://www.slimframework.com/docs/v4/start/installation.html)
+* [Slim 4](https://www.slimframework.com/docs/v4/start/installation.html)
 * [NPM](https://nodejs.org/en/download/)
 
 ## Introduction

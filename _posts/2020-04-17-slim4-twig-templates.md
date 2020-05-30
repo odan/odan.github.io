@@ -122,7 +122,6 @@ Add the following settings to your Slim settings array, e.g `config/settings.php
 
 ```php
 // Twig settings
-// Configuration reference: https://symfony.com/doc/current/reference/configuration/twig.html
 $settings['twig'] = [
     // Template paths
     'paths' => [
@@ -174,7 +173,10 @@ return [
     },
 
     TwigMiddleware::class => function (ContainerInterface $container) {
-        return TwigMiddleware::createFromContainer($container->get(App::class), Twig::class);
+        return TwigMiddleware::createFromContainer(
+            $container->get(App::class),
+            Twig::class
+        );
     },
 ];
 
@@ -246,8 +248,10 @@ final class HelloAction
         $this->twig = $twig;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
         $viewData = [
             'name' => 'World',
             'notifications' => [
@@ -331,7 +335,11 @@ return [
     },
 
     Translator::class => function (ContainerInterface $container) {
-        $translator = new Translator('en_US',new MessageFormatter(new IdentityTranslator()));
+        $translator = new Translator(
+            'en_US',
+            new MessageFormatter(new IdentityTranslator())
+        );
+        
         $translator->addLoader('mo', new MoFileLoader());
 
         return $translator;

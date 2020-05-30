@@ -69,8 +69,10 @@ final class HttpsMiddleware implements MiddlewareInterface
      *
      * @return ResponseInterface The response
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
+    public function process(
+        ServerRequestInterface $request, 
+        RequestHandlerInterface $handler
+    ): ResponseInterface {
         $uri = $request->getUri();
 
         if ($uri->getHost() !== 'localhost' && $uri->getScheme() !== 'https') {

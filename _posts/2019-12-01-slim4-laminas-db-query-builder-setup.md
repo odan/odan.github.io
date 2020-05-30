@@ -86,7 +86,10 @@ return [
     },
 
     PDO::class => function (ContainerInterface $container) {
-        $connection = $container->get(AdapterInterface::class)->getDriver()->getConnection();
+        $connection = $container->get(AdapterInterface::class)
+            ->getDriver()
+            ->getConnection();
+
         $connection->connect();
 
         return $connection->getResource();
@@ -119,7 +122,12 @@ final class QueryFactory
 
     public function table(string $table): TableGateway
     {
-        return new TableGateway($table, $this->adapter, null, new ResultSet(ResultSet::TYPE_ARRAY));
+        return new TableGateway(
+            $table, 
+            $this->adapter,
+            null, 
+            new ResultSet(ResultSet::TYPE_ARRAY)
+        );
     }
 }
 ```

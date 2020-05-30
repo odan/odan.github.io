@@ -95,8 +95,10 @@ final class ImageExampleAction
         $this->imageManager = $imageManager;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
         // Create image in memory
         $image = $this->imageManager->canvas(800, 600, '#719e40');
 
@@ -148,8 +150,10 @@ use Slim\Psr7\Factory\StreamFactory;
 
 final class ImageCreateAction
 {
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
         // Create image in memory
         $image = imagecreate(200, 80);
         imagecolorallocate($image, 255, 255, 255);

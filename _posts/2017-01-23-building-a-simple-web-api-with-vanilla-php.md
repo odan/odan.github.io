@@ -7,7 +7,7 @@ description:
 keywords: 
 ---
 
-This article is inspired by Brad Cypert's blog post: <http://www.bradcypert.com/building-a-simple-api-in-php-using-lumen/>.
+This article is inspired by Brad Cypert's blog post: <https://www.bradcypert.com/building-a-simple-api-in-php-using-lumen/>.
 
 Why should we build a API with Vanilla PHP? Because you can, and it makes fun.
 

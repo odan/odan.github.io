@@ -62,5 +62,5 @@ if (verify_password_hash('secret', $strHash)) {
 
 Links:
 
-* http://www.sitepoint.com/hashing-passwords-php-5-5-password-hashing-api/
-* http://stackoverflow.com/questions/536584/non-random-salt-for-password-hashes/536756#536756
+* https://www.sitepoint.com/hashing-passwords-php-5-5-password-hashing-api/
+* https://stackoverflow.com/questions/536584/non-random-salt-for-password-hashes/536756#536756

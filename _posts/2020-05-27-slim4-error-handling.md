@@ -101,7 +101,10 @@ final class ErrorHandlerMiddleware implements MiddlewareInterface
      *
      * @return ResponseInterface The response
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function process(
+        ServerRequestInterface $request, 
+        RequestHandlerInterface $handler
+    ): ResponseInterface
     {
         $errorTypes = E_ALL;
 
@@ -110,13 +113,19 @@ final class ErrorHandlerMiddleware implements MiddlewareInterface
             function ($errno, $errstr, $errfile, $errline) {
                 switch ($errno) {
                     case E_USER_ERROR:
-                        $this->logger->error("Error number [$errno] $errstr on line $errline in file $errfile");
+                        $this->logger->error(
+                            "Error number [$errno] $errstr on line $errline in file $errfile"
+                        );
                         break;
                     case E_USER_WARNING:
-                        $this->logger->warning("Error number [$errno] $errstr on line $errline in file $errfile");
+                        $this->logger->warning(
+                            "Error number [$errno] $errstr on line $errline in file $errfile"
+                        );
                         break;
                     default:
-                        $this->logger->notice("Error number [$errno] $errstr on line $errline in file $errfile");
+                        $this->logger->notice(
+                            "Error number [$errno] $errstr on line $errline in file $errfile"
+                        );
                         break;
                 }
 
@@ -155,7 +164,8 @@ $test = $array['nada'];
 The expected logfile output should look like this:
 
 ```
-[2020-05-25 10:10:05] app.NOTICE: Error number [8] Undefined index: nada on line 30 in file filename.php [] []
+[2020-05-25 10:10:05] app.NOTICE: Error number [8] Undefined index: 
+nada on line 30 in file filename.php [] []
 ``` 
 
 PS: Another way to achieve the same effect is to register a custom shutdown handler.
@@ -173,7 +183,7 @@ Since Slim 4 it's possible to add a custom error handler to the `ErrorMiddleware
 
 Here you can find some examples how to add a custom error handler
 
-* <http://www.slimframework.com/docs/v4/middleware/error-handling.html>
+* <https://www.slimframework.com/docs/v4/middleware/error-handling.html>
 * <https://github.com/odan/slim4-skeleton/blob/master/src/Handler/DefaultErrorHandler.php>
 * <https://github.com/slimphp/Slim-Skeleton/blob/master/src/Application/Handlers/HttpErrorHandler.php>
 
@@ -190,7 +200,10 @@ use Slim\Psr7\Response;
 // ...
 
 // HttpNotFound Middleware
-$app->add(function (ServerRequestInterface $request, RequestHandlerInterface $handler) {
+$app->add(function (
+    ServerRequestInterface $request, 
+    RequestHandlerInterface $handler
+    ) {
     try {
         return $handler->handle($request);
     } catch (HttpNotFoundException $httpException) {
@@ -237,7 +250,10 @@ final class HttpExceptionMiddleware implements MiddlewareInterface
         $this->responseFactory = $responseFactory;
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    public function process(
+        ServerRequestInterface $request, 
+        RequestHandlerInterface $handler
+    ): ResponseInterface
     {
         try {
             return $handler->handle($request);

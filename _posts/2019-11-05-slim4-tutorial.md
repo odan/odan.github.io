@@ -666,7 +666,9 @@ $result = ['error' => ['message' => 'Validation failed']];
 
 $response->getBody()->write(json_encode($result));
 
-return $response->withHeader('Content-Type', 'application/json')->withStatus(422);
+return $response
+    ->withHeader('Content-Type', 'application/json')
+    ->withStatus(422);
 ```
 
 ## Domain
@@ -806,8 +808,12 @@ final class ValidationException extends RuntimeException
 {
     private $errors;
 
-    public function __construct(string $message, array $errors = [], int $code, Throwable $previous)
-    {
+    public function __construct(
+        string $message, 
+        array $errors = [], 
+        int $code, 
+        Throwable $previous
+    ){
         parent::__construct($message, $code, $previous);
 
         $this->errors = $errors;
@@ -1038,7 +1044,9 @@ final class UserCreateAction
         // Build the HTTP response
         $response->getBody()->write((string)json_encode($result));
 
-        return $response->withHeader('Content-Type', 'application/json')->withStatus(201);
+        return $response
+            ->withHeader('Content-Type', 'application/json')
+            ->withStatus(201);
     }
 }
 ```

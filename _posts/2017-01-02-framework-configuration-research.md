@@ -12,17 +12,17 @@ Naming Conventions for service and parameter names in the service container and 
 ## Symfony
 
 * Naming convention: lowercase (lower_under), words separated by underscores, section separated by dot 
-* Docs: http://symfony.com/doc/current/service_container/parameters.html
+* Docs: https://symfony.com/doc/current/service_container/parameters.html
 * Example: my_multilang.language_fallback
 * More examples:
-* http://symfony.com/doc/current/best_practices/configuration.html
+* https://symfony.com/doc/current/best_practices/configuration.html
 * https://github.com/symfony/config/blob/master/Tests/Fixtures/Configuration/ExampleConfiguration.php 
-* Naming Conventions: http://symfony.com/doc/current/contributing/code/standards.html#naming-conventions
+* Naming Conventions: https://symfony.com/doc/current/contributing/code/standards.html#naming-conventions
 
 ## Zend
 * Naming convention: lowercase (lower_under), words separated by underscores, section separated by dot
 * Array: multidimensional
-* Docs: http://zf2.readthedocs.io/en/latest/modules/zend.config.introduction.html
+* Docs: https://zf2.readthedocs.io/en/latest/modules/zend.config.introduction.html
 * Example (from ini file): database.params.host = 'db.example.com'
 * Get a value: echo $data['database']['params']['host']['value'];
 
@@ -51,15 +51,15 @@ Naming Conventions for service and parameter names in the service container and 
 * Set a value: $app = new \Slim\App(['settings' => 'displayErrorDetails' => true]);
 * Get a value: $settings = $container->get('settings')['logger'];
 * Docs: https://www.slimframework.com/docs/objects/application.html
-* Docs: http://docs.slimframework.com/configuration/settings/
+* Docs: https://docs.slimframework.com/configuration/settings/
 
 ## Silex
 
 * Naming convention: lowercase (lower_under), words separated by underscores, section separated by dot 
 * Example: monolog.exception.logger_filter
-* Example 2: http://silex.sensiolabs.org/doc/master/providers.html
-* Example link: http://silex.sensiolabs.org/doc/master/providers/monolog.html
-* Docs: http://silex.sensiolabs.org/doc/master/
+* Example 2: https://silex.sensiolabs.org/doc/master/providers.html
+* Example link: https://silex.sensiolabs.org/doc/master/providers/monolog.html
+* Docs: https://silex.sensiolabs.org/doc/master/
 
 ## Phalcon
 
@@ -78,12 +78,12 @@ Naming Conventions for service and parameter names in the service container and 
 ## Yii 2
 * Naming convention: camelCase  (e.g. className), section separated by sub array
 * Example: 'basePath' => dirname(__DIR__)
-* Docs: http://www.yiiframework.com/doc-2.0/guide-concept-configurations.html
+* Docs: https://www.yiiframework.com/doc-2.0/guide-concept-configurations.html
 
 ## Aura
 * Naming convention: ???
 * Example:  
-* Docs: http://auraphp.com/framework/2.x/en/configuration/
+* Docs: https://auraphp.com/framework/2.x/en/configuration/
 
 ## Fat-Free
 
@@ -96,7 +96,7 @@ Naming Conventions for service and parameter names in the service container and 
 * Get value: Config::get('items_to_display') 
 * Get value: Config::get('db.active');
 * Set value: Config::set('blog.items_to_display', 5);
-* Docs: http://fuelphp.com/dev-docs/classes/config.html
+* Docs: https://fuelphp.com/dev-docs/classes/config.html
 
 ## nova-framework
 

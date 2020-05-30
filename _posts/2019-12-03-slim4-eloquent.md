@@ -88,7 +88,8 @@ return [
     Connection::class => function (ContainerInterface $container) {
         $factory = new ConnectionFactory(new IlluminateContainer());
 
-        $connection = $factory->make($container->get(Configuration::class)->getArray('db'));
+        $connection = $factory->make($container->get(Configuration::class)
+            ->getArray('db'));
 
         // Disable the query log to prevent memory issues
         $connection->disableQueryLog();
@@ -309,7 +310,8 @@ return [
             return new SecondConnection($connection, $database, $prefix, $config);
         });
         
-        $connection = $factory->make($container->get(Configuration::class)->getArray('db2'));
+        $connection = $factory->make($container->get(Configuration::class)
+            ->getArray('db2'));
 
         // Disable the query log to prevent memory issues
         $connection->disableQueryLog();

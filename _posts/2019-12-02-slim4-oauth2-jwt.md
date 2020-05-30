@@ -362,8 +362,10 @@ final class TokenCreateAction
         $this->jwtAuth = $jwtAuth;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
         $data = (array)$request->getParsedBody();
 
         $username = (string)($data['username'] ?? '');
@@ -412,7 +414,7 @@ and a body content like this:
 }
 ```
 
-The Slim [BodyParsingMiddleware](http://www.slimframework.com/docs/v4/middleware/body-parsing.html) only 
+The Slim [BodyParsingMiddleware](https://www.slimframework.com/docs/v4/middleware/body-parsing.html) only 
 parses the request body if the request header is set correctly.
 Make sure that your client also sends this request header: 
 
@@ -463,8 +465,10 @@ final class JwtMiddleware implements MiddlewareInterface
      */
     private $responseFactory;
 
-    public function __construct(JwtAuth $jwtAuth, ResponseFactoryInterface $responseFactory)
-    {
+    public function __construct(
+        JwtAuth $jwtAuth, 
+        ResponseFactoryInterface $responseFactory
+    ) {
         $this->jwtAuth = $jwtAuth;
         $this->responseFactory = $responseFactory;
     }
@@ -477,9 +481,14 @@ final class JwtMiddleware implements MiddlewareInterface
      *
      * @return ResponseInterface The response
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
-        $authorization = explode(' ', (string)$request->getHeaderLine('Authorization'));
+    public function process(
+        ServerRequestInterface $request, 
+        RequestHandlerInterface $handler
+    ): ResponseInterface {
+        $authorization = explode(
+            ' ', 
+            (string)$request->getHeaderLine('Authorization')
+        );
         $token = $authorization[1] ?? '';
 
         if (!$token || !$this->jwtAuth->validateToken($token)) {

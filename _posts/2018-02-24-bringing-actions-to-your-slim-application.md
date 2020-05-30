@@ -94,8 +94,10 @@ class ProductIndexAction extends AbstractAction
         $this->productIndexService = $productIndexService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
         $viewData = $this->productIndexService->calculateThings();
         
         return $this->render($response, 'Product/product-index.twig', $viewData);
@@ -123,8 +125,10 @@ class ProductEditAction extends AbstractAction
         $this->productEditService = $productEditService;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
         $viewData = $this->productEditService->calculateThings();
         
         return $this->render($response, 'Product/product-edit.twig', $viewData);
