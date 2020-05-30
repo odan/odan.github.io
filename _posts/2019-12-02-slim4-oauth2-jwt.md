@@ -645,7 +645,10 @@ to remove the token from the browser. Since the cookies that we designed are
 A logout route, e.g. `GET /logout`:
 
 ```php
-$response = $response->withHeader('Set-Cookie', 'Authentication=; HttpOnly; Secure; Path=/; Max-Age=0');
+$response = $response->withHeader(
+    'Set-Cookie', 
+    'Authentication=; HttpOnly; Secure; Path=/; Max-Age=0'
+);
 ```
 
 **How to handle CORS with OPTIONS preflight requests?**
