@@ -650,7 +650,7 @@ $response = $response->withHeader(
 );
 ```
 
-### How to implement a authentication with HTTP Basic authentication or form data?
+### How to implement a HTTP Basic or form data authentication?
 
 The [OAuth 2 spec](https://tools.ietf.org/html/rfc6749#section-2.3.1) states 
 that the username and password MAY use the HTTP Basic authentication or form data.
