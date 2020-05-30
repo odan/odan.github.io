@@ -71,7 +71,6 @@ In your `config/container.php` or wherever you add your container definitions:
 <?php
 
 use Psr\Container\ContainerInterface;
-use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Laminas\Db\Adapter\Adapter;
@@ -82,7 +81,7 @@ return [
     // ...
     
     AdapterInterface::class => function (ContainerInterface $container) {
-        return new Adapter($container->get(Configuration::class)->getArray('db'));
+        return new Adapter($container->get('settings')['db']);
     },
 
     PDO::class => function (ContainerInterface $container) {
