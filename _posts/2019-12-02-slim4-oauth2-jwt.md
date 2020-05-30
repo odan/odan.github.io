@@ -638,7 +638,7 @@ to the JavaScript `Document.cookie` API; it is sent only to the server.
 
 JSON Web Tokens are stateless. You can’t change a token to be invalid in 
 a straightforward way. The easiest way to implement logging out is just 
-to remove the token from the browser. Since the cookies that we designed are 
+to remove the token from the browser. Since the cookies that should be defined as 
 `HttpOnly`, you need to create an endpoint that clears it.
 
 A logout route, e.g. `GET /logout`:
