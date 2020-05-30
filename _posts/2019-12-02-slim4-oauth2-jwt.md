@@ -152,7 +152,7 @@ add the following class into this file: `src/Auth/JwtAuth.php`.
 ```php
 <?php
 
-namespace App\Auth;
+namespace App\Routing;
 
 use Cake\Chronos\Chronos;
 use InvalidArgumentException;
@@ -164,6 +164,9 @@ use Lcobucci\JWT\Token;
 use Lcobucci\JWT\ValidationData;
 use UnexpectedValueException;
 
+/**
+ * JwtAuth.
+ */
 final class JwtAuth
 {
     /**
@@ -187,7 +190,7 @@ final class JwtAuth
     private $publicKey;
 
     /**
-     * @var The signer
+     * @var Sha256 The signer
      */
     private $signer;
 
@@ -225,24 +228,27 @@ final class JwtAuth
     /**
      * Create JSON web token.
      *
-     * @param string $uid The user id
+     * @param array $claims The claims
      *
      * @throws UnexpectedValueException
      *
      * @return string The JWT
      */
-    public function createJwt(string $uid): string
+    public function createJwt(array $claims): string
     {
         $issuedAt = Chronos::now()->getTimestamp();
 
-        // (JWT ID) Claim, a unique identifier for the JWT
-        return (new Builder())->issuedBy($this->issuer)
+        $builder = (new Builder())->issuedBy($this->issuer)
             ->identifiedBy(uuid_create(), true)
             ->issuedAt($issuedAt)
             ->canOnlyBeUsedAfter($issuedAt)
-            ->expiresAt($issuedAt + $this->lifetime)
-            ->withClaim('uid', $uid)
-            ->getToken($this->signer, new Key($this->privateKey));
+            ->expiresAt($issuedAt + $this->lifetime);
+
+        foreach ($claims as $name => $value) {
+            $builder = $builder->withClaim($name, $value);
+        }
+
+        return $builder->getToken($this->signer, new Key($this->privateKey));
     }
 
     /**
@@ -291,25 +297,20 @@ Add the the following container definitons, e.g. into `config/container.php`:
 ```php
 <?php
 
-use App\Auth\JwtAuth;
+use App\Routing\JwtAuth;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
-use Selective\Config\Configuration;
 use Slim\App;
 
 return [
-    Configuration::class => function () {
-        return new Configuration(require __DIR__ . '/settings.php');
+    'settings' => function () {
+        return require __DIR__ . '/settings.php';
     },
 
     App::class => function (ContainerInterface $container) {
         AppFactory::setContainer($container);
-        $app = AppFactory::create();
 
-        // Optional: Set the base path to run the app in a sub-directory.
-        //$app->setBasePath('/sub-directory');
-
-        return $app;
+        return AppFactory::create();
     },
 
     // Add this entry
@@ -319,12 +320,12 @@ return [
 
     // And add this entry
     JwtAuth::class => function (ContainerInterface $container) {
-        $config = $container->get(Configuration::class);
+        $config = $container->get('settings')['jwt'];
 
-        $issuer = $config->getString('jwt.issuer');
-        $lifetime = $config->getInt('jwt.lifetime');
-        $privateKey = $config->getString('jwt.private_key');
-        $publicKey = $config->getString('jwt.public_key');
+        $issuer = (string)$config['issuer'];
+        $lifetime = (int)$config['lifetime'];
+        $privateKey = (string)$config['private_key'];
+        $publicKey = (string)$config['public_key'];
 
         return new JwtAuth($issuer, $lifetime, $privateKey, $publicKey);
     },
@@ -349,7 +350,7 @@ Then create the following action class for the route: `src/Action/TokenCreateAct
 
 namespace App\Action;
 
-use App\Auth\JwtAuth;
+use App\Routing\JwtAuth;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -373,7 +374,7 @@ final class TokenCreateAction
 
         // Validate login (pseudo code)
         // Warning: This should be done in an application service and not here!
-        // e.g. $isValidLogin = $this->userAuth->checkLogin($username, $password); 
+        // $userAuthData = $this->userAuth->authenticate($username, $password);
         $isValidLogin = ($username === 'user' && $password === 'secret');
 
         if (!$isValidLogin) {
@@ -384,7 +385,10 @@ final class TokenCreateAction
         }
 
         // Create a fresh token
-        $token = $this->jwtAuth->createJwt($username);
+        $token = $this->jwtAuth->createJwt([
+            'uid' => $username,
+        ]);
+        
         $lifetime = $this->jwtAuth->getLifetime();
 
         // Transform the result into a OAuh 2.0 Access Token Response
@@ -436,14 +440,15 @@ The client must send the JWT within the `Authorization` request header in this f
 Authorization: Bearer <token>
 ```
 
-Create the following middleware to parse the Bearer authentication header: `src/Middleware/JwtMiddleware.php`
+Create the following middleware to validate the Bearer authentication header: 
+`src/Middleware/JwtAuthMiddleware.php`
 
 ```php
 <?php
 
 namespace App\Middleware;
 
-use App\Auth\JwtAuth;
+use App\Routing\JwtAuth;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -451,9 +456,9 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
- * JWT middleware.
+ * JWT Auth middleware.
  */
-final class JwtMiddleware implements MiddlewareInterface
+final class JwtAuthMiddleware implements MiddlewareInterface
 {
     /**
      * @var JwtAuth
@@ -465,8 +470,14 @@ final class JwtMiddleware implements MiddlewareInterface
      */
     private $responseFactory;
 
+    /**
+     * The constructor.
+     *
+     * @param JwtAuth $jwtAuth The JWT auth
+     * @param ResponseFactoryInterface $responseFactory The response factory
+     */
     public function __construct(
-        JwtAuth $jwtAuth, 
+        JwtAuth $jwtAuth,
         ResponseFactoryInterface $responseFactory
     ) {
         $this->jwtAuth = $jwtAuth;
@@ -482,14 +493,10 @@ final class JwtMiddleware implements MiddlewareInterface
      * @return ResponseInterface The response
      */
     public function process(
-        ServerRequestInterface $request, 
+        ServerRequestInterface $request,
         RequestHandlerInterface $handler
     ): ResponseInterface {
-        $authorization = explode(
-            ' ', 
-            (string)$request->getHeaderLine('Authorization')
-        );
-        $token = $authorization[1] ?? '';
+        $token = explode(' ', (string)$request->getHeaderLine('Authorization'))[1] ?? '';
 
         if (!$token || !$this->jwtAuth->validateToken($token)) {
             return $this->responseFactory->createResponse()
@@ -497,45 +504,105 @@ final class JwtMiddleware implements MiddlewareInterface
                 ->withStatus(401, 'Unauthorized');
         }
 
-        // Append valid token
-        $parsedToken = $this->jwtAuth->createParsedToken($token);
-        $request = $request->withAttribute('token', $parsedToken);
-
-        // Append the user id as request attribute
-        $request = $request->withAttribute('uid', $parsedToken->getClaim('uid'));
-
         return $handler->handle($request);
     }
 }
+
 ```
 
-## Protecting routes with JWT
-
-If you want to protect a single route just add the `JwtMiddleware` to the route you want to protect:
-
-```php
-$app->post('/users', \App\Action\UserCreateAction::class)
-    ->add(\App\Middleware\JwtMiddleware::class);
-```
-
-If you want to protect a route group just add the `JwtMiddleware` to the route group you want to protect:
+Create the following middleware to extract the claims from the token: 
+`src/Middleware/JwtClaimMiddleware.php`
 
 ```php
 <?php
 
-use App\Middleware\JwtMiddleware;
+namespace App\Middleware;
+
+use App\Routing\JwtAuth;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+
+/**
+ * JWT Claim middleware.
+ */
+final class JwtClaimMiddleware implements MiddlewareInterface
+{
+    /**
+     * @var JwtAuth
+     */
+    private $jwtAuth;
+
+    /**
+     * The constructor.
+     *
+     * @param JwtAuth $jwtAuth The JWT auth
+     */
+    public function __construct(JwtAuth $jwtAuth)
+    {
+        $this->jwtAuth = $jwtAuth;
+    }
+
+    /**
+     * Invoke middleware.
+     *
+     * @param ServerRequestInterface $request The request
+     * @param RequestHandlerInterface $handler The handler
+     *
+     * @return ResponseInterface The response
+     */
+    public function process(
+        ServerRequestInterface $request,
+        RequestHandlerInterface $handler
+    ): ResponseInterface {
+        $token = explode(' ', (string)$request->getHeaderLine('Authorization'))[1] ?? '';
+
+        if ($token && $this->jwtAuth->validateToken($token)) {
+            // Append valid token
+            $parsedToken = $this->jwtAuth->createParsedToken($token);
+            $request = $request->withAttribute('token', $parsedToken);
+
+            // Append the user id as request attribute
+            $request = $request->withAttribute('uid', $parsedToken->getClaim('uid'));
+            $request = $request->withAttribute('locale', $parsedToken->getClaim('locale'));
+        }
+
+        return $handler->handle($request);
+    }
+}
+
+```
+
+## Protecting routes with JWT
+
+If you want to protect a single route just add the `JwtAuthMiddleware` to 
+the route you want to protect:
+
+```php
+$app->post('/users', \App\Action\UserCreateAction::class)
+    ->add(\App\Middleware\JwtAuthMiddleware::class);
+```
+
+If you want to protect a route group just add the `JwtAuthMiddleware` 
+to the route group you want to protect:
+
+```php
+<?php
+
+use App\Middleware\JwtAuthMiddleware;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app) {
-    // This route must not be protected
-    $app->post('/api/tokens', \App\Action\TokenCreateAction::class);
+    // API login. This route must not be protected.
+    $app->post('/tokens', \App\Action\TokenCreateAction::class);
 
-    // Protect the whole group
+    // API endpoints. This group is protected with JWT.
     $app->group('/api', function (RouteCollectorProxy $group) {
         $group->get('/users/{id}', \App\Action\UserReadAction::class);
         $group->post('/users', \App\Action\UserCreateAction::class);
-    })->add(JwtMiddleware::class);
+    })->add(JwtAuthMiddleware::class);
 
 };
 ```
