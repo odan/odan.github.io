@@ -84,12 +84,6 @@ Run this command to install [PHP-DI](http://php-di.org/):
 composer require php-di/php-di
 ```
 
-To access the application configuration install the `selective/config` package:
-
-```
-composer require selective/config
-```
-
 For testing purpose we are installing [phpunit](https://phpunit.de/) as development dependency with the `--dev` option:
 
 ```
@@ -162,7 +156,6 @@ The complete `composer.json` file should look like this:
 {
     "require": {
         "php-di/php-di": "^6.0",
-        "selective/config": "^1",
         "slim/psr7": "^1",
         "slim/slim": "^4.4"
     },
@@ -343,7 +336,6 @@ Create a file to load global middleware handler `config/middleware.php` and copy
 ```php
 <?php
 
-use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Middleware\ErrorMiddleware;
 
@@ -410,14 +402,13 @@ Create a new file for the container entries `config/container.php` and copy/past
 <?php
 
 use Psr\Container\ContainerInterface;
-use Selective\Config\Configuration;
 use Slim\App;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 
 return [
-    Configuration::class => function () {
-        return new Configuration(require __DIR__ . '/settings.php');
+    'settings' => function () {
+        return require __DIR__ . '/settings.php';
     },
 
     App::class => function (ContainerInterface $container) {
@@ -428,8 +419,7 @@ return [
 
     ErrorMiddleware::class => function (ContainerInterface $container) {
         $app = $container->get(App::class);
-        $settings = $container->get(Configuration::class)
-            ->getArray('error_handler_middleware');
+        $settings = $container->get('settings')['error_handler_middleware'];
 
         return new ErrorMiddleware(
             $app->getCallableResolver(),
@@ -924,7 +914,7 @@ Insert a `PDO::class` container definition to `config/container.php`:
 
 ```php
 PDO::class => function (ContainerInterface $container) {
-    $settings = $container->get(Configuration::class)->getArray('db');
+    $settings = $container->get('settings')['db'];
 
     $host = $settings['host'];
     $dbname = $settings['database'];
