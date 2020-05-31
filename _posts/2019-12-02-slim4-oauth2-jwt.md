@@ -657,6 +657,8 @@ that the username and password MAY use the HTTP Basic authentication or form dat
 
 Please write into the comments if you need more information about this topic.
 
+Read more: <https://blog.restcase.com/4-most-used-rest-api-authentication-methods/>
+
 ### How to handle CORS with OPTIONS preflight requests?
 
 Read more: [Slim 4 - CORS Setup](https://odan.github.io/2019/11/24/slim4-cors.html)
