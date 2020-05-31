@@ -252,7 +252,7 @@ $settings['temp'] = $settings['root'] . '/tmp';
 $settings['public'] = $settings['root'] . '/public';
 
 // Error Handling Middleware settings
-$settings['error_handler_middleware'] = [
+$settings['error'] = [
 
     // Should be set to false in production
     'display_error_details' => true,
@@ -419,7 +419,7 @@ return [
 
     ErrorMiddleware::class => function (ContainerInterface $container) {
         $app = $container->get(App::class);
-        $settings = $container->get('settings')['error_handler_middleware'];
+        $settings = $container->get('settings')['error'];
 
         return new ErrorMiddleware(
             $app->getCallableResolver(),
@@ -435,6 +435,8 @@ return [
 
 ## Base path
 
+Most people will get a **404 error (not found)**, because the basePath is not set corretly.
+
 If you run your Slim app in a sub-directory, resp. not directly within the 
 [DocumentRoot](https://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot)
 of your webserver, you must set the "correct" base path.
@@ -445,12 +447,12 @@ In all other cases you have to make sure, that your base path is correct. For ex
 the DocumentRoot directory is `/var/www/domain.com/htdocs/`, but the application
 is stored under `/var/www/domain.com/htdocs/my-app/`, then you have to set `/my-app` as base path.
 
-To be more clear: In this context “sub-directory” means a sub-directory of the project, not the `public/` directory.
-For example when you place your app not directly under the webservers `DocumentRoot`.
+To be more precise: In this context “sub-directory” means a sub-directory of the project,
+and **not** the `public/` directory. For example when you place your app not directly 
+under the webservers `DocumentRoot`.
+
 For security reasons you should always place your front-controller (index.php) into the `public/`
 directory. Don't place your front controller directly into the project root directory.
-
-Most people will get a **404 error (not found)**, because the basePath is not set corretly.
 
 You can manually set the base path in Slim using the `setBasePath` method:
 
@@ -458,10 +460,12 @@ You can manually set the base path in Slim using the `setBasePath` method:
 $app->setBasePath('/slim4-tutorial');
 ```
 
-But the problem is, that the basePath can be different for each host (dev, prod etc...).
+But the problem is, that the basePath can be different for each host (dev, testing, staging, prod etc...).
 
-To fix this we are installing the [BasePathMiddleware](https://github.com/selective-php/basepath) now.
-Run:
+The [BasePathMiddleware](https://github.com/selective-php/basepath) detects the basePath
+and sets the base path into the Slim app instance.
+
+To install the BasePathMiddleware, run:
 
 ```
 composer require selective/basepath
@@ -481,8 +485,6 @@ return [
     },
 ];
 ``` 
-
-Now that you have installed the `BasePathMiddleware` remove this line (if exists): `$app->setBasePath('...');`.
 
 Then add the `BasePathMiddleware::class` to the middleware stack in `config/middleware.php`:
 
@@ -506,6 +508,8 @@ return function (App $app) {
     $app->add(ErrorMiddleware::class);
 };
 ```
+
+Now that you have installed the `BasePathMiddleware`, remove this line (if exists): `$app->setBasePath('...');`.
 
 ## Your first route
 
@@ -576,7 +580,6 @@ The use of class names is more lightweight, faster and scales better for larger 
 More details about the flow of everything that happens when arriving a route 
 and the communication between the different layers can be found here: [Action](https://odan.github.io/slim4-skeleton/action.html)
 
-* Create a directory: `src/`
 * Create a sub-directory: `src/Action`
 * Create this action class in: `src/Action/HomeAction.php`
 
@@ -815,6 +818,9 @@ final class ValidationException extends RuntimeException
     }
 }
 ```
+
+If you like this pattern for validation, I recommend to have a look at this library: 
+[selective/validation](https://github.com/selective-php/validation)
 
 ### Data Transfer Objects (DTO) 
   
@@ -1076,21 +1082,21 @@ Run this command in the same directory as the project’s composer.json file:
 composer install --no-dev --optimize-autoloader
 ```
 
-You don't have to run composer on your production server. Instead you should implement a [build pipeline](https://www.amazon.com/dp/B003YMNVC0) that creates
-an so called "artifact". An artifact is an ZIP file you can upload and deploy on your production server.
+You don't have to run composer on your production server. Instead you should implement a 
+[build pipeline](https://www.amazon.com/dp/B003YMNVC0) that creates
+an so called "artifact". An artifact is an ZIP file you can upload and deploy on 
+your production server.
 
-* [Apache Ant](https://ant.apache.org/bindownload.cgi) is a software great tool for automating software build processes.
-* [selective-php/artifact](https://github.com/selective-php/artifact) is a tool, written in PHP, to build artifacts from your source code.
+The following tools are very useful for creating artifacts:
+
+* [Deployer](https://deployer.org/) to build and upload your release files to the application servers.
+* [Apache Ant](https://ant.apache.org/bindownload.cgi) to automate your software build processes. Requires Java.
 
 For security reasons, you should switch off the output of all error details in production:
 
 ```php
-$settings['error_handler_middleware'] = [
-    'display_error_details' => false,
-];
+$settings['error']['display_error_details'] = false;
 ```
-
-If you have to run your Slim application in a sub-directory, you could try this library: [selective/basepath](https://github.com/selective-php/basepath)
 
 **Important**: It's very important to set the Apache `DocumentRoot` to the `public/` directory. 
 Otherwise, it may happen that someone else could access internal files from the web. [More details](https://www.digitalocean.com/community/tutorials/how-to-move-an-apache-web-root-to-a-new-location-on-ubuntu-16-04)
@@ -1141,8 +1147,7 @@ Read this article:  [Slim 4 - CORS setup](https://odan.github.io/2019/11/24/slim
 
 ### How to add a logger?
 
-You could inject a logger factory, e.g. like the [LoggerFactory](https://github.com/odan/slim4-skeleton/blob/master/src/Factory/LoggerFactory.php)
-The settings are defined [here](https://github.com/odan/slim4-skeleton/blob/master/config/defaults.php#L43). 
+Read this article: [Slim 4 - Logging](https://odan.github.io/2020/05/25/slim4-logging.html)
 
 ### I get a 404 (not found) error
 
