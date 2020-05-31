@@ -462,8 +462,8 @@ $app->setBasePath('/slim4-tutorial');
 
 But the problem is, that the basePath can be different for each host (dev, testing, staging, prod etc...).
 
-The [BasePathMiddleware](https://github.com/selective-php/basepath) detects the basePath
-and sets the base path into the Slim app instance.
+The [BasePathMiddleware](https://github.com/selective-php/basepath) detects and sets
+the base path into the Slim app instance.
 
 To install the BasePathMiddleware, run:
 
@@ -1087,7 +1087,7 @@ You don't have to run composer on your production server. Instead you should imp
 an so called "artifact". An artifact is an ZIP file you can upload and deploy on 
 your production server.
 
-The following tools are very useful for creating artifacts:
+These tools are very useful for creating artifacts:
 
 * [Deployer](https://deployer.org/) to build and upload your release files to the application servers.
 * [Apache Ant](https://ant.apache.org/bindownload.cgi) to automate your software build processes. Requires Java.
