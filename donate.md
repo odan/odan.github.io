@@ -16,7 +16,7 @@ I would appreciate a small donation:
 * **[PayPal](https://www.paypal.me/dopitz/1)**
 * [Buy a Coffee](https://ko-fi.com/dopitz)
 
-You can  **buy** all Slim articles (over 167 pages) bundled into a eBook. 
+You can  **buy** all Slim articles (> 210 pages) bundled into a eBook. 
 
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
