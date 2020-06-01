@@ -163,7 +163,7 @@ return [
         $options = $twigSettings['options'];
         $options['cache'] = $options['cache_enabled'] ? $options['cache_path'] : false;
 
-        $twig = Twig::create($settings['paths'], $options);
+        $twig = Twig::create($twigSettings['paths'], $options);
 
         // Add more extension here
         // ...
