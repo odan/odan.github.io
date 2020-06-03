@@ -180,7 +180,7 @@ $userRow = $this->connection->table('users')->find(1);
 
 ### Handling relationships
 
-You can define the relationships directly with a [join clause](https://laravel.com/docs/master/queries#joins).
+You can define relationships directly with a [join clause](https://laravel.com/docs/master/queries#joins).
 
 **Example**
 
