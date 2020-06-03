@@ -110,6 +110,7 @@ You can inject the connection instance into your repository like this:
 
 namespace App\Domain\User\Repository;
 
+use DomainException;
 use Illuminate\Database\Connection;
 
 class UserRepository
@@ -129,7 +130,18 @@ class UserRepository
         $this->connection = $connection;
     }
 
-    // ...
+    public function getUserById(int $userId): array
+    {
+        $row = $this->connection->table('users')->find(1);
+
+        if(!$row) {
+            throw new DomainException(sprintf('User not found: %s', $userId));
+        }       
+
+        return $row;
+    }
+
+    // Add more methods...
 }
 ```
 
@@ -148,13 +160,27 @@ $rows = $this->connection->table('users')->get();
 *Query searching for names matching foo*
 
 ```php
-$rows = $this->connection->table('users')->where('username', 'like', '%root%')->get();
+$userRows = $this->connection->table('users')->where('username', 'like', '%root%')->get();
 ```
 
 ### Query the table by id
 
 ```php
-$row = $this->connection->table('users')->find(1);
+$userRow = $this->connection->table('users')->find(1);
+```
+
+### Handling relationships
+
+You can define the relationships directly with a [join clause](https://laravel.com/docs/master/queries#joins).
+
+**Example**
+
+```php
+$userRows = $this->connection->table('users')
+    ->select('users.*', 'contacts.phone', 'orders.price')
+    ->join('contacts', 'users.id', '=', 'contacts.user_id')
+    ->join('orders', 'users.id', '=', 'orders.user_id')
+    ->get();
 ```
 
 ### Insert a record
