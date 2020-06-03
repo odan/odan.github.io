@@ -15,18 +15,18 @@ keywords: php slim laravel eloquent orm sql querybuilder
 * [Repository](#repository)
 * [Usage](#usage)
 * [Fetching arrays](#fetching-arrays)
-* [Setup multiple connections](#setup-multiple-connections)
+* [Multiple database connections](#multiple-database-connections)
 
 ## Requirements
 
 * PHP 7.1+
 * MySQL 5.7+
-* Composer
+* Composer (for development)
 * [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
 
 ## Introduction
 
-You can use a Laravel [QueryBuilder](https://laravel.com/docs/master/queries) to connect 
+You can use a Laravel [Illuminate QueryBuilder](https://laravel.com/docs/master/queries) to connect 
 your Slim 4 application to a database.
 
 Please note: This concept requires no Eloquent ORM.
@@ -182,8 +182,6 @@ $userRow = $this->connection->table('users')->find(1);
 
 You can define relationships directly with a [join clause](https://laravel.com/docs/master/queries#joins).
 
-**Example**
-
 ```php
 $userRows = $this->connection->table('users')
     ->select('users.*', 'contacts.phone', 'orders.price')
@@ -247,19 +245,13 @@ $this->connection->table('users')
 
 ### Fetching arrays
 
-In Laravel 5.4, the default (and only) fetch mode is `PDO::FETCH_OBJ`. The only global way to change this is to now rely on events.
+In Laravel 5.4, the default (and only) fetch mode is `PDO::FETCH_OBJ`. 
 
-You still have at least two options to change the fetch mode to array.
+But you still have at least two options to change the fetch mode to array.
 
-### Option 1: Extending MySqlConnection
+#### Option 1: Extending MySqlConnection
 
 You can extend from `\Illuminate\Database\MySqlConnection` and define a resolver for it.
-
-```php
-\Illuminate\Database\Connection::resolverFor('mysql', function($connection, $database, $prefix, $config) {
-    return new \App\Database\MySqlConnectionAssocArray($connection, $database, $prefix, $config);
-});
-```
 
 ```php
 class MySqlConnectionAssocArray extends \Illuminate\Database\MySqlConnection
@@ -273,40 +265,63 @@ class MySqlConnectionAssocArray extends \Illuminate\Database\MySqlConnection
 }
 ```
 
+The resolver:
+
+```php
+\Illuminate\Database\Connection::resolverFor('mysql', function($connection, $database, $prefix, $config) {
+    return new \App\Database\MySqlConnectionAssocArray($connection, $database, $prefix, $config);
+});
+```
+
 *Thanks to devinim for this tip.*
 
-### Option 2: Using events
+#### Option 2: Using events
 
 Installation: `composer require illuminate/events`
 
 Register this event handler in your container definiton for `Connection::class`:
 
 ```php
-$dispatcher = new \Illuminate\Events\Dispatcher();
-$db->setEventDispatcher($dispatcher);
+// ...
 
-$dispatcher->listen(\Illuminate\Database\Events\StatementPrepared::class, function ($event) {
-    $event->statement->setFetchMode(PDO::FETCH_ASSOC);
-});
+return [
+    // ...
+    
+    // Database connection
+    Connection::class => function (ContainerInterface $container) {
+        $factory = new ConnectionFactory(new IlluminateContainer());
+
+        $connection = $factory->make($container->get('settings')['db']);
+
+        // Disable the query log to prevent memory issues
+        $connection->disableQueryLog();
+
+        $dispatcher = new \Illuminate\Events\Dispatcher();
+        $connection->setEventDispatcher($dispatcher);
+
+        $dispatcher->listen(\Illuminate\Database\Events\StatementPrepared::class, function ($event) {
+            $event->statement->setFetchMode(PDO::FETCH_ASSOC);
+        });
+
+        return $connection;
+    },
+    
+    // ...
+];
 ```
 
 **Usage:**
 
 ```php
-$db = $this->get('db');
-$rows = $db->table('information_schema.schemata')->get()->toArray();
+$rows = $this-connection->table('users')->get()->toArray();
 ```
 
-Downside: Events are a poor workaround for this, as mocking an event for testing will 
-then prevent the fetch mode event from firing, and if your app relies on a different 
-fetch mode you now may get issues with your tests.
-
-### Setup multiple connections
+### Multiple database connections
 
 The following example shows how you can use the Eloquent Query Builder to set up 
 multiple database connections and access them in a repository.
 
-1. Extend your second connection from `Illuminate\Database\Connection`:
+Extend your second connection from `Illuminate\Database\Connection`:
 
 Create a new file: `src/App/Database/SecondConnection.php`
 
@@ -323,7 +338,7 @@ class SecondConnection extends MySqlConnection
 }
 ```
 
-2. Register a new container definition for the second database connection.
+Register a new container definition for the second database connection.
 
 Please note: You also need new connection configuration (e.g. db2) and a new driver name (e.g. mysql2) for the second connection parameters.
 
@@ -364,7 +379,7 @@ return [
 ];
 ```
 
-3. Inject the database connections into the repository
+Inject the second database connection into the repository.
 
 If you need multiple connections, define them in the constructor parameter list as follows:
 
@@ -406,5 +421,5 @@ class UserRepository
 
 ## Read more
 
-* [Eloquent documentation](https://laravel.com/docs/master/eloquent)
+* [Laravel Database Query Builder](https://laravel.com/docs/master/queries)
 * [Illuminate Database on Github](https://github.com/illuminate/database)
