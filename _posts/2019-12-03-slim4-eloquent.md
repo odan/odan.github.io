@@ -19,7 +19,7 @@ keywords: php slim laravel eloquent orm sql querybuilder
 
 ## Requirements
 
-* PHP 7.1+
+* PHP 7.2+
 * MySQL 5.7+
 * Composer (for development)
 * [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
