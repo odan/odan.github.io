@@ -26,7 +26,7 @@ keywords: php slim laravel eloquent orm sql querybuilder
 
 ## Introduction
 
-You can use a database query builder such as [Eloquent](https://laravel.com/docs/eloquent) to connect 
+You can use a database **query builder** such as [Eloquent](https://laravel.com/docs/eloquent) to connect 
 your Slim 4 application to a database.
 
 ## Installation
@@ -157,6 +157,13 @@ $rows = $this->connection->table('users')->get();
 
 ### Query the table with where
 
+You can use the [where]((https://laravel.com/docs/master/queries#where-clauses)) 
+method on a query builder instance to add where clauses to the query. 
+
+```php
+$userRows = $this->connection->table('users')->where('username', '=', 'admin')->get();
+```
+
 *Query searching for names matching foo*
 
 ```php
@@ -185,6 +192,10 @@ $userRows = $this->connection->table('users')
 
 ### Insert a record
 
+The query builder also provides an [insert](https://laravel.com/docs/master/queries#inserts)
+method for inserting records into the database table. 
+The insert method accepts an array of column names and values:
+
 ```php
 $values = [
     'first_name' => 'john',
@@ -203,6 +214,10 @@ $newId = $this->connection->table('users')->insertGetId($values);
 
 ### Update a record
 
+In addition to inserting records into the database, 
+the query builder can also update existing records using 
+the [update](https://laravel.com/docs/master/queries#updates) method.
+
 ```php
 $values = ['email' => 'new@example.com'];
 
@@ -212,6 +227,9 @@ $this->connection->table('users')
 ```
 
 ### Delete a record
+
+The query builder can also be used to [delete](https://laravel.com/docs/master/queries#deletes) 
+records from the table via the delete method.
 
 ```php
 $this->connection->table('users')->delete(1);
