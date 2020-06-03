@@ -104,7 +104,7 @@ return [
 
 ## Repository
 
-The best place to use the query build is within a repository.
+The best place to use the query builder is within a repository.
 
 To get the query build into the repository instance, 
 it must be declared in the constructor as follows:
