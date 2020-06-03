@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Doctrine DBAL Setup
+title: Slim 4 - Doctrine DBAL
 layout: post
 comments: true
 published: true

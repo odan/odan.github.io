@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Eloquent Setup
+title: Slim 4 - Laravel Query Builder
 layout: post
 comments: true
 published: true
@@ -26,8 +26,10 @@ keywords: php slim laravel eloquent orm sql querybuilder
 
 ## Introduction
 
-You can use a database **query builder** such as [Eloquent](https://laravel.com/docs/eloquent) to connect 
+You can use a Laravel [QueryBuilder](https://laravel.com/docs/master/queries) to connect 
 your Slim 4 application to a database.
+
+Please note: This concept requires no Eloquent ORM.
 
 ## Installation
 

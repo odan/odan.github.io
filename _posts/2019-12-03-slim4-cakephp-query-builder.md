@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - CakePHP Query Builder Setup
+title: Slim 4 - CakePHP Query Builder
 layout: post
 comments: true
 published: true
