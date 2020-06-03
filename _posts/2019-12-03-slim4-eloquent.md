@@ -26,14 +26,14 @@ keywords: php slim laravel eloquent orm sql querybuilder
 
 ## Introduction
 
-You can use a Laravel [Illuminate QueryBuilder](https://laravel.com/docs/master/queries) to connect 
-your Slim 4 application to a database.
+You can use the [Illuminate Query Builder](https://laravel.com/docs/master/queries) from Laravel
+to connect your Slim 4 application to a database.
 
 Please note: This concept requires no Eloquent ORM.
 
 ## Installation
 
-To add Eloquent to your application, run:
+To add the Query Builder to your application, run:
 
 ```
 composer require illuminate/database
@@ -41,7 +41,7 @@ composer require illuminate/database
 
 ## Configuration
 
-Add the database settings to Slim’s settings array, e.g `config/settings.php`:
+Add the database configuration to the settings array, e.g in `config/settings.php`:
 
 ```php
 // Database settings
@@ -69,7 +69,7 @@ $settings['db'] = [
 ];
 ```
 
-In your `config/container.php` or wherever you add your container definitions:
+Add a new container definiton for `Connection::class` and `PDO::class`, e.g. in `config/container.php`:
 
 ```php
 <?php
@@ -78,8 +78,7 @@ use Illuminate\Container\Container as IlluminateContainer;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Connectors\ConnectionFactory;
 use Psr\Container\ContainerInterface;
-use Slim\App;
-use Slim\Factory\AppFactory;
+// ...
 
 return [
 
@@ -105,7 +104,10 @@ return [
 
 ## Repository
 
-You can inject the connection instance into your repository like this:
+The best place to use the query build is within a repository.
+
+To get the query build into the repository instance, 
+it must be declared in the constructor as follows:
 
 ```php
 <?php
@@ -132,24 +134,27 @@ class UserRepository
         $this->connection = $connection;
     }
 
-    public function getUserById(int $userId): array
-    {
-        $row = $this->connection->table('users')->find(1);
-
-        if(!$row) {
-            throw new DomainException(sprintf('User not found: %s', $userId));
-        }       
-
-        return $row;
-    }
-
-    // Add more methods...
+    // Add your custom query methods here...
 }
 ```
 
 ## Usage
 
-Once the connection instance has been injected, you may use it as follows:
+Once the connection instance has been injected, you may use it as follows. 
+Add a new method per query you want to provide for the service class. Example:
+
+```php
+public function getUserById(int $userId): array
+{
+    $row = $this->connection->table('users')->find($userId);
+
+    if(!$row) {
+        throw new DomainException(sprintf('User not found: %s', $userId));
+    }       
+
+    return $row;
+}
+```
 
 ### Query all rows
 
