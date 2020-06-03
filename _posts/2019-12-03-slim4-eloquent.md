@@ -114,7 +114,6 @@ it must be declared in the constructor as follows:
 
 namespace App\Domain\User\Repository;
 
-use DomainException;
 use Illuminate\Database\Connection;
 
 class UserRepository
@@ -149,7 +148,7 @@ public function getUserById(int $userId): array
     $row = $this->connection->table('users')->find($userId);
 
     if(!$row) {
-        throw new DomainException(sprintf('User not found: %s', $userId));
+        throw new \DomainException(sprintf('User not found: %s', $userId));
     }       
 
     return $row;
