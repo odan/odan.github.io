@@ -11,8 +11,8 @@ keywords: slim, slimphp, php, monolog, logging
 
 * [Requirements](#requirements)
 * [Introduction](#introduction)
-* [Catching PHP warnings, notices and errors](#catching-php-warnings-notices-and-errors)
 * [Catching 404 not found errors](#catching-404-not-found-errors)
+* [Catching PHP warnings, notices and errors](#catching-php-warnings-notices-and-errors)
 * [Catching invalid HTTP requests](#catching-invalid-http-requests)
 
 ## Requirements
@@ -42,6 +42,105 @@ like [Monolog](https://seldaek.github.io/monolog/).
 
 * [The Monolog LoggerFactory](https://odan.github.io/2020/05/25/slim4-logging.html) 
  
+## Catching 404 not found errors
+
+In Slim 3 you were able to add the custom "Not Found Handler" to handle undefined routes.
+Since Slim 4 it's possible to add a custom error handler to the `ErrorMiddleware`.
+
+Here you can find some examples how to add a custom error handler
+
+* <https://www.slimframework.com/docs/v4/middleware/error-handling.html>
+* <https://github.com/odan/slim4-skeleton/blob/master/src/Handler/DefaultErrorHandler.php>
+* <https://github.com/slimphp/Slim-Skeleton/blob/master/src/Application/Handlers/HttpErrorHandler.php>
+
+The simplest way to catch 404 (and other) http errors is to add a 
+custom middleware before the ErrorMiddleware, e.g.:
+
+```php
+<?php
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Exception\HttpNotFoundException;
+use Slim\Psr7\Response;
+
+// ...
+
+// HttpNotFound Middleware
+$app->add(function (
+    ServerRequestInterface $request, 
+    RequestHandlerInterface $handler
+    ) {
+    try {
+        return $handler->handle($request);
+    } catch (HttpNotFoundException $httpException) {
+        $response = (new Response())->withStatus(404);
+        $response->getBody()->write('404 Not found');
+
+        return $response;
+    }
+});
+
+$app->addErrorMiddleware(true, true, true, $logger);
+```
+
+Of course this example is very limited in its functionality. To catch
+all http errors you could use the `HttpException` within the catch block.
+
+If you want to log all http errors or render Twig templates
+then you should implement a custom Slim DefaultErrorHandler or a 
+`HttpExceptionMiddleware`.
+
+**Example**
+
+```php
+<?php
+
+namespace App\Middleware;
+
+use Psr\Http\Message\ResponseFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Exception\HttpException;
+
+final class HttpExceptionMiddleware implements MiddlewareInterface
+{
+    /**
+     * @var ResponseFactoryInterface
+     */
+    private $responseFactory;
+
+    public function __construct(ResponseFactoryInterface $responseFactory)
+    {
+        $this->responseFactory = $responseFactory;
+    }
+
+    public function process(
+        ServerRequestInterface $request, 
+        RequestHandlerInterface $handler
+    ): ResponseInterface
+    {
+        try {
+            return $handler->handle($request);
+        } catch (HttpException $httpException) {
+            // Handle the http exception here
+            $statusCode = $httpException->getCode();
+            $response = $this->responseFactory->createResponse()->withStatus($statusCode);
+            $errorMessage = sprintf('%s %s', $statusCode, $response->getReasonPhrase());
+
+            // Log the errror message
+            // $this->logger->error($errorMessage);
+
+            // Render twig template or just add the content to the body
+            $response->getBody()->write($errorMessage);
+
+            return $response;
+        }
+    }
+}
+```
+
 ## Catching PHP warnings, notices and errors
 
 Besides [Throwable](https://www.php.net/manual/en/class.throwable.php)
@@ -174,106 +273,6 @@ PS: Another way to achieve the same effect is to register a custom shutdown hand
 
 * <https://github.com/slimphp/Slim-Skeleton/blob/master/public/index.php#L60>
 * <https://github.com/slimphp/Slim-Skeleton/blob/master/src/Application/Handlers/ShutdownHandler.php>
-
-
-## Catching 404 not found errors
-
-In Slim 3 you could add acustom "Not Found Handler" to handle routes that are not defined.
-Since Slim 4 it's possible to add a custom error handler to the `ErrorMiddleware`.
-
-Here you can find some examples how to add a custom error handler
-
-* <https://www.slimframework.com/docs/v4/middleware/error-handling.html>
-* <https://github.com/odan/slim4-skeleton/blob/master/src/Handler/DefaultErrorHandler.php>
-* <https://github.com/slimphp/Slim-Skeleton/blob/master/src/Application/Handlers/HttpErrorHandler.php>
-
-The simplest way to catch 404 (and other) http errors is to add a 
-custom middleware before the ErrorMiddleware, e.g.:
-
-```php
-<?php
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\RequestHandlerInterface;
-use Slim\Exception\HttpNotFoundException;
-use Slim\Psr7\Response;
-
-// ...
-
-// HttpNotFound Middleware
-$app->add(function (
-    ServerRequestInterface $request, 
-    RequestHandlerInterface $handler
-    ) {
-    try {
-        return $handler->handle($request);
-    } catch (HttpNotFoundException $httpException) {
-        $response = (new Response())->withStatus(404);
-        $response->getBody()->write('404 Not found');
-
-        return $response;
-    }
-});
-
-$app->addErrorMiddleware(true, true, true, $logger);
-```
-
-Of course this example is very limited in its functionality. To catch
-all http errors you could use the `HttpException` within the catch block.
-
-If you want to log all http errors or render Twig templates
-then you should implement a custom Slim DefaultErrorHandler or a 
-`HttpExceptionMiddleware`.
-
-**Example**
-
-```php
-<?php
-
-namespace App\Middleware;
-
-use Psr\Http\Message\ResponseFactoryInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
-use Slim\Exception\HttpException;
-
-final class HttpExceptionMiddleware implements MiddlewareInterface
-{
-    /**
-     * @var ResponseFactoryInterface
-     */
-    private $responseFactory;
-
-    public function __construct(ResponseFactoryInterface $responseFactory)
-    {
-        $this->responseFactory = $responseFactory;
-    }
-
-    public function process(
-        ServerRequestInterface $request, 
-        RequestHandlerInterface $handler
-    ): ResponseInterface
-    {
-        try {
-            return $handler->handle($request);
-        } catch (HttpException $httpException) {
-            // Handle the http exception here
-            $statusCode = $httpException->getCode();
-            $response = $this->responseFactory->createResponse()->withStatus($statusCode);
-            $errorMessage = sprintf('%s %s', $statusCode, $response->getReasonPhrase());
-
-            // Log the errror message
-            // $this->logger->error($errorMessage);
-
-            // Render twig template or just add the content to the body
-            $response->getBody()->write($errorMessage);
-
-            return $response;
-        }
-    }
-}
-```
 
 ## Catching invalid HTTP requests
 
