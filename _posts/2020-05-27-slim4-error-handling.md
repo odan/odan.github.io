@@ -61,8 +61,8 @@ custom middleware before the ErrorMiddleware, e.g.:
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 use Slim\Exception\HttpNotFoundException;
+use Slim\Middleware\ErrorMiddleware;
 use Slim\Psr7\Response;
-
 // ...
 
 // HttpNotFound Middleware
@@ -80,7 +80,7 @@ $app->add(function (
     }
 });
 
-$app->addErrorMiddleware(true, true, true, $logger);
+$app->add(ErrorMiddleware::class);
 ```
 
 Of course this example is very limited in its functionality. To catch
@@ -139,6 +139,20 @@ final class HttpExceptionMiddleware implements MiddlewareInterface
         }
     }
 }
+```
+
+Add the middleware to the stack, e.g. in `config/middleware.php`:
+
+```php
+<?php
+
+use App\Middleware\HttpExceptionMiddleware;
+use Slim\Middleware\ErrorMiddleware;
+// ...
+
+$app->add(HttpExceptionMiddleware::class); // <--- here
+
+$app->add(ErrorMiddleware::class);
 ```
 
 ## Catching PHP warnings, notices and errors
