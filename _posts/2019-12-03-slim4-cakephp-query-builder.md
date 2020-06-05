@@ -291,7 +291,7 @@ and `innerJoin()` to create joins:
 ```php
 $query = $this->queryFactory->newSelect('users');
 
-$query->select(['users.*',]);
+$query->select(['users.*']);
 
 $query->innerJoin('contacts', 'contacts.user_id = users.id');
 $query->leftJoin('orders', 'orders.user_id = users.id');
