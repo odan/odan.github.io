@@ -99,3 +99,4 @@ $app->run();
 
 * A closure factory doesn't get the container automatically. You have to pass it manually with `addArgument`.
 * Constructor parameters with optional / nullable values are not supported.
+* Compared to PHP-DI, the performance of League Container can be up to 12 slower.

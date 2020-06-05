@@ -442,7 +442,7 @@ return [
 #### Transaction handling example
 
 Don't use the transaction handler directly within a repository.
-Instead you should orchestrate all transactions one layer above, in a service class
+Instead you should orchestrate all transactions one layer above, in a service class.
 
 **Example**
 
