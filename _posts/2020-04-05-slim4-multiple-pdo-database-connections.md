@@ -168,7 +168,7 @@ class UserRepository
 }
 ```
 
-Please note: If you don't like the class name `PDO2`, just give it a more specific name.
+If you don't like the class name `PDO2`, just give it a more specific name.
 
 ## Autowired objects
 
