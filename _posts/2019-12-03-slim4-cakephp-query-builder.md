@@ -360,9 +360,7 @@ $rows = $query->execute()->fetchAll('assoc');
 
 ## Transaction handling
 
-The service layer is responsible to handle the transaction, not the repository.
-
-The transaction can be abstracted away with this interface:
+The transaction handling can be abstracted away with this interface:
 
 ```php
 <?php
@@ -377,7 +375,7 @@ interface TransactionInterface
 }
 ```
 
-The `TransactionInterface` can can be implemented as follows:
+The `TransactionInterface` can be implemented as follows:
 
 ```php
 <?php
@@ -441,7 +439,8 @@ return [
 
 #### Transaction handling example
 
-Don't use the transaction handler directly within a repository.
+The service layer is responsible to handle the transaction.
+Please don't use the transaction handler directly within a repository.
 Instead you should orchestrate all transactions one layer above, in a service class.
 
 **Example**
