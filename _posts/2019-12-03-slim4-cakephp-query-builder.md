@@ -281,6 +281,24 @@ $row = $query->execute()->fetch('assoc');
 
 Read more: [Selecting data](https://book.cakephp.org/3/en/orm/query-builder.html#selecting-data)
 
+### Handling relationships
+
+You can define relationships directly with a join clause.
+
+In addition to `join()` you can use `rightJoin()`, `leftJoin()` 
+and `innerJoin()` to create joins:
+
+```php
+$query = $this->queryFactory->newSelect('users');
+
+$query->select(['users.*',]);
+
+$query->innerJoin('contacts', 'contacts.user_id = users.id');
+$query->leftJoin('orders', 'orders.user_id = users.id');
+
+$rows = $query->execute()->fetchAll('assoc');
+```
+
 ### Insert a record
 
 ```php
