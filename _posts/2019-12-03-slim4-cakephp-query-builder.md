@@ -377,7 +377,7 @@ interface TransactionInterface
 }
 ```
 
-The implementation for the `TransactionInterface` interface could be implemented as follows:
+The implementation for `TransactionInterface` can be implemented as follows:
 
 ```php
 <?php
@@ -419,7 +419,7 @@ final class Transaction implements TransactionInterface
 
 ```
 
-Add a container definition for ``:
+Add a container definition for `App\Database\TransactionInterface::class`:
 
 ```php
 <?php
