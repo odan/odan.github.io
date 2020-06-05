@@ -404,12 +404,12 @@ final class Transaction implements TransactionInterface
         $this->connection->begin();
     }
 
-    public function commit()
+    public function commit(): void
     {
         $this->connection->commit();
     }
 
-    public function rollback()
+    public function rollback(): void
     {
         $this->connection->rollback();
     }
