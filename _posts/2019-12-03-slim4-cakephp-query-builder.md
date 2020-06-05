@@ -15,6 +15,12 @@ keywords: php slim cakephp sql querybuilder
 * [Configuration](#configuration)
 * [Repository](#repository)
 * [Usage](#usage)
+  * [Select](#select)  
+  * [Insert](#insert)
+  * [Update](#update)
+  * [Delete](#delete)
+* [Handling relationships](#handling-relationships)
+* [Transaction handling](#transaction-handling)
 
 ## Requirements
 
@@ -245,7 +251,9 @@ class UserRepository
 
 Once the query factory instance has been injected, you may use it like so:
 
-### Query all rows
+### Select
+
+Query all rows:
 
 ```php
 $query = $this->queryFactory->newSelect('users')->select('*');
@@ -256,7 +264,7 @@ foreach ($rows as $row) {
 }
 ```
 
-### Query the table with where
+Query the table with where:
 
 ```php
 $query = $this->queryFactory->newSelect('users');
@@ -271,7 +279,7 @@ foreach ($rows as $row) {
 }
 ```
 
-### Query the table by id
+Query the table by id:
 
 ```php
 $query = $this->queryFactory->newSelect('users')->andWhere(['id' => 1]);
@@ -281,25 +289,9 @@ $row = $query->execute()->fetch('assoc');
 
 Read more: [Selecting data](https://book.cakephp.org/3/en/orm/query-builder.html#selecting-data)
 
-### Handling relationships
+### Insert
 
-You can define relationships directly with a join clause.
-
-In addition to `join()` you can use `rightJoin()`, `leftJoin()` 
-and `innerJoin()` to create joins:
-
-```php
-$query = $this->queryFactory->newSelect('users');
-
-$query->select(['users.*']);
-
-$query->innerJoin('contacts', 'contacts.user_id = users.id');
-$query->leftJoin('orders', 'orders.user_id = users.id');
-
-$rows = $query->execute()->fetchAll('assoc');
-```
-
-### Insert a record
+Insert a record
 
 ```php
 $values = [
@@ -321,7 +313,9 @@ $newId = (int)$this->queryFactory->newInsert('users', $values)
 
 Read more: [Inserting data](https://book.cakephp.org/3/en/orm/query-builder.html#inserting-data)
 
-### Update a record
+### Update
+
+Update a record:
 
 ```php
 $values = ['email' => 'new@example.com'];
@@ -334,7 +328,9 @@ $this->queryFactory->newUpdate('users')
 
 Read more: [Updating data](https://book.cakephp.org/3/en/orm/query-builder.html#updating-data)
 
-### Delete a record
+### Delete 
+
+Delete a record:
 
 ```php
 $this->queryFactory->newDelete('users')
@@ -344,7 +340,25 @@ $this->queryFactory->newDelete('users')
 
 Read more: [Deleting data](https://book.cakephp.org/3/en/orm/query-builder.html#deleting-data)
 
-### Transaction handling
+## Handling relationships
+
+You can define relationships directly with a join clause.
+
+In addition to `join()` you can use `rightJoin()`, `leftJoin()` 
+and `innerJoin()` to create joins:
+
+```php
+$query = $this->queryFactory->newSelect('users');
+
+$query->select(['users.*']);
+
+$query->innerJoin('contacts', 'contacts.user_id = users.id');
+$query->leftJoin('orders', 'orders.user_id = users.id');
+
+$rows = $query->execute()->fetchAll('assoc');
+```
+
+## Transaction handling
 
 The service layer is responsible to handle the transaction, not the repository.
 
@@ -425,7 +439,7 @@ return [
 ];
 ```
 
-#### Usage
+#### Transaction handling example
 
 Don't use the transaction handler directly within a repository.
 Instead you should orchestrate all transactions one layer above, in a service class
