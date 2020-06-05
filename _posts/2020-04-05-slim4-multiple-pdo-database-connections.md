@@ -11,9 +11,11 @@ keywords: php slim pdo database connection container phpdi
 
 * [Requirements](#requirements)
 * [Introduction](#introduction)
-* [Two database connections with fixed configuration](#two-database-connections-with-fixed-configuration)
-* [First database fixed, second database with dynamic configuration](#first-database-fixed-second-database-with-dynamic-configuration)
-* [Multiple dynamic database connections](#multiple-dynamic-database-connections)
+* [The connection proxy](#the-connection-proxy)
+* [Extending PDO](#extending-pdo)
+* [Autowired objects](#autowired-objects)
+* [Connection Factory](#connection-factory)
+* [Connection Manager](#connection-manager)
 * [Read more](#read-more)
 
 ## Requirements
@@ -36,19 +38,17 @@ can only be mapped once, we have to think of something else.
 Depending on the use case, I will present here several generic solutions, 
 which can be further customized. 
 
-## Two database connections with fixed configuration
+## The connection proxy
 
-You have multiple options:
-
-1. The connection proxy
-2. Extending PDO
-3. Autowired objects
-
-### The  connection proxy
+**Use case:** Two or more database connections with fixed configuration
 
 Example:
 
 ```php
+<?php
+
+namespace App\Database;
+
 use PDO;
 
 class ConnectionProxy
@@ -75,7 +75,7 @@ class ConnectionProxy
 }
 ```
 
-The container definition:
+Add the container definition as follows:
 
 ```php
 return [
@@ -111,7 +111,7 @@ class MyRepository
 }
 ```
 
-### 2. Extending PDO
+## Extending PDO
 
 Instead of using another implicit "container" for multiple connections, you could
 extend a class from PDO to give each database connection a unique and
@@ -120,6 +120,7 @@ fullly qualified name for the container definiton.
 Create a file: src/Database/PDO2.php and copy/paste this content:
 
 ```php
+<?php
 
 namespace App\Database;
 
@@ -127,7 +128,7 @@ use PDO;
 
 class PDO2 extends PDO
 {
-
+    // must be empty
 }
 ```
 
@@ -153,7 +154,7 @@ return [
 namespace App\Domain\User\Repository;
 
 use PDO;
-use PDO2; 
+use App\Database\PDO2; 
 
 class UserRepository
 {
@@ -169,15 +170,19 @@ class UserRepository
 }
 ```
 
-### 3. Autowired objects
+Please note: If you don't like the class name `PDO2`, just give it a more specific name.
+
+## Autowired objects
 
 See Matthieu Napoli's answer: <https://stackoverflow.com/a/57758106/1461181>
 
-Please note that the use of [DI/autowire()](https://stackoverflow.com/a/57758106/1461181), 
+Note that the use of [DI/autowire()](https://stackoverflow.com/a/57758106/1461181), 
 could cause too much effort in container configuration and maintenance can 
-become a nightmare in larger projects.
+become a nightmare in bigger projects.
 
-## First database fixed, second database with dynamic configuration
+## Connection Factory
+
+Use case: First database fixed, second database with dynamic configuration
 
 Imagine that you need at least two database connection instances.
 
@@ -220,9 +225,7 @@ $settings['db2'] = [
 ];
 ```
 
-Add the ConnectionManager class.
-
-File: src/Database/ConnectionManager.php
+Create a ConnectionFactory class in `src/Database/ConnectionFactory.php`:
 
 ```php
 <?php
@@ -232,7 +235,7 @@ namespace App\Database;
 use PDO;
 use UnexpectedValueException;
 
-final class ConnectionManager
+final class ConnectionFactory
 {
     /**
      * @var array
@@ -277,16 +280,16 @@ final class ConnectionManager
 }
 ```
 
-Add the DatabaseMiddleware.
+Add the DatabaseMiddleware class.
 
-File: src/Middleware/DatabaseMiddleware.php
+File: `src/Middleware/DatabaseMiddleware.php`
 
 ```php
 <?php
 
 namespace App\Middleware;
 
-use App\Database\ConnectionManager;
+use App\Database\ConnectionFactory;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -297,22 +300,22 @@ final class DatabaseMiddleware implements MiddlewareInterface
     /**
      * @var ConnectionManager
      */
-    private $connectionManager;
+    private $connectionFactory;
 
-    public function __construct(ConnectionManager $connectionFactory)
+    public function __construct(ConnectionFactory $connectionFactory)
     {
-        $this->connectionManager = $connectionFactory;
+        $this->connectionFactory = $connectionFactory;
     }
 
     public function process(
         ServerRequestInterface $request, 
         RequestHandlerInterface $handler
     ): ResponseInterface {
-        // fetch the database name from the JWT
+        // fetch the database name from a JWT
         $databaseName = $request->getAttribute('database');
 
         if ($databaseName) {
-            $this->connectionManager->createConnection($databaseName);
+            $this->connectionFactory->createConnection($databaseName);
         }
 
         return $handler->handle($request);
@@ -333,7 +336,7 @@ $app->add(DatabaseMiddleware::class);
 
 ```
 
-Add this container definiton in config/container.php
+Add this container definiton in `config/container.php`:
 
 ```php
 use App\Database\ConnectionManager;
@@ -384,13 +387,14 @@ class UserRepository
 }
 ```
 
-## Multiple dynamic database connections
+## Connection Manager
 
-You can implement a ConnectionManager to handle multiple connections, 
-first in container you declare the manager and add the default connection to it, 
-then in a middleware at application level you get the user data from the request 
-and resolves the user specific connection adding it to the Manager, 
-you could implement an interface like this:
+Use case: Multiple dynamic database connections.
+
+You could also implement a ConnectionManager to handle multiple dynamic connections. 
+First you declare the manager in the container and add the default connection to it. 
+Then you get the user data from the request and resolves the user-specific connection 
+and adds it to the manager. For this purpose, you could implement an interface like this:
 
 ```php
 namespace App\Database;
