@@ -343,3 +343,151 @@ $this->queryFactory->newDelete('users')
 ```
 
 Read more: [Deleting data](https://book.cakephp.org/3/en/orm/query-builder.html#deleting-data)
+
+### Transaction handling
+
+The service layer is responsible to handle the transaction, not the repository.
+
+The transaction can be abstracted away with this interface:
+
+```php
+<?php
+
+namespace App\Database;
+
+interface TransactionInterface
+{
+    public function begin(): void;
+    public function commit(): void;
+    public function rollback(: void;
+}
+```
+
+The implementation for the `TransactionInterface` interface could be implemented as follows:
+
+```php
+<?php
+
+namespace App\Database;
+
+use Cake\Database\Connection;
+
+/**
+ * Transaction handler.
+ */
+final class Transaction implements TransactionInterface
+{
+    /**
+     * @var Connection The database connection
+     */
+    private $connection;
+
+    public function __construct(Connection $connection)
+    {
+        $this->connection = $connection;
+    }
+
+    public function begin(): void
+    {
+        $this->connection->begin();
+    }
+
+    public function commit()
+    {
+        $this->connection->commit();
+    }
+
+    public function rollback()
+    {
+        $this->connection->rollback();
+    }
+}
+
+```
+
+Add a container definition for ``:
+
+```php
+<?php
+
+use App\Database\Transaction;
+use App\Database\TransactionInterface;
+use Cake\Database\Connection;
+use Psr\Container\ContainerInterface;
+
+return [
+
+    // ...
+    
+    TransactionInterface::class => function (ContainerInterface $container) {
+        return new Transaction($container->get(Connection::class);
+    },
+];
+```
+
+#### Usage
+
+Don't use the transaction handler directly within a repository.
+Instead you should orchestrate all transactions one layer above, in a service class
+
+**Example**
+
+````php
+<?php
+
+namespace App\Domain\User\Service;
+
+use App\Domain\User\Repository\UserCreatorRepository;
+use App\Factory\LoggerFactory;
+use App\Database\TransactionInterface;
+use Exception;
+use Psr\Log\LoggerInterface;
+
+final class UserCreator
+{
+    private $repository;
+
+    private $transaction;
+
+    private $logger;
+
+    public function __construct(
+        UserCreatorRepository $repository,
+        TransactionInterface $transaction,
+        LoggerFactory $loggerFactory
+    ) {
+        $this->repository = $repository;
+        $this->transaction = $transaction;
+        $this->logger = $loggerFactory
+            ->addFileHandler('user_creator.log')
+            ->createInstance('user_creator');
+    }
+
+    public function createUser(array $formData): void
+    {
+        // Input validation
+        // ...
+
+        $this->transaction->begin();
+
+        try {
+            // ...
+
+            $userId = $this->repository->insertUser($userData);
+            
+            // Do more database operations
+            // ...    
+
+            $this->logger->info(sprintf('User created successfully: %s', $userId));
+    
+            // Commit all changes
+            $this->transaction->commit();
+        } catch (Exception $exception) {
+            // Revert all changes
+            $this->transaction->rollback();
+
+            $this->logger->error($exception->getMessage());
+        }
+    }
+}
+```
