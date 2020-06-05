@@ -377,7 +377,7 @@ interface TransactionInterface
 }
 ```
 
-The implementation for `TransactionInterface` can be implemented as follows:
+The `TransactionInterface` can can be implemented as follows:
 
 ```php
 <?php
