@@ -15,6 +15,13 @@ keywords: php slim sql laminas zend querybuilder
 * [Configuration](#configuration)
 * [Repository](#repository)
 * [Usage](#usage)
+  * [Select](#select)  
+  * [Insert](#insert)
+  * [Update](#update)
+  * [Delete](#delete)
+* [Handling relationships](#handling-relationships)
+* [Transactions](#transactions)
+* [Usage](#usage)
 
 ## Requirements
 
@@ -65,7 +72,7 @@ $settings['db'] = [
 ];
 ```
 
-In your `config/container.php` or wherever you add your container definitions:
+Add the following container definitions, e.g. in `config/container.php`:
 
 ```php
 <?php
@@ -169,11 +176,9 @@ class UserCreatorRepository
 
 ## Usage
 
-Once the query factory instance has been injected, you may use it like so:
+### Select 
 
-### Query all rows
-
-A simple query:
+Fetch all rows:
 
 ```php
 $rows = $this->queryFactory->table('users')->select( /* where */ );
@@ -199,8 +204,10 @@ foreach ($rows as $row) {
 }
 ```
 
-### Query the table with where
-
+Note that the result of a query is an instance of 
+[Laminas\Db\ResultSet\ResultSet](https://docs.laminas.dev/laminas-db/result-set/#laminasdbresultsetresultset-and-laminasdbresultsetabstractresultset)
+that will expose each row as either an ArrayObject-like object or an array of row data.
+ 
 Select only the first row:
 
 ```php
@@ -210,7 +217,9 @@ $row = $this->queryFactory->table('users')
 
 Read more: [Select](https://docs.laminas.dev/laminas-db/sql/#select)
 
-### Insert a record
+### Insert 
+
+Insert a record:
 
 ```php
 $table = $this->queryFactory->table('users');
@@ -221,7 +230,9 @@ $newId = (int)$table->getLastInsertValue();
 
 Read more: [Insert](https://docs.laminas.dev/laminas-db/sql/#insert)
 
-### Update a record
+### Update
+ 
+Update a record
 
 ```php
 $values = ['email' => 'new@example.com'];
@@ -231,10 +242,53 @@ $this->queryFactory->table('users')->update($values, ['id' => 1]);
 
 Read more: [Update](https://docs.laminas.dev/laminas-db/sql/#update)
 
-### Delete a record
+### Delete
+
+Delete a record:
 
 ```php
 $this->queryFactory->table('users')->delete(['id' => 1]);
 ```
 
 Read more: [Delete](https://docs.laminas.dev/laminas-db/sql/#delete)
+
+## Handling relationships
+
+You can define relationships directly with a [join clause](https://docs.laminas.dev/laminas-db/sql/#join).
+
+```php
+use Laminas\Db\Sql\Join;
+
+// ...
+
+$table = $this->queryFactory->table('users');
+
+$select = $table->getSql()->select();
+$select->columns(['id']);
+$select->where(['id' => 1]);
+
+$rows = $table->selectWith($select);
+
+$select->join('contacts', 'users.id = contacts.user_id');
+$select->join('orders', 'users.id = orders.user_id', Join::JOIN_LEFT);
+```
+
+## Transactions
+
+You should orchestrate all transactions in a service class.
+Please don't use the transaction handler directly within a repository.
+
+The transaction handling can be abstracted away with this interface:
+
+```php
+<?php
+
+namespace App\Database;
+
+interface TransactionInterface
+{
+    public function begin(): void;
+    public function commit(): void;
+    public function rollback(): void;
+}
+```
