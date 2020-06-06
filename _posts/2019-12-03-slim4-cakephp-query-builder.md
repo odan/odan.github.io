@@ -20,7 +20,7 @@ keywords: php slim cakephp sql querybuilder
   * [Update](#update)
   * [Delete](#delete)
 * [Handling relationships](#handling-relationships)
-* [Transaction handling](#transaction-handling)
+* [Transactions](#transactions)
 
 ## Requirements
 
@@ -358,7 +358,7 @@ $query->leftJoin('orders', 'orders.user_id = users.id');
 $rows = $query->execute()->fetchAll('assoc');
 ```
 
-## Transaction handling
+## Transactions
 
 The transaction handling can be abstracted away with this interface:
 
@@ -439,9 +439,8 @@ return [
 
 #### Transaction handling example
 
-The service layer is responsible to handle the transaction.
+You should orchestrate all transactions in a service class.
 Please don't use the transaction handler directly within a repository.
-Instead you should orchestrate all transactions one layer above, in a service class.
 
 **Example**
 

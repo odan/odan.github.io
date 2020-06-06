@@ -14,6 +14,12 @@ keywords: php slim laravel eloquent orm sql querybuilder
 * [Installation](#installation)
 * [Repository](#repository)
 * [Usage](#usage)
+  * [Select](#select)  
+  * [Insert](#insert)
+  * [Update](#update)
+  * [Delete](#delete)
+* [Handling relationships](#handling-relationships)
+* [Transactions](#transactions)
 * [Fetching arrays](#fetching-arrays)
 * [Multiple database connections](#multiple-database-connections)
 
@@ -155,13 +161,13 @@ public function getUserById(int $userId): array
 }
 ```
 
-### Query all rows
+### Select
+
+Query all rows:
 
 ```php
 $rows = $this->connection->table('users')->get();
 ```
-
-### Query the table with where
 
 You can use the [where]((https://laravel.com/docs/master/queries#where-clauses)) 
 method on a query builder instance to add where clauses to the query. 
@@ -170,31 +176,19 @@ method on a query builder instance to add where clauses to the query.
 $userRows = $this->connection->table('users')->where('username', '=', 'admin')->get();
 ```
 
-*Query searching for names matching foo*
+Query searching for names matching foo:
 
 ```php
 $userRows = $this->connection->table('users')->where('username', 'like', '%root%')->get();
 ```
 
-### Query the table by id
+Query the table by id:
 
 ```php
 $userRow = $this->connection->table('users')->find(1);
 ```
 
-### Handling relationships
-
-You can define relationships directly with a [join clause](https://laravel.com/docs/master/queries#joins).
-
-```php
-$userRows = $this->connection->table('users')
-    ->select('users.*', 'contacts.phone', 'orders.price')
-    ->join('contacts', 'users.id', '=', 'contacts.user_id')
-    ->join('orders', 'users.id', '=', 'orders.user_id')
-    ->get();
-```
-
-### Insert a record
+### Insert
 
 The query builder also provides an [insert](https://laravel.com/docs/master/queries#inserts)
 method for inserting records into the database table. 
@@ -216,7 +210,7 @@ Insert a record and get the last inserted id:
 $newId = $this->connection->table('users')->insertGetId($values);
 ```
 
-### Update a record
+### Update
 
 In addition to inserting records into the database, 
 the query builder can also update existing records using 
@@ -230,7 +224,7 @@ $this->connection->table('users')
     ->update($values);
 ```
 
-### Delete a record
+### Delete
 
 The query builder can also be used to [delete](https://laravel.com/docs/master/queries#deletes) 
 records from the table via the delete method.
@@ -247,13 +241,45 @@ $this->connection->table('users')
     ->delete();
 ```
 
-### Fetching arrays
+## Handling relationships
+
+You can define relationships directly with a [join clause](https://laravel.com/docs/master/queries#joins).
+
+```php
+$userRows = $this->connection->table('users')
+    ->select('users.*', 'contacts.phone', 'orders.price')
+    ->join('contacts', 'users.id', '=', 'contacts.user_id')
+    ->join('orders', 'users.id', '=', 'orders.user_id')
+    ->get();
+```
+
+## Transactions
+
+You should orchestrate all transactions in a service class.
+Please don't use the transaction handler directly within a repository.
+
+The transaction handling can be abstracted away with this interface:
+
+```php
+<?php
+
+namespace App\Database;
+
+interface TransactionInterface
+{
+    public function begin(): void;
+    public function commit(): void;
+    public function rollback(): void;
+}
+```
+
+## Fetching arrays
 
 In Laravel 5.4, the default (and only) fetch mode is `PDO::FETCH_OBJ`. 
 
-But you still have at least two options to change the fetch mode to array.
+But you still have at least two options to change the fetch mode to `PDO::FETCH_ASSOC`.
 
-#### Option 1: Extending MySqlConnection
+### Option 1: Extending MySqlConnection
 
 You can extend from `\Illuminate\Database\MySqlConnection` and define a resolver for it.
 
@@ -279,7 +305,7 @@ The resolver:
 
 *Thanks to devinim for this tip.*
 
-#### Option 2: Using events
+### Option 2: Using events
 
 Installation: `composer require illuminate/events`
 
@@ -317,10 +343,10 @@ return [
 **Usage:**
 
 ```php
-$rows = $this-connection->table('users')->get()->toArray();
+$rows = $this->connection->table('users')->get()->toArray();
 ```
 
-### Multiple database connections
+## Multiple database connections
 
 The following example shows how you can use the Eloquent Query Builder to set up 
 multiple database connections and access them in a repository.
