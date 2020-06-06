@@ -14,6 +14,13 @@ keywords: php slim doctrine sql query builder
 * [Installation](#installation)
 * [Repository](#repository)
 * [Usage](#usage)
+  * [Select](#select)  
+  * [Insert](#insert)
+  * [Update](#update)
+  * [Delete](#delete)
+* [Handling relationships](#handling-relationships)
+* [Transactions](#transactions)
+* [Read more](#read-more)
 
 ## Requirements
 
@@ -130,7 +137,9 @@ class UserRepository
 
 Once the connection instance has been injected, you may use it like so:
 
-### Query all rows
+### Select
+ 
+Query all rows:
 
 ```php
 $query = $this->connection->createQueryBuilder();
@@ -142,7 +151,7 @@ $rows = $query
     ->fetchAll();
 ```
 
-### Query the table with where
+Query the table with where:
 
 ```php
 $userInputEmail = 'mail@example.com';
@@ -158,7 +167,7 @@ $rows = $query
     ->fetchAll();
 ```
 
-### Query the table by id
+Query the table by id:
 
 ```php
 $query = $this->connection->createQueryBuilder();
@@ -171,7 +180,9 @@ $row = $query->select('id', 'username')
     ->fetch();
 ```
 
-### Insert a record
+### Insert
+
+Insert a record:
 
 ```php
 $values = [
@@ -189,7 +200,9 @@ Retrieve the last inserted id:
 $newId = $this->connection->lastInsertId();
 ```
 
-### Update a record
+### Update
+
+Update a record:
 
 ```php
 $values = ['email' => 'new@example.com'];
@@ -197,10 +210,49 @@ $values = ['email' => 'new@example.com'];
 $this->connection->update('users', $values, ['id' => 1]);
 ```
 
-### Delete a record
+### Delete
+
+Delete a record
 
 ```php
 $this->connection->delete('users', ['id' => 1]);
+```
+
+## Handling relationships
+
+You can define relationships directly with a 
+[join clause](https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/query-builder.html#join-clauses).
+
+```php
+$query = $this->connection->createQueryBuilder();
+
+$rows = $query
+    ->select('id', 'username')
+    ->from('users')
+    ->innerJoin('users', 'contacts', 'contacts', 'users.id = contacts.user_id')
+    ->leftJoin('users', 'orders', 'orders', 'users.id = orders.user_id')
+    ->execute()
+    ->fetchAll();
+```
+
+## Transactions
+
+You should orchestrate all transactions in a service class.
+Please don't use the transaction handler directly within a repository.
+
+The transaction handling can be abstracted away with this interface:
+
+```php
+<?php
+
+namespace App\Database;
+
+interface TransactionInterface
+{
+    public function begin(): void;
+    public function commit(): void;
+    public function rollback(): void;
+}
 ```
 
 ## Read more
