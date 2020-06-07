@@ -49,7 +49,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * PHP 7.2+
 * MySQL 5.7+ or MariaDB
 * Apache webserver with [mod_rewrite](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html) and [.htaccess](https://httpd.apache.org/docs/2.4/howto/htaccess.html)
-* Composer (for development only)
+* Composer (only for development)
 
 ## Introduction
 
