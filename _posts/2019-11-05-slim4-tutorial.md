@@ -84,6 +84,12 @@ Run this command to install [PHP-DI](http://php-di.org/):
 composer require php-di/php-di
 ```
 
+For testing purpose we are installing [phpunit](https://phpunit.de/) as development dependency with the `--dev` option:
+
+```
+composer require phpunit/phpunit --dev
+```
+
 Ok nice, now we have installed the most basic dependencies for our project. Later we will add more.
 
 **Note:** Please don't commit the `vendor/` to your git repository. To set up the git repository correctly, create a file called `.gitignore` in the project root folder and add the following lines to this file:
