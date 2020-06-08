@@ -11,7 +11,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 
 ![slim](https://user-images.githubusercontent.com/781074/82730649-87608800-9d01-11ea-83ea-6112f973b051.png)
 
-**[You can buy this document as PDF](../../../donate.html)**
+**[You can buy all Slim articles as eBook](../../../donate.html).**
 
 ## Table of contents
 
@@ -1184,6 +1184,22 @@ There is an open issue here: <https://github.com/PHP-DI/PHP-DI/issues/711>
 In case you are looking for a similar (and faster) container try this PSR-11 container implementation:
 
 * <https://github.com/selective-php/container>
+
+### How to serve Slim with NGINX and PHP-FPM?
+
+If you run Slim with Nginx you don't need the `.htaccess` files and the `BasePathMiddleware`.
+Configure Nginx with this [configuration](https://www.slimframework.com/docs/v4/start/web-servers.html#nginx-configuration).
+
+### How to use the PHP built-in server?
+
+Run the following command in terminal to start localhost web server:
+
+```
+cd public/
+php -S localhost:8080
+```
+
+Then navigate to: `http://localhost:8080/`
 
 ### Support
 
