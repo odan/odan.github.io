@@ -205,7 +205,7 @@ foreach ($rows as $row) {
 ```
 
 Note that the result of a query is an instance of 
-[Laminas\Db\ResultSet\ResultSet](https://docs.laminas.dev/laminas-db/result-set/#laminasdbresultsetresultset-and-laminasdbresultsetabstractresultset)
+[ResultSet](https://docs.laminas.dev/laminas-db/result-set/#laminasdbresultsetresultset-and-laminasdbresultsetabstractresultset)
 that will expose each row as either an ArrayObject-like object or an array of row data.
  
 Select only the first row:
