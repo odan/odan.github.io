@@ -37,7 +37,7 @@ excellent [documentation](https://phpunit.readthedocs.io/).
 
 ## Installation
 
-Before creating your first test we are installing [phpunit](https://phpunit.de/) 
+Before creating the first test we are installing [phpunit](https://phpunit.de/) 
 as development dependency with the `--dev` option:
 
 ```
@@ -45,16 +45,9 @@ composer require phpunit/phpunit --dev
 ```
 
 Each test - whether it's a unit test or a functional test - 
-is a PHP class that should live in the `tests/` directory of your application. 
+is a PHP class that should live in the `tests/TestCase/` directory of your application. 
 
-Create a new `tests/` directory in your project root with the 
-following sub-directories:
-
-```
-.
-├── TestCase/             Test classes
-└── Fixture               Fixtures
-```
+Create a new `tests/TestCase/` directory in your project root.
 
 Open `composer.json` and the the following scripts:
 
@@ -141,7 +134,7 @@ To test this, create a `CalculatorTest` file in the `tests/TestCase/Util`
 directory of your application:
 
 ```php
-// tests/Util/CalculatorTest.php
+// tests/TestCase/Util/CalculatorTest.php
 namespace App\Tests\Util;
 
 use App\Util\Calculator;
@@ -187,9 +180,8 @@ but they have a very specific workflow:
 
 All HTTP request will run in-memory without a webserver.
 
-Depending on your needs you can choose wheter you want to run
-your test against a test database (with fixtures) or just against
-a mocked dataset (data provider). 
+Depending on your needs, you can choose to run your test against 
+a test database (with fixtures) or only against a mocked data set (data provider).
 
 Let's assume that you have implemented a RESTful API with the Slim Framework. 
 For this purpose, we are going to implement a test to check the functionality of the endpoint(s).
@@ -201,7 +193,7 @@ we have to setup the container (PSR-11) for each test first.
 The advantage is that we can also test the complete middleware stack
 and use the autowire functionality of the depenency injection container.
 
-The following trait will bootstrap the slim application with the container
+The following trait will bootstrap the Slim application with the depenency injection container
 and provides some convenient methods for mocking and creating http requests.
 
 Create a new file `tests/AppTestTrait.php` and copy/paste this content:
@@ -298,8 +290,11 @@ trait AppTestTrait
      *
      * @return ServerRequestInterface
      */
-    protected function createRequest(string $method, $uri, array $serverParams = []): ServerRequestInterface
-    {
+    protected function createRequest(
+        string $method,
+        $uri,
+        array $serverParams = []
+    ): ServerRequestInterface {
         // A phpunit fix #3026
         if (!isset($_SERVER['REQUEST_URI'])) {
             $_SERVER = [
@@ -320,8 +315,10 @@ trait AppTestTrait
      *
      * @return ServerRequestInterface
      */
-    protected function withJson(ServerRequestInterface $request, array $data): ServerRequestInterface
-    {
+    protected function withJson(
+        ServerRequestInterface $request, 
+        array $data
+    ): ServerRequestInterface{
         $request = $request->withParsedBody($data);
 
         return $request->withHeader('Content-Type', 'application/json');
@@ -341,8 +338,10 @@ trait AppTestTrait
 }
 ```
 
-Ok, now add your first API test. Create a new file `tests/TestCase/UserReaderActionTest.php`
-and add this test code for the endpoint `GET /users/1`:
+Ok, now add your first API test. 
+
+Create a new file `tests/TestCase/Action/UserReaderActionTest.php`
+and add this code to test the endpoint `GET /users/1`:
 
 ```php
 <?php
