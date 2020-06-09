@@ -368,6 +368,7 @@ class UserReaderActionTest extends TestCase
     public function testUserReaderAction(): void
     {
         // Mock the repository resultset
+        // It could also be an array or a primitive data type
         $user = new UserData();
         $user->id = 1;
         $user->username = 'admin';
