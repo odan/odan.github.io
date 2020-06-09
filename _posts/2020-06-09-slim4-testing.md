@@ -399,3 +399,4 @@ If you want to make real database tests, you should read my next blog post. Stay
 
 * <https://martinfowler.com/articles/practical-test-pyramid.html>
 * <http://www.getlaura.com/testing-unit-vs-integration-vs-regression-vs-acceptance/>
+* <https://github.com/odan/slim4-tutorial>
