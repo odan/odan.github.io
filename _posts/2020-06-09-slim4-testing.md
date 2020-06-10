@@ -214,9 +214,6 @@ use Slim\App;
 use Slim\Psr7\Factory\ServerRequestFactory;
 use UnexpectedValueException;
 
-/**
- * Container Trait.
- */
 trait AppTestTrait
 {
     /** @var ContainerInterface|Container */
@@ -345,18 +342,10 @@ use App\Domain\User\Repository\UserReaderRepository;
 use App\Test\AppTestTrait;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Test.
- */
 class UserReaderActionTest extends TestCase
 {
     use AppTestTrait;
 
-    /**
-     * Test.
-     *
-     * @return void
-     */
     public function testUserReaderAction(): void
     {
         // Mock the repository resultset
