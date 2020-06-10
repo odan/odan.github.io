@@ -441,6 +441,8 @@ In twig:
 ```
 {% endraw %}
 
+* StackOverflow: <https://stackoverflow.com/a/62296745/1461181>
+
 ## Read more
 
 * [Twig](https://twig.symfony.com/)
