@@ -165,7 +165,7 @@ return [
 
         $twig = Twig::create($twigSettings['paths'], $options);
 
-        // Add more extension here
+        // Add extension here
         // ...
         
         return $twig;
@@ -368,6 +368,77 @@ How to use the `trans` filter you can learn here:
 
 * <https://symfony.com/doc/current/translation.html>
 * <https://symfony.com/doc/current/reference/twig_reference.html#trans>
+
+## Global variables
+
+### Static values
+
+Twig allows to inject automatically one or more variables into all templates.
+
+```php
+$environment = $twig->getEnvironment();
+$environment->addGlobal('ga_tracking', 'UA-xxxxx-x');
+```
+
+Now, the variable ga_tracking is available in all Twig templates, so you can use it without 
+having to pass it explicitly from the controller or service that renders the template:
+
+```php
+<p>The Google tracking code is: {{ ga_tracking }}</p>
+```
+
+### Dynamic values
+
+Changing the value of global variable afterwards is possible when you use objects.
+I'ts still not possible to replace the object itself, but it's possible to
+change the property values of the object afterwards.
+
+Register a global twig variable:
+
+```php
+$environment = $twig->getEnvironment();
+$environment->addGlobal('current_user', (object)[
+    'id' => null,
+]);
+```
+
+Change the value in a middleware:
+
+```php
+$currentUser = $this->twig->getEnvironment()->getGlobals()['current_user'];
+
+// Set the new value
+$currentUser->id = 1234
+```
+
+In twig:
+
+{% raw %}
+```twig
+{{ current_user.id }}
+```
+{% endraw %}
+
+Output: `1234`
+
+### Container service values
+
+In addition to global variables you can also reference services from the service container.
+To load a service lazily just wrap the call into a Twig function:
+
+```php
+$environment->addFunction(new \Twig\TwigFunction('user_auth', function () use ($container) {
+    return $container->get(UserAuth::class);
+}));
+```
+
+In twig:
+
+{% raw %}
+```twig
+{{ user_auth().getUser().id }}
+```
+{% endraw %}
 
 ## Read more
 
