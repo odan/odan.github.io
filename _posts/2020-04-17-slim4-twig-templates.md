@@ -433,7 +433,7 @@ $environment->addFunction(new \Twig\TwigFunction('user_auth', function () use ($
 }));
 ```
 
-In twig:
+To invoke the service method in a Twig template use this syntax:
 
 {% raw %}
 ```twig
@@ -441,6 +441,29 @@ In twig:
 ```
 {% endraw %}
 
+Please note that using methods should be used only with caution, because
+it could break the MVC priciples.
+
+> Please note that calling higher level services should only be used carefully,
+because it could break the principles of MVC.
+ 
+In the most cases it's better to return a simple value or an array.
+
+```php
+$environment->addFunction(new \Twig\TwigFunction('user', function () use ($container) {
+    // Do something...
+
+    return ['id' => $userId];
+}));
+```
+
+Then print the result in your Twig template using this syntax:
+
+{% raw %}
+```twig
+{{ user.id }}
+```
+{% endraw %}
 
 ## Read more
 
