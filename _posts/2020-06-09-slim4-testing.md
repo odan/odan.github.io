@@ -91,13 +91,13 @@ Create a new file `phpunit.xml` and copy/paste this configuration:
 
 Try executing PHPUnit by running :
 
-``` bash
+```
 composer test
 ```
 
 To start all tests with code coverage, run:
 
-``` bash
+```
 composer test:coverage
 ```
 
@@ -164,7 +164,7 @@ put the test in the `tests/TestCase/Util/` directory.
 
 Now run all tests:
 
-``` bash
+```
 composer test
 ```
 
@@ -393,7 +393,13 @@ class UserReaderActionTest extends TestCase
 }
 ```
 
-This test does't hit the database and is very fast. 
+Now run all tests:
+
+```
+composer test
+```
+
+This HTTP test does't hit the database and is very fast. 
 If you want to make real database tests, you should read my next blog post. Stay tuned.
 
 ## Read more
