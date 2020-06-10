@@ -422,7 +422,7 @@ In twig:
 
 Output: `1234`
 
-### Global container services
+### Container services
 
 In addition to global variables you can also reference services from the service container.
 To load a service lazily just wrap the call into a Twig function:
@@ -441,9 +441,9 @@ In twig:
 ```
 {% endraw %}
 
-* StackOverflow: <https://stackoverflow.com/a/62296745/1461181>
 
 ## Read more
 
 * [Twig](https://twig.symfony.com/)
 * [Creating and Using Templates](https://symfony.com/doc/current/templates.html)
+* [Render on all pages using a middlware](https://stackoverflow.com/a/62296745/1461181)
