@@ -294,7 +294,7 @@ trait AppTestTrait
         return (new ServerRequestFactory())->createServerRequest($method, $uri, $serverParams);
     }
 
-   /**
+    /**
      * Create a JSON request.
      *
      * @param string $method The HTTP method
