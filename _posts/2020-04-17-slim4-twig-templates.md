@@ -422,7 +422,7 @@ In twig:
 
 Output: `1234`
 
-### Container service values
+### Global container services
 
 In addition to global variables you can also reference services from the service container.
 To load a service lazily just wrap the call into a Twig function:
@@ -437,7 +437,7 @@ In twig:
 
 {% raw %}
 ```twig
-{{ user_auth().getUser().id }}
+{{ user_auth().myServiceMethod() }}
 ```
 {% endraw %}
 
