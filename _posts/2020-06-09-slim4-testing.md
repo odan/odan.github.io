@@ -370,6 +370,7 @@ class UserReaderActionTest extends TestCase
     {
         // Mock the repository resultset
         // It could also be an array or a primitive data type
+        // Better use the @dataProvider annotation
         $user = new UserData();
         $user->id = 1;
         $user->username = 'admin';
@@ -402,8 +403,8 @@ Now run all tests:
 composer test
 ```
 
-This HTTP test does't hit the database and is very fast. 
-If you want to make real database tests, you should read my next blog post. Stay tuned.
+This HTTP test doesn't hit the database and is very fast. 
+If you also want to test against a real database, you should read my next blog post. Stay tuned.
 
 ## Read more
 
