@@ -389,9 +389,9 @@ having to pass it explicitly from the controller or service that renders the tem
 
 ### Dynamic values
 
-Changing the value of global variable afterwards is possible when you use objects.
-I'ts still not possible to replace the object itself, but it's possible to
-change the property values of the object afterwards.
+When using objects, it is possible to change the value of the global variable afterwards. 
+It is still not possible to replace the object itself, 
+but it is possible to change the property values of the object afterwards.
 
 Register a global twig variable:
 
