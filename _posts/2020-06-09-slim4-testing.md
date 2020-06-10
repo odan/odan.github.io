@@ -294,33 +294,27 @@ trait AppTestTrait
         return (new ServerRequestFactory())->createServerRequest($method, $uri, $serverParams);
     }
 
-    /**
-     * Add Json data.
+   /**
+     * Create a JSON request.
      *
-     * @param ServerRequestInterface $request The request
-     * @param mixed[] $data The data
+     * @param string $method The HTTP method
+     * @param string|UriInterface $uri The URI
+     * @param array|null $data The json data
      *
      * @return ServerRequestInterface
      */
-    protected function withJson(
-        ServerRequestInterface $request, 
-        array $data
-    ): ServerRequestInterface{
-        $request = $request->withParsedBody($data);
+    protected function createJsonRequest(
+        string $method, 
+        $uri, 
+        array $data = null
+    ): ServerRequestInterface {
+        $request = $this->createRequest($method, $uri);
+
+        if ($data !== null) {
+            $request = $request->withParsedBody($data);
+        }
 
         return $request->withHeader('Content-Type', 'application/json');
-    }
-
-    /**
-     * Make request.
-     *
-     * @param ServerRequestInterface $request The request
-     *
-     * @return ResponseInterface
-     */
-    protected function request(ServerRequestInterface $request): ResponseInterface
-    {
-        return $this->app->handle($request);
     }
 }
 ```
@@ -361,7 +355,7 @@ class UserReaderActionTest extends TestCase
         $this->mockMethod([UserReaderRepository::class, 'getUserById'])->willReturn($user);
 
         $request = $this->createRequest('GET', '/users/1');
-        $response = $this->request($request);
+        $response = $this->app->handle($request);
 
         $this->assertSame(200, $response->getStatusCode());
 
@@ -381,6 +375,13 @@ Now run all tests:
 
 ```
 composer test
+```
+
+To test a JSON endpoint you can use the `createJsonRequest` method, e.g.:
+
+```php
+$request = $this->createJsonRequest('POST', '/users', ['email' => 'user@example.com']);
+$response = $this->app->handle($request);
 ```
 
 This HTTP test doesn't hit the database and is very fast. 
