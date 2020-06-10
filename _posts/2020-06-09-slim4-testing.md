@@ -393,6 +393,9 @@ class UserReaderActionTest extends TestCase
 }
 ```
 
+Pleae note: In real life, you should pass the test data with 
+[Data Providers](https://phpunit.readthedocs.io/en/9.0/writing-tests-for-phpunit.html#data-providers).
+
 Now run all tests:
 
 ```
