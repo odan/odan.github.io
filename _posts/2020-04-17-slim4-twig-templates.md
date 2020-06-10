@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Twig Setup
+title: Slim 4 - Twig
 layout: post
 comments: true
 published: true
