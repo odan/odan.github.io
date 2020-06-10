@@ -13,7 +13,7 @@ keywords: slim, slimphp, php, test, testing, phpunit
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Unit Tests](#unit-tests)
-* [Functional Tests](#functional-tests)
+* [HTTP Tests](#http-tests)
 
 ## Requirements
 
@@ -34,6 +34,11 @@ both functional and unit tests.
 This article explains how to integrate PHPUnit as testing framework, 
 but won't cover PHPUnit itself, which has its own 
 excellent [documentation](https://phpunit.readthedocs.io/).
+
+This article covers the most used test topics: Unit tests and HTTP tests.
+
+In the future I plan to write about other topics like database tests, 
+browser tests and console tests.
 
 ## Installation
 
@@ -163,14 +168,11 @@ Now run all tests:
 composer test
 ```
 
-## Functional Tests
+## HTTP Tests
 
-Integration tests (aka Functional tests) ensure that an app's components function correctly at a level 
-that includes the app's supporting infrastructure, such as the database, file system 
-and network. 
+HTTP testing allows you to verify your API endpoints. This includes the 
+infrastructure supported by the app, such as the database, file system, and network.
 
-Functional tests check the integration of the different layers of an application 
-(from the routing to the views). 
 They are no different from unit tests as far as PHPUnit is concerned, 
 but they have a very specific workflow:
 
@@ -182,9 +184,6 @@ All HTTP request will run in-memory without a webserver.
 
 Depending on your needs, you can choose to run your test against 
 a test database (with fixtures) or only against a mocked data set (data provider).
-
-Let's assume that you have implemented a RESTful API with the Slim Framework. 
-For this purpose, we are going to implement a test to check the functionality of the endpoint(s).
 
 ### Container setup
 
@@ -339,6 +338,8 @@ trait AppTestTrait
 ```
 
 Ok, now add your first API test. 
+
+Let's assume that you have implemented a RESTful API with Slim Framework.
 
 Create a new file `tests/TestCase/Action/UserReaderActionTest.php`
 and add this code to test the endpoint `GET /users/1`:
