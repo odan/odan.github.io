@@ -19,6 +19,7 @@ keywords: php slim twig templates html engine symfony
 * [Linking to Pages](#linking-to-pages)
 * [Linking to CSS, JavaScript and Image Assets](#linking-to-css-javascript-and-image-assets)
 * [Translations](#translations)
+* [Global variables](#global-variables)
 * [Read more](#read-more)
 
 ## Requirements
