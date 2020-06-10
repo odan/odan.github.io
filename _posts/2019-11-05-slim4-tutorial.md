@@ -1137,6 +1137,10 @@ The source code with more examples (e.g. reading a user) can be found here: <htt
 
 A complete skeleton for Slim 4 can be found here: <https://github.com/odan/slim4-skeleton>
 
+### How can I add unit and integration / functional tests?
+
+Read this topic: [Slim 4 - Testing](https://odan.github.io/2020/06/09/slim4-testing.html)
+
 ### How to add JSON Web Token (JWT) / Bearer authentication?
 
 Read this article: [Slim 4 - OAuth 2.0 and JSON Web Token Setup](https://odan.github.io/2019/12/02/slim4-oauth2-jwt.html) 
