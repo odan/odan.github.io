@@ -316,6 +316,21 @@ trait AppTestTrait
 
         return $request->withHeader('Content-Type', 'application/json');
     }
+
+    /**
+     * Verify that the given array is an exact match for the JSON returned.
+     *
+     * @param ResponseInterface $response The response
+     * @param array $expected The expected array
+     *
+     * @return void
+     */
+    protected function assertJsonResponse(ResponseInterface $response, array $expected): void
+    {
+        $actual = (string)$response->getBody();
+        self::assertJson($actual);
+        self::assertSame($expected, (array)json_decode($actual, true));
+    }
 }
 ```
 
@@ -359,10 +374,15 @@ class UserReaderActionTest extends TestCase
 
         $this->assertSame(200, $response->getStatusCode());
 
-        $body = (string)$response->getBody();
-        $this->assertStringContainsString(
-            '{"user_id":1,"username":"admin","first_name":"John","last_name":"Doe","email":"john.doe@example.com"}',
-            $body
+        $this->assertJsonData(
+            $response,
+            [
+                'user_id' => 1,
+                'username' => 'admin',
+                'first_name' => 'John',
+                'last_name' => 'Doe',
+                'email' => 'john.doe@example.com',
+            ]
         );
     }
 }
@@ -380,7 +400,7 @@ composer test
 To test a JSON endpoint you can use the `createJsonRequest` method, e.g.:
 
 ```php
-$request = $this->createJsonRequest('POST', '/users', ['email' => 'user@example.com']);
+$request = $this->createJsonRequest('POST', '/users', ['name' => 'John']);
 $response = $this->app->handle($request);
 ```
 
