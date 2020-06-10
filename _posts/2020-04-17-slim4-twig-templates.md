@@ -441,11 +441,9 @@ To invoke the service method in a Twig template use this syntax:
 ```
 {% endraw %}
 
-Please note that using methods should be used only with caution, because
-it could break the MVC priciples.
-
 > Please note that calling higher level services should only be used carefully,
-because it could break the principles of MVC.
+because it could break the principles of MVC. As long you are only invoking
+infrastructure services it should be fine.
  
 In the most cases it's better to return a simple value or an array.
 
