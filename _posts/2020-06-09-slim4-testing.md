@@ -341,7 +341,7 @@ but they have a very specific workflow:
 All HTTP request will run in-memory without a webserver.
 
 Ok, now add your first API test. Let's assume that you have 
-implemented a RESTful API with Slim Framework.
+implemented a RESTful API with Slim.
 
 Create a new file `tests/TestCase/Action/UserReaderActionTest.php`
 and add this code to test the endpoint `GET /users/1`:
