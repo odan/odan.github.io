@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: slim, slimphp, php, test, testing, phpunit
+keywords: slim, slimphp, php, test, testing, phpunit, integration
 ---
 
 ## Table of contents
@@ -13,7 +13,10 @@ keywords: slim, slimphp, php, test, testing, phpunit
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Unit Tests](#unit-tests)
-* [HTTP Tests](#http-tests)
+* [Integration Tests](#integration-tests)
+  * [Container Setup](#container-setup)
+  * [HTTP Tests](#http-tests)
+* [Read more](#read-more)
 
 ## Requirements
 
