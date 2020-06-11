@@ -173,9 +173,14 @@ composer test
 Integration tests ensure that component collaborations work as expected. 
 Assertions may test the HTTP API, or side-effects such as database, filesystem, datetime, logging etc.
 
+Integration tests
+
+* Test a repository against the actual database
+* Test an application service using a real controller action
+* Test a HTTP integration agains the real webservice
+
 Depending on your needs, you can choose to run your test against 
 a integration database (with fixtures) or only against a mocked repository.
-
 Some people prefer to create repository interfaces and replace them with an empty 
 implementation for testing. Of course you can do that, 
 but the technical effort for testing is much higher then.
@@ -414,13 +419,14 @@ $response = $this->app->handle($request);
 ```
 
 This HTTP test doesn't hit the database and is very fast. 
-If you also want to test against a real database, you should read my next blog post about database testing.
+If you also want to test against the database, you should read my next blog post about database testing.
  
 Stay tuned.
 
 ## Read more
 
-* <https://martinfowler.com/articles/practical-test-pyramid.html>
-* <http://www.getlaura.com/testing-unit-vs-integration-vs-regression-vs-acceptance/>
-* <https://www.softwaretestinghelp.com/the-difference-between-unit-integration-and-functional-testing/>
+* [The Practical Test Pyramid](https://martinfowler.com/articles/practical-test-pyramid.html)
+* [Testing: Unit vs Integration vs Regression vs Acceptance](http://www.getlaura.com/testing-unit-vs-integration-vs-regression-vs-acceptance/)
+* [The Differences Between Unit Testing, Integration Testing And Functional Testing](https://www.softwaretestinghelp.com/the-difference-between-unit-integration-and-functional-testing/)
+* [A Testing Strategy for Hexagonal Applications](https://www.youtube.com/watch?v=LtbHAFsEu5g)
 * <https://github.com/odan/slim4-tutorial>
