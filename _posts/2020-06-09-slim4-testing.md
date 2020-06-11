@@ -29,16 +29,11 @@ tutorial and its linked content.
 
 Whenever you write a new line of code, you also potentially add new bugs. 
 To build better and more reliable applications, you should test your code using 
-both functional and unit tests.
+both integration- and unit tests.
 
 This article explains how to integrate PHPUnit as testing framework, 
 but won't cover PHPUnit itself, which has its own 
 excellent [documentation](https://phpunit.readthedocs.io/).
-
-This article covers the most used test topics: Unit tests and HTTP tests.
-
-In the future I plan to write about other topics like database tests, 
-browser tests and console tests.
 
 ## Installation
 
@@ -49,7 +44,7 @@ as development dependency with the `--dev` option:
 composer require phpunit/phpunit --dev
 ```
 
-Each test - whether it's a unit test or a functional test - 
+Each test - whether it's a unit test or a integration test - 
 is a PHP class that should live in the `tests/TestCase/` directory of your application. 
 
 Create a new `tests/TestCase/` directory in your project root.
@@ -116,9 +111,11 @@ xdebug.remote_enable = 1
 
 ## Unit Tests
 
+Unit tests ensure that individual components of the app work as expected.
+
 A unit test is a test against a single PHP class, also called a unit. 
 If you want to test the overall behavior of your application, 
-see the section about [Functional Tests](#functional-tests).
+see the section about [Integration Tests](#integration-tests).
 
 Suppose, for example, that you have an incredibly simple class called `Calculator` in 
 the `src/Util/` directory of the app:
@@ -168,26 +165,14 @@ Now run all tests:
 composer test
 ```
 
-## HTTP Tests
+## Integration Tests
 
-HTTP testing allows you to verify your API endpoints. This includes the 
-infrastructure supported by the app, such as the database, file system, and network.
-
-They are no different from unit tests as far as PHPUnit is concerned, 
-but they have a very specific workflow:
-
-* Make a request (click on a link or submit json data)
-* Test the response
-* Clean up and repeat
-
-All HTTP request will run in-memory without a webserver.
-
-Depending on your needs, you can choose to run your test against 
-a test database (with fixtures) or only against a mocked data set (data provider).
+Integration tests ensure that component collaborations work as expected. 
+Assertions may test the HTTP API, or side-effects such as database, filesystem, datetime, logging etc.
 
 ### Container setup
 
-To be able to perform complete and realistic integration- and functional tests 
+To be able to perform complete and realistic integration tests 
 we have to setup the container (PSR-11) for each test first.
 The advantage is that we can also test the complete middleware stack
 and use the autowire functionality of the depenency injection container.
@@ -334,6 +319,23 @@ trait AppTestTrait
 }
 ```
 
+### HTTP Tests
+
+HTTP testing allows you to verify your API endpoints. This includes the 
+infrastructure supported by the app, such as the database, file system, and network.
+
+They are no different from unit tests as far as PHPUnit is concerned, 
+but they have a very specific workflow:
+
+* Make a request (click on a link or submit json data)
+* Test the response
+* Clean up and repeat
+
+All HTTP request will run in-memory without a webserver.
+
+Depending on your needs, you can choose to run your test against 
+a test database (with fixtures) or only against a mocked data set (data provider).
+
 Ok, now add your first API test. 
 
 Let's assume that you have implemented a RESTful API with Slim Framework.
@@ -411,4 +413,5 @@ If you also want to test against a real database, you should read my next blog p
 
 * <https://martinfowler.com/articles/practical-test-pyramid.html>
 * <http://www.getlaura.com/testing-unit-vs-integration-vs-regression-vs-acceptance/>
+* <https://www.softwaretestinghelp.com/the-difference-between-unit-integration-and-functional-testing/>
 * <https://github.com/odan/slim4-tutorial>
