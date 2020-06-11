@@ -334,11 +334,10 @@ but they have a very specific workflow:
 All HTTP request will run in-memory without a webserver.
 
 Depending on your needs, you can choose to run your test against 
-a test database (with fixtures) or only against a mocked data set (data provider).
+a integration database (with fixtures) or only against a mocked repository.
 
-Ok, now add your first API test. 
-
-Let's assume that you have implemented a RESTful API with Slim Framework.
+Ok, now add your first API test. Let's assume that you have 
+implemented a RESTful API with Slim Framework.
 
 Create a new file `tests/TestCase/Action/UserReaderActionTest.php`
 and add this code to test the endpoint `GET /users/1`:
@@ -390,7 +389,7 @@ class UserReaderActionTest extends TestCase
 }
 ```
 
-Pleae note: In real life, you should pass the test data with 
+Please note: In real life, you should pass the test data via 
 [Data Providers](https://phpunit.readthedocs.io/en/9.0/writing-tests-for-phpunit.html#data-providers).
 
 Now run all tests:
