@@ -336,6 +336,10 @@ All HTTP request will run in-memory without a webserver.
 Depending on your needs, you can choose to run your test against 
 a integration database (with fixtures) or only against a mocked repository.
 
+> Some people prefer to create repository interfaces and replace it with an empty 
+> implementation for testing. Of course you can do this as well, 
+> but the technical effort for testing is much higher then.
+
 Ok, now add your first API test. Let's assume that you have 
 implemented a RESTful API with Slim Framework.
 
