@@ -56,6 +56,8 @@ ssl-mode=DISABLED
 
 ### Initializing the data directory
 
+<span style="color:red">Important: Don't skip this step!</span>
+
 ```cmd
 cd c:\xampp\mysql\bin
 ```
@@ -83,7 +85,7 @@ Done.
 * Error: `mysqldump: Got error: 2026: SSL connection error: error:00000000:lib(0):func(0):reason(0) when trying to connect`
   * Add the `[client] ssl-mode=DISABLED` option to your `my.ini` file
 
-* Error: `Error: MySQL shutdown unexpectedly.`
+* Error: `MySQL shutdown unexpectedly.`
   * You might forgot to [initialize the data directory](#initializing-the-data-directory).
   
 * I can't start or stop MySQL using the XAMPP control panel button.
