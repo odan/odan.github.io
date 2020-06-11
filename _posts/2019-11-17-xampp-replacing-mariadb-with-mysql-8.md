@@ -56,7 +56,7 @@ ssl-mode=DISABLED
 
 ### Initializing the data directory
 
-<span style="color:red">Important: Don't skip this step!</span>
+**<span style="color:red">Important: Don't skip this step!</span>**
 
 ```cmd
 cd c:\xampp\mysql\bin
