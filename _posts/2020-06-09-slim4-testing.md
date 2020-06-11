@@ -171,13 +171,12 @@ composer test
 ## Integration Tests
 
 Integration tests ensure that component collaborations work as expected. 
-Assertions may test the HTTP API, or side-effects such as database, filesystem, datetime, logging etc.
-
-Integration tests
 
 * Test a repository against the actual database
 * Test an application service using a real controller action
 * Test a HTTP integration agains the real webservice
+
+Assertions may test the HTTP API, or side-effects such as database, filesystem, datetime, logging etc.
 
 Depending on your needs, you can choose to run your test against 
 a integration database (with fixtures) or only against a mocked repository.
