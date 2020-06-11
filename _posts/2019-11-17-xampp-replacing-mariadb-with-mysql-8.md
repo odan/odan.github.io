@@ -30,7 +30,7 @@ and can be replaced with the "orginal" MySQL server.
 
 * Download MySQL Community Server 8.x (**64-Bit**) from: <https://dev.mysql.com/downloads/mysql/>
 * Scroll down to `Other Downloads:` and click **Download**.
-* Click [No thanks, just start my download.](https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.18-winx64.zip)
+* Click the link: **No thanks, just start my download**
 * Create a new and empty folder: `c:\xampp\mysql`
 * Extract ZIP archive to: `c:\xampp\mysql`
 * Create a new file: `c:\xampp\mysql\bin\my.ini` and copy this content:
@@ -91,3 +91,7 @@ Done.
 **Q:** I can't start or stop MySQL using the XAMPP control panel button.
 
 **A:** Make sure you have installed the **64-bit** version of XAMPP and MySQL.
+
+**Q:**: How to fix this errors? `Error: MySQL shutdown unexpectedly.`
+
+**A:** You forgot to [initialize the data directory](#initializing-the-data-directory).

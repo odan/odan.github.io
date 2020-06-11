@@ -286,7 +286,8 @@ trait AppTestTrait
         $uri,
         array $serverParams = []
     ): ServerRequestInterface {
-        return (new ServerRequestFactory())->createServerRequest($method, $uri, $serverParams);
+        return (new ServerRequestFactory())
+            ->createServerRequest($method, $uri, $serverParams);
     }
 
     /**
