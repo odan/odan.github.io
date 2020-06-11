@@ -170,6 +170,13 @@ composer test
 Integration tests ensure that component collaborations work as expected. 
 Assertions may test the HTTP API, or side-effects such as database, filesystem, datetime, logging etc.
 
+Depending on your needs, you can choose to run your test against 
+a integration database (with fixtures) or only against a mocked repository.
+
+Some people prefer to create repository interfaces and replace them with an empty 
+implementation for testing. Of course you can do that, 
+but the technical effort for testing is much higher then.
+
 ### Container setup
 
 To be able to perform complete and realistic integration tests 
@@ -332,13 +339,6 @@ but they have a very specific workflow:
 * Clean up and repeat
 
 All HTTP request will run in-memory without a webserver.
-
-Depending on your needs, you can choose to run your test against 
-a integration database (with fixtures) or only against a mocked repository.
-
-> Some people prefer to create repository interfaces and replace it with an empty 
-> implementation for testing. Of course you can do this as well, 
-> but the technical effort for testing is much higher then.
 
 Ok, now add your first API test. Let's assume that you have 
 implemented a RESTful API with Slim Framework.
