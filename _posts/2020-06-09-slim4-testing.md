@@ -410,7 +410,9 @@ $response = $this->app->handle($request);
 ```
 
 This HTTP test doesn't hit the database and is very fast. 
-If you also want to test against a real database, you should read my next blog post. Stay tuned.
+If you also want to test against a real database, you should read my next blog post about database testing.
+ 
+Stay tuned.
 
 ## Read more
 
