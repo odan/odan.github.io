@@ -413,7 +413,7 @@ composer test
 To test a JSON endpoint you can use the `createJsonRequest` method, e.g.:
 
 ```php
-$request = $this->createJsonRequest('POST', '/users', ['name' => 'John']);
+$request = $this->createJsonRequest('POST', '/users', ['name' => 'Sally']);
 $response = $this->app->handle($request);
 ```
 
