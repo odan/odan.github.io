@@ -87,6 +87,7 @@ Done.
 
 * Error: `MySQL shutdown unexpectedly.`
   * You might forgot to [initialize the data directory](#initializing-the-data-directory).
+  * Try to start `mysqld.exe` from the console: `c:\xampp\mysql\bin>mysqld.exe`
   
 * I can't start or stop MySQL using the XAMPP control panel button.
   * Make sure you have installed the **64-bit** version of XAMPP and MySQL.
