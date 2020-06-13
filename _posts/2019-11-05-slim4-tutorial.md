@@ -1178,17 +1178,6 @@ You can add a query builder as described here:
 
 * [Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
 
-### How to fix abandoned messages?
-
-`Package jeremeamia/superclosure is abandoned, you should avoid using it. Use opis/closure instead.`
-
-The `jeremeamia/superclosure` component is a dependency of PHP-DI (and not of Slim).
-There is an open issue here: <https://github.com/PHP-DI/PHP-DI/issues/711>
-
-In case you are looking for a similar (and faster) container try this PSR-11 container implementation:
-
-* <https://github.com/selective-php/container>
-
 ### How to serve Slim with NGINX and PHP-FPM?
 
 If you run Slim with Nginx you don't need the `.htaccess` files and the `BasePathMiddleware`.
@@ -1209,7 +1198,7 @@ Then navigate to: `http://localhost:8080/`
 
 For technical questions create an issue here:
 
-* <https://github.com/odan/slim4-skeleton/issues>
+* <https://github.com/odan/slim4-tutorial/issues>
 
 If you have Slim-Framework specific questions, visit:
 
