@@ -661,7 +661,7 @@ to remove the token from the browser. Since the cookies that should be defined a
 A logout route, e.g. `GET /logout`:
 
 ```php
-$response = $response->withHeader(
+return $response->withHeader(
     'Set-Cookie', 
     'Authentication=; HttpOnly; Secure; Path=/; Max-Age=0'
 );
