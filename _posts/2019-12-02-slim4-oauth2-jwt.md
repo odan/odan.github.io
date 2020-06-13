@@ -437,14 +437,22 @@ Content-Type: application/json
 
 ## Bearer Authentication Middleware
 
-Bearer authentication (also called token authentication) is an HTTP authentication 
-scheme that involves security tokens called bearer tokens. The Bearer authentication 
-scheme was originally created as part of OAuth 2.0 in [RFC 6750](https://tools.ietf.org/html/rfc6750).
-The client must send the JWT within the `Authorization` request header in this format:
+Whenever the user wants to access a protected route or resource, 
+the user agent should send the JWT, typically in the Authorization 
+header using the Bearer schema. 
+
+The content of the header should look like the following:
 
 ```
 Authorization: Bearer <token>
 ```
+
+This can be, in certain cases, a stateless authorization mechanism. 
+The the server's protected routes resp. the `JwtAuthMiddleware` will check 
+for a valid JWT in the Authorization header, and if it's present, 
+the user will be allowed to access protected resources. 
+If the JWT contains the necessary data, the need to query the database for 
+certain operations may be reduced, though this may not always be the case.
 
 Create the following middleware to validate the Bearer authentication header: 
 `src/Middleware/JwtAuthMiddleware.php`
