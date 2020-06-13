@@ -85,9 +85,14 @@ Done.
 * Error: `mysqldump: Got error: 2026: SSL connection error: error:00000000:lib(0):func(0):reason(0) when trying to connect`
   * Add the `[client] ssl-mode=DISABLED` option to your `my.ini` file
 
-* Error: `MySQL shutdown unexpectedly.`
-  * You might forgot to [initialize the data directory](#initializing-the-data-directory).
+* XAMPP control panel error: `MySQL shutdown unexpectedly.`
+  * Make sure you have installed the **64-bit** version of XAMPP and MySQL.
+  * Make sure that no other MySQL server is already running on the same port (3306).
+  * Try to run `xampp-control.exe` as administrator
+  * You might forgot to [initialize the data directory](#initializing-the-data-directory). 
+  * Some MySQL versions are not compatible with the XAMPP control panel.
   * Try to start `mysqld.exe` from the console: `c:\xampp\mysql\bin>mysqld.exe`
+  * Try to [delete the ibdata1 file](https://stackoverflow.com/a/18162264/1461181)
   
 * I can't start or stop MySQL using the XAMPP control panel button.
   * Make sure you have installed the **64-bit** version of XAMPP and MySQL.
