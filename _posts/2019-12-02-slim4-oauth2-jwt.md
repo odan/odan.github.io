@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - OAuth 2.0 and JSON Web Token (JWT) Setup
+title: Slim 4 - JSON Web Token (JWT) authentication
 layout: post
 comments: true
 published: true
@@ -32,10 +32,14 @@ keywords: php slim oauth jwt json authentication security
 This tutorial demonstrates how signed JSON Web Tokens (JWTs) can be used as [OAuth 2.0](https://oauth.net/2/)
 [Bearer Tokens](https://tools.ietf.org/html/rfc6750).
 
+In **authentication**, when the user successfully logs in using their credentials, 
+a JSON Web Token will be returned. 
+
 Please note that OAuth 2.0 is a **Authorization Framework** and not an [authentication protocol](https://oauth.net/articles/authentication/). 
 
 Clients may use the HTTP Basic authentication scheme, as defined in [RFC2617](https://tools.ietf.org/html/rfc2617),
-to authenticate with the server. In this tutorial we will use a RESTful approach to implement the authentication protocol.
+to authenticate with the server. In this tutorial we will use a RESTful approach to implement 
+the authentication protocol.
 
 ## Limitations
 
@@ -45,11 +49,16 @@ The advantage of token-based authorization is that the client usually only needs
 to submit its credentials again for each request. A token requires no state on the server and
 therefore scales better across server boundaries.
 
+Since tokens are credentials, great care must be taken to prevent security issues. In general, 
+you should not keep tokens longer than required.
+
 Because a token is time-limited, the client must take care of the renewal itself. This can be tricky sometimes.
 
 A **logout** functionality with tokens is not feasible without 
-giving up the [stateless principle](https://restfulapi.net/statelessness/). This is because you cannot invalidate a 
-token without keeping its status on a server. This would break the stateless principle.
+giving up the [stateless principle](https://restfulapi.net/statelessness/). 
+This is because you cannot invalidate a token without keeping its status on a server. 
+This would break the stateless principle. However, if your client is only a browser, you
+can delete a JWT cookie with this trick: [How to implement a logout?](#how-to-implement-a-logout)
 
 Try to [avoid JWT for session management](http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/) 
 or server-side storage for sessions. 
