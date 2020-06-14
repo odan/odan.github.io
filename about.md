@@ -31,8 +31,8 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 * HTML, CSS, jQuery, Bootstrap, Vue.js
 * Slim, CakePHP, Symfony
 * REST, SOAP, XML, JSON
-* SOLID, KISS, YAGNI, Clean Code, Hexagonal Architecture
-* IT-Security
+* SOLID, DDD, Hexagonal Architecture
+* Docker, IT-Security
 
 ## My projects
 
