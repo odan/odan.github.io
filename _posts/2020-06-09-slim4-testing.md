@@ -347,7 +347,8 @@ but they have a very specific workflow:
 * Test the response
 * Clean up and repeat
 
-All HTTP request will run in-memory without a webserver.
+All HTTP request will run in-memory.
+We don't need a http client (like Guzzle) or a webserver to perform the requests.
 
 Ok, now add your first API test. Let's assume that you have 
 implemented a RESTful API with Slim.
