@@ -29,6 +29,10 @@ through a route (eg. /docs), without the need for node.
 Just add a reference to your swagger Yaml or JSON specification, 
 and enjoy swagger-ui in all it's glory.
 
+*Preview:*
+
+![screely-1591996310595](https://user-images.githubusercontent.com/781074/84546695-2d505280-ad02-11ea-9ce9-93c609db656f.png)
+
 ## Installation
 
 To parse the OpenAPI Yaml file, we have to install a good Yaml parser:
@@ -145,7 +149,3 @@ $app->get('/docs/v1', \App\Action\Docs\SwaggerUiAction::class);
 
 Then navigate to `http://localhost/docs/v1` and you should see 
 a pretty Swagger UI documentation:
-
-![screely-1591996310595](https://user-images.githubusercontent.com/781074/84546695-2d505280-ad02-11ea-9ce9-93c609db656f.png)
-
-
