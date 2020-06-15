@@ -167,7 +167,7 @@ $twig->addExtension(new \Fullpipe\TwigWebpackExtension\WebpackExtension(
 ));
 ```
 
-* The first parameter (manifestFile) defines the location of youre `manifest.json` file. You can also use `__PATH__` here.
+* The first parameter (manifestFile) defines the location of your `manifest.json` file. You can also use `__PATH__` here.
 * The second parameter (publicPathJs) defines the public path for the js files.
 * The third parameter (publicPathCss) defines the public path for the css files.
 
