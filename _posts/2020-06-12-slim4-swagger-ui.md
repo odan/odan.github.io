@@ -148,4 +148,4 @@ $app->get('/docs/v1', \App\Action\Docs\SwaggerUiAction::class);
 ```
 
 Then navigate to `http://localhost/docs/v1` and you should see 
-a pretty Swagger UI documentation:
+a pretty Swagger UI documentation.
