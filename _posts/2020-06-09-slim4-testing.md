@@ -355,18 +355,18 @@ class UserReaderActionTest extends TestCase
 {
     use AppTestTrait;
 
-    public function testUserReaderAction(): void
+    /**
+     * Test.
+     *
+     * @dataProvider provideUserReaderAction
+     *
+     * @param UserData $user The user
+     *
+     * @return void
+     */
+    public function testUserReaderAction(UserData $user): void
     {
         // Mock the repository resultset
-        // It could also be an array or a primitive data type
-        // Better use the @dataProvider annotation
-        $user = new UserData();
-        $user->id = 1;
-        $user->username = 'admin';
-        $user->email = 'john.doe@example.com';
-        $user->firstName = 'John';
-        $user->lastName = 'Doe';
-
         $this->mock(UserReaderRepository::class)->method('getUserById')->willReturn($user);
 
         $request = $this->createRequest('GET', '/users/1');
@@ -385,11 +385,32 @@ class UserReaderActionTest extends TestCase
             ]
         );
     }
+
+    /**
+     * Provider.
+     *
+     * @return array The data
+     */
+    public function provideUserReaderAction(): array
+    {
+        $user = new UserData();
+        $user->id = 1;
+        $user->username = 'admin';
+        $user->email = 'john.doe@example.com';
+        $user->firstName = 'John';
+        $user->lastName = 'Doe';
+
+        return [
+            'User' => [
+                $user
+            ]
+        ];
+    }
 }
 ```
 
-Please note: In real life, you should pass the test data via 
-[Data Providers](https://phpunit.readthedocs.io/en/9.0/writing-tests-for-phpunit.html#data-providers).
+The PHPUnit documentation contains more information about 
+[Data Providers](https://phpunit.readthedocs.io/en/9.0/writing-tests-for-phpunit.html#data-providers)
 
 Now run all tests:
 
