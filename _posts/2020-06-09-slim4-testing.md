@@ -266,18 +266,6 @@ trait AppTestTrait
     }
 
     /**
-     * Create a mocked class method.
-     *
-     * @param array|callable $method The class and method
-     *
-     * @return InvocationMocker The mocker
-     */
-    protected function mockMethod($method): InvocationMocker
-    {
-        return $this->mock((string)$method[0])->method((string)$method[1]);
-    }
-
-    /**
      * Create a server request.
      *
      * @param string $method The HTTP method
@@ -382,7 +370,7 @@ class UserReaderActionTest extends TestCase
         $user->firstName = 'John';
         $user->lastName = 'Doe';
 
-        $this->mockMethod([UserReaderRepository::class, 'getUserById'])->willReturn($user);
+        $this->mock(UserReaderRepository::class)->method('getUserById')->willReturn($user);
 
         $request = $this->createRequest('GET', '/users/1');
         $response = $this->app->handle($request);
