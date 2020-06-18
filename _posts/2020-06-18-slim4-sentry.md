@@ -66,8 +66,10 @@ You can throw an exception in your PHP application:
 throw new \Exception('My first Sentry error!');
 ```
 
-In your `config/container.php` or wherever you add your container definitions:
+Then login to your Sentry account and you should see all details of the error:
+
+![image](https://user-images.githubusercontent.com/781074/85070056-70ed0580-b1b5-11ea-8537-ca6851154192.png)
 
 Now that you’ve got basic reporting set up, you’ll want to explore adding additional context to your data.
 
-Read more: [Next Steps](https://docs.sentry.io/error-reporting/quickstart/?platform=php#next-steps)
+**Read more:** [Next Steps](https://docs.sentry.io/error-reporting/quickstart/?platform=php#next-steps)
