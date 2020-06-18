@@ -63,7 +63,7 @@ One way to verify your setup is by intentionally sending an event that breaks yo
 You can throw an exception in your PHP application:
 
 ```php
-throw new \Exception('My first Sentry error!');
+throw new Exception('My first Sentry error!');
 ```
 
 Then login to your Sentry account and you should see all details of the error:
