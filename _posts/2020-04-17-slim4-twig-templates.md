@@ -384,9 +384,11 @@ $environment->addGlobal('ga_tracking', 'UA-xxxxx-x');
 Now, the variable ga_tracking is available in all Twig templates, so you can use it without 
 having to pass it explicitly from the controller or service that renders the template:
 
+{% raw %}
 ```php
 <p>The Google tracking code is: {{ ga_tracking }}</p>
 ```
+{% endraw %}
 
 ### Dynamic values
 
