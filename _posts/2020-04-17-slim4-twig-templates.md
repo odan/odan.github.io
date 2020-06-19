@@ -467,6 +467,5 @@ Then print the result in your Twig template using this syntax:
 
 ## Read more
 
-* [Twig](https://twig.symfony.com/)
+* [Twig Website](https://twig.symfony.com/)
 * [Creating and Using Templates](https://symfony.com/doc/current/templates.html)
-* [Render on all pages using a middlware](https://stackoverflow.com/a/62296745/1461181)
