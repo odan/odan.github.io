@@ -69,7 +69,10 @@ Create a new file `phpunit.xml` and copy/paste this configuration:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="vendor/autoload.php" colors="true" backupGlobals="false" backupStaticAttributes="false">
+<phpunit bootstrap="vendor/autoload.php" 
+    colors="true" 
+    backupGlobals="false" 
+    backupStaticAttributes="false">
     <testsuites>
         <testsuite name="Tests">
             <directory suffix="Test.php">tests</directory>
@@ -311,8 +314,10 @@ trait AppTestTrait
      *
      * @return void
      */
-    protected function assertJsonData(ResponseInterface $response, array $expected): void
-    {
+    protected function assertJsonData(
+        ResponseInterface $response, 
+        array $expected
+    ): void {
         $actual = (string)$response->getBody();
         $this->assertJson($actual);
         $this->assertSame($expected, (array)json_decode($actual, true));
@@ -368,7 +373,8 @@ class UserReaderActionTest extends TestCase
     public function testUserReaderAction(UserData $user, array $expected): void
     {
         // Mock the repository resultset
-        $this->mock(UserReaderRepository::class)->method('getUserById')->willReturn($user);
+        $this->mock(UserReaderRepository::class)
+            ->method('getUserById')->willReturn($user);
 
         // Create request with method and url
         $request = $this->createRequest('GET', '/users/1');
