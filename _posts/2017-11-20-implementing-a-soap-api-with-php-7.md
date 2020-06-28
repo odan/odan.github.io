@@ -144,7 +144,11 @@ class stdClass#4 (1) {
 }
 ```
 
-It is possible that your PHP static analysis tool (e.g. phpstan) has a problem with calling `$client->sayHello(...)`. The reason is that this method does not exist and is called internally via a magic method. To avoid this warning there is a simple trick. Instead, call the web service methods using the `$client->call(method, params)`. In this case you simply pass the method name as a string. Note that the parameters must be passed in a double nested array.
+It is possible that your PHP static analysis tool (e.g. phpstan) has a problem with calling `$client->sayHello(...)`. 
+The reason is that this method does not exist and is called internally via a magic method. 
+To avoid this warning there is a simple trick. Instead, call the web service methods 
+using the `$client->call(method, params)`. In this case you simply pass the method name as a string. 
+Note that the parameters must be passed in a double nested array.
 
 This is the **wrong** way to use the `call` method:
 

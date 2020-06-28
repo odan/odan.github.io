@@ -86,4 +86,8 @@ SSLCACertificateFile "conf/ssl.crt/root.crt"
 
 ## Testing the SSL certificate
 
-This [SSL Checker](https://www.sslshopper.com/ssl-checker.html) will help you diagnose problems with your SSL certificate installation. You can verify the SSL certificate on your web server to make sure it is correctly installed, valid, trusted and doesn't give any errors to any of your users. To use the SSL Checker, simply enter your server's hostname (must be public) in the box below and click the Check SSL button.
+This [SSL Checker](https://www.sslshopper.com/ssl-checker.html) will help you diagnose problems with your 
+SSL certificate installation. You can verify the SSL certificate on your web server to make 
+sure it is correctly installed, valid, trusted and doesn't give any errors to any of your users. 
+To use the SSL Checker, simply enter your server's hostname (must be public) in the box below and 
+click the Check SSL button.

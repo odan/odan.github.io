@@ -241,12 +241,15 @@ final class UserRepository
 
 **Return types**
 
-In some cases, it makes more sense to return only a simple array of data or objects. In other cases (like an insert), it makes more sense to simply return the last inserted ID as an integer. For deletions, it is recommended to return only a boolean value such as `true`.
+In some cases, it makes more sense to return only a simple array of data or objects. In other cases (like an insert), 
+it makes more sense to simply return the last inserted ID as an integer. For deletions, it is recommended 
+to return only a boolean value such as `true`.
 
 **Method names**
 
 Use the prefix `get` to indicate that this method must return a value, otherwise throw an exception.
-If the select method can return an empty result set, the method name starts with `find` and doesn't throws an exception.
+If the select method can return an empty result set, the method name starts with `find` and doesn't 
+throws an exception.
 
 **Examples**
 
@@ -338,7 +341,9 @@ If you like to read more about this topic, please contact me or write a comment.
 
 ## Handling Ajax requests
 
-Today we have multiple different possiblilities to invoke an Ajax request from the client side like jQuery, Axios or the native `fetch` function. I still prefer jQuery because it's bulletproof and simply works in any browser.
+Today we have multiple different possiblilities to invoke an Ajax request from the client side like jQuery, 
+Axios or the native `fetch` function. I still prefer jQuery because it's bulletproof and simply 
+works in any browser.
 
 ### Client side
 
