@@ -36,9 +36,6 @@ composer require sentry/sdk:2.1.0
 
 ## Configuration
 
-To capture all errors, even the one during the startup of your application, 
-you should initialize the Sentry PHP SDK as soon as possible.
-
 Add the following settings to your Slim settings array, e.g `config/settings.php`:
 
 ```php
@@ -105,6 +102,9 @@ final class SentryMiddleware implements MiddlewareInterface
     }
 }
 ```
+
+To capture all errors, even the one during the startup of your application, 
+you should initialize the Sentry PHP SDK as soon as possible.
 
 Add the `SentryMiddleware` before the Slim error middleware, e.g. in `config/middleware.php`:
 
