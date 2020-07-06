@@ -106,7 +106,7 @@ final class SentryMiddleware implements MiddlewareInterface
 }
 ```
 
-Add the `SentryMiddleware` before the slim error middlware in `config/middleware.php`:
+Add the `SentryMiddleware` before the Slim error middlware in `config/middleware.php`:
 
 ```php
 <?php
@@ -162,7 +162,7 @@ throw new Exception('My first Sentry error!');
 
 Then login to your Sentry account and you should see all details of the error:
 
-![image](https://user-images.githubusercontent.com/781074/85070512-36379d00-b1b6-11ea-843a-ddd3c3120dc4.png)
+![image](https://user-images.githubusercontent.com/781074/86631748-ca836b80-bfce-11ea-93f1-1a13c1a5d965.png)
 
 Now that you’ve got basic reporting set up, you’ll want to explore adding additional context to your data.
 
