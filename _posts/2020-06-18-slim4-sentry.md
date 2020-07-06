@@ -39,18 +39,112 @@ composer require sentry/sdk:2.1.0
 To capture all errors, even the one during the startup of your application, 
 you should initialize the Sentry PHP SDK as soon as possible.
 
-To configure the SDK add this line with the public data source name (DSN) 
-into your bootstrap file, e.g. in `config/bootstrap.php` 
-directly after the composer autoloader:
+Add the following settings to your Slim settings array, e.g `config/settings.php`:
+
+```php
+$settings['sentry'] = [
+    'dsn' => 'https://<key>@<organization>.ingest.sentry.io/<project>',
+];
+```
+
+**Please note:** For security reasons you should keep the secret DSN out of version control.
+
+## Middleware
+
+Create a new `SentryMiddleware` in `src/Middleware/SentryMiddleware.php`:
 
 ```php
 <?php
 
-//...
+namespace App\Middleware;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Throwable;
 
-Sentry\init(['dsn' => 'https://<key>@<organization>.ingest.sentry.io/<project>']);
+final class SentryMiddleware implements MiddlewareInterface
+{
+    /**
+     * @var array
+     */
+    private $options;
+
+    /**
+     * The constructor.
+     *
+     * @param array $options The sentry options
+     */
+    public function __construct(array $options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * Invoke middleware.
+     *
+     * @param ServerRequestInterface $request The request
+     * @param RequestHandlerInterface $handler The handler
+     *
+     * @throws Throwable
+     *
+     * @return ResponseInterface The response
+     */
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        try {
+            \Sentry\init($this->options);
+
+            return $handler->handle($request);
+        } catch (Throwable $exception) {
+            \Sentry\captureException($exception);
+
+            throw $exception;
+        }
+    }
+}
+```
+
+Add the `SentryMiddleware` before the slim error middlware in `config/middleware.php`:
+
+```php
+<?php
+
+use App\Middleware\SentryMiddleware;
+use Slim\App;
+use Slim\Middleware\ErrorMiddleware;
+
+return function (App $app) {
+    // ...
+
+    $app->add(SentryMiddleware::class); // <-- here
+
+    $app->add(ErrorMiddleware::class);
+};
+
+```
+
+### Container setup
+
+Add a container definition for `\App\Middleware\SentryMiddleware:class` in `config/container.php`:
+
+```php
+<?php
+
+use App\Middleware\SentryMiddleware;
+use Psr\Container\ContainerInterface;
+// ...
+
+return [
+
+    // ...
+
+    SentryMiddleware::class => function (ContainerInterface $container) {
+        return new SentryMiddleware($container->get('settings')['sentry']);
+    },
+];
+
 ```
 
 ## Usage
