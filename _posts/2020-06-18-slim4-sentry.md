@@ -125,6 +125,17 @@ return function (App $app) {
 
 ```
 
+However, of course any errors in bootstrap etc aren't handled so for completion one needs 
+to also add the `Sentry\init()` call just after the container build if you wanted to 
+monitor that part of the app.
+
+```php
+// Build PHP-DI Container instance
+$container = $containerBuilder->build();
+
+Sentry\init($container->get('settings')['sentry']);
+```
+
 ### Container setup
 
 Add a container definition for `\App\Middleware\SentryMiddleware:class` in `config/container.php`:
