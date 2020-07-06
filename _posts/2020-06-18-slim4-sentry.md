@@ -106,7 +106,7 @@ final class SentryMiddleware implements MiddlewareInterface
 }
 ```
 
-Add the `SentryMiddleware` before the Slim error middlware in `config/middleware.php`:
+Add the `SentryMiddleware` before the Slim error middleware, e.g. in `config/middleware.php`:
 
 ```php
 <?php
