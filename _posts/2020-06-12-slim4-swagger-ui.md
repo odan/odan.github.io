@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Provide Swagger-UI inside your project 
+title: Slim 4 - API documentation with Swagger
 layout: post
 comments: true
 published: true
