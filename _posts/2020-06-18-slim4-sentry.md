@@ -162,7 +162,7 @@ throw new Exception('My first Sentry error!');
 
 Then login to your Sentry account and you should see all details of the error:
 
-![image](https://user-images.githubusercontent.com/781074/86631748-ca836b80-bfce-11ea-93f1-1a13c1a5d965.png)
+![image](https://user-images.githubusercontent.com/781074/86631970-159d7e80-bfcf-11ea-8eed-5b294b9760c4.png)
 
 Now that you’ve got basic reporting set up, you’ll want to explore adding additional context to your data.
 
