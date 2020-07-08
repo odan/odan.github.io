@@ -804,8 +804,8 @@ final class ValidationException extends RuntimeException
     public function __construct(
         string $message, 
         array $errors = [], 
-        int $code, 
-        Throwable $previous
+        int $code = 422, 
+        Throwable $previous = null
     ){
         parent::__construct($message, $code, $previous);
 
