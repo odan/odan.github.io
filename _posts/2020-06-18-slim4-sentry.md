@@ -88,8 +88,10 @@ final class SentryMiddleware implements MiddlewareInterface
      *
      * @return ResponseInterface The response
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
+    public function process(
+        ServerRequestInterface $request,
+        RequestHandlerInterface $handler
+    ): ResponseInterface {
         try {
             \Sentry\init($this->options);
 
@@ -125,7 +127,7 @@ return function (App $app) {
 
 ```
 
-However, of course any errors in bootstrap etc aren't handled so for completion one needs 
+However, of course any errors in bootstrap etc aren't handled, so for completion one needs 
 to also add the `Sentry\init()` call just after the container build if you wanted to 
 monitor that part of the app.
 
