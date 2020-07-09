@@ -2,7 +2,7 @@
 title: Value Objects with "at least one item required" constraint
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: 
 ---

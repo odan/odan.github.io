@@ -2,7 +2,7 @@
 title: PHP Inspections (EA Extended) for PhpStorm
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: php, phpstorm, static code analysis
 ---
