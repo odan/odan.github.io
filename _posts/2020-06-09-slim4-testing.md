@@ -330,14 +330,13 @@ trait AppTestTrait
 HTTP testing allows you to verify your API endpoints. This includes the 
 infrastructure supported by the app, such as the database, file system, and network.
 
-They are no different from unit tests as far as PHPUnit is concerned, 
-but they have a very specific workflow:
+HTTP tests have a very specific workflow:
 
 * Make a request (click on a link or submit json data)
 * Test the response
 * Clean up and repeat
 
-All HTTP request will run in-memory.
+All HTTP requests are performed in memory.
 We don't need a http client (like Guzzle) or a webserver to perform the requests.
 
 Ok, now add your first API test. Let's assume that you have 
