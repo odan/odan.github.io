@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Sending E-Mails
+title: Slim 4 - Mail
 layout: post
 comments: true
 published: true

@@ -218,7 +218,7 @@ to store  the template contents:
 {% raw %}
 ```twig
 <h1>Hello {{ name }}!</h1>
-<p>You have {{ notifications|length }} new notifications.</p>
+<p>You have {{ notifications|length }} new notification(s).</p>
 ```
 {% endraw %}
 
@@ -275,7 +275,7 @@ Now open the browser and navigate to the `/hello` route, e.g. `http://localhost/
 You should see a rendered output like this:
 
 > <h1>Hello World!</h1>
-> <p>You have 1 new notifications.</p>
+> <p>You have 1 new notification(s).</p>
 
 ## Linking to Pages
 

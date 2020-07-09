@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - League Container Setup
+title: Slim 4 - League Container
 layout: post
 comments: true
 published: true

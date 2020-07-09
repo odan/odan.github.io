@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Working with Images
+title: Slim 4 - Images
 layout: post
 comments: true
 published: true
