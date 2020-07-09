@@ -392,11 +392,57 @@ having to pass it explicitly from the controller or service that renders the tem
 
 ### Dynamic values
 
+You can add dynamic Twig variables and values within a middleware using the `addGlobal` method as follows:
+
+```php
+<?php
+
+namespace App\Middleware;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Views\Twig;
+
+final class UserTwigMiddleware implements MiddlewareInterface
+{
+    /**
+     * @var Twig
+     */
+    private $twig;
+
+    public function __construct(Twig $twig)
+    {
+        $this->twig = $twig;
+    }
+
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        // Extract user information from request, JWT or session
+        $userId = 1;
+    
+        if($userId) {
+            $this->twig->getEnvironment()->addGlobal('user_id', $userId);
+            
+            return $handler->handle($request);  
+        }
+        
+        // User is not logged in. Redirect to login page.
+        return $this->responder->redirect($this->responder->createResponse(), 'login');
+    }
+}
+```
+
+This only works as long as no other Twig template has been rendered yet. Because 
+after the first rendering twig blocks all changes to the global variables and throws an exception like 
+`Unable to add global "user_id" as the runtime or the extensions have already been initialized.`
+
 When using objects, it is possible to change the value of the global variable afterwards. 
 It is still not possible to replace the object itself, 
 but it is possible to change the property values of the object afterwards.
 
-Register a global twig variable:
+Register a global twig variable within the container definition (not within the middleware):
 
 ```php
 $environment = $twig->getEnvironment();
