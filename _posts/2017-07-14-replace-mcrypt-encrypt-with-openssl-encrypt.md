@@ -2,10 +2,12 @@
 title: Replacing mcrypt_encrypt with openssl_encrypt
 layout: post
 comments: true
-published: false
+published: true
 description: 
 keywords: php, mcrypt, openssl, encryption
 ---
+
+**Attention:** This article is from 2017, some information may be out of date.
 
 > Note: This might help too:
 > <https://packagist.org/packages/phpseclib/mcrypt_compat>
