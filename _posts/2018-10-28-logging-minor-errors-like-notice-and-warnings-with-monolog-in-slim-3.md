@@ -2,7 +2,7 @@
 title: Logging minor errors (like notice and warnings) with Monolog in Slim 3
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: slim, slimphp, php, monolog, logging
 ---

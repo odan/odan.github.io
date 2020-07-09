@@ -2,7 +2,7 @@
 title: Setting up permissions for apache var/www/html
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: apache, ubuntu
 ---

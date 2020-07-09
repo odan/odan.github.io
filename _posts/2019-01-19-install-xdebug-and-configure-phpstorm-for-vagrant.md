@@ -2,7 +2,7 @@
 title: Using Xdebug with Vagrant and PHPStorm
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: PhpStorm, Xdebug, Vagrant, php, debugger, linux
 ---

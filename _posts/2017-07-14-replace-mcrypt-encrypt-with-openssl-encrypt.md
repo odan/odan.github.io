@@ -2,7 +2,7 @@
 title: Replacing mcrypt_encrypt with openssl_encrypt
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: php, mcrypt, openssl, encryption
 ---
