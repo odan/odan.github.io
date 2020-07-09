@@ -1,8 +1,8 @@
 ---
-title: How to use htmlspecialchars() in PHP?
+title: Using htmlspecialchars correctly
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: php, xss
 ---

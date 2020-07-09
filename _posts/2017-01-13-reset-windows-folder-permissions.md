@@ -2,7 +2,7 @@
 title: Reset windows folder permissions
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: php, vfsStream
 ---

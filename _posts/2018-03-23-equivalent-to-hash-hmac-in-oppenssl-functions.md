@@ -2,7 +2,7 @@
 title: Equivalent to hash_hmac in oppenssl_* functions
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: 
 ---
