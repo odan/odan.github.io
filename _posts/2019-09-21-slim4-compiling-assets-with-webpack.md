@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Compiling Assets with Webpack
+title: Slim 4 - Webpack
 layout: post
 comments: true
 published: true
