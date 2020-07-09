@@ -424,12 +424,9 @@ final class UserTwigMiddleware implements MiddlewareInterface
     
         if($userId) {
             $this->twig->getEnvironment()->addGlobal('user_id', $userId);
-            
-            return $handler->handle($request);  
         }
         
-        // User is not logged in. Redirect to login page.
-        return $this->responder->redirect($this->responder->createResponse(), 'login');
+        return $handler->handle($request);  
     }
 }
 ```
