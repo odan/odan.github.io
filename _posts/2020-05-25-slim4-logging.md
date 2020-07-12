@@ -31,7 +31,7 @@ the output according to your needs.
 
 ### Installation
 
-To install composer, run:
+To install monolog, run:
 
 ```
 composer require monolog/monolog
