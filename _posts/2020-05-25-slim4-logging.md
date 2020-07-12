@@ -200,7 +200,7 @@ return [
 
 ## Usage
 
-Okay, great! From now on you can create your custom logfile per class by using the 
+Okay, great! From now on you can create your custom logfile by using the
 `LoggerFactory` instance. 
 
 ### Slim Error middleware
