@@ -216,7 +216,7 @@ $errorMiddleware = $app->addErrorMiddleware(true, true, true, $logger);
 
 ### Services
 
-Creating a custom logger for a service class:
+Creating a custom logger for a service class using dependency injection:
 
 ```php
 <?php
