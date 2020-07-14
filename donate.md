@@ -26,7 +26,7 @@ You can  **buy** all Slim articles (> 200 pages) bundled into a eBook.
 <td>
 <input type="hidden" name="on0" value="Slim 4 - eBook">Slim 4 - eBook</td></tr><tr><td>
 <select name="os0">
-	<option value="PDF & EPUB">PDF & EPUB €4,00 EUR</option>
+	<option value="PDF & EPUB">PDF & EPUB €9,00 EUR</option>
 </select> </td>
 </tr>
 <tr>
