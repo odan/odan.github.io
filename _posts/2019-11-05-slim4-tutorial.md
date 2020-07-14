@@ -677,7 +677,7 @@ then just invoke that application service you need in your action.
 The [Domain](https://github.com/pmjones/adr/blob/master/ADR.md#model-versus-domain) is the place for the
 complex [business logic](https://en.wikipedia.org/wiki/Business_logic).
 
-Instead of putting the logic into gigantic (fat) "Models", we but the logic into smaller, 
+Instead of putting the logic into gigantic (fat) "Models", we put the logic into smaller, 
 specialized **Service** classes, aka Application Service.
 
 A service provides a specific functionality or a set of functionalities, such as the retrieval of 
