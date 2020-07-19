@@ -558,13 +558,29 @@ but it's never part of your base path and the official url.
 
 ## Action
 
-Each **Single Action Controller** is represented by a individual class or closure.
+Slim provides some methods for adding controller logic directly in a route callback.
+For example, you can register such a handler in Slim:
+
+```php
+$app->get('/hello', function (ServerRequestInterface $request, ResponseInterface $response) {
+    $response->getBody()->write('Hello World');
+    return $response;
+});
+```
+
+While such interfaces look intuitive, they are not suitable for complex business logic scenarios. 
+Assuming there are tens or even hundreds of handlers that need to be registered in the framework, 
+isn't it a better practice to implement them separately in their respective classes? 
+So unless your logic is very simple, I don't recommend using route callbacks. 
+Instead, you can create an **Single Action Controller**.
+
+Each **Single Action Controller** is represented by its own class.
 
 The *Action* does only these things:
 
-* collects input from the HTTP request (if needed)
-* invokes the **Domain** with those inputs (if required) and retains the result
-* builds an HTTP response (typically with the Domain invocation results).
+* Collects input from the HTTP request (if needed)
+* Invokes the **Domain** with those inputs (if required) and retains the result
+* Builds an HTTP response (typically with the Domain invocation results).
 
 All other logic, including all forms of input validation, error handling, and so on, 
 are therefore pushed out of the Action and into the **Domain** 
