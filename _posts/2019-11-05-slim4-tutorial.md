@@ -563,6 +563,13 @@ The PSR-7 request object is injected into your Slim application routes as the fi
 argument to the route callback like this:
 
 ```php
+<?php
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+// ...
+
 $app->get('/hello', function (ServerRequestInterface $request, ResponseInterface $response) {
     $response->getBody()->write('Hello World');
     return $response;
