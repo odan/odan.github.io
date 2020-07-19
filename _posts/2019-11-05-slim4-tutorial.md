@@ -33,7 +33,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Base path](#base-path)
 * [Your first route](#your-first-route)
 * [Good URLs](#good-urls)
-* [Actions](#action)
+* [Actions](#actions)
 * [Writing JSON to the response](#writing-json-to-the-response)
 * [Domain](#domain)
   * [Services](#services)
@@ -556,10 +556,11 @@ but it's never part of your base path and the official url.
 * `http://www.example.com/my-app/public`
 * `http://www.example.com/my-app/public/users`
 
-## Action
+## Actions
 
 Slim provides some methods for adding controller logic directly in a route callback.
-For example, you can register such a handler in Slim:
+The PSR-7 request object is injected into your Slim application routes as the first 
+argument to the route callback like this:
 
 ```php
 $app->get('/hello', function (ServerRequestInterface $request, ResponseInterface $response) {
