@@ -31,7 +31,7 @@ the output according to your needs.
 
 ### Installation
 
-To install composer, run:
+To install monolog, run:
 
 ```
 composer require monolog/monolog
@@ -177,11 +177,12 @@ final class LoggerFactory
 }
 ```
 
-Add a new container definition for the `LoggerFactory::class` in `config/container.ph`:
+Add a new container definition for the `LoggerFactory::class` in `config/container.php`:
 
 ```php
 <?php
 
+use App\Factory\LoggerFactory;
 use Psr\Container\ContainerInterface;
 use Selective\BasePath\BasePathMiddleware;
 use Slim\App;
@@ -199,10 +200,23 @@ return [
 
 ## Usage
 
-Okay, great! From now on you can create your custom logfile per class by using the 
+Okay, great! From now on you can create your custom logfile by using the
 `LoggerFactory` instance. 
 
-Here is an example:
+### Slim Error middleware
+
+Creating a custom logger for the `ErrorMiddleware`:
+
+```php
+$loggerFactory = $app->getContainer()->get(\App\Factory\LoggerFactory::class);
+$logger = $loggerFactory->addFileHandler('error.log')->createInstance('error');
+
+$errorMiddleware = $app->addErrorMiddleware(true, true, true, $logger);
+```
+
+### Services
+
+Creating a custom logger for a service class using dependency injection:
 
 ```php
 <?php

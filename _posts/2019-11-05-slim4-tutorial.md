@@ -33,7 +33,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Base path](#base-path)
 * [Your first route](#your-first-route)
 * [Good URLs](#good-urls)
-* [Actions](#action)
+* [Actions](#actions)
 * [Writing JSON to the response](#writing-json-to-the-response)
 * [Domain](#domain)
   * [Services](#services)
@@ -556,15 +556,39 @@ but it's never part of your base path and the official url.
 * `http://www.example.com/my-app/public`
 * `http://www.example.com/my-app/public/users`
 
-## Action
+## Actions
 
-Each **Single Action Controller** is represented by a individual class or closure.
+Slim provides some methods for adding controller logic directly in a route callback.
+The PSR-7 request object is injected into your Slim application routes as the first 
+argument to the route callback like this:
+
+```php
+<?php
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+// ...
+
+$app->get('/hello', function (ServerRequestInterface $request, ResponseInterface $response) {
+    $response->getBody()->write('Hello World');
+    return $response;
+});
+```
+
+While such interfaces look intuitive, they are not suitable for complex business logic scenarios. 
+Assuming there are tens or even hundreds of handlers that need to be registered in the framework, 
+isn't it a better practice to implement them separately in their respective classes? 
+So unless your logic is very simple, I don't recommend using route callbacks. 
+Instead, you can create an **Single Action Controller**.
+
+Each **Single Action Controller** is represented by its own class.
 
 The *Action* does only these things:
 
-* collects input from the HTTP request (if needed)
-* invokes the **Domain** with those inputs (if required) and retains the result
-* builds an HTTP response (typically with the Domain invocation results).
+* Collects input from the HTTP request (if needed)
+* Invokes the **Domain** with those inputs (if required) and retains the result
+* Builds an HTTP response (typically with the Domain invocation results).
 
 All other logic, including all forms of input validation, error handling, and so on, 
 are therefore pushed out of the Action and into the **Domain** 
@@ -677,7 +701,7 @@ then just invoke that application service you need in your action.
 The [Domain](https://github.com/pmjones/adr/blob/master/ADR.md#model-versus-domain) is the place for the
 complex [business logic](https://en.wikipedia.org/wiki/Business_logic).
 
-Instead of putting the logic into gigantic (fat) "Models", we but the logic into smaller, 
+Instead of putting the logic into gigantic (fat) "Models", we put the logic into smaller, 
 specialized **Service** classes, aka Application Service.
 
 A service provides a specific functionality or a set of functionalities, such as the retrieval of 
@@ -804,8 +828,8 @@ final class ValidationException extends RuntimeException
     public function __construct(
         string $message, 
         array $errors = [], 
-        int $code, 
-        Throwable $previous
+        int $code = 422, 
+        Throwable $previous = null
     ){
         parent::__construct($message, $code, $previous);
 
@@ -1178,17 +1202,6 @@ You can add a query builder as described here:
 
 * [Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
 
-### How to fix abandoned messages?
-
-`Package jeremeamia/superclosure is abandoned, you should avoid using it. Use opis/closure instead.`
-
-The `jeremeamia/superclosure` component is a dependency of PHP-DI (and not of Slim).
-There is an open issue here: <https://github.com/PHP-DI/PHP-DI/issues/711>
-
-In case you are looking for a similar (and faster) container try this PSR-11 container implementation:
-
-* <https://github.com/selective-php/container>
-
 ### How to serve Slim with NGINX and PHP-FPM?
 
 If you run Slim with Nginx you don't need the `.htaccess` files and the `BasePathMiddleware`.
@@ -1209,7 +1222,7 @@ Then navigate to: `http://localhost:8080/`
 
 For technical questions create an issue here:
 
-* <https://github.com/odan/slim4-skeleton/issues>
+* <https://github.com/odan/slim4-tutorial/issues>
 
 If you have Slim-Framework specific questions, visit:
 

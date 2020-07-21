@@ -218,7 +218,7 @@ to store  the template contents:
 {% raw %}
 ```twig
 <h1>Hello {{ name }}!</h1>
-<p>You have {{ notifications|length }} new notifications.</p>
+<p>You have {{ notifications|length }} new notification(s).</p>
 ```
 {% endraw %}
 
@@ -275,7 +275,7 @@ Now open the browser and navigate to the `/hello` route, e.g. `http://localhost/
 You should see a rendered output like this:
 
 > <h1>Hello World!</h1>
-> <p>You have 1 new notifications.</p>
+> <p>You have 1 new notification(s).</p>
 
 ## Linking to Pages
 
@@ -384,17 +384,62 @@ $environment->addGlobal('ga_tracking', 'UA-xxxxx-x');
 Now, the variable ga_tracking is available in all Twig templates, so you can use it without 
 having to pass it explicitly from the controller or service that renders the template:
 
+{% raw %}
 ```php
 <p>The Google tracking code is: {{ ga_tracking }}</p>
 ```
+{% endraw %}
 
 ### Dynamic values
+
+You can add dynamic Twig variables and values within a middleware using the `addGlobal` method as follows:
+
+```php
+<?php
+
+namespace App\Middleware;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Slim\Views\Twig;
+
+final class UserTwigMiddleware implements MiddlewareInterface
+{
+    /**
+     * @var Twig
+     */
+    private $twig;
+
+    public function __construct(Twig $twig)
+    {
+        $this->twig = $twig;
+    }
+
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        // Extract user information from request, JWT or session
+        $userId = 1;
+    
+        if($userId) {
+            $this->twig->getEnvironment()->addGlobal('user_id', $userId);
+        }
+        
+        return $handler->handle($request);  
+    }
+}
+```
+
+This only works as long as no other Twig template has been rendered yet. Because 
+after the first rendering twig blocks all changes to the global variables and throws an exception like 
+`Unable to add global "user_id" as the runtime or the extensions have already been initialized.`
 
 When using objects, it is possible to change the value of the global variable afterwards. 
 It is still not possible to replace the object itself, 
 but it is possible to change the property values of the object afterwards.
 
-Register a global twig variable:
+Register a global twig variable within the container definition (not within the middleware):
 
 ```php
 $environment = $twig->getEnvironment();
@@ -465,6 +510,5 @@ Then print the result in your Twig template using this syntax:
 
 ## Read more
 
-* [Twig](https://twig.symfony.com/)
+* [Twig Website](https://twig.symfony.com/)
 * [Creating and Using Templates](https://symfony.com/doc/current/templates.html)
-* [Render on all pages using a middlware](https://stackoverflow.com/a/62296745/1461181)

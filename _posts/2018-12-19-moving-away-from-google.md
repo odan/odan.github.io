@@ -2,7 +2,7 @@
 title: Moving away from Google
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: google
 ---

@@ -2,7 +2,7 @@
 title: Remove directory recursively in PHP
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: php, vfsStream
 ---

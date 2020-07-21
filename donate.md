@@ -26,7 +26,7 @@ You can  **buy** all Slim articles (> 200 pages) bundled into a eBook.
 <td>
 <input type="hidden" name="on0" value="Slim 4 - eBook">Slim 4 - eBook</td></tr><tr><td>
 <select name="os0">
-	<option value="PDF & EPUB">PDF & EPUB €4,00 EUR</option>
+	<option value="PDF & EPUB">PDF & EPUB €9,00 EUR</option>
 </select> </td>
 </tr>
 <tr>
@@ -36,8 +36,8 @@ You can  **buy** all Slim articles (> 200 pages) bundled into a eBook.
 </tr>
 </table>
 <input type="hidden" name="currency_code" value="EUR">
-<input type="image" src="https://www.paypalobjects.com/de_DE/DE/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
-<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
 
 

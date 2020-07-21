@@ -53,7 +53,7 @@ keywords:
 ## HTTP Methods
 
 HTTP Method | HTTP Path | CRUDL | SQL | [OperationId](https://github.com/watson-developer-cloud/api-guidelines/blob/master/swagger-coding-style.md#operationid) | Description | Response codes
-|--- | ---  | --- | --- | --- | --- | ---
+|--- | ---  | --- | --- | --- | --- | --- |
 GET | /users | List | SELECT | listUsers / getUsers | Used for retrieving a list of resources | 200 (OK), 404 (Not Found)
 GET | /users/{id} | Read | SELECT | getUserById | Used for retrieving a single resources | 200 (OK), 404 (Not Found)
 POST | /users | Create | INSERT | createUser or addUser | Used for creating resources | 201 (Created), 404 (Not Found), 409 (Conflict)
@@ -73,7 +73,7 @@ Status codes indicate the result of the HTTP request.
 Return meaningful status codes:
 
 Code | Name| What does it mean?
---- | ---  | ---
+--- | ---  | --- |
 200 | OK | All right!
 201 | Created | If resource was created successfully.
 400 | Bad Request | 4xx Client Error

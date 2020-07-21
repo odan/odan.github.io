@@ -69,7 +69,10 @@ Create a new file `phpunit.xml` and copy/paste this configuration:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="vendor/autoload.php" colors="true" backupGlobals="false" backupStaticAttributes="false">
+<phpunit bootstrap="vendor/autoload.php" 
+    colors="true" 
+    backupGlobals="false" 
+    backupStaticAttributes="false">
     <testsuites>
         <testsuite name="Tests">
             <directory suffix="Test.php">tests</directory>
@@ -174,9 +177,10 @@ Integration tests ensure that component collaborations work as expected.
 
 * Test a repository against the actual database
 * Test an application service using a real controller action
-* Test a HTTP integration agains the real webservice
+* Test a HTTP integration against the real webservice
 
-Assertions may test the HTTP API, or side-effects such as database, filesystem, datetime, logging etc.
+Assertions may test the HTTP API, or side-effects such as database, 
+filesystem, datetime, logging etc.
 
 Depending on your needs, you can choose to run your test against 
 a integration database (with fixtures) or only against a mocked repository.
@@ -205,7 +209,6 @@ use DI\Container;
 use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\Builder\InvocationMocker;
 use PHPUnit\Framework\MockObject\MockObject;
-use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
@@ -215,7 +218,7 @@ use UnexpectedValueException;
 
 trait AppTestTrait
 {
-    /** @var ContainerInterface|Container */
+    /** @var Container */
     protected $container;
 
     /** @var App */
@@ -257,23 +260,9 @@ trait AppTestTrait
             ->disableOriginalConstructor()
             ->getMock();
 
-        if ($this->container instanceof Container) {
-            $this->container->set($class, $mock);
-        }
+        $this->container->set($class, $mock);
 
         return $mock;
-    }
-
-    /**
-     * Create a mocked class method.
-     *
-     * @param array|callable $method The class and method
-     *
-     * @return InvocationMocker The mocker
-     */
-    protected function mockMethod($method): InvocationMocker
-    {
-        return $this->mock((string)$method[0])->method((string)$method[1]);
     }
 
     /**
@@ -325,8 +314,10 @@ trait AppTestTrait
      *
      * @return void
      */
-    protected function assertJsonResponse(ResponseInterface $response, array $expected): void
-    {
+    protected function assertJsonData(
+        ResponseInterface $response, 
+        array $expected
+    ): void {
         $actual = (string)$response->getBody();
         $this->assertJson($actual);
         $this->assertSame($expected, (array)json_decode($actual, true));
@@ -339,14 +330,14 @@ trait AppTestTrait
 HTTP testing allows you to verify your API endpoints. This includes the 
 infrastructure supported by the app, such as the database, file system, and network.
 
-They are no different from unit tests as far as PHPUnit is concerned, 
-but they have a very specific workflow:
+HTTP tests have a very specific workflow:
 
 * Make a request (click on a link or submit json data)
 * Test the response
 * Clean up and repeat
 
-All HTTP request will run in-memory without a webserver.
+All HTTP requests are performed in memory.
+We don't need a http client (like Guzzle) or a webserver to perform the requests.
 
 Ok, now add your first API test. Let's assume that you have 
 implemented a RESTful API with Slim.
@@ -368,11 +359,40 @@ class UserReaderActionTest extends TestCase
 {
     use AppTestTrait;
 
-    public function testUserReaderAction(): void
+    /**
+     * Test.
+     *
+     * @dataProvider provideUserReaderAction
+     *
+     * @param UserData $user The user
+     * @param array $expected The expected result
+     *
+     * @return void
+     */
+    public function testUserReaderAction(UserData $user, array $expected): void
     {
         // Mock the repository resultset
-        // It could also be an array or a primitive data type
-        // Better use the @dataProvider annotation
+        $this->mock(UserReaderRepository::class)
+            ->method('getUserById')->willReturn($user);
+
+        // Create request with method and url
+        $request = $this->createRequest('GET', '/users/1');
+
+        // Make request and fetch response
+        $response = $this->app->handle($request);
+
+        // Asserts
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertJsonData($response, $expected);
+    }
+
+    /**
+     * Provider.
+     *
+     * @return array The data
+     */
+    public function provideUserReaderAction(): array
+    {
         $user = new UserData();
         $user->id = 1;
         $user->username = 'admin';
@@ -380,29 +400,23 @@ class UserReaderActionTest extends TestCase
         $user->firstName = 'John';
         $user->lastName = 'Doe';
 
-        $this->mockMethod([UserReaderRepository::class, 'getUserById'])->willReturn($user);
-
-        $request = $this->createRequest('GET', '/users/1');
-        $response = $this->app->handle($request);
-
-        $this->assertSame(200, $response->getStatusCode());
-
-        $this->assertJsonData(
-            $response,
-            [
-                'user_id' => 1,
-                'username' => 'admin',
-                'first_name' => 'John',
-                'last_name' => 'Doe',
-                'email' => 'john.doe@example.com',
+        return [
+            'User' => [
+                $user,
+                [
+                    'user_id' => 1,
+                    'username' => 'admin',
+                    'first_name' => 'John',
+                    'last_name' => 'Doe',
+                    'email' => 'john.doe@example.com',
+                ]
             ]
-        );
-    }
+        ];
 }
 ```
 
-Please note: In real life, you should pass the test data via 
-[Data Providers](https://phpunit.readthedocs.io/en/9.0/writing-tests-for-phpunit.html#data-providers).
+The PHPUnit documentation contains more information about 
+[Data Providers](https://phpunit.readthedocs.io/en/9.0/writing-tests-for-phpunit.html#data-providers)
 
 Now run all tests:
 
@@ -413,7 +427,7 @@ composer test
 To test a JSON endpoint you can use the `createJsonRequest` method, e.g.:
 
 ```php
-$request = $this->createJsonRequest('POST', '/users', ['name' => 'John']);
+$request = $this->createJsonRequest('POST', '/users', ['name' => 'Sally']);
 $response = $this->app->handle($request);
 ```
 

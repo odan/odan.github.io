@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Performance Testing using Apache Bench
+title: Slim 4 - Performance Testing
 layout: post
 comments: true
 published: true

@@ -2,7 +2,7 @@
 title: Creating a deployment pipeline
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: 
 ---

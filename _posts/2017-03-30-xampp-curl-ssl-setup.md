@@ -2,7 +2,7 @@
 title: XAMPP - CURL SSL Setup
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: PHP, CURL, SSL, Twitter, CURLOPT_SSL_VERIFYPEER
 ---

@@ -2,7 +2,7 @@
 title: REST, RESTful, REST-like API Resources
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: 
 ---

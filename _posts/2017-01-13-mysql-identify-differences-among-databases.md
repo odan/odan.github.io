@@ -2,7 +2,7 @@
 title: MySQL - Identify Differences Among Databases
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: 
 ---

@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Sending E-Mails
+title: Slim 4 - Mail
 layout: post
 comments: true
 published: true
@@ -13,7 +13,7 @@ keywords: php slim email smtp symfony
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Configuration](#configuration)
-* [Creating & Sending Messages](#creating--sending-messages)
+* [Creating and Sending Messages](#creating-and-sending-messages)
 * [Twig Integration](#twig-integration)
 * [Error handling](#error-handling)
 * [Read more](#read-more)
@@ -103,7 +103,7 @@ If you don't use the Configuration class, just use `settings` as container entry
 $settings = $container->get('settings')['smtp'];
 ```
 
-## Creating & Sending Messages
+## Creating and Sending Messages
 
 Let the DIC inject the `MailerInterface` object and create an new `Email` object:
 

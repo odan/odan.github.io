@@ -2,7 +2,7 @@
 title: MySQL - Find duplicate foreign keys
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: mysql
 ---
