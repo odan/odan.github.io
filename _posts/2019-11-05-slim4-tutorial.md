@@ -355,10 +355,11 @@ return function (App $app) {
 
 ### A quick guide to the container
 
-**[Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)** is passing dependency to other objects.
-Dependency injection makes testing easier. The injection can be done through a constructor.
+**[Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)** is passing 
+dependency to other objects. Dependency injection makes testing easier. 
+The injection can be done through a constructor.
 
-A **dependencies injection container** (DIC) is a tool for injecting dependencies.
+A **dependencies injection container** (aka IoC Container) is a tool for injecting dependencies.
 
 **A general rule:** The core application should not use the container.
 Injecting the container into a class is an **anti-pattern**. You should declare all class 
@@ -377,9 +378,6 @@ Q: How can I make it better?
 
 A: Use [composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance) 
 and (constructor) **dependency injection**. 
-
-Dependency injection is a programming practice of passing into an object it’s collaborators, 
-rather the object itself creating them. 
 
 Since **Slim 4** you can use modern tools like [PHP-DI](http://php-di.org/) with the awesome [autowire](http://php-di.org/doc/autowiring.html) feature. 
 This means: Now you can declare all dependencies explicitly in your constructor and let the DIC inject these 
