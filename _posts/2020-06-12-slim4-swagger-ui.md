@@ -52,7 +52,7 @@ Save the yaml file in the `resources/docs/` directory. If not exists, create it.
 Create a new template file: `templates/docs/swagger.twig` and copy/paste this content:
 
 {% raw %}
-```twig
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
