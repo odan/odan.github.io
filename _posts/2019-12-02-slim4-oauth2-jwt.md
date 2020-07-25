@@ -706,7 +706,7 @@ The request token endpoint can also use a Refresh Token by using the
 `grant_type` value `refresh_token`, as described in Section 6 of OAuth 2.0 RFC6749.
 
 On the client, before the previous JWT token expires, you could wire up our app 
-to make a `/tokens` endpoint and grab a new JWT.
+to make a `PUT /tokens` endpoint and grab a new JWT.
 
 The auth server should save this refresh token and associates it to a 
 particular user in its own database, so that it can handle the renewing JWT logic.
