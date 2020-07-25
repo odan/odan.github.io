@@ -696,7 +696,7 @@ return $response->withHeader(
 
 ### How does a refresh token work?
 
-This article does not cover refresh tokens. A refresh token requires a
+This tutorial does not cover refresh tokens. A refresh token requires a
 some kind of state on your server-side and would go beyond the scope of this tutorial.
 
 A [refresh token](https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.12) 
