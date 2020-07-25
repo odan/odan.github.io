@@ -55,7 +55,7 @@ you should not keep tokens longer than required.
 Because a token is time-limited, the client must take care of the renewal itself. This can be tricky sometimes.
 
 A **logout** functionality with tokens is not feasible without 
-giving up the [stateless principle](https://restfulapi.net/statelessness/). 
+giving up the [stateless principle](https://auth0.com/blog/stateless-auth-for-stateful-minds/). 
 This is because you cannot invalidate a token without keeping its status on a server. 
 This would break the stateless principle. However, if your client is only a browser, you
 can delete a JWT cookie with this trick: [How to implement a logout?](#how-to-implement-a-logout)
