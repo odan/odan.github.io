@@ -646,10 +646,37 @@ return function (App $app) {
 
 ### Where to store the token?
 
-If you store a JWT as a cookie, make it `HttpOnly` and `Secure`.
+We need to save our JWT token somewhere, so that we can forward it to our API as a header. 
+You might be tempted to persist it in localstorage; you should not do it! 
+This is prone to XSS attacks.
+
+Creating cookies on the client to save the JWT will also be prone to XSS. 
+If it can be read on the client from Javascript outside of your app - it can be stolen. 
+
+XSS is when users get unsafe JS running on your domain in other users browsers 
+when that happens neither JWT in localStorage or sessions and JWT in cookies are safe. 
+With httpOnly flag on cookies, you can't directly access them, but the browser will 
+still send them with AJAX requests to your server. 
+If this happens you generally out of luck. To prevent this, make sure to escape all 
+user input if it's sent to the browser.
+
+If you load 3rd party JS with script tags or iframes this might compromise localStorage 
+unless you are careful, but I haven't worked enough with this to help you here.
+
+You might think an HttpOnly cookie (created by the server instead of the client) 
+will help, but cookies are vulnerable to CSRF attacks. 
+It is important to note that HttpOnly and sensible CORS policies cannot prevent 
+CSRF form-submit attacks and using cookies require a proper CSRF mitigation strategy.
+
+If you still want to store a JWT as a cookie, then as a 
+[SameSite cookie](https://web.dev/samesite-cookies-explained/).
+Make the SameSite cookie `SameSite=Lax`, `HttpOnly` and `Secure`.
 
 A cookie with the `HttpOnly` attribute is inaccessible 
 to the JavaScript `Document.cookie` API; it is sent only to the server.
+
+Another option is to store the token **in memory**. But then
+the token will be nullified when the user switches between tabs.
 
 ### How to implement a logout?
 
@@ -666,6 +693,35 @@ return $response->withHeader(
     'Authentication=; HttpOnly; Secure; Path=/; Max-Age=0'
 );
 ```
+
+### How does a refresh token work?
+
+This article does not cover refresh tokens. A refresh token requires a
+some kind of state on your server-side and would go beyond the scope of this tutorial.
+
+A [refresh token](https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.12) 
+is issued as part of authentication process along with the JWT. 
+
+The request token endpoint can also use a Refresh Token by using the 
+`grant_type` value `refresh_token`, as described in Section 6 of OAuth 2.0 RFC6749.
+
+On the client, before the previous JWT token expires, you could wire up our app 
+to make a `/tokens` endpoint and grab a new JWT.
+
+The auth server should saves this refresh token and associates it to a 
+particular user in its own database, so that it can handle the renewing JWT logic.
+
+Anyway, there are certain additional aspects (that tend to get difficult or are even 
+against the [fundamental ideas of JWT]((https://restfulapi.net/statelessness/))) 
+you should consider before using JWTs as refresh-token, 
+as this basically means you introduce long-living JWT.
+
+Dependent on your use-case you should consider all the possible implications, 
+long-living tokens have as they usually require you to introduce some kind of state 
+on your server-side (e.g. to allow revocation/ blacklisting). Keep in mind the beauty 
+and security of the JWT concept lies within JWTs being short-lived.
+
+If you still need refresh tokens, you may try the [Auth0 PHP SDK](https://auth0.com/docs/quickstart/webapp/php)
 
 ### How to implement a HTTP Basic or form data authentication?
 
