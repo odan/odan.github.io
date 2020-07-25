@@ -712,7 +712,7 @@ The auth server should save this refresh token and associates it to a
 particular user in its own database, so that it can handle the renewing JWT logic.
 
 Anyway, there are certain additional aspects (that tend to get difficult or are even 
-against the [fundamental ideas of JWT]((https://auth0.com/blog/stateless-auth-for-stateful-minds/))) 
+against the [fundamental ideas of JWT]((https://auth0.com/blog/stateless-auth-for-stateful-minds/)) 
 you should consider before using JWTs as refresh-token, 
 as this basically means you introduce long-living JWT.
 
