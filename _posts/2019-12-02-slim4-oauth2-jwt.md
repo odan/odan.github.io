@@ -711,14 +711,10 @@ to make a `/tokens` endpoint and grab a new JWT.
 The auth server should save this refresh token and associates it to a 
 particular user in its own database, so that it can handle the renewing JWT logic.
 
-Anyway, there are certain additional aspects (that tend to get difficult or are even 
-against the [fundamental ideas of JWT]((https://auth0.com/blog/stateless-auth-for-stateful-minds/)) 
+Anyway, there are certain additional aspects, that tend to get difficult or are even 
+against the [fundamental ideas of JWT](https://auth0.com/blog/stateless-auth-for-stateful-minds/), 
 you should consider before using JWTs as refresh-token, 
-as this basically means you introduce long-living JWT.
-
-Dependent on your use-case you should consider all the possible implications, 
-long-living tokens have as they usually require you to introduce some kind of state 
-on your server-side (e.g. to allow revocation/ blacklisting). Keep in mind the beauty 
+as this basically means you introduce long-living JWT. Keep in mind the beauty 
 and security of the JWT concept lies within JWTs being short-lived.
 
 If you still need refresh tokens, you may try the [Auth0 PHP SDK](https://auth0.com/docs/quickstart/webapp/php)
