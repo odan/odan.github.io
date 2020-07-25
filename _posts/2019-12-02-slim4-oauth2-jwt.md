@@ -697,7 +697,7 @@ return $response->withHeader(
 ### How does a refresh token work?
 
 This tutorial does not cover refresh tokens. A refresh token requires a
-some kind of state on your server-side and would go beyond the scope of this tutorial.
+some kind of state on the server-side and would go beyond the scope of this tutorial.
 
 A [refresh token](https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.12) 
 is issued as part of authentication process along with the JWT. 
@@ -708,11 +708,11 @@ The request token endpoint can also use a Refresh Token by using the
 On the client, before the previous JWT token expires, you could wire up our app 
 to make a `/tokens` endpoint and grab a new JWT.
 
-The auth server should saves this refresh token and associates it to a 
+The auth server should save this refresh token and associates it to a 
 particular user in its own database, so that it can handle the renewing JWT logic.
 
 Anyway, there are certain additional aspects (that tend to get difficult or are even 
-against the [fundamental ideas of JWT]((https://restfulapi.net/statelessness/))) 
+against the [fundamental ideas of JWT]((https://auth0.com/blog/stateless-auth-for-stateful-minds/))) 
 you should consider before using JWTs as refresh-token, 
 as this basically means you introduce long-living JWT.
 
