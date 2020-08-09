@@ -27,9 +27,9 @@ keywords: php slim session http cookies
 
 Since HTTP driven applications are stateless, sessions provide a way to store 
 information about the user across multiple requests. The PHP ecosystem provides a 
-variety of session components to handle sessions. But there are a dozen of session
-components, which are more or less good maintained.
-The most bulletproof and best maintained session component for PHP comes from symfony.
+variety of session components to handle sessions. But there are a dozen session
+components, that are more or less well maintained.
+The bullet-proof and best maintained session component for PHP comes from symfony.
 It's part part the [HttpFoundation Component](https://github.com/symfony/http-foundation) 
 component and handles sessions in an expressive, unified API.
 Support for popular backends such as Memcached, Redis, and databases 
@@ -37,8 +37,8 @@ is included out of the box.
 
 Some people would say now that you have to manually convert the HttpFoundation 
 request to/from PSR-7 requests/response objects. The answer is: No.
-You don't have to use or convert the Symfony request/response objects 
-because the Symfony `Session` class works without the Symfony request/response classes. 
+You don't have to convert any objects at all, because the Symfony `Session` class 
+works without the Symfony request/response classes. 
 Of course it would be much better if the entire `Symfony\Component\HttpFoundation\Session` 
 namespace would be provided in a separate Github repository without all the 
 Symfony HTTP classes ;-) 
