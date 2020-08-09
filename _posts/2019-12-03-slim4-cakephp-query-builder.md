@@ -31,7 +31,7 @@ keywords: php slim cakephp sql querybuilder
 
 ## Introduction
 
-You can use the [CakePHP Query Builder](https://book.cakephp.org/3/en/orm/query-builder.html)
+You can use the [CakePHP Query Builder](https://book.cakephp.org/4/en/orm/query-builder.html)
 to connect your Slim 4 application to a database.
 
 ## Installation
@@ -287,7 +287,37 @@ $query = $this->queryFactory->newSelect('users')->andWhere(['id' => 1]);
 $row = $query->execute()->fetch('assoc');
 ```
 
-Read more: [Selecting data](https://book.cakephp.org/3/en/orm/query-builder.html#selecting-data)
+
+**Aggregate functions**
+
+The [func()](https://api.cakephp.org/4.0/class-Cake.Database.Query.html#func) method 
+returns an instance of a functions builder object that can be used for 
+generating arbitrary SQL functions.
+
+```php
+$query->select(['counter' => $query->func()->count('invoices.id')]);
+
+$query->select(['amount_sum' => $query->func()->sum('payments.amount')]);
+
+$query->select(['user_score_max' => $query->func()->max('users.score')]);
+```
+
+**Custom functions**
+
+The [newExpr()](https://api.cakephp.org/4.0/class-Cake.Database.Query.html#newExpr) method returns a new QueryExpression object. 
+This is a handy function when building complex queries using a fluent interface. 
+You can also override this function in subclasses to use a more specialized
+QueryExpression class if required.
+
+```php
+$query->select(
+    [
+        'date_of_birth' => $query->newExpr("DATE_FORMAT(users.date_of_birth,'%d.%m.%Y')"),
+    ]
+);
+```
+
+Read more: [Selecting data](https://book.cakephp.org/4/en/orm/query-builder.html#selecting-data)
 
 ### Insert
 
@@ -311,7 +341,7 @@ $newId = (int)$this->queryFactory->newInsert('users', $values)
     ->lastInsertId();
 ```
 
-Read more: [Inserting data](https://book.cakephp.org/3/en/orm/query-builder.html#inserting-data)
+Read more: [Inserting data](https://book.cakephp.org/4/en/orm/query-builder.html#inserting-data)
 
 ### Update
 
@@ -326,7 +356,7 @@ $this->queryFactory->newUpdate('users')
     ->execute();
 ```
 
-Read more: [Updating data](https://book.cakephp.org/3/en/orm/query-builder.html#updating-data)
+Read more: [Updating data](https://book.cakephp.org/4/en/orm/query-builder.html#updating-data)
 
 ### Delete 
 
@@ -338,7 +368,7 @@ $this->queryFactory->newDelete('users')
     ->execute();
 ```
 
-Read more: [Deleting data](https://book.cakephp.org/3/en/orm/query-builder.html#deleting-data)
+Read more: [Deleting data](https://book.cakephp.org/4/en/orm/query-builder.html#deleting-data)
 
 ## Handling relationships
 
