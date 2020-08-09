@@ -53,7 +53,7 @@ composer require symfony/http-foundation
 
 ## Configuration
 
-Insert the logger settings into your configuration file, e.g. `config/settings.php`;
+Insert the session settings into your configuration file, e.g. `config/settings.php`;
 
 ```php
 // Session
@@ -62,6 +62,8 @@ $settings['session'] = [
     'cache_expire' => 0,
 ];
 ```
+
+Read more: [Session configuration reference](https://symfony.com/doc/current/reference/configuration/framework.html#session)
 
 ## Middleware
 
@@ -122,7 +124,7 @@ return function (App $app) {
 
 ## Container setup
 
-Add a container definition for `\App\Middleware\SentryMiddleware:class` in `config/container.php`:
+Add a container definition for `Session:class` and `SessionInterface:class` in `config/container.php`:
 
 ```php
 <?php
@@ -273,8 +275,8 @@ final class LogoutAction
 
 ```
 
-To check the user session for each request you can add a special middleware that
-that redirects all invalid requests to the login page.
+To check the user session for each request you can add a middleware that
+redirects all "invalid" requests to the login page.
 
 ```php
 <?php
@@ -318,7 +320,7 @@ final class UserAuthMiddleware implements MiddlewareInterface
 
 ```
 
-You can add the `UserAuthMiddleware` to all routes and route groups you want to protect.
+You can add the `UserAuthMiddleware::class` to individual routes and/or route groups you want to protect.
 
 ```php
 use App\Middleware\UserAuthMiddleware;
