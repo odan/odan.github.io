@@ -629,7 +629,7 @@ final class HomeAction
 Then open `config/routes.php` and replace the route closure for `/` with this line:
 
 ```php
-$app->get('/', \App\Action\HomeAction::class);
+$app->get('/', \App\Action\HomeAction::class)->setName('home');;
 ```
 
 The complete `config/routes.php` should look like this now:
@@ -640,7 +640,7 @@ The complete `config/routes.php` should look like this now:
 use Slim\App;
 
 return function (App $app) {
-    $app->get('/', \App\Action\HomeAction::class);
+    $app->get('/', \App\Action\HomeAction::class)->setName('home');
 };
 ```
 

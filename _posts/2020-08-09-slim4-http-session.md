@@ -92,8 +92,10 @@ final class SessionMiddleware implements MiddlewareInterface
         $this->session = $session;
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
+    public function process(
+        ServerRequestInterface $request, 
+        RequestHandlerInterface $handler
+    ): ResponseInterface {
         $this->session->start();
 
         return $handler->handle($request);
