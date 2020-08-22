@@ -155,6 +155,29 @@ $app->add(HttpExceptionMiddleware::class); // <--- here
 $app->add(ErrorMiddleware::class);
 ```
 
+To create the `HttpExceptionMiddleware` automatically via autowiring, 
+you need the following container definition for `ResponseFactoryInterface::class`.
+
+```php
+<?php
+
+use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Slim\App;
+// ...
+
+return [
+
+    // ...
+    
+    ResponseFactoryInterface::class => function (ContainerInterface $container) {
+        return $container->get(App::class)->getResponseFactory();
+    },
+    
+];
+```
+
+
 ## Catching PHP warnings, notices and errors
 
 Besides [Throwable](https://www.php.net/manual/en/class.throwable.php)
