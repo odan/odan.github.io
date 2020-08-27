@@ -177,7 +177,6 @@ return [
 ];
 ```
 
-
 ## Catching PHP warnings, notices and errors
 
 Besides [Throwable](https://www.php.net/manual/en/class.throwable.php)
