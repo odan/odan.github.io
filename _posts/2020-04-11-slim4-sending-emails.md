@@ -127,10 +127,10 @@ final class ContactMailer
         $this->mailer = $mailer;
     }
 
-    public function sendEmail(array $formData)
+    public function sendEmail(array $formData): void
     {
         // Validate form data
-        // ...
+        $this->validate($formData);
 
         // Send email
         $email = (new Email())
@@ -145,6 +145,11 @@ final class ContactMailer
             ->html('<p>My HTML content</p>');
 
         $this->mailer->send($email);
+    }
+
+    private function validate(array $data): void
+    {
+        // ...
     }
 }
 ```
