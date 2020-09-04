@@ -13,8 +13,7 @@ keywords: donate paypal stripe
 If you think my blog and support is useful for you, 
 I would appreciate a small donation:
 
-* **[PayPal](https://www.paypal.me/dopitz/1)**
-* [Buy a Coffee](https://ko-fi.com/dopitz)
+* **[PayPal](https://www.paypal.me/dopitz/5)**
 
 You can **buy** all Slim articles (> 200 pages) bundled into a eBook. 
 
