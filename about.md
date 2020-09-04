@@ -61,7 +61,8 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 
 ## Publications
 
-* Fachartikel zu Slim 4 im [PHP Magazin](https://odan.github.io/2020/05/20/slim4-php-magazin-420.html) 4.20
+* Fachartikel zu Slim 4 im [PHP Magazin Ausgabe 4.20](https://odan.github.io/2020/05/20/slim4-php-magazin-420.html) (2020)
+* Programmez! [À la découverte de Slim 4](https://www.programmez.com/magazine/article/la-decouverte-de-slim-4) (2020)
 
 ## Conferences
 
@@ -70,10 +71,10 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 
 ## Contact me
 
-* [Discord](https://discord.com/): odan#9242
 * d.opitz (at) outlook.com
+* [Slim support forum](https://discourse.slimframework.com/new-message?username=odan) (Direct message)
+* [Discord](https://discord.com/): odan#9242
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
-* [Slim support forum](https://discourse.slimframework.com/u/odan/summary) (Direct message)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
 * [Xing](https://www.xing.com/profile/Daniel_Opitz9)
