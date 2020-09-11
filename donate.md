@@ -60,7 +60,6 @@ You can **buy** all Slim articles (> 200 pages) bundled into a eBook (PDF and EP
         }
     }).render('#paypal-button-container');
 </script>
-<br>
 
 Please note: The e-mail delivery can take up to 12 hours.
 If you have not received your ebook, please check your junk mail folder.
