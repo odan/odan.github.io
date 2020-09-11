@@ -15,10 +15,10 @@ I would appreciate a small donation:
 
 * **[PayPal](https://www.paypal.me/dopitz/5)**
 
-You can **buy** all Slim articles (> 200 pages) bundled into a eBook. 
+You can **buy** all Slim articles (> 200 pages) bundled into a eBook (PDF and EPUB). 
 
 <div style="text-align: center;">
-<img src="https://user-images.githubusercontent.com/781074/92960025-27871c00-f46d-11ea-87be-3b460f4edeec.png">
+<img src="https://user-images.githubusercontent.com/781074/92961116-0293a880-f46f-11ea-9e84-90ef9781e0c8.png">
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
