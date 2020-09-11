@@ -17,6 +17,8 @@ I would appreciate a small donation:
 
 You can **buy** all Slim articles (> 200 pages) bundled into a eBook. 
 
+<img src="https://user-images.githubusercontent.com/781074/83908487-7c790f00-a767-11ea-94df-0a341c5b0fff.jpg" width="220" border="1">
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <div id="paypal-button-container"></div>
