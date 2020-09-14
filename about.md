@@ -51,8 +51,8 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 
 ## Tools
 
-* [IT News Feed](https://odan-online.com/tools/feeds/) 
-* [Media Downloader](https://odan-online.com/tools/media-download.php) - Download images from Twitter, Facebook and Instagram
+* [IT News Feed](https://odan-online.com/tools/feeds/)
+* [IT News Feed v2](https://odan-online.com/tools/feeds2/)  
 * [Random Domain Generator](https://odan-online.com/tools/domain-generator.php)
 
 ## Interviews
