@@ -182,7 +182,7 @@ return [
 
         // Add extensions
         $twig->addExtension(new \Fullpipe\TwigWebpackExtension\WebpackExtension(
-            // must be a absolute path
+            // must be an absolute path
             '/var/www/example.com/public/assets/manifest.json',
             // url path for js
             $basePath . '/assets/',
