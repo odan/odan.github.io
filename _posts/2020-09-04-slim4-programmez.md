@@ -16,4 +16,5 @@ A new article by Thierry Leriche-Dessirier and me was published today in the fre
 ## Links
 
 * <https://www.programmez.com/magazine/article/la-decouverte-de-slim-4>
+* <https://www.linkedin.com/posts/thierryler_%C3%A0-la-d%C3%A9couverte-de-slim-4-activity-6707650218298548224-Soun>
 * <https://twitter.com/dopitz/status/1301894377602781184>
