@@ -575,10 +575,10 @@ $app->get('/hello', function (ServerRequestInterface $request, ResponseInterface
 ```
 
 While such interfaces look intuitive, they are not suitable for complex business logic scenarios. 
-Assuming there are tens or even hundreds of handlers that need to be registered in the framework, 
-isn't it a better practice to implement them separately in their respective classes? 
-So unless your logic is very simple, I don't recommend using route callbacks. 
-Instead, you can create an **Single Action Controller**.
+Assuming there are tens or even hundreds of route handlers that need to be registered. 
+Unless your logic is very simple, I don't recommend using route callbacks. 
+Isn't it a better practice to implement these handlers in their own classes? Yes.
+This is the moment where a **Single Action Controller** come into play.
 
 Each **Single Action Controller** is represented by its own class.
 
