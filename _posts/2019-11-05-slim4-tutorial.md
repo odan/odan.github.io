@@ -574,10 +574,10 @@ $app->get('/hello', function (ServerRequestInterface $request, ResponseInterface
 ```
 
 While such interfaces look intuitive, they are not suitable for complex business logic scenarios. 
-Assuming there are tens or even hundreds of handlers that need to be registered in the framework, 
-isn't it a better practice to implement them separately in their respective classes? 
-So unless your logic is very simple, I don't recommend using route callbacks. 
-Instead, you can create an **Single Action Controller**.
+Assuming there are tens or even hundreds of route handlers that need to be registered. 
+Unless your logic is very simple, I don't recommend using route callbacks. 
+Isn't it a better practice to implement these handlers in their own classes? Yes.
+This is the moment where a **Single Action Controller** come into play.
 
 Each **Single Action Controller** is represented by its own class.
 
@@ -690,8 +690,8 @@ return $response
 Forget CRUD! Your API should reflect the business [use cases](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) 
 and not the technical "database operations" aka. [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete). 
 Don't put business logic into actions. The action invokes the domain layer, 
-resp. the application service. If you want to reuse the same logic in another action, 
-then just invoke that application service you need in your action.
+resp. the service. If you want to reuse the same logic in another action, 
+then just invoke that service you need in your action.
 
 ### Services
 
@@ -699,7 +699,7 @@ The [Domain](https://github.com/pmjones/adr/blob/master/ADR.md#model-versus-doma
 complex [business logic](https://en.wikipedia.org/wiki/Business_logic).
 
 Instead of putting the logic into gigantic (fat) "Models", we put the logic into smaller, 
-specialized **Service** classes, aka Application Service.
+specialized **Service** classes.
 
 A service provides a specific functionality or a set of functionalities, such as the retrieval of 
 specified information or the execution of a set of operations, with a purpose that different clients 
