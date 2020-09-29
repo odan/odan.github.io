@@ -700,7 +700,7 @@ The [Domain](https://github.com/pmjones/adr/blob/master/ADR.md#model-versus-doma
 complex [business logic](https://en.wikipedia.org/wiki/Business_logic).
 
 Instead of putting the logic into gigantic (fat) "Models", we put the logic into smaller, 
-specialized **Service** classes, aka Application Service.
+specialized **Service** classes.
 
 A service provides a specific functionality or a set of functionalities, such as the retrieval of 
 specified information or the execution of a set of operations, with a purpose that different clients 
