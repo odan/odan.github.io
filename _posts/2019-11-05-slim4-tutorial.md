@@ -38,7 +38,6 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Domain](#domain)
   * [Services](#services)
   * [Validation](#validation)
-  * [Data Transfer Objects](#data-transfer-objects-dto)
   * [Repositories](#repositories)
 * [Deployment](#deployment)
 * [Conclusion](#conclusion)
@@ -713,7 +712,7 @@ another service, the CLI (console) and the unit-test environment (phpunit).
 
 Each service class should have only one responsibility, e.g. to transfer money from A to B, and not more.
 
-Separate **data** from **behavior** by using services for the behavior and DTO's for the data.
+Separate **data** from **behavior** by using services for the behavior and [Data transfer objects](https://en.wikipedia.org/wiki/Data_transfer_object) for the data.
 
 The directory for all (domain) modules and sub-modules is: `src/Domain`
 
@@ -843,41 +842,6 @@ final class ValidationException extends RuntimeException
 
 If you like this pattern for validation, I recommend to have a look at this library: 
 [selective/validation](https://github.com/selective-php/validation)
-
-### Data Transfer Objects (DTO) 
-  
-A DTO contains only pure **data**. There is no business or domain specific logic. 
-There is also no database access within a DTO. 
-A service fetches data from a repository and  the repository (or the service) 
-fills the DTO with data. A DTO can be used to transfer data inside or outside the domain.
-
-Example of a DTO:
-
-```php
-<?php
-
-namespace App\Domain\User\Data;
-
-final class UserReaderData
-{
-    /**
-     * @var int
-     */
-    public $id;
-
-    /** @var string */
-    public $username;
-
-    /** @var string */
-    public $firstName;
-
-    /** @var string */
-    public $lastName;
-
-    /** @var string */
-    public $email;
-}
-```
 
 ### Repositories
 
@@ -1111,7 +1075,6 @@ your production server.
 
 These tools are very useful for creating artifacts:
 
-* [Deployer](https://deployer.org/) to build and upload your release files to the application servers.
 * [Apache Ant](https://ant.apache.org/bindownload.cgi) to automate your software build processes. Requires Java.
 
 For security reasons, you should switch off the output of all error details in production:
@@ -1144,7 +1107,6 @@ Remember the relationships:
 * Single Action Controllers - Request, response handling. Invoking the domain (service method).
 * Domain - The core layer of your application
 * Services - To handle business logic
-* DTO - To carry data (no behavior)
 * Repositories - To execute database queries
 
 ## FAQ
