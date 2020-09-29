@@ -691,8 +691,8 @@ return $response
 Forget CRUD! Your API should reflect the business [use cases](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) 
 and not the technical "database operations" aka. [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete). 
 Don't put business logic into actions. The action invokes the domain layer, 
-resp. the application service. If you want to reuse the same logic in another action, 
-then just invoke that application service you need in your action.
+resp. the service. If you want to reuse the same logic in another action, 
+then just invoke that service you need in your action.
 
 ### Services
 
