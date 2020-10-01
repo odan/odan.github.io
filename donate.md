@@ -13,31 +13,53 @@ keywords: donate paypal stripe
 If you think my blog and support is useful for you, 
 I would appreciate a small donation:
 
-* **[PayPal](https://www.paypal.me/dopitz/1)**
-* [Buy a Coffee](https://ko-fi.com/dopitz)
+* **[PayPal](https://www.paypal.me/dopitz/5)**
 
-You can  **buy** all Slim articles (> 200 pages) bundled into a eBook. 
+You can **buy** all Slim articles (> 200 pages) bundled into a eBook (PDF and EPUB). 
 
-<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="N2YEC7WX8BB9A">
-<table>
-<tr>
-<td>
-<input type="hidden" name="on0" value="Slim 4 - eBook">Slim 4 - eBook</td></tr><tr><td>
-<select name="os0">
-	<option value="PDF & EPUB">PDF & EPUB €9,00 EUR</option>
-</select> </td>
-</tr>
-<tr>
-<td>
-<img src="https://user-images.githubusercontent.com/781074/83908487-7c790f00-a767-11ea-94df-0a341c5b0fff.jpg" width="220">
- </td>
-</tr>
-</table>
-<input type="hidden" name="currency_code" value="EUR">
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-</form>
+<div style="text-align: center;">
+<img src="https://user-images.githubusercontent.com/781074/92961116-0293a880-f46f-11ea-9e84-90ef9781e0c8.png">
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+<div id="paypal-button-container"></div>
+<script src="https://www.paypal.com/sdk/js?client-id=AdgjzHMB-hvxJGnVoxlkeGzRwFlItWRfDCLLIeHMwqmi6TpUU24NlOyWjbCmPiHTzpekYxqgXA1IyJYz&currency=EUR" data-sdk-integration-source="button-factory"></script>
+<script>
+    paypal.Buttons({
+        style: {
+            shape: 'rect',
+            color: 'gold',
+            layout: 'vertical',
+            label: 'paypal',
+
+        },
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '9'
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                //alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                Swal.fire({
+                    icon: 'success',
+                    text: 'Transaction completed. Thank you! Please check your inbox. If you did not receive your activation email, please check your spam filter settings and your spam folders.',
+                });
+            });
+        },
+        onCancel: function (data, actions) {
+            Swal.fire({
+                icon: 'error',
+                text: 'Transaction canceled. Please try it again!',
+            });
+        }
+    }).render('#paypal-button-container');
+</script>
+
+Please note: The e-mail delivery can take up to 12 hours.
+If you have not received your ebook, please check your junk mail folder.

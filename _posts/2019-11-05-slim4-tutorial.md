@@ -38,7 +38,6 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Domain](#domain)
   * [Services](#services)
   * [Validation](#validation)
-  * [Data Transfer Objects](#data-transfer-objects-dto)
   * [Repositories](#repositories)
 * [Deployment](#deployment)
 * [Conclusion](#conclusion)
@@ -575,10 +574,10 @@ $app->get('/hello', function (ServerRequestInterface $request, ResponseInterface
 ```
 
 While such interfaces look intuitive, they are not suitable for complex business logic scenarios. 
-Assuming there are tens or even hundreds of handlers that need to be registered in the framework, 
-isn't it a better practice to implement them separately in their respective classes? 
-So unless your logic is very simple, I don't recommend using route callbacks. 
-Instead, you can create an **Single Action Controller**.
+Assuming there are tens or even hundreds of route handlers that need to be registered. 
+Unless your logic is very simple, I don't recommend using route callbacks. 
+Isn't it a better practice to implement these handlers in their own classes? Yes.
+This is the moment where a **Single Action Controller** come into play.
 
 Each **Single Action Controller** is represented by its own class.
 
@@ -629,7 +628,7 @@ final class HomeAction
 Then open `config/routes.php` and replace the route closure for `/` with this line:
 
 ```php
-$app->get('/', \App\Action\HomeAction::class);
+$app->get('/', \App\Action\HomeAction::class)->setName('home');;
 ```
 
 The complete `config/routes.php` should look like this now:
@@ -640,7 +639,7 @@ The complete `config/routes.php` should look like this now:
 use Slim\App;
 
 return function (App $app) {
-    $app->get('/', \App\Action\HomeAction::class);
+    $app->get('/', \App\Action\HomeAction::class)->setName('home');
 };
 ```
 
@@ -691,8 +690,8 @@ return $response
 Forget CRUD! Your API should reflect the business [use cases](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) 
 and not the technical "database operations" aka. [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete). 
 Don't put business logic into actions. The action invokes the domain layer, 
-resp. the application service. If you want to reuse the same logic in another action, 
-then just invoke that application service you need in your action.
+resp. the service. If you want to reuse the same logic in another action, 
+then just invoke that service you need in your action.
 
 ### Services
 
@@ -700,7 +699,7 @@ The [Domain](https://github.com/pmjones/adr/blob/master/ADR.md#model-versus-doma
 complex [business logic](https://en.wikipedia.org/wiki/Business_logic).
 
 Instead of putting the logic into gigantic (fat) "Models", we put the logic into smaller, 
-specialized **Service** classes, aka Application Service.
+specialized **Service** classes.
 
 A service provides a specific functionality or a set of functionalities, such as the retrieval of 
 specified information or the execution of a set of operations, with a purpose that different clients 
@@ -713,7 +712,7 @@ another service, the CLI (console) and the unit-test environment (phpunit).
 
 Each service class should have only one responsibility, e.g. to transfer money from A to B, and not more.
 
-Separate **data** from **behavior** by using services for the behavior and DTO's for the data.
+Separate **data** from **behavior** by using services for the behavior and [Data transfer objects](https://en.wikipedia.org/wiki/Data_transfer_object) for the data.
 
 The directory for all (domain) modules and sub-modules is: `src/Domain`
 
@@ -843,41 +842,6 @@ final class ValidationException extends RuntimeException
 
 If you like this pattern for validation, I recommend to have a look at this library: 
 [selective/validation](https://github.com/selective-php/validation)
-
-### Data Transfer Objects (DTO) 
-  
-A DTO contains only pure **data**. There is no business or domain specific logic. 
-There is also no database access within a DTO. 
-A service fetches data from a repository and  the repository (or the service) 
-fills the DTO with data. A DTO can be used to transfer data inside or outside the domain.
-
-Example of a DTO:
-
-```php
-<?php
-
-namespace App\Domain\User\Data;
-
-final class UserData
-{
-    /**
-     * @var int
-     */
-    public $id;
-
-    /** @var string */
-    public $username;
-
-    /** @var string */
-    public $firstName;
-
-    /** @var string */
-    public $lastName;
-
-    /** @var string */
-    public $email;
-}
-```
 
 ### Repositories
 
@@ -1111,7 +1075,6 @@ your production server.
 
 These tools are very useful for creating artifacts:
 
-* [Deployer](https://deployer.org/) to build and upload your release files to the application servers.
 * [Apache Ant](https://ant.apache.org/bindownload.cgi) to automate your software build processes. Requires Java.
 
 For security reasons, you should switch off the output of all error details in production:
@@ -1144,7 +1107,6 @@ Remember the relationships:
 * Single Action Controllers - Request, response handling. Invoking the domain (service method).
 * Domain - The core layer of your application
 * Services - To handle business logic
-* DTO - To carry data (no behavior)
 * Repositories - To execute database queries
 
 ## FAQ

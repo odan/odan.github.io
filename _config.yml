@@ -25,7 +25,10 @@ twitter:
   
 #linkedin:
 #  url: https://www.linkedin.com/in/daniel-opitz-493816111/
- 
+
+# Disqus comments
+comments: false
+
 # List of links in the navigation bar
 navbar-links:
   About Me: "aboutme"

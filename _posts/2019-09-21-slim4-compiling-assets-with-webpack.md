@@ -148,28 +148,91 @@ Now we install the Twig Webpack extension with composer:
 composer require fullpipe/twig-webpack-extension
 ```
 
-Register the WebpackExtension Twig extension: 
+Register the WebpackExtension Twig extension within your `Twig::class` container definition: 
 
 ```php
-// $app is the Slim 4 App instance
-// We need the basePath to configure the correct public assets path
-$basePath = $app->getBasePath();
-
+use Psr\Container\ContainerInterface;
+use Slim\App;
+use Slim\Views\Twig;
 // ...
 
-$twig->addExtension(new \Fullpipe\TwigWebpackExtension\WebpackExtension(
-    // must be a absolute path
-    '/var/www/example.com/public/assets/manifest.json',
-    // url path for js
-    $basePath . '/assets/',
-    // url path for css
-    $basePath . '/assets/'
-));
+return [
+    // Application settings
+    'settings' => function () {
+        return require __DIR__ . '/settings.php';
+    },
+
+    // The Slim app factory
+    App::class => function (ContainerInterface $container) {
+        AppFactory::setContainer($container);
+
+        return AppFactory::create();
+    },
+
+    // The Twig template engine
+    Twig::class => function (ContainerInterface $container) {
+        // Fetch the Slim 4 App instance
+        // We need the basePath to configure the correct public assets path
+        $app = $container->get(App::class);
+        $basePath = $app->getBasePath();
+
+        $settings = (array)$container->get('settings')['twig'];
+        $twig = Twig::create($settings['paths'], $settings['options']);
+        // ...        
+
+        // Add extensions
+        $twig->addExtension(new \Fullpipe\TwigWebpackExtension\WebpackExtension(
+            // must be an absolute path
+            '/var/www/example.com/public/assets/manifest.json',
+            // url path for js
+            $basePath . '/assets/',
+            // url path for css
+            $basePath . '/assets/'
+        ));
+
+        return $twig;
+    },
+
+    // Add more container entries ...
+];
 ```
 
 * The first parameter (manifestFile) defines the location of your `manifest.json` file. You can also use `__PATH__` here.
 * The second parameter (publicPathJs) defines the public path for the js files.
 * The third parameter (publicPathCss) defines the public path for the css files.
+
+It's recommended to create the Slim app instance within the container (and not somewhere "outside").
+Just make sure that your bootstrap proccess also uses excatly this app instance from the container.
+
+Example for `config/bootstrap.php`:
+
+```php
+<?php
+
+use DI\ContainerBuilder;
+use Slim\App;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$containerBuilder = new ContainerBuilder();
+
+// Add container definitions
+$containerBuilder->addDefinitions(__DIR__ . '/container.php');
+
+// Build PHP-DI Container instance
+$container = $containerBuilder->build();
+
+// Create App instance
+$app = $container->get(App::class);
+
+// Register routes
+// ...
+
+// Register middleware
+// ...
+
+return $app;
+```
 
 ## Creating assets
 

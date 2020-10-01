@@ -115,7 +115,7 @@ namespace App\Domain\User\Service;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
 
-final class UserMailer
+final class ContactMailer
 {
     /**
      * @var MailerInterface
@@ -127,8 +127,12 @@ final class UserMailer
         $this->mailer = $mailer;
     }
 
-    public function sendEmail()
+    public function sendEmail(array $formData): void
     {
+        // Validate form data
+        $this->validate($formData);
+
+        // Send email
         $email = (new Email())
             ->from('hello@example.com')
             ->to('you@example.com')
@@ -141,6 +145,11 @@ final class UserMailer
             ->html('<p>My HTML content</p>');
 
         $this->mailer->send($email);
+    }
+
+    private function validate(array $data): void
+    {
+        // ...
     }
 }
 ```
