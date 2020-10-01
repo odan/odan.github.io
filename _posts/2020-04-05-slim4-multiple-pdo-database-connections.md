@@ -11,7 +11,6 @@ keywords: php slim pdo database connection container phpdi
 
 * [Requirements](#requirements)
 * [Introduction](#introduction)
-* [The connection proxy](#the-connection-proxy)
 * [Extending PDO](#extending-pdo)
 * [Autowired objects](#autowired-objects)
 * [Read more](#read-more)
@@ -36,84 +35,10 @@ can only be mapped once, we have to think of something else.
 Depending on the use case, I will present here several generic solutions, 
 which can be further customized. 
 
-## The connection proxy
-
-**Use case:** Two or more database connections with fixed configuration
-
-Example:
-
-```php
-<?php
-
-namespace App\Database;
-
-use PDO;
-
-class ConnectionProxy
-{
-    private $pdo;
-
-    private $pdo2;
-
-    public function __construct(PDO $pdo, PDO $pdo2)
-    {
-        $this->pdo = $pdo;
-        $this->pdo2 = $pdo2;
-    }
-
-    public function getPdo(): PDO
-    {
-        return $this->pdo;
-    }
-
-    public function getPdo2(): PDO
-    {
-        return $this->pdo2;
-    }
-}
-```
-
-Add the container definition as follows:
-
-```php
-return [
-    ConnectionProxy::class => function (ContainerInterface $container) {
-        return new ConnectionProxy(
-            $container->get('db1'),
-            $container->get('db2')
-        );
-    },
-    'db1' => function (ContainerInterface $container) {
-        return new PDO(...);
-    },
-    'db2' => function (ContainerInterface $container) {
-        return new PDO(...);
-    },
-];
-```
-
-**Usage**
-
-```php
-class MyRepository
-{
-    private $pdo;
-
-    private $pdo2;
-    
-    public function __construct(ConnectionProxy $connectionProxy)
-    {
-        $this->pdo = $connectionProxy->getPdo();
-        $this->pdo2 = $connectionProxy->getPdo2();
-    }
-}
-```
-
 ## Extending PDO
 
-Instead of using another implicit "container" for multiple connections, you could
-extend a class from PDO to give each database connection a unique and
-fullly qualified name for the container definiton.
+The dependecy injection container requires fully qualified name for each connection. 
+For this we have to extend a class from PDO to create a new container definiton.
 
 Create a file: src/Database/PDO2.php and copy/paste this content:
 
