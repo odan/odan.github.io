@@ -102,8 +102,3 @@ See Matthieu Napoli's answer: <https://stackoverflow.com/a/57758106/1461181>
 Note that the use of [DI/autowire()](https://stackoverflow.com/a/57758106/1461181), 
 could cause too much effort in container configuration and maintenance can 
 become a nightmare in bigger projects.
-
-## Read more
-
-* Stackoverflow: <https://stackoverflow.com/a/57769575/1461181>
-
