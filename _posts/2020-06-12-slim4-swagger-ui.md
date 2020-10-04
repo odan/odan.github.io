@@ -99,6 +99,7 @@ namespace App\Action\Docs;
 use App\Responder\Responder;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Views\Twig;
 use Symfony\Component\Yaml\Yaml;
 
 final class SwaggerUiAction
