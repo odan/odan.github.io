@@ -156,7 +156,7 @@ from another (secure) source.
 ## Creating a JWT
 
 For the sake of simplicity, dependency injection and testability 
-add the following class into this file: `src/Auth/JwtAuth.php`.
+add the following class into this file: `src/Routing/JwtAuth.php`.
 
 ```php
 <?php
