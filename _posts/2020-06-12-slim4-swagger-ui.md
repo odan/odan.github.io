@@ -20,6 +20,7 @@ keywords: slim, slimphp, php, swagger, openapi, api, docs, documentation
 * PHP 7.2+
 * Composer (dev environment)
 * [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
+* [Twig](https://odan.github.io/2020/04/17/slim4-twig-templates.html)
 
 ## Introduction
 
@@ -103,18 +104,13 @@ use Symfony\Component\Yaml\Yaml;
 final class SwaggerUiAction
 {
     /**
-     * @var Responder
+     * @var Twig
      */
-    private $responder;
+    private $twig;
 
-    /**
-     * The constructor.
-     *
-     * @param Responder $responder The responder
-     */
-    public function __construct(Responder $responder)
+    public function __construct(Twig $twig)
     {
-        $this->responder = $responder;
+        $this->twig = $twig;
     }
 
     /**
@@ -136,7 +132,7 @@ final class SwaggerUiAction
             'spec' =>json_encode(Yaml::parseFile($yamlFile)),
         ];
 
-        return $this->responder->render($response, 'docs/swagger.twig', $viewData);
+        return $this->twig->render($response, 'docs/swagger.twig', $viewData);
     }
 }
 ```
