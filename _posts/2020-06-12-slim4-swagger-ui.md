@@ -20,7 +20,7 @@ keywords: slim, slimphp, php, swagger, openapi, api, docs, documentation
 * PHP 7.2+
 * Composer (dev environment)
 * [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
-* [Twig](https://odan.github.io/2020/04/17/slim4-twig-templates.html)
+* [Twig for Slim](https://odan.github.io/2020/04/17/slim4-twig-templates.html)
 
 ## Introduction
 
