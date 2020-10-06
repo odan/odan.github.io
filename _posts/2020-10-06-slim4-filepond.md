@@ -22,7 +22,6 @@ keywords: php filepond slim
 
 * PHP 7.3+
 * [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
-* [Twig for Slim](https://odan.github.io/2020/04/17/slim4-twig-templates.html)
 
 ## Introduction
 
