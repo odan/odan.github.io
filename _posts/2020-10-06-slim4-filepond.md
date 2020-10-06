@@ -14,6 +14,7 @@ keywords: php filepond slim
 * [Installation](#installation)
 * [Storage](#storage)
 * [Actions](#actions)
+* [Security](#security)
 * [Usage](#usage)
 * [Read more](#read-more)
 
@@ -278,6 +279,37 @@ Add this route into your routing file, e.g. in `config/routes.php`:
 
 ```php
 $app->delete('/filepond/revert', \App\Action\FilePondRevertAction::class);
+```
+
+## Security
+
+For security reasons all requested filenames must be "sanitized" to prevent
+unwanted filesystem manipulations.
+
+Create a class in `src/Util/FilenameFilter.php` and copy this content:
+
+```php
+<?php
+
+namespace App\Util;
+
+final class FilenameFilter
+{
+    /**
+     * Makes file name safe to use.
+     *
+     * @param string $file The name of the file [not full path]
+     *
+     * @return  string The sanitised string
+     */
+    public static function createSafeFilename(string $file): string
+    {
+        // Remove any trailing dots, as those aren't ever valid file names.
+        $file = trim($file, '.');
+
+        return trim(preg_replace(['#(\.){2,}#', '#[^A-Za-z0-9\.\_\- ]#', '#^\.#'], '', $file));
+    }
+}
 ```
 
 ## Usage
