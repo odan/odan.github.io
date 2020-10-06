@@ -54,7 +54,7 @@ Make sure that the `storage/` directory has write access.
 We need at least 3 routes for this minimal application.
 
 * `GET /filepond` - To show the upload form
-* `POST /filepond/process` - To handle the image uploads
+* `POST /filepond/process` - To handle image uploads
 * `DELETE /filepond/revert` - To revert (delete) the uploaded images
 
 ### Index
