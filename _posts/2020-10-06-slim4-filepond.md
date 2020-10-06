@@ -28,7 +28,7 @@ keywords: php filepond slim
 
 [FilePond](https://pqina.nl/filepond/) is a JavaScript library that brings silky smooth drag n’ drop file uploading.
 
-This tutorial show how you can integrate the basic feature of FilePond into your Slim application.
+This tutorial shows how to implement the most basic API endpoints of FilePond in your slim application.
 
 ## Installation
 
