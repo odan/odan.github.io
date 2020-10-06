@@ -39,10 +39,10 @@ composer require symfony/polyfill-uuid
 
 ## Storage
 
-Create new new `storage/` directory in your project root
-that acts later as our upload directory.
+Create a new `storage/` directory in your project root
+which later acts as your upload directory.
 
-Also add this `.htaccess` file within into the `storage/` directory to
+Add this `.htaccess` file to the `storage/` directory to 
 prevent unwanted access from the web due to misconfiguration.
 
 `deny from all`
