@@ -1,0 +1,305 @@
+---
+title: Slim 4 - FilePond
+layout: post
+comments: false
+published: true
+description: 
+keywords: php filepond slim
+---
+
+## Table of contents
+
+* [Requirements](#requirements)
+* [Introduction](#introduction)
+* [Installation](#installation)
+* [Storage](#storage)
+* [Actions](#actions)
+* [Usage](#usage)
+* [Read more](#read-more)
+
+## Requirements
+
+* PHP 7.3+
+* [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
+* [Twig for Slim](https://odan.github.io/2020/04/17/slim4-twig-templates.html)
+
+## Introduction
+
+[FilePond](https://pqina.nl/filepond/) is a JavaScript library that brings silky smooth drag n’ drop file uploading.
+
+This tutorial show how you can integrate the basic feature of FilePond into your Slim application.
+
+## Installation
+
+To create unique filenames we have to install a UUID generator. Run:
+
+```
+composer require symfony/polyfill-uuid
+```
+
+## Storage
+
+Create new new `storage/` directory in your project root
+that acts later as our upload directory.
+
+Also add this `.htaccess` file within into the `storage/` directory to
+prevent unwanted access from the web due to misconfiguration.
+
+`deny from all`
+
+Make sure that the `storage/` directory has write access.
+
+## Actions
+
+We need at least 3 routes for this minimal application.
+
+* `GET /filepond` - To show the upload form
+* `POST /filepond/process` - To handle the image uploads
+* `DELETE /filepond/revert` - To revert (delete) the uploaded images
+
+### Index
+
+First we are preparing a simple HTML page and the action for the upload form itself.
+
+Create a new directory (if not exists): `templates/`
+
+Create a new template file in `templates/filepond.html` and copy/paste this content:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>FilePond PHP Boilerplate Project</title>
+    <link href="https://unpkg.com/filepond/dist/filepond.css" rel="stylesheet">
+    <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet">
+    <style>form { max-width:24em; }</style>
+</head>
+<body>
+
+<form action="filepond/process" method="post" enctype="multipart/form-data">
+    <input type="file" name="filepond[]" multiple>
+    <!-- <button type="submit">Submit</button> -->
+</form>
+
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+
+<script>
+    FilePond.registerPlugin(
+        FilePondPluginImagePreview,
+    );
+
+    // Set default FilePond options
+    FilePond.setOptions({
+        // upload to this server end point
+        server: {
+            process: 'filepond/process',
+            revert: 'filepond/revert',
+            restore: 'filepond/restore?id=',
+            fetch: 'filepond/fetch?data=',
+            load: 'filepond/load',
+            fetch: 'filepond/fetch'
+        },
+    });
+
+    const pond = FilePond.create(document.querySelector('input[type="file"]'));
+</script>
+
+</body>
+</html>
+```
+
+Then add this action class into: `src/Action/FilePondIndexAction.php`:
+
+```php
+<?php
+
+namespace App\Action;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+final class FilePondIndexAction
+{
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
+        $template = __DIR__ . '/../../templates/filepond.html';
+        $response->getBody()->write(file_get_contents($template));
+
+        return $response;
+    }
+}
+```
+
+Add this route into your routing file, e.g. in `config/routes.php`:
+
+```php
+$app->get('/filepond', \App\Action\FilePondIndexAction::class);
+```
+
+### Process
+
+To handle the [image upload](https://pqina.nl/filepond/docs/patterns/api/server/#process) we add a new action class.
+
+Create this action class in `src/Action/FilePondProcessAction.php`:
+
+```php
+<?php
+
+namespace App\Action;
+
+use App\Util\FilenameFilter;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UploadedFileInterface;
+use Slim\Psr7\UploadedFile;
+
+final class FilePondProcessAction
+{
+    /**
+     * Process upload.
+     *
+     * @see https://pqina.nl/filepond/docs/patterns/api/server/#process
+     *
+     * @param ServerRequestInterface $request The request
+     * @param ResponseInterface $response The response
+     *
+     * @return ResponseInterface The response
+     */
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
+        /** @var UploadedFile[] $uploadedFiles */
+        $uploadedFiles = (array)($request->getUploadedFiles()['filepond'] ?? []);
+
+        // Load this value from your settings!
+        $directory = __DIR__ . '/../../storage';
+
+        $fileIdentifier = '';
+        foreach ($uploadedFiles as $uploadedFile) {
+            if ($uploadedFile->getError() !== UPLOAD_ERR_OK) {
+                continue;
+            }
+            $fileIdentifier = $this->moveUploadedFile($directory, $uploadedFile);
+        }
+
+        // Server returns unique location id in text/plain response
+        $response = $response->withHeader('Content-Type', 'text/plain');
+        $response->getBody()->write($fileIdentifier);
+
+        return $response;
+    }
+
+    /**
+     * Moves the uploaded file to the upload directory and assigns it a unique name
+     * to avoid overwriting an existing uploaded file.
+     *
+     * @param string $directory The directory to which the file is moved
+     * @param UploadedFileInterface $uploadedFile The file uploaded file to move
+     *
+     * @return string The filename of moved file
+     */
+    private function moveUploadedFile(string $directory, UploadedFileInterface $uploadedFile): string
+    {
+        // Craete unique id for this file
+        $extension = (string)pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
+        $filename = FilenameFilter::createSafeFilename(sprintf('%s.%s', (string)uuid_create(), $extension));
+
+        // Save the file into the filestorage
+        $targetPath = sprintf('%s/%s', $directory, $filename);
+        $uploadedFile->moveTo($targetPath);
+
+        return $filename;
+    }
+
+}
+```
+
+Add this route into your routing file, e.g. in `config/routes.php`:
+
+```php
+$app->post('/filepond/process', \App\Action\FilePondProcessAction::class);
+```
+
+### Revert
+
+To provide the [revert](https://pqina.nl/filepond/docs/patterns/api/server/#revert) funtionality, 
+add this new action class in `src/Action/FilePondRevertAction.php`:
+
+```php
+<?php
+
+namespace App\Action;
+
+use App\Util\FilenameFilter;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+final class FilePondRevertAction
+{
+    /**
+     * Revert upload.
+     *
+     * @see https://pqina.nl/filepond/docs/patterns/api/server/#revert
+     *
+     * @param ServerRequestInterface $request The request
+     * @param ResponseInterface $response The response
+     *
+     * @return ResponseInterface The response
+     */
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
+        // The server uses the unique id to remove the file
+        $filename = FilenameFilter::createSafeFilename((string)$request->getBody());
+
+        if (!$filename) {
+            return $response;
+        }
+
+        $fullPath = sprintf('%s/%s', __DIR__ . '/../storage', $filename);
+
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
+
+        return $response;
+    }
+}
+```
+
+Add this route into your routing file, e.g. in `config/routes.php`:
+
+```php
+$app->delete('/filepond/revert', \App\Action\FilePondRevertAction::class);
+```
+
+## Usage
+
+Now, when you enter the website, e.g. `http://localhost/filepond`, the page should look like this:
+
+![image](https://user-images.githubusercontent.com/781074/95257595-d4627800-0824-11eb-9fe8-a2e8bf32f1dd.png)
+
+Then click "Browse" or use Drag and Drop to upload some images.
+
+![image](https://user-images.githubusercontent.com/781074/95257827-302d0100-0825-11eb-9458-5b12e344fb58.png)
+
+To revert (delete) the image, just click the undo button.
+
+Now you are able to upload, preview and revert images uploads.
+FilePond offers much more plugins, e.g. for image manipulation, but this is out of the scope of this article.  
+
+## Read more
+
+* [FilePond website](https://pqina.nl/filepond/)
+* [FilePond documentation](https://pqina.nl/filepond/docs/)
+* [FilePond API documentation](https://pqina.nl/filepond/docs/patterns/api/server/)
+* [FilePond Github repository](https://github.com/pqina/filepond)
+* [Slim forum](https://discourse.slimframework.com)
+* [Feedback and support](https://github.com/odan/slim4-tutorial/issues)
