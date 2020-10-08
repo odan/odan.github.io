@@ -127,7 +127,6 @@ Create a new template file in `templates/filepond.html` and copy/paste this cont
 
                 request.send(formData);
             },
-          //  process: 'filepond/process',
             revert: 'filepond/revert',
             restore: 'filepond/restore?id=',
             fetch: 'filepond/fetch?data=',
