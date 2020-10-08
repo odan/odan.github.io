@@ -255,7 +255,8 @@ final class FilePondProcessAction
     }
 
     /**
-     * Uses the unique id to move the ids to its final location and remove the temp files.
+     * Uses the unique id to move the ids to its final location 
+     * and remove the temp files.
      *
      * @param string[] $submittedIds
      * @param ResponseInterface $response
@@ -302,11 +303,19 @@ final class FilePondProcessAction
      *
      * @return string The filename of moved file
      */
-    private function moveUploadedFile(string $directory, UploadedFileInterface $uploadedFile): string
-    {
+    private function moveUploadedFile(
+        string $directory,
+        UploadedFileInterface $uploadedFile
+    ): string {
+        $extension = (string)pathinfo(
+            $uploadedFile->getClientFilename(),
+            PATHINFO_EXTENSION
+        );
+
         // Craete unique id for this file
-        $extension = (string)pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
-        $filename = FilenameFilter::createSafeFilename(sprintf('%s.%s', (string)uuid_create(), $extension));
+        $filename = FilenameFilter::createSafeFilename(
+            sprintf('%s.%s', (string)uuid_create(), $extension)
+        );
 
         // Save the file into the filestorage
         $targetPath = sprintf('%s/%s', $directory, $filename);
