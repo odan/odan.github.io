@@ -39,6 +39,9 @@ composer require symfony/polyfill-uuid
 
 ## Storage
 
+Create a new `tmp/upload/` directory in your project root
+which later acts as your temporary upload directory.
+
 Create a new `storage/` directory in your project root
 which later acts as your upload directory.
 
@@ -47,7 +50,7 @@ prevent unwanted access from the web due to misconfiguration.
 
 `deny from all`
 
-Make sure that the `storage/` directory has write access.
+Make sure that the `tmp/upload/` and the `storage/` directory has write access.
 
 ## Actions
 
