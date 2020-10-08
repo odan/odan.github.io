@@ -275,11 +275,15 @@ final class FilePondProcessAction
             $targetFile = sprintf('%s/%s', $this->storageDirectory, $submittedId);
 
             if (!copy($sourceFile, $targetFile)) {
-                throw new RuntimeException(sprintf('Error moving uploaded file %s to the storage', $submittedId));
+                throw new RuntimeException(
+                    sprintf('Error moving uploaded file %s to the storage', $submittedId)
+                );
             }
 
             if (!unlink($sourceFile)) {
-                throw new RuntimeException(sprintf('Error removing uploaded file %s', $submittedId));
+                throw new RuntimeException(
+                    sprintf('Error removing uploaded file %s', $submittedId)
+                );
             }
         }
 
