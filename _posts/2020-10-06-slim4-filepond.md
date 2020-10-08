@@ -43,7 +43,7 @@ Create a new `tmp/upload/` directory in your project root
 which later acts as your temporary upload directory.
 
 Create a new `storage/` directory in your project root
-which later acts as your upload directory.
+which acts as your storage directory.
 
 Add this `.htaccess` file to the `storage/` directory to 
 prevent unwanted access from the web due to misconfiguration.
