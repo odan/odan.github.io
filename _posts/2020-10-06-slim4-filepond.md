@@ -80,7 +80,7 @@ Create a new template file in `templates/filepond.html` and copy/paste this cont
 
 <form action="filepond/process" method="post" enctype="multipart/form-data">
     <input type="file" name="filepond[]" multiple>
-    <!-- <button type="submit">Submit</button> -->
+    <button type="submit">Submit</button>
 </form>
 
 <script src="https://unpkg.com/filepond/dist/filepond.js"></script>
@@ -95,7 +95,39 @@ Create a new template file in `templates/filepond.html` and copy/paste this cont
     FilePond.setOptions({
         // upload to this server end point
         server: {
-            process: 'filepond/process',
+
+            process:(fieldName, file, metadata, load, error, progress, abort, transfer, options) => {
+
+                // fieldName is the name of the input field
+                // file is the actual file object to send
+                const formData = new FormData();
+                formData.append(fieldName, file, file.name);
+
+                const request = new XMLHttpRequest();
+                request.open('POST', 'filepond/process');
+
+                // Should call the progress method to update the progress to 100% before calling load
+                // Setting computable to false switches the loading indicator to infinite mode
+                request.upload.onprogress = (e) => {
+                    progress(e.lengthComputable, e.loaded, e.total);
+                };
+
+                // Should call the load method when done and pass the returned server file id
+                // this server file id is then used later on when reverting or restoring a file
+                // so your server knows which file to return without exposing that info to the client
+                request.onload = function () {
+                    if (request.status >= 200 && request.status < 300) {
+                        // the load method accepts either a string (id) or an object
+                        load(request.responseText);
+                    } else {
+                        // Can call the error method if something is wrong, should exit after
+                        error('oh no');
+                    }
+                };
+
+                request.send(formData);
+            },
+          //  process: 'filepond/process',
             revert: 'filepond/revert',
             restore: 'filepond/restore?id=',
             fetch: 'filepond/fetch?data=',
@@ -156,10 +188,15 @@ use App\Util\FilenameFilter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
+use RuntimeException;
 use Slim\Psr7\UploadedFile;
 
 final class FilePondProcessAction
 {
+    private $tempDirectory = __DIR__ . '/../../tmp/upload';
+
+    private $storageDirectory = __DIR__ . '/../../storage';
+
     /**
      * Process upload.
      *
@@ -177,15 +214,37 @@ final class FilePondProcessAction
         /** @var UploadedFile[] $uploadedFiles */
         $uploadedFiles = (array)($request->getUploadedFiles()['filepond'] ?? []);
 
-        // Load this value from your settings!
-        $directory = __DIR__ . '/../../storage';
+        if ($uploadedFiles) {
+            return $this->moveTemporaryUploadedFile($uploadedFiles, $response);
+        }
 
+        $submittedIds = (array)($request->getParsedBody()['filepond'] ?? []);
+        if ($submittedIds) {
+            return $this->storeUploadedFiles($submittedIds, $response);
+        }
+
+        return $response->withStatus(422);
+    }
+
+    /**
+     * Saves file to unique location and returns unique location id.
+     *
+     * @param UploadedFile[] $uploadedFiles
+     * @param ResponseInterface $response
+     *
+     * @return ResponseInterface
+     */
+    private function moveTemporaryUploadedFile(
+        array $uploadedFiles,
+        ResponseInterface $response
+    ): ResponseInterface {
         $fileIdentifier = '';
+
         foreach ($uploadedFiles as $uploadedFile) {
             if ($uploadedFile->getError() !== UPLOAD_ERR_OK) {
                 continue;
             }
-            $fileIdentifier = $this->moveUploadedFile($directory, $uploadedFile);
+            $fileIdentifier = $this->moveUploadedFile($this->tempDirectory, $uploadedFile);
         }
 
         // Server returns unique location id in text/plain response
@@ -193,6 +252,41 @@ final class FilePondProcessAction
         $response->getBody()->write($fileIdentifier);
 
         return $response;
+    }
+
+    /**
+     * Uses the unique id to move the ids to its final location and remove the temp files.
+     *
+     * @param string[] $submittedIds
+     * @param ResponseInterface $response
+     *
+     * @throws RuntimeException
+     *
+     * @return ResponseInterface
+     */
+    private function storeUploadedFiles(
+        array $submittedIds,
+        ResponseInterface $response
+    ): ResponseInterface {
+        foreach ($submittedIds as $submittedId) {
+            // Save the file into the filestorage
+            $submittedId = FilenameFilter::createSafeFilename($submittedId);
+            $sourceFile = sprintf('%s/%s', $this->tempDirectory, $submittedId);
+            $targetFile = sprintf('%s/%s', $this->storageDirectory, $submittedId);
+
+            if (!copy($sourceFile, $targetFile)) {
+                throw new RuntimeException(sprintf('Error moving uploaded file %s to the storage', $submittedId));
+            }
+
+            if (!unlink($sourceFile)) {
+                throw new RuntimeException(sprintf('Error removing uploaded file %s', $submittedId));
+            }
+        }
+
+        // Server returns unique location id in text/plain response
+        $response = $response->withHeader('Content-Type', 'text/plain');
+
+        return $response->withStatus(201);
     }
 
     /**
@@ -204,15 +298,11 @@ final class FilePondProcessAction
      *
      * @return string The filename of moved file
      */
-    private function moveUploadedFile(
-        string $directory, 
-        UploadedFileInterface $uploadedFile
-    ): string {
+    private function moveUploadedFile(string $directory, UploadedFileInterface $uploadedFile): string
+    {
         // Craete unique id for this file
         $extension = (string)pathinfo($uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
-        $filename = FilenameFilter::createSafeFilename(
-            sprintf('%s.%s', (string)uuid_create(), $extension)
-        );
+        $filename = FilenameFilter::createSafeFilename(sprintf('%s.%s', (string)uuid_create(), $extension));
 
         // Save the file into the filestorage
         $targetPath = sprintf('%s/%s', $directory, $filename);
