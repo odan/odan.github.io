@@ -40,8 +40,12 @@ composer require respect/validation
 ## Usage
 
 I think the most common use case is to validate nested arrays. 
-For this purpose I will show how a simple array with the fields 
-`username`, `password`, `email` and one optional field `mobile`.
+For this reason I will show how to validate a simple array with this fields:
+
+* `username`: **required**, min. length is 3, the max. length is 60
+* `password`: **required**, min. length is 8, the max. length is 60
+* `email`: **required**, must be a valid email address
+* `mobile`: *optional*, must be a valid phone number
 
 To fetch the form data as an array use this code in your action class:
 
@@ -75,7 +79,7 @@ $validator->addRule(v::key('password', v::allOf(
 //...
 ```
 
-Optional fields can be added like this. Juse pass `false` to make the key optional:
+Optional fields can be added like this. Just pass `false` to make the key optional:
 
 ```php
 $validator->addRule(v::key('mobile', v::allOf(
@@ -84,7 +88,7 @@ $validator->addRule(v::key('mobile', v::allOf(
 ), false));
 ```
 
-To start the validation use the `assert` method. There are other methods as well.
+To start the validation use the `assert` method.
 
 ```php
 $validator->assert($formData);
@@ -92,7 +96,7 @@ $validator->assert($formData);
 
 ## Transaltions
 
-To translate the strings just use the `_` or `__` function from gettext.
+To translate the strings for the error messages just use the `_` or `__` function from gettext.
 
 ```php
 $validator->addRule(v::key('username', v::allOf(
@@ -191,10 +195,8 @@ In order to make it work, the `RespectValidationMiddleware::class` must be added
 use App\Middleware\RespectValidationMiddleware;
 
 // ...
-
 $app->addErrorMiddleware(true, true, true);
-
-$app->add(ErrorHandlerMiddleware::class); // <-- here
+$app->add(RespectValidationMiddleware::class); // <-- here
 ```
 
 ## Conclusion
