@@ -109,7 +109,7 @@ $validator->addRule(v::key('username', v::allOf(
 
 As soon as the validation fails a `NestedValidationException` will be thrown.
 
-This exception is great because you can transform this specific excption into an JSON response with status code 422.
+This is great, because you can transform this specific exception into an JSON response with status code 422.
 
 For this purpose we add a custom middleware to the stack.
 
@@ -208,8 +208,8 @@ A lot of magic is going on when you use the static method of the validator class
 I prefer less magic and more rubust and faster code. For me a real
 fluent interface would be more readable and elegant, but this is just a matter of taste.
 
-It was quit hard for me to find out how to add custom messages and translations
-to each validation rule, but it works now. 
+It was quite hard for me to find out how to add a custom message and translations
+to each validation rule. In the end it worked.
 
 In my next article I will show how to use the [CakePHP validation library](https://github.com/cakephp/validation) in Slim.
 
