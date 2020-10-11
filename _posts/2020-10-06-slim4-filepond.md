@@ -351,6 +351,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class FilePondRevertAction
 {
+    private $tempDirectory = __DIR__ . '/../../tmp/upload';
+
     /**
      * Revert upload.
      *
@@ -372,7 +374,7 @@ final class FilePondRevertAction
             return $response;
         }
 
-        $fullPath = sprintf('%s/%s', __DIR__ . '/../storage', $filename);
+        $fullPath = sprintf('%s/%s', $this->tempDirectory, $filename);
 
         if (file_exists($fullPath)) {
             unlink($fullPath);
