@@ -13,7 +13,7 @@ keywords: php validaton slim
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Conclusion](#conculsion)
+* [Conclusion](#conclusion)
 * [Read more](#read-more)
 
 ## Requirements
