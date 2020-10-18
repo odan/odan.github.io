@@ -200,7 +200,7 @@ $app->add(RespectValidationMiddleware::class); // <-- here
 
 ## Conclusion
 
-Respect\Validation is very flexible and provides a lot of rules out of the box.
+The Respect/Validation component is very flexible and provides a lot of rules out of the box.
 It's maintained and the download number on github is impressive.
 
 A lot of magic is going on when you use the static method of the validator class.
@@ -210,12 +210,10 @@ fluent interface would be more readable and elegant, but this is just a matter o
 It was quite hard for me to find out how to add a custom message and translations
 to each validation rule. In the end it worked.
 
-In my next article I will show how to use the [CakePHP validation library](https://github.com/cakephp/validation) in Slim.
-
 ## Read more
 
-* [The Respect\Validation Github repository](https://github.com/Respect/Validation)
-* [The Respect\Validation documentation](https://respect-validation.readthedocs.io/en/latest/)
-* [What makes Respect\Validation awesome?](https://www.reddit.com/r/PHP/comments/1telis/respectvalidation_the_most_awesome_validation/ce7hvcs/?utm_source=reddit&utm_medium=web2x&context=3)
+* [The Respect/Validation Github repository](https://github.com/Respect/Validation)
+* [The Respect/Validation documentation](https://respect-validation.readthedocs.io/en/latest/)
+* [What makes Respect/Validation awesome?](https://www.reddit.com/r/PHP/comments/1telis/respectvalidation_the_most_awesome_validation/ce7hvcs/?utm_source=reddit&utm_medium=web2x&context=3)
 * [Slim forum](https://discourse.slimframework.com)
 * [Feedback and support](https://github.com/odan/support/issues)
