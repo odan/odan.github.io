@@ -97,7 +97,7 @@ More specific (and precise) rules can be added using a custom regex.
 ->regex('mobile', '/^\+[0-9]{6,}$/', 'Invalid mobile number');
 ```
 
-To start the validation use the `assert` method.
+To start the validation use the `validate` method.
 
 ```php
 $errors = $validator->validate($formData);
@@ -123,9 +123,6 @@ array (
 ```
 
 With this result you should be able to render the error messages into a twig template.
-
-For this case I would recommend to throw an validation here and bubble it up to a specific 
-Validation middleware.
 
 But if you implement a RESTful API, you usually don't use a server-side template engine (like Twig).
 In this case I would recommend to throw a validation exception and catch it in a special validation middleware.
