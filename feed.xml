@@ -19,11 +19,8 @@ layout: null
         <title>{{ post.title }}</title>
         <link href="{{ site.url }}{{ post.url }}" />
         <published>{{ post.date | date_to_xmlschema }}</published>
-        {% if post.excerpt %}
-        <summary type="html">{{ post.excerpt | markdownify | xml_escape }}</summary>
-        {% else %}
-        <content type="html">{{ post.content | xml_escape }}</content>
-        {% endif %}
+        <summary type="html">{{ post.title | xml_escape }}</summary>
+        <content type="html"><![CDATA[<p><h2>{{ post.title }}</h2></p><a href="{{ site.url }}{{ post.url }}">{{ site.url }}{{ post.url }}</a>]]></content>
     </entry>
     {% endfor %}
 </feed>
