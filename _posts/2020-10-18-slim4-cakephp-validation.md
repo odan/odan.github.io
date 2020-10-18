@@ -127,14 +127,14 @@ With this result you should be able to render the error messages into a twig tem
 But if you implement a RESTful API, you usually don't use a server-side template engine (like Twig).
 In this case I would recommend to throw a validation exception and catch it in a special validation middleware.
  
-For this purpose we add a [selective\validation](https://github.com/selective-php/validation) component 
+For this purpose we add a [selective/validation](https://github.com/selective-php/validation) component 
 to our application. Run:
 
 ```php
 composer require selective/validation
 ```
 
-The `selective\validation` component is able to convert the result from the `$validator->validate()` 
+The `selective/validation` component is able to convert the result from the `$validator->validate()` 
 method into a proper `ValidationResult` object using the `CakeValidationErrorCollector`.
 
 Change the code example from above just a litle bit: 
@@ -192,7 +192,7 @@ $validator
 
 ## Validation Middleware
 
-As soon as the validation fails a `ValidationException` should be thrown to 
+As soon as the validation fails a `ValidationException` will be thrown to 
 transform this specific exception into an JSON response with status code 422.
 
 The `ValidationExceptionMiddleware` middleware catches all exceptions and 
@@ -263,8 +263,8 @@ $app->run();
 
 ## Conclusion
 
-The `CakePHP Validation` component is very flexible and provides some usful out of the box.
-I think the fluent interface is readable and elegant. Defining custom messages and translations is very easy.
+The `CakePHP Validation` component is very flexible and provides some usful rules out of the box.
+I think the fluent interface is readable and elegant. Defining custom messages and translations is also very easy.
 
 ## Read more
 
