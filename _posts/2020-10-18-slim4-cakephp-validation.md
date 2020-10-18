@@ -263,8 +263,9 @@ $app->run();
 
 ## Conclusion
 
-The `CakePHP Validation` component is very flexible and provides some usful rules out of the box.
-I think the fluent interface is readable and elegant. Defining custom messages and translations is also very easy.
+The `CakePHP Validation` component is very fast, flexible and provides some usful rules out of the box.
+
+Now you should be able to validate even complex API and form data.
 
 ## Read more
 
