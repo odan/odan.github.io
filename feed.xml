@@ -19,7 +19,7 @@ layout: null
         <title>{{ post.title }}</title>
         <link href="{{ site.url }}{{ post.url }}" />
         <published>{{ post.date | date_to_xmlschema }}</published>
-        <summary type="html"><p>{{ post.title | xml_escape }}</p><br><a href="{{ site.url }}{{ post.url }}">{{ site.url }}{{ post.url }}</a></summary>
+        <summary type="html"><p>{{ post.title | xml_escape }}</p><a href="{{ site.url }}{{ post.url }}">{{ site.url }}{{ post.url }}</a></summary>
     </entry>
     {% endfor %}
 </feed>
