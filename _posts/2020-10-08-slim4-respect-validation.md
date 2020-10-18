@@ -20,7 +20,6 @@ keywords: php validaton slim
 
 * PHP 7.3+
 * [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
-* [Twig for Slim](https://odan.github.io/2020/04/17/slim4-twig-templates.html)
 
 ## Introduction
 
@@ -96,7 +95,7 @@ $validator->assert($formData);
 
 ## Transaltions
 
-To translate the strings for the error messages just use the `_` or `__` function from gettext.
+To translate the strings for the error messages, just use the `_` or `__` function of gettext.
 
 ```php
 $validator->addRule(v::key('username', v::allOf(
@@ -219,4 +218,4 @@ In my next article I will show how to use the [CakePHP validation library](https
 * [The Respect\Validation documentation](https://respect-validation.readthedocs.io/en/latest/)
 * [What makes Respect\Validation awesome?](https://www.reddit.com/r/PHP/comments/1telis/respectvalidation_the_most_awesome_validation/ce7hvcs/?utm_source=reddit&utm_medium=web2x&context=3)
 * [Slim forum](https://discourse.slimframework.com)
-* [Feedback and support](https://github.com/odan/slim4-tutorial/issues)
+* [Feedback and support](https://github.com/odan/support/issues)
