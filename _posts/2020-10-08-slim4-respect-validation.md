@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Respect\Validation
+title: Slim 4 - Respect/Validation
 layout: post
 comments: false
 published: true
@@ -23,14 +23,14 @@ keywords: php validaton slim
 
 ## Introduction
 
-The `Respect\Validation` component is a popular and flexible validation library for PHP.
+The `Respect/Validation` component is a popular and flexible validation library for PHP.
 It works as standalone libary and without much additional dependencies.
 
 
 
 ## Installation
 
-To install Respect\Validation, run:
+To install Respect/Validation, run:
 
 ```
 composer require respect/validation
