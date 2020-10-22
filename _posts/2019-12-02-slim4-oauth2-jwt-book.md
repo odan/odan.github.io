@@ -301,7 +301,7 @@ final class JwtAuth
 }
 ```
 
-Add the the following container definitons, e.g. into `config/container.php`:
+Add the following container definitons, e.g. into `config/container.php`:
 
 ```php
 <?php
@@ -448,7 +448,7 @@ Authorization: Bearer <token>
 ```
 
 This can be, in certain cases, a stateless authorization mechanism. 
-The the server's protected routes resp. the `JwtAuthMiddleware` will check 
+The protected routes resp. the `JwtAuthMiddleware` will check 
 for a valid JWT in the Authorization header, and if it's present, 
 the user will be allowed to access protected resources. 
 If the JWT contains the necessary data, the need to query the database for 

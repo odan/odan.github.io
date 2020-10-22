@@ -52,7 +52,7 @@ is a PHP class that should live in the `tests/TestCase/` directory of your appli
 
 Create a new `tests/TestCase/` directory in your project root.
 
-Open `composer.json` and the the following scripts:
+Open `composer.json` and the following scripts:
 
 ```json
 "scripts": {

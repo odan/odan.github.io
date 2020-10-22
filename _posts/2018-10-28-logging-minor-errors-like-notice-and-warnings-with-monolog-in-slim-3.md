@@ -65,7 +65,7 @@ $container['phpErrorHandler'] = function (Container $container) {
 };
 ```
 
-### Setup the the middleware to handle all minor errors
+### Setup the middleware to handle all minor errors
 
 The problem is that Slim's default error handler will not handle all the PHP specific `warning` and `notice` errors for you.
 
