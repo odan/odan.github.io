@@ -103,7 +103,7 @@ To start the validation use the `validate` method.
 $errors = $validator->validate($formData);
 ```
 
-Now when you test your code you should get a list of validation errors like this:
+As result you should get a list of validation errors like this:
 
 ```php
 array (
@@ -125,7 +125,7 @@ array (
 With this result you should be able to render the error messages into a twig template.
 
 But if you implement a RESTful API, you usually don't use a server-side template engine (like Twig).
-In this case I would recommend to throw a validation exception and catch it in a special validation middleware.
+In this case I would recommend to throw a `ValidationException` to catch it in a special `ValidationExceptionMiddleware`.
  
 For this purpose we add a [selective/validation](https://github.com/selective-php/validation) component 
 to our application. Run:
