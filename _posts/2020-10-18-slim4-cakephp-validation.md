@@ -88,8 +88,8 @@ if ($errors) {
 By default, all fields are optional. Once you add the 'requirePresence' rule, the
 element must always be present. To disallow empty strings, you can add the rule `notEmptyString`.
 
-There are a lot of predifed rules. 
-Here you can find a list of [available Validation rules in the API](https://api.cakephp.org/4.0/class-Cake.Validation.Validation.html).
+There are a lot of predefined rules. 
+Here you can find a list of [available validation rules in the API](https://api.cakephp.org/4.0/class-Cake.Validation.Validation.html).
 
 More specific (and precise) rules can be added using a custom regex.
 
