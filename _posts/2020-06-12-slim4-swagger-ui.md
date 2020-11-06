@@ -72,6 +72,7 @@ Create a new template file: `templates/docs/swagger.twig` and copy/paste this co
             spec: {{ spec|raw }},
             dom_id: '#swagger-ui',
             deepLinking: true,
+            supportedSubmitMethods: [],
             presets: [
                 SwaggerUIBundle.presets.apis,
             ],
