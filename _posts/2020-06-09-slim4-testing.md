@@ -143,14 +143,14 @@ directory of your application:
 
 ```php
 // tests/TestCase/Util/CalculatorTest.php
-namespace App\Tests\Util;
+namespace App\Test\TestCase\Util;
 
 use App\Util\Calculator;
 use PHPUnit\Framework\TestCase;
 
 class CalculatorTest extends TestCase
 {
-    public function testAdd()
+    public function testAdd(): void
     {
         $calculator = new Calculator();
         $result = $calculator->add(30, 12);
