@@ -13,6 +13,8 @@ keywords: php validaton slim
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Usage](#usage)
+* [Translations](#translations)
+* [Validation Middleware](#validation-middleware)
 * [Conclusion](#conclusion)
 * [Read more](#read-more)
 
@@ -177,7 +179,7 @@ if ($this->existsUsername($formData['username'])) {
 }
 ```
 
-## Transaltions
+## Translations
 
 To translate the strings for the error messages, just use the `_` or `__` function of gettext.
 
