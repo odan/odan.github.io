@@ -14,6 +14,7 @@ If you think my blog and support is useful for you,
 I would appreciate a small donation:
 
 * **[PayPal](https://www.paypal.me/dopitz/5)**
+* **[Buy a Coffee](https://ko-fi.com/dopitz)**
 
 You can **buy** all Slim articles (> 200 pages) bundled into a eBook (PDF and EPUB). 
 
@@ -63,3 +64,5 @@ You can **buy** all Slim articles (> 200 pages) bundled into a eBook (PDF and EP
 
 Please note: The e-mail delivery can take up to 12 hours.
 If you have not received your ebook, please check your junk mail folder.
+
+If you don't have PayPal, you can also buy this eBook in my [Ko-fi Shop](https://www.ko-fi.com/s/5f182b4b22). 
