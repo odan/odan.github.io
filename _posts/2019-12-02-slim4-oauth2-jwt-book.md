@@ -747,3 +747,16 @@ Read more: <https://stackoverflow.com/a/26791450/1461181>
 
 * [Auth0 PHP SDK](https://auth0.com/docs/quickstart/webapp/php)
 * [tuupola/slim-jwt-auth](https://github.com/tuupola/slim-jwt-auth)
+
+The approach of this article is more middleware and routing "friendly",
+while the `tuupola/slim-jwt-auth` approach uses an array to configure the different routes.
+ 
+I think the array based configuration is not so good to maintain in the long run, 
+for example when you add or change a route path you may miss to change the configuration
+and suddenly some routes are unprotected.
+
+I prefer to explicitly add the `JwtAuthMiddleware` to specific routes or route groups in `routes.php`. 
+You can open the `routes.php` file see what is protected. This approach also makes it easier to 
+fetch users from the database (see `TokenCreateAction`) instead of loading it from a fixed array.
+
+I think you have to decide what's better for your specific use case.
