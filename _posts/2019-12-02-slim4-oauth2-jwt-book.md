@@ -745,6 +745,8 @@ Read more: <https://stackoverflow.com/a/26791450/1461181>
 
 ### Is there a working library?
 
+Yes, there are also some other libraries for PHP you could use instead:
+
 * [Auth0 PHP SDK](https://auth0.com/docs/quickstart/webapp/php)
 * [tuupola/slim-jwt-auth](https://github.com/tuupola/slim-jwt-auth)
 
