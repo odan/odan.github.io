@@ -275,4 +275,4 @@ Now you should be able to validate even complex API and form data.
 * [The CakePHP Validation documentation](https://book.cakephp.org/4/en/core-libraries/validation.html)
 * [A list of available Validation rules in the API](https://api.cakephp.org/4.0/class-Cake.Validation.Validation.html#).
 * [Slim forum](https://discourse.slimframework.com)
-* [Feedback and support](https://github.com/odan/support/issues)
+* [Feedback and support](https://github.com/odan/slim4-tutorial/issues)
