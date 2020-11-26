@@ -49,12 +49,6 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 * [cakephp/cakephp](https://github.com/cakephp/cakephp) A rapid development framework for PHP
 * [cakephp/chronos](https://github.com/cakephp/chronos) A standalone DateTime library
 
-## Tools
-
-* [IT News Feed](https://odan-online.com/tools/feeds/)
-* [Random Domain Generator](https://odan-online.com/tools/domain-generator.php)
-* [Media Downloader](https://odan-online.com/tools/media-download.php) - Download images from Twitter, Facebook and Instagram
-
 ## Interviews
 
 * [PHP Microframework Slim auch für größere Anwendungen geeignet](https://entwickler.de/online/php/php-microframework-slim-579928772.html)
