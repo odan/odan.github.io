@@ -18,6 +18,11 @@ I would appreciate a small donation:
 
 You can **buy** all Slim articles (> 270 pages) bundled into a eBook (PDF and EPUB). 
 
+Exclusive content:
+
+* Slim 4 Introducing
+* JSON Web Token (JWT) authentication
+
 <div style="text-align: center;">
 <img src="https://user-images.githubusercontent.com/781074/92961116-0293a880-f46f-11ea-9e84-90ef9781e0c8.png">
 </div>
@@ -62,5 +67,4 @@ You can **buy** all Slim articles (> 270 pages) bundled into a eBook (PDF and EP
     }).render('#paypal-button-container');
 </script>
 
-Please note: The e-mail delivery can take up to 12 hours.
-If you have not received your ebook, please check your junk mail folder.
+Please note: If you have not received your ebook, please check your spam email folder.
