@@ -60,15 +60,15 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 
 ## Conferences
 
+* [International PHP Conference - Online](https://phpconference.com/) (2020)
 * [International PHP Conference - Berlin](https://phpconference.com/) (2015, 2016, 2017, 2018, 2019)
 * [International PHP Conference - Munich](https://phpconference.com/) (2013)
 
-## Contact me
+## Contact
 
 * d.opitz (at) outlook.com
-* [Slim support forum](https://discourse.slimframework.com/new-message?username=odan) (Direct message)
-* [Discord](https://discord.com/): odan#9242
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
+* [Skype](skype:dali.o)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
 * [Xing](https://www.xing.com/profile/Daniel_Opitz9)
