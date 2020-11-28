@@ -644,6 +644,32 @@ return function (App $app) {
 
 ## FAQ
 
+### Should I use JWT or PHP sessions?
+
+JWT should not be used for sessions: [JWTs Suck as Session Tokens](https://developer.okta.com/blog/2017/08/17/why-jwts-suck-as-session-tokens)
+
+For a typical web-application with login/logout functionality a 
+cookie based session handling is still a very good option today.
+
+In >98% of all cases a (cookie) based session storage is simpler and "good enough".
+
+In a globally scaling web application with millions of users, 
+cookies can also be scaled in the backend by sharing the session 
+data on database servers (e.g. [redis](https://redislabs.com/solutions/use-cases/session-management/),
+Memcached or even MySql).
+
+### When can / should I use JWT?
+
+When your "client" is not a browser.
+
+As long as your client transmits its data over HTTPS, 
+it doesn't matter which Auth mechanism you use. Even BasicAuth is good enough in most cases.
+
+For APIs that have to be implemented for large corporations and governments, 
+the use of JWT is recommended. In this landscape, one usually has the capacity 
+and financial resources to deal with the technical complexity and difficult maintainability
+that cryptographic tokens bring with it.
+
 ### Where to store the token?
 
 We need to save our JWT token somewhere, so that we can forward it to our API as a header. 
