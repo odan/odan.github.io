@@ -16,15 +16,10 @@ keywords: php xdebug php8 debugger
 If the file `C:\xampp\php\ext\php_xdebug.dll` already exists, you can skip the download.
 
 * Download Xdebug for the specific PHP version:
-
   * PHP 8.0 (64-Bit): <https://xdebug.org/files/php_xdebug-3.0.0-8.0-vs16-x86_64.dll>
-
 * Move the downloaded dll file to: `C:\xampp\php\ext`
-
 * Open the file `C:\xampp\php\php.ini` with Notepad++
-
 * Disable output buffering: `output_buffering = Off`
-
 * Scroll down to the `[XDebug]` section (or create it) and copy/paste these lines:
 
 ```ini
