@@ -348,10 +348,10 @@ $this->mock(UserCreatorRepository::class)
 
 This could also be used to mock external API calls etc.
 
-The downside of mocking is that you don't test and cover the code you
-are actually deploy and run on your real system. The phpunit code coverage can
-never be 100% when you mock your repositories. The test quality
-will never be as good as when making real integration tests.
+The downside of mocking is that you are not testing and covering 
+the code that you actually deploy and run on your real system.
+The phpunit code coverage can never be 100% when you mock your repositories. 
+and the test quality will never be as good as in real integration tests.
 
 ## Integration Tests
 
