@@ -12,10 +12,12 @@ keywords: slim, slimphp, php, test, testing, phpunit, integration
 * [Requirements](#requirements)
 * [Introduction](#introduction)
 * [Installation](#installation)
+* [Test Traits](#test-traits)
 * [Unit Tests](#unit-tests)
+* [Mocking](#mocking)
 * [Integration Tests](#integration-tests)
-  * [Container Setup](#container-setup)
-  * [HTTP Tests](#http-tests)
+* [HTTP Tests](#http-tests)
+* [Database Testing](#database-testing)
 * [Read more](#read-more)
 
 ## Requirements
@@ -115,6 +117,151 @@ xdebug.remote_autostart = 1
 xdebug.remote_enable = 1
 ```
 
+### Test Traits
+
+To be able to perform complete and realistic integration tests 
+we have to setup the container (PSR-11) for each test first.
+The advantage is that we can also test the complete middleware stack
+and use the autowire functionality of the depenency injection container.
+
+The following trait will bootstrap the Slim application with the depenency injection container
+and provides some convenient methods for mocking and creating http requests.
+
+Create a new directory: `tests/Traits`.
+
+Create a new file `tests/Traits/AppTestTrait.php` and copy/paste this content:
+
+```php
+<?php
+
+namespace App\Test\Traits;
+
+use DI\Container;
+use InvalidArgumentException;
+use JsonException;
+use PHPUnit\Framework\MockObject\MockObject;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UriInterface;
+use Slim\App;
+use Slim\Psr7\Factory\ServerRequestFactory;
+use UnexpectedValueException;
+
+/**
+ * App Test Trait.
+ */
+trait AppTestTrait
+{
+    /**
+     * @var Container
+     */
+    protected $container;
+
+    /**
+     * @var App
+     */
+    protected $app;
+
+    /**
+     * Bootstrap app.
+     *
+     * @throws UnexpectedValueException
+     *
+     * @return void
+     */
+    protected function setUp(): void
+    {
+        $this->app = require __DIR__ . '/../../config/bootstrap.php';
+
+        $container = $this->app->getContainer();
+        if ($container === null) {
+            throw new UnexpectedValueException('Container must be initialized');
+        }
+
+        $this->container = $container;
+    }
+
+    /**
+     * Add mock to container.
+     *
+     * @param string $class The class or interface
+     *
+     * @return MockObject The mock
+     */
+    protected function mock(string $class): MockObject
+    {
+        if (!class_exists($class)) {
+            throw new InvalidArgumentException(sprintf('Class not found: %s', $class));
+        }
+
+        $mock = $this->getMockBuilder($class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->container->set($class, $mock);
+
+        return $mock;
+    }
+
+    /**
+     * Create a server request.
+     *
+     * @param string $method The HTTP method
+     * @param string|UriInterface $uri The URI
+     * @param array $serverParams The server parameters
+     *
+     * @return ServerRequestInterface
+     */
+    protected function createRequest(
+        string $method,
+        $uri,
+        array $serverParams = []
+    ): ServerRequestInterface {
+        return (new ServerRequestFactory())->createServerRequest($method, $uri, $serverParams);
+    }
+
+    /**
+     * Create a JSON request.
+     *
+     * @param string $method The HTTP method
+     * @param string|UriInterface $uri The URI
+     * @param array|null $data The json data
+     *
+     * @return ServerRequestInterface
+     */
+    protected function createJsonRequest(
+        string $method,
+        $uri,
+        array $data = null
+    ): ServerRequestInterface {
+        $request = $this->createRequest($method, $uri);
+
+        if ($data !== null) {
+            $request = $request->withParsedBody($data);
+        }
+
+        return $request->withHeader('Content-Type', 'application/json');
+    }
+
+    /**
+     * Verify that the given array is an exact match for the JSON returned.
+     *
+     * @param ResponseInterface $response The response
+     * @param array $expected The expected array
+     *
+     * @throws JsonException
+     *
+     * @return void
+     */
+    protected function assertJsonData(ResponseInterface $response, array $expected): void
+    {
+        $actual = (string)$response->getBody();
+        $this->assertSame($expected, (array)json_decode($actual, true, 512, JSON_THROW_ON_ERROR));
+    }
+}
+
+```
+
 ## Unit Tests
 
 Unit tests ensure that individual components of the app work as expected.
@@ -171,6 +318,41 @@ Now run all tests:
 composer test
 ```
 
+## Mocking
+
+When testing Slim applications, you may wish to "mock" certain aspects of your 
+application so they are not actually executed during a test. 
+For example, when testing an HTTP endpoint that hits the database, 
+you may wish to mock the repository method so it's not actually accessing the database
+during the test. 
+
+Phpunit itself provides some usful methods for mocking out of the box.
+But when you use a dependency injection container (PSR-11), then you also have to
+set the mocked instances into the container. For this purpose I added
+the `mock` helper method into the `AppTestTrait`.
+This tiny helper primarily provides a convenience layer over the Phpunit MockObject so you do not 
+have to manually make complicated mocking method calls. 
+
+For example, if you want to mock the database, just use the `mock` method as follows:
+
+```php
+use App\Domain\User\Repository\UserCreatorRepository;
+
+// ...
+
+// Mock the required repository method
+$this->mock(UserCreatorRepository::class)
+    ->method('insertUser')
+    ->willReturn(1);
+```
+
+This could also be used to mock external API calls etc.
+
+The downside of mocking is that you don't test and cover the code you
+are actually deploy and run on your real system. The phpunit code coverage can
+never be 100% when you mock your repositories. The test quality
+will never be as good as when making real integration tests.
+
 ## Integration Tests
 
 Integration tests ensure that component collaborations work as expected. 
@@ -188,144 +370,7 @@ Some people prefer to create repository interfaces and replace them with an empt
 implementation for testing. Of course you can do that, 
 but the technical effort for testing is much higher then.
 
-### Container setup
-
-To be able to perform complete and realistic integration tests 
-we have to setup the container (PSR-11) for each test first.
-The advantage is that we can also test the complete middleware stack
-and use the autowire functionality of the depenency injection container.
-
-The following trait will bootstrap the Slim application with the depenency injection container
-and provides some convenient methods for mocking and creating http requests.
-
-Create a new file `tests/AppTestTrait.php` and copy/paste this content:
-
-```php
-<?php
-
-namespace App\Test;
-
-use DI\Container;
-use InvalidArgumentException;
-use PHPUnit\Framework\MockObject\Builder\InvocationMocker;
-use PHPUnit\Framework\MockObject\MockObject;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Psr\Http\Message\UriInterface;
-use Slim\App;
-use Slim\Psr7\Factory\ServerRequestFactory;
-use UnexpectedValueException;
-
-trait AppTestTrait
-{
-    /** @var Container */
-    protected $container;
-
-    /** @var App */
-    protected $app;
-
-    /**
-     * Bootstrap app.
-     *
-     * @throws UnexpectedValueException
-     *
-     * @return void
-     */
-    protected function setUp(): void
-    {
-        $this->app = require __DIR__ . '/../config/bootstrap.php';
-
-        $container = $this->app->getContainer();
-        if ($container === null) {
-            throw new UnexpectedValueException('Container must be initialized');
-        }
-
-        $this->container = $container;
-    }
-
-    /**
-     * Add mock to container.
-     *
-     * @param string $class The class or interface
-     *
-     * @return MockObject The mock
-     */
-    protected function mock(string $class): MockObject
-    {
-        if (!class_exists($class)) {
-            throw new InvalidArgumentException(sprintf('Class not found: %s', $class));
-        }
-
-        $mock = $this->getMockBuilder($class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $this->container->set($class, $mock);
-
-        return $mock;
-    }
-
-    /**
-     * Create a server request.
-     *
-     * @param string $method The HTTP method
-     * @param string|UriInterface $uri The URI
-     * @param array $serverParams The server parameters
-     *
-     * @return ServerRequestInterface
-     */
-    protected function createRequest(
-        string $method,
-        $uri,
-        array $serverParams = []
-    ): ServerRequestInterface {
-        return (new ServerRequestFactory())
-            ->createServerRequest($method, $uri, $serverParams);
-    }
-
-    /**
-     * Create a JSON request.
-     *
-     * @param string $method The HTTP method
-     * @param string|UriInterface $uri The URI
-     * @param array|null $data The json data
-     *
-     * @return ServerRequestInterface
-     */
-    protected function createJsonRequest(
-        string $method, 
-        $uri, 
-        array $data = null
-    ): ServerRequestInterface {
-        $request = $this->createRequest($method, $uri);
-
-        if ($data !== null) {
-            $request = $request->withParsedBody($data);
-        }
-
-        return $request->withHeader('Content-Type', 'application/json');
-    }
-
-    /**
-     * Verify that the given array is an exact match for the JSON returned.
-     *
-     * @param ResponseInterface $response The response
-     * @param array $expected The expected array
-     *
-     * @return void
-     */
-    protected function assertJsonData(
-        ResponseInterface $response, 
-        array $expected
-    ): void {
-        $actual = (string)$response->getBody();
-        $this->assertJson($actual);
-        $this->assertSame($expected, (array)json_decode($actual, true));
-    }
-}
-```
-
-### HTTP Tests
+## HTTP Tests
 
 HTTP testing allows you to verify your API endpoints. This includes the 
 infrastructure supported by the app, such as the database, file system, and network.
@@ -352,7 +397,7 @@ namespace App\Test\TestCase\Action;
 
 use App\Domain\User\Data\UserData;
 use App\Domain\User\Repository\UserReaderRepository;
-use App\Test\AppTestTrait;
+use App\Test\Traits\AppTestTrait;
 use PHPUnit\Framework\TestCase;
 
 class UserReaderActionTest extends TestCase
@@ -431,9 +476,12 @@ $request = $this->createJsonRequest('POST', '/users', ['name' => 'Sally']);
 $response = $this->app->handle($request);
 ```
 
-This HTTP test doesn't hit the database and is very fast. 
-If you also want to test against the database, you should read my next blog post about database testing.
- 
+## Database Testing
+
+The shown HTTP test doesn't hit the database and is very fast. 
+If you also want to test against the database, 
+you should read my next article post about database testing.
+
 Stay tuned.
 
 ## Read more
