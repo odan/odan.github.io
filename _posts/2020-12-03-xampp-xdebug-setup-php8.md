@@ -35,6 +35,7 @@ xdebug.start_with_request=yes
 
 ## PhpStorm
 
+* Change the Debug port from 9000 to 9003. [Screenshot](https://user-images.githubusercontent.com/781074/101086364-0daf2e00-35b1-11eb-89d3-87647d619fb1.png)
 * Use the [PhpStorm bookmarklets generator](https://www.jetbrains.com/phpstorm/marklets/) to activate Xdebug from the browser side.
 * Enable the Xdebug option: "Can accept external connections". See [screenshot](https://user-images.githubusercontent.com/781074/83182499-ba9e7f00-a126-11ea-88c0-f28d0cbff260.png)
 
