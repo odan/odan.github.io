@@ -41,7 +41,7 @@ xdebug.start_with_request=yes
 
 ## Netbeans
 
-* Change the Netbeans debugging options: https://user-images.githubusercontent.com/781074/39868196-c98f15a0-5458-11e8-8143-d8c44079e099.jpg
+* Change the Netbeans debugging options: [Screenshot](https://user-images.githubusercontent.com/781074/39868196-c98f15a0-5458-11e8-8143-d8c44079e099.jpg)
 
 ## Visual Studio Code
 
