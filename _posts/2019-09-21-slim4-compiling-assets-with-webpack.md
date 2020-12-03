@@ -98,6 +98,7 @@ module.exports = {
     },
     output: {
         path: path.resolve(__dirname, 'public/assets'),
+        publicPath: 'assets/',
     },
     optimization: {
         minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
@@ -171,23 +172,22 @@ return [
 
     // The Twig template engine
     Twig::class => function (ContainerInterface $container) {
-        // Fetch the Slim 4 App instance
-        // We need the basePath to configure the correct public assets path
-        $app = $container->get(App::class);
-        $basePath = $app->getBasePath();
+        $settings = (array)$container->get('settings');
+        $twigSettings = $settings['twig'];
 
-        $settings = (array)$container->get('settings')['twig'];
-        $twig = Twig::create($settings['paths'], $settings['options']);
-        // ...        
+        $twig = Twig::create($twigSettings['paths'], $twigSettings['options']);
+        // ...
+
+        // The path must be absolute.
+        // e.g. /var/www/example.com/public
+        $publicPath = (string)$settings['public'];
 
         // Add extensions
         $twig->addExtension(new \Fullpipe\TwigWebpackExtension\WebpackExtension(
-            // must be an absolute path
-            '/var/www/example.com/public/assets/manifest.json',
-            // url path for js
-            $basePath . '/assets/',
-            // url path for css
-            $basePath . '/assets/'
+            // The manifest file.
+            $publicPath . '/assets/manifest.json',
+            // The public path
+            $publicPath
         ));
 
         return $twig;
