@@ -31,8 +31,6 @@ xdebug.start_with_request=yes
 
 * Restart Apache
 
-* Click the Github &#9733; Star button :-)
-
 ## PhpStorm
 
 * Change the Debug port from 9000 to 9003. [Screenshot](https://user-images.githubusercontent.com/781074/101086364-0daf2e00-35b1-11eb-89d3-87647d619fb1.png)
@@ -48,10 +46,6 @@ xdebug.start_with_request=yes
 * [Installing XDebug on anything for VSCode in 5 minutes](https://technex.us/2020/06/installing-xdebug-on-anything-for-vscode-in-5-minutes/)
 * Install the [PHP Debug Adapter for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug).
 * [Debug PHP In VSCode With XDebug](https://www.codewall.co.uk/debug-php-in-vscode-with-xdebug/)
-
-## Adobe Brackets
-
-* Install the [PHP Debugger for Brackets](https://github.com/spocke/php-debugger).
 
 ## Sublime Text 2 and 3
 
