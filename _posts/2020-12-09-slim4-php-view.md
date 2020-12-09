@@ -23,8 +23,6 @@ keywords: php slim
     * [Updating translation strings](#updating-translation-strings)
     * [Gettext fitfalls](#gettext-fitfalls)
 
-###       
-
 ## Requirements
 
 * PHP 7.2+
@@ -32,9 +30,31 @@ keywords: php slim
 
 ## Introduction
 
+A very pleasant discussion with Samuel Gfeller inspired and motivated me to write an article about this topic.
+The idea or "spirit" behind Slim is to keep your tech stack lean, clean, modern, indipendent 
+and flexible at the same time. I already wrote a lot about how to integrate and build
+a websites and web application using the Symfony Twig template engine in Slim.
+Of course Twig is absolutely fantastic, but sometimes it still feels quite "heavy" and over-complex for some developers out there.
+So I decided to show you a very lightweight or let's say "native" way to use templates in PHP 
+without Twig. At the same time, this solution should not be inferior to Twig in terms of 
+flexibility and extensibility.
+With the help of small helper functions (comparable to Twig Extensions), we can extend 
+our templates with any functionality we want.
+
+Like [Plates](https://platesphp.com/), the [Slim/PHP-View](https://github.com/slimphp/PHP-View)
+uses PHP to render templates directly. You don't have to learn a new syntax
+and your template code is getting cached by the [OPCache](https://www.php.net/manual/de/book.opcache.php)
+automaticaly. The means you don't have to create a local cache directory
+for your template cache files. You also don't need to set special write permissions to any
+directories etc.
+
+While in Twig the output of variables is coded to HTML by default, you have to take care of this on your own.
+My experience shows that the more developers participate in a project, the more difficult it becomes to enforce this security rule.
+Therefore, checking template code for this vulnerability is even more important when using this approach.
+
 ## Installation
 
-To install php-view, run:
+To install the PHP-View component, run:
 
 ```
 composer require slim/php-view
