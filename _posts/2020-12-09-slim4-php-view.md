@@ -416,7 +416,7 @@ return function (App $app) {
 
 The `PhpViewExtensionMiddleware` adds the following template variables:
 
-* `basePath` - The current base path as string
+* `$basePath` - The current base path as string
 * `$route` - The current Slim RouteParserInterface object from the incoming ServerRequestInterface object
 * `$uri` - The PSR-7 UriInterface object from the incoming ServerRequestInterface object
 
@@ -436,7 +436,7 @@ echo $basePath;
 echo $route->urlFor('home');
 
 // Output the URL for a given route. e.g.: https://www.example.com/hello/world
-echo $route->fullUrlFor($uri, 'home');
+echo $route->fullUrlFor($uri, 'hello', ['name' => 'world']);
 
 // Output the path for a named route excluding the base path
 echo $route->relativeUrlFor('home');
