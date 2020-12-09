@@ -432,13 +432,13 @@ The `PhpViewExtensionMiddleware` adds the following template variables:
 // Output the base path
 echo $basePath;
 
-// Output the URL for a given route. e.g.: /hello/world
+// Output the URL for a given route. e.g.: /
 echo $route->urlFor('home');
 
 // Output the URL for a given route. e.g.: https://www.example.com/hello/world
 echo $route->fullUrlFor($uri, 'hello', ['name' => 'world']);
 
-// Output the path for a named route excluding the base path
+// Output the path for a named route, excluding the base path
 echo $route->relativeUrlFor('home');
 
 // The PSR-7 UriInterface object from the incoming ServerRequestInterface object
