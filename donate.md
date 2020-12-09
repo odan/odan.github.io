@@ -22,6 +22,7 @@ Exclusive content:
 
 * Slim 4 Introducing
 * JSON Web Token (JWT) authentication
+* Rendering PHP view scripts into a PSR-7 Response with slim/PHP-View
 
 <div style="text-align: center;">
 <img src="https://user-images.githubusercontent.com/781074/92961116-0293a880-f46f-11ea-9e84-90ef9781e0c8.png">

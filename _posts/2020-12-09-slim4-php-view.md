@@ -1,5 +1,8 @@
 ---
-title: Slim 4 - PHP-View layout: post comments: false published: false keywords: php slim
+title: Slim 4 - PHP-View
+layout: post comments: false
+published: false
+keywords: php slim
 ---
 
 ## Table of contents
@@ -155,14 +158,16 @@ final class HomeAction
         $this->renderer = $renderer;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function __invoke(
+        ServerRequestInterface $request,
+        ResponseInterface $response
+    ): ResponseInterface {
         return $this->renderer->render($response, 'home.php', ['name' => 'World']);
     }
 }
 ```
 
-Please consult the [documentation](https://github.com/slimphp/PHP-View#template-variables) 
+Please consult the **[documentation](https://github.com/slimphp/PHP-View#template-variables)**
 to learn more about layout templates and global templates variables.
 
 ## Translations
@@ -193,20 +198,25 @@ resources/text/de_DE/LC_MESSAGES/
 * Click `File > Save`
 * Enter a filename in this format: `<domain>_<locale>.po`
     * Example: `resources/text/de_DE/LC_MESSAGES/messages_de_DE.po`
+
 * Open the menu: `Catalogue` > `Properties...`
-* Open the tab `Sources path` and add the `src` and the `templates` directory to the parser.
-* Open the tab `Sources keywords` and add the `__` as additional keyword.
-* Klick `OK` and save the file.
 
 ![image](https://user-images.githubusercontent.com/781074/101627114-276fcb80-3a1e-11eb-8f2d-d3c7a9fe4b99.png)
 
+Open the tab `Sources path` and add the `src` and the `templates` directory to the parser.
+
 ![image](https://user-images.githubusercontent.com/781074/101632581-6570ed80-3a26-11eb-9ceb-955fa51611fc.png)
+
+Open the tab `Sources keywords` and add the `__` as additional keyword.
 
 ![image](https://user-images.githubusercontent.com/781074/101632611-70c41900-3a26-11eb-9511-abf24449abbf.png)
 
+Click `OK` and save the file.
+
 ### Translation helper
 
-To provide a convenient way to retrieve strings in various languages, allowing you to easily support multiple languages
+To provide a convenient way to retrieve strings in various languages, 
+allowing you to easily support multiple languages
 within your application, we add some helper functions.
 
 Copy the following functions into your file: `src/Util/functions.php`:
