@@ -21,7 +21,8 @@ keywords: php slim
     * [Translations in PHP](#translations-in-php)
     * [Translations in templates](#translations-in-templates)
     * [Updating translation strings](#updating-translation-strings)
-    * [Gettext fitfalls](#gettext-fitfalls)
+    * [Gettext pitfalls](#gettext-pitfalls)
+* [URL helper](#url-helper)
 
 ## Requirements
 
@@ -337,8 +338,110 @@ You can call setlocale like so, and it'll return the current local.
 $currentLocale = setlocale(LC_ALL, 0);
 ```
 
-### Gettext fitfalls
+### Gettext pitfalls
 
 You should know that the translations are cached until you restart the Apache web server. In a production environment
 this is quite good for performance reason. A more developer friendly solution would be the Symfony Translation
 Component.
+
+## URL helper
+
+The [Slim Twig-View](https://github.com/slimphp/Twig-View#custom-template-functions) component
+provides some useful template function like `url_for()`, `current_url()` and `base_path()` etc.
+Unfortunately these functions are not available for the PHP-View component.
+
+To extend the PHP-View template enginge we add a middleware as follwows.
+
+Create a new file: `src/Middleware/PhpViewExtensionMiddleware.php` and copy/paste this code:
+
+```php
+<?php
+
+namespace App\Middleware;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+use Slim\App;
+use Slim\Views\PhpRenderer;
+
+final class PhpViewExtensionMiddleware implements MiddlewareInterface
+{
+    /**
+     * @var App
+     */
+    private $app;
+
+    /**
+     * @var PhpRenderer
+     */
+    private $phpRenderer;
+
+
+    public function __construct(App $app, PhpRenderer $phpRenderer)
+    {
+        $this->phpRenderer = $phpRenderer;
+        $this->app = $app;
+    }
+
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
+    {
+        $this->phpRenderer->addAttribute('uri', $request->getUri());
+        $this->phpRenderer->addAttribute('basePath', $this->app->getBasePath());
+        $this->phpRenderer->addAttribute('route', $this->app->getRouteCollector()->getRouteParser());
+
+        return $handler->handle($request);
+    }
+}
+
+```
+
+Register the middleware in `config/middleware.php`:
+
+```php
+<?php
+
+use App\Middleware\PhpViewExtensionMiddleware;
+use Slim\App;
+
+return function (App $app) {
+    // ...
+
+    $app->add(PhpViewExtensionMiddleware::class);
+
+    // ...
+};
+```
+
+The `PhpViewExtensionMiddleware` adds the following template variables:
+
+* `basePath` - The current base path as string
+* `$route` - The current Slim RouteParserInterface object from the incoming ServerRequestInterface object
+* `$uri` - The PSR-7 UriInterface object from the incoming ServerRequestInterface object
+
+### Template usage 
+
+```php
+<?php
+
+/* @var string $basePath */
+/* @var \Slim\Interfaces\RouteParserInterface $route */
+/* @var \Psr\Http\Message\UriInterface $uri */
+
+// Output the base path
+echo $basePath;
+
+// Output the URL for a given route. e.g.: /hello/world
+echo $route->urlFor('home');
+
+// Output the URL for a given route. e.g.: https://www.example.com/hello/world
+echo $route->fullUrlFor($uri, 'home');
+
+// Output the path for a named route excluding the base path
+echo $route->relativeUrlFor('home');
+
+// The PSR-7 UriInterface object from the incoming ServerRequestInterface object
+echo $uri->getPath();
+
+```
