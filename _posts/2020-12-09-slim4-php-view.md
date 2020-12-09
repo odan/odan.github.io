@@ -378,15 +378,16 @@ final class PhpViewExtensionMiddleware implements MiddlewareInterface
      */
     private $phpRenderer;
 
-
     public function __construct(App $app, PhpRenderer $phpRenderer)
     {
         $this->phpRenderer = $phpRenderer;
         $this->app = $app;
     }
 
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
+    public function process(
+        ServerRequestInterface $request,
+        RequestHandlerInterface $handler
+    ): ResponseInterface {
         $this->phpRenderer->addAttribute('uri', $request->getUri());
         $this->phpRenderer->addAttribute('basePath', $this->app->getBasePath());
         $this->phpRenderer->addAttribute('route', $this->app->getRouteCollector()->getRouteParser());
