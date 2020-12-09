@@ -1,6 +1,7 @@
 ---
 title: Slim 4 - PHP-View
-layout: post comments: false
+layout: post
+comments: false
 published: false
 keywords: php slim
 ---
