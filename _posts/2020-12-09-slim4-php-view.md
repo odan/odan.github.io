@@ -199,19 +199,21 @@ resources/text/de_DE/LC_MESSAGES/
 * Enter a filename in this format: `<domain>_<locale>.po`
     * Example: `resources/text/de_DE/LC_MESSAGES/messages_de_DE.po`
 
+\newpage
 * Open the menu: `Catalogue` > `Properties...`
-
-![image](https://user-images.githubusercontent.com/781074/101627114-276fcb80-3a1e-11eb-8f2d-d3c7a9fe4b99.png)
-
-Open the tab `Sources path` and add the `src` and the `templates` directory to the parser.
+* Open the tab `Sources path` and add the `src` and the `templates` directory to the parser.
 
 ![image](https://user-images.githubusercontent.com/781074/101632581-6570ed80-3a26-11eb-9ceb-955fa51611fc.png)
 
-Open the tab `Sources keywords` and add the `__` as additional keyword.
+\newpage
+
+* Open the tab `Sources keywords` and add the `__` as additional keyword.
 
 ![image](https://user-images.githubusercontent.com/781074/101632611-70c41900-3a26-11eb-9511-abf24449abbf.png)
 
 Click `OK` and save the file.
+
+\newpage
 
 ### Translation helper
 
@@ -266,11 +268,6 @@ function set_locale(string $locale, string $domain = 'messages'): void
  * @param string|int|float|bool ...$context The context
  *
  * @return string The translated string
- *
- * <code>
- * echo __('Hello');
- * echo __('There are %s persons logged in', 7);
- * </code>
  */
 function __(string $message, ...$context): string
 {
