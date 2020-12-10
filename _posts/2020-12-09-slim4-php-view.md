@@ -23,6 +23,8 @@ keywords: php slim
     * [Updating translation strings](#updating-translation-strings)
     * [Gettext pitfalls](#gettext-pitfalls)
 * [URL helper](#url-helper)
+    * [Template Usage](#template-usage)
+* [Assets](#assets)
 
 ## Requirements
 
@@ -435,7 +437,7 @@ The `PhpViewExtensionMiddleware` adds the following template variables:
 * `$route` - The current Slim RouteParserInterface object from the incoming ServerRequestInterface object
 * `$uri` - The PSR-7 UriInterface object from the incoming ServerRequestInterface object
 
-### Template usage 
+### Template usage
 
 ```php
 <?php
