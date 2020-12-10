@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - PHP-View
+title: Slim 4 - Native PHP template system
 layout: post
 comments: false
 published: false
@@ -25,6 +25,7 @@ keywords: php slim
 * [URL helper](#url-helper)
     * [Template Usage](#template-usage)
 * [Assets](#assets)
+* [Similar components](#similar-components)
 
 ## Requirements
 
@@ -554,3 +555,17 @@ Hello World
 </body>
 </html>
 ```
+
+## Similar components
+
+[Plates](https://platesphp.com/) is a native PHP template system that’s fast, easy to use and easy to extend. 
+It’s inspired by the excellent Twig template engine and strives to bring modern template 
+language functionality to native PHP templates. Plates is designed for developers who 
+prefer to use native PHP templates over compiled template languages, such as Twig or Smarty.
+
+My personal impression is that Plates is not so actively developed anymore.
+Version 4 is in Aplha since 2018.
+
+There was also the native [Symfony Templating](https://github.com/symfony/templating) component 
+that provides a lot of tools needed to build any kind of template system.
+But since Symfony 5.0 it's no longer supported.
