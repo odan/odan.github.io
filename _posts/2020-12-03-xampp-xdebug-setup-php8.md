@@ -13,8 +13,6 @@ keywords: php xdebug php8 debugger
 
 ## Setup
 
-If the file `C:\xampp\php\ext\php_xdebug.dll` already exists, you can skip the download.
-
 * Download Xdebug for the specific PHP version:
   * PHP 8.0 (64-Bit): <https://xdebug.org/files/php_xdebug-3.0.0-8.0-vs16-x86_64.dll>
 * Move the downloaded dll file to: `C:\xampp\php\ext`
@@ -47,9 +45,11 @@ xdebug.start_with_request=yes
 * Install the [PHP Debug Adapter for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=felixfbecker.php-debug).
 * [Debug PHP In VSCode With XDebug](https://www.codewall.co.uk/debug-php-in-vscode-with-xdebug/)
 
-## Sublime Text 2 and 3
+## Postman
 
-* Install the [Xdebug Client Package](https://packagecontrol.io/packages/Xdebug%20Client)
+Add `XDEBUG_SESSION_START=PHPSTORM` as query parameter to the url, e.g.
+
+* http://localhost?XDEBUG_SESSION_START=PHPSTORM
 
 ## Start debugger from the console
 
@@ -59,12 +59,6 @@ Enter cmd:
 set XDEBUG_CONFIG="idekey=xdebug"
 php test.php
 ```
-
-## Postman
-
-Add `XDEBUG_SESSION_START=PHPSTORM` as query parameter to the url, e.g.
-
-* http://localhost?XDEBUG_SESSION_START=PHPSTORM
 
 ## Known Issues
 
