@@ -25,6 +25,7 @@ keywords: php slim
 * [URL helper](#url-helper)
     * [Template Usage](#template-usage)
 * [Assets](#assets)
+  * [Bundling assets](#bundling-assets)
 * [Similar components](#similar-components)
 
 ## Requirements
@@ -468,9 +469,9 @@ echo $uri->getPath();
 
 To inform the browser where to find the assets (js, css, images) we add a `<base>` tag inside the `<head>` element of the document.
 The `<base>` tag specifies the base URL for all relative URLs in a document.
-In this case we use `<base>` tag and add the basePath to the `href` attribute.
+In this case we put the `$basePath` into the base `href` attribute.
 
-Create a new layout file: `templates/layput.php` and copy/paste this content:
+Create a new layout file: `templates/layout.php` and copy/paste this content:
 
 **Example:**
 
@@ -500,9 +501,8 @@ document.addEventListener('DOMContentLoaded', function () {
 ```
 
 To render the content into the layout template use the `$content` variable.
-
-The `$content` is special variable used inside layouts to render the wrapped view and should
-not be set in your view paramaters.
+The `$content` variable is special variable used inside layouts to render the 
+wrapped view and should not be set in your view data.
 
 Modify your HomeAction class in `src/Action/HomeAction.php` to render the layout template:
 
@@ -555,6 +555,98 @@ Hello World
 </body>
 </html>
 ```
+
+### Bundling assets
+
+You should only use minified assets on your **production** server to speed up performance (SEO). 
+To bundle assets, you can add [Webpack](https://webpack.js.org/) to your build process.
+A webpack script could, for example, recursively traverse the JS and CSS directories and minify its content.
+
+Example: `package.json`
+
+```
+{
+    "scripts": {
+        "build": "npx webpack --mode=production",
+        "build:dev": "npx webpack --mode=development"
+    },
+    "devDependencies": {
+        "autoprefixer": "^9.8.6",
+        "css-loader": "^3.6.0",
+        "file-loader": "^4.3.0",
+        "mini-css-extract-plugin": "^0.8.2",
+        "optimize-css-assets-webpack-plugin": "^5.0.4",
+        "postcss-loader": "^3.0.0",
+        "terser-webpack-plugin": "^2.3.8",
+        "webpack": "^4.44.2",
+        "webpack-assets-manifest": "^3.1.1",
+        "webpack-cli": "^3.3.12",
+        "webpack-manifest-plugin": "^2.2.0"
+    }
+}
+```
+
+Example: `webpack.config.js`
+
+```js
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const TerserJSPlugin = require('terser-webpack-plugin');
+
+module.exports = (env, argv) => ({
+    entry: function loadEntries(pattern) {
+        const glob = require('glob');
+        const path = require('path');
+        const object = {};
+
+        glob.sync(pattern).forEach(function (match) {
+            const ext = path.extname(match);
+
+            if (!['.js', '.css'].includes(ext)) {
+                return;
+            }
+
+            const basename = path.basename(match, ext);
+            const onlyPath = path.dirname(match);
+            const key = onlyPath.replace('\.\/public\/', '');
+
+            object[key + '/' + basename] = match;
+        });
+
+        return object;
+    }('./public/**'),
+
+    output: {
+        path: path.resolve(__dirname, 'public'),
+        publicPath: '/',
+    },
+
+    mode: 'development',
+
+    optimization: {
+        minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    },
+
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+        ],
+    },
+
+    plugins: [
+        new MiniCssExtractPlugin({
+            ignoreOrder: false
+        }),
+    ],
+});
+
+```
+
+To minify all assets for production run: `npm run build`
 
 ## Similar components
 
