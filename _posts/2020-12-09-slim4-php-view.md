@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Native PHP template system
+title: Slim 4 - PHP Templates
 layout: post
 comments: false
 published: false
