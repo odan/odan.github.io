@@ -16,14 +16,14 @@ keywords: php slim
 * [Helper functions](#helper-functions)
 * [Usage](#usage)
 * [Translations](#translations)
-    * [Requirements](#translator-requirements)
-    * [Translation helper](#translation-helper)
-    * [Translations in PHP](#translations-in-php)
-    * [Translations in templates](#translations-in-templates)
-    * [Updating translation strings](#updating-translation-strings)
-    * [Gettext pitfalls](#gettext-pitfalls)
+  * [Requirements](#translator-requirements)
+  * [Translation helper](#translation-helper)
+  * [Translations in PHP](#translations-in-php)
+  * [Translations in templates](#translations-in-templates)
+  * [Updating translation strings](#updating-translation-strings)
+  * [Gettext pitfalls](#gettext-pitfalls)
 * [URL helper](#url-helper)
-    * [Template Usage](#template-usage)
+  * [Template Usage](#template-usage)
 * [Assets](#assets)
   * [Bundling assets](#bundling-assets)
 * [Similar components](#similar-components)
@@ -527,8 +527,10 @@ final class HomeAction
         $this->renderer = $renderer;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function __invoke(
+        ServerRequestInterface $request, 
+        ResponseInterface $response
+    ): ResponseInterface {
         $this->renderer->setLayout('layout.php');
 
         // optional
@@ -647,6 +649,10 @@ module.exports = (env, argv) => ({
 ```
 
 To minify all assets for production run: `npm run build`
+
+If you are looking for a simpler way, you may
+take a look at **[Apache ant](https://stackoverflow.com/a/1498830/1461181)**
+to automate Javascript / CSS minification.
 
 ## Similar components
 
