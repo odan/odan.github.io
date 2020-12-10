@@ -153,7 +153,7 @@ Then run `composer dump-autoload` to update the autoloader.
 Create a new view template: `templates/home.php`
 
 ```php
-Hello <?=html($name)?>
+Hello <?= html($name) ?>
 ```
 
 This Action class shows how to inject the PhpRenderer to render an template:
@@ -324,6 +324,21 @@ You can use the same `__` function to translate messages in PHP templates.
 <?= html(__('There are %s users logged in.', 7)) ?>
 ```
 
+**Example:**
+
+```php
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><?= html($title ?? 'Default title') ?></title>
+</head>
+<body>
+<?= html(__('There are %s users logged in.', 7)) ?>
+</body>
+</html>
+```
+
 ### Updating translation strings
 
 To update a PO file, open it in Poedit and click `Update from code`
@@ -444,4 +459,96 @@ echo $route->relativeUrlFor('home');
 // The PSR-7 UriInterface object from the incoming ServerRequestInterface object
 echo $uri->getPath();
 
+```
+
+## Assets
+
+To inform the browser where to find the assets (js, css, images) we add a `<base>` tag inside the `<head>` element of the document.
+The `<base>` tag specifies the base URL for all relative URLs in a document.
+In this case we use `<base>` tag and add the basePath to the `href` attribute.
+
+Create a new layout file: `templates/layput.php` and copy/paste this content:
+
+**Example:**
+
+```php
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><?= html($title ?? 'Slim Tutorial') ?></title>
+    <base href="<?= $basePath ?>/"/>
+    <script type="text/javascript" src="js/hello.js"></script>
+</head>
+<body>
+<?= $content ?>
+</body>
+</html>
+```
+
+The browser then downloads the assets relative to the base path, e.g. from `/slim4-tutorial/js/hello.js`.
+
+Create a simple JavaScript file in `public/js/hello.js`:
+
+```js
+document.addEventListener('DOMContentLoaded', function () {
+  alert('The DOM is ready');
+});
+```
+
+To render the content into the layout template use the `$content` variable.
+
+The `$content` is special variable used inside layouts to render the wrapped view and should
+not be set in your view paramaters.
+
+Modify your HomeAction class in `src/Action/HomeAction.php` to render the layout template:
+
+```php
+<?php
+
+namespace App\Action;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Slim\Views\PhpRenderer;
+
+final class HomeAction
+{
+    /**
+     * @var PhpRenderer
+     */
+    private $renderer;
+
+    public function __construct(PhpRenderer $renderer)
+    {
+        $this->renderer = $renderer;
+    }
+
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    {
+        $this->renderer->setLayout('layout.php');
+
+        // optional
+        $this->renderer->addAttribute('title', 'My Slim Application');
+
+        return $this->renderer->render($response, 'home.php', ['name' => 'World']);
+    }
+}
+```
+
+**Result:**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>My Slim Application</title>
+  <base href="/slim4-tutorial/"/>
+  <script type="text/javascript" src="js/hello.js"></script>
+</head>
+<body>
+Hello World
+</body>
+</html>
 ```
