@@ -24,28 +24,28 @@ keywords: slim4 php
 * [SameSite cookies](#samesite-cookies)
 * [Dependency Injection](#dependency-injection)
 
-## Documentation
+### Documentation
 
 * <https://www.slimframework.com/docs/v4/>
 
-## Slim 4 Changes
+### Slim 4 Changes
 
 * <https://github.com/slimphp/Slim/wiki/Slim-4-Roadmap>
 * <https://github.com/slimphp/Slim/issues/1686>
 * <https://www.slimframework.com/2019/04/25/slim-4.0.0-alpha-release.html>
 
-## Installation 
+### Installation 
 
 * <https://www.slimframework.com/docs/v4/start/installation.html>
 
-## Skeletons
+### Skeletons
 
 * <https://github.com/slimphp/Slim-Skeleton>
 * <https://github.com/odan/slim4-skeleton>
 * <https://github.com/adriansuter/Slim4-Skeleton>
 * <https://github.com/akrabat/slim4-starter>
 
-## Error 404
+### Error 404
 
 In the beginning many people have an issue with the error message: **Error 404 (Not found)**
 
@@ -74,13 +74,13 @@ This library can be used as a helper to determine the correct base path:
 
 * <https://github.com/selective-php/basepath>
 
-## Retrieving the current route
+### Retrieving the current route
 
 ```php
 $route = \Slim\Routing\RouteContext::fromRequest($request)->getRoute();
 ```
 
-## Retrieving the current route arguments
+### Retrieving the current route arguments
 
 ```php
 $routeArguments = \Slim\Routing\RouteContext::fromRequest($request)
@@ -88,19 +88,19 @@ $routeArguments = \Slim\Routing\RouteContext::fromRequest($request)
     ->getArguments();
 ```
 
-## Accessing the RouteParser
+### Accessing the RouteParser
 
 ```php
 $routeParser = \Slim\Routing\RouteContext::fromRequest($request)->getRouteParser();
 ```
 
-## Retrieving the base path
+### Retrieving the base path
 
 ```php
 $basePath = \Slim\Routing\RouteContext::fromRequest($request)->getBasePath(),
 ```
 
-## Reading the response body
+### Reading the response body
 
 ```php
 $body = (string)$request->getBody();
@@ -110,7 +110,7 @@ If the request body is still empty, it could be an bug or an issue with chunked 
 
 * <https://www.jeffgeerling.com/blog/2017/apache-fastcgi-proxyfcgi-and-empty-post-bodies-chunked-transfer>
 
-## Receiving input
+### Receiving input
 
 To receive the submitted JSON / XML data you have to add the `BodyParsingMiddleware`:
 
@@ -135,18 +135,18 @@ The `BodyParsingMiddleware` also supports `PUT` requests.
 
 More details: <https://akrabat.com/receiving-input-into-a-slim-4-application/>
 
-## CSRF protection
+### CSRF protection
 
 Take a look a the "official" [Slim-CSRF](https://github.com/slimphp/Slim-Csrf) package. 
 
-## SameSite cookies
+### SameSite cookies
 
 With SameSite Cookies (available since PHP 7.3) you may no longer need CSRF protection:
 
 * [CSRF is (really) dead](https://scotthelme.co.uk/csrf-is-really-dead/)
 * [SameSite Cookie Middlware](https://github.com/selective-php/samesite-cookie)
 
-## Dependency Injection
+### Dependency Injection
 
 As a general rule:
 
