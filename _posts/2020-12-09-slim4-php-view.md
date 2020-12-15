@@ -35,22 +35,21 @@ keywords: php slim
 
 ## Introduction
 
-A very pleasant discussion with Samuel Gfeller inspired and motivated me to write an article about this topic.
-The idea or "spirit" behind Slim is to keep your technology stack lean, clean, modern, independent and flexible.
+A very pleasant discussion with [Samuel Gfeller](https://github.com/samuelgfeller) inspired and motivated me to write an article about this topic.
+The idea or "spirit" behind Slim is to keep your technology stack simple, lean and flexible.
 I already wrote a lot about how to integrate and build a websites and web application using the Twig template engine in Slim.
-Of course Twig is absolutely fantastic, but sometimes it still feels quite "heavy" and over-complex for some developers out there.
+Of course, Twig is absolutely fantastic, but for some developers, Twig still feels a bit "heavy" and over-engineered.
 So I decided to show you a very lightweight or let's say "native" way to use templates in PHP 
 without Twig. At the same time, this solution should not be inferior to Twig in terms of 
 flexibility and extensibility.
 With the help of small helper functions (comparable to Twig Extensions), we can extend 
 PHP templates with any functionality we want.
 
-Like [Plates](https://platesphp.com/), the [Slim/PHP-View](https://github.com/slimphp/PHP-View)
+Like [Plates](https://platesphp.com/), the [Slim/PHP-View](https://github.com/slimphp/PHP-View) component
 uses PHP to render templates directly. You don't have to learn a new syntax
 and your template code is getting cached by the [OPCache](https://www.php.net/manual/de/book.opcache.php)
-automaticaly. The means you don't have to create a local cache directory
-for your template cache files. You also don't need to set special write permissions to any
-directories etc.
+automaticaly. This means you no longer need to create a local cache directory
+for your template cache files. You also don't need to set special write permissions for directories etc.
 
 While in Twig the output of variables is encoded into HTML by default, you have to take care of it yourself in a PHP template.
 My experience shows that the more developers are involved in a project, the more difficult it becomes to enforce this security rule.
