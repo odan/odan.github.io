@@ -407,8 +407,7 @@ $currentLocale = setlocale(LC_ALL, 0);
 ### Gettext pitfalls
 
 You should know that the translations are cached until you restart the Apache web server. In a production environment
-this is quite good for performance reason. A more developer friendly solution would be the Symfony Translation
-Component.
+this is quite good for performance reason.
 
 ## URL helper
 
@@ -711,3 +710,7 @@ Version 4 is in Aplha since 2018.
 There was also the native [Symfony Templating](https://github.com/symfony/templating) component 
 that provides a lot of tools needed to build any kind of template system.
 But since Symfony 5.0 it's no longer supported.
+
+At the end of the day, I would say that the `slim/twig-view` components make 
+the most sense if you are using Slim because it's maintained and the built-in support 
+for the PSR-7 request and response objects makes it much easier to use.
