@@ -191,6 +191,55 @@ final class HomeAction
 }
 ```
 
+### Layouts
+
+The simplest form would be to include recurring elements such as the page header, 
+navigation and footer, as a ready-made layout template. 
+
+Create a new layout file: `templates/layout.php` and copy/paste this content:
+
+**Example:**
+
+```php
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Slim Tutorial</title>
+</head>
+<body>
+<?= $content ?>
+</body>
+</html>
+```
+
+To render the content into the layout template use the `$content` variable.
+The `$content` variable is special variable used inside layouts to render the
+wrapped view and should not be set in your view data.
+
+To render the `home.php` template into the `layout.php` template you have 
+to set the layout template in your action:
+
+```php
+$this->renderer->setLayout('layout.php');
+
+return $this->renderer->render($response, 'home.php', ['name' => 'World']);
+```
+
+Now the response should contain the layout and the content of the rendered home template:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Slim Tutorial</title>
+</head>
+<body>
+Hello World</body>
+</html>
+```
+
 Please consult the **[documentation](https://github.com/slimphp/PHP-View#template-variables)**
 to learn more about layout templates and global templates variables.
 
@@ -470,7 +519,7 @@ To inform the browser where to find the assets (js, css, images) we add a `<base
 The `<base>` tag specifies the base URL for all relative URLs in a document.
 In this case we put the `$basePath` into the base `href` attribute.
 
-Create a new layout file: `templates/layout.php` and copy/paste this content:
+Create or modify your existing layout file: `templates/layout.php` using this content:
 
 **Example:**
 
@@ -498,10 +547,6 @@ document.addEventListener('DOMContentLoaded', function () {
   alert('The DOM is ready');
 });
 ```
-
-To render the content into the layout template use the `$content` variable.
-The `$content` variable is special variable used inside layouts to render the 
-wrapped view and should not be set in your view data.
 
 Modify your HomeAction class in `src/Action/HomeAction.php` to render the layout template:
 
