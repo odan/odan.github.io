@@ -1,5 +1,9 @@
 ---
-title: Creating a strictly typed collection of objects in PHP layout: post comments: true published: true description:
+title: Creating a strictly typed collection of objects in PHP 
+layout: post
+comments: true
+published: true 
+description: 
 keywords: php array generics
 ---
 
