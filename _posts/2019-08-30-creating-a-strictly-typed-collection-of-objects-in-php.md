@@ -107,3 +107,11 @@ You could also use variadics and pass many User objects in constructor at once l
 ```php
 $userList = new UserList(new User(), new User());
 ```
+
+Passing an array of Users to the class constructor:
+
+```php
+$userList = new UserList(...[new User(), new User()]);
+```
+
+[Demo](https://3v4l.org/JNY1Z)
