@@ -1,37 +1,29 @@
 ---
-title: Creating a strictly typed collection of objects in PHP
-layout: post
-comments: true
-published: true
-description: 
+title: Creating a strictly typed collection of objects in PHP layout: post comments: true published: true description:
 keywords: php array generics
 ---
 
 ## Table of contents
 
 * [Intro](#intro)
-* [Creating a data object](#creating-a-data-object)
 * [Creating a collection class](#creating-a-collection-class)
 * [Usage](#usage)
 
 ## Intro
 
-[Generics](https://wiki.php.net/rfc/generic-arrays) are still a long way off and whether 
-they'll ever come like that is questionable.
+A type-checked array is an array that ensures that all values of an array are an instance of the
+same [data type](https://www.php.net/manual/en/language.types.intro.php) (class).
 
-Did you know that we actually do not need generics, because PHP 7.4+ has everything to 
-implement type-safe and future-proof collection classes.
+Until today this is not possible directly with arrays and I think that this is a feature that is missing in PHP.
 
-We only need the features everyone should know since PHP 7: [Classes](https://www.php.net/manual/en/language.oop5.php),
- arrays and [type declarations](https://www.php.net/manual/en/functions.arguments.php#functions.arguments.type-declaration). 
+There is an interesting RFC about [Generic arrays](https://wiki.php.net/rfc/generic-arrays), but whether and when this
+feature will be added is still unclear.
 
-Type declarations were also known as "type hints" in PHP 5. 
-With type declarations, methods can require that parameters be of a certain type at the time of the invocation. 
-If the specified value is of the wrong type, an error occurred.
+However, you can also implement it with the existing language features.
 
-## Creating a data object
+## Creating a collection class
 
-First, we create a data object to store our data in-memory:
+First, we create a class we want to add to the collection:
 
 ```php
 <?php
@@ -40,11 +32,6 @@ final class User
 {
 }
 ```
-
-**Note:** [Typed class properties](https://wiki.php.net/rfc/typed_properties_v2) have been 
-added in PHP 7.4 and provide a major improvement to PHP's type system.
-
-## Creating a collection class
 
 Now we create a collection class to collect and retrieve our "array" of user objects.
 
