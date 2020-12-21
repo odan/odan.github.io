@@ -48,7 +48,7 @@ PHP templates with any functionality we want.
 Like [Plates](https://platesphp.com/), the [Slim/PHP-View](https://github.com/slimphp/PHP-View) component
 uses PHP to render templates directly. You don't have to learn a new syntax
 and your template code is getting cached by the [OPCache](https://www.php.net/manual/de/book.opcache.php)
-automaticaly. This means you no longer need to create a local cache directory
+automatically. This means you no longer need to create a local cache directory
 for your template cache files. You also don't need to set special write permissions for directories etc.
 
 While in Twig the output of variables is encoded into HTML by default, you have to take care of it yourself in a PHP template.
@@ -105,7 +105,7 @@ The OWASP Top 10 web security risks study lists Cross-Site Scripting (XSS) in se
 
 Note that `slim/PHP-View` has no built-in mitigation from XSS attacks. It is the developer's responsibility to
 use `htmlspecialchars()` or a component like `laminas-escaper`. In this case I want to keep it lean and we just add this
-simple but efficent html encoding function to our application instead.
+simple but efficient html encoding function to our application instead.
 
 Create a new directory, if not exists: `src/Util`
 
@@ -415,7 +415,7 @@ The [Slim Twig-View](https://github.com/slimphp/Twig-View#custom-template-functi
 provides some useful template function like `url_for()`, `current_url()` and `base_path()` etc.
 Unfortunately these functions are not available for the PHP-View component.
 
-To extend the PHP-View template enginge we add a middleware as follwows.
+To extend the PHP-View template enginge we add a middleware as follows.
 
 Create a new file: `src/Middleware/PhpViewExtensionMiddleware.php` and copy/paste this code:
 
@@ -705,7 +705,7 @@ language functionality to native PHP templates. Plates is designed for developer
 prefer to use native PHP templates over compiled template languages, such as Twig or Smarty.
 
 My personal impression is that Plates is not so actively developed anymore.
-Version 4 is in Aplha since 2018.
+Version 4 is in Alpha since 2018.
 
 There was also the native [Symfony Templating](https://github.com/symfony/templating) component 
 that provides a lot of tools needed to build any kind of template system.
