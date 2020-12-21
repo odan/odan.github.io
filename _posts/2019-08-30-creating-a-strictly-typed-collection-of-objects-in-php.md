@@ -75,7 +75,7 @@ final class UserList
      *
      * @return void
      */
-    public function addUser(User $user): void
+    public function add(User $user): void
     {
         $this->list[] = $user;
     }
@@ -99,8 +99,8 @@ final class UserList
 $userList = new UserList();
 
 // Add some new User objects to the collection
-$userList->addUser(new User());
-$userList->addUser(new User());
+$userList->add(new User());
+$userList->add(new User());
 ```
 
 Iterating over the collection:
