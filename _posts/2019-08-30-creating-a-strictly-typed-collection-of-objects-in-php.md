@@ -18,7 +18,7 @@ keywords: php array generics
 A type-checked array is an array that ensures that all values of an array are an instance of the
 same [data type](https://www.php.net/manual/en/language.types.intro.php) (class).
 
-Until today this is not possible directly with arrays and I think that this is a feature that is missing in PHP.
+Until today it is not possible directly with arrays and I think this is a missing feature in PHP.
 
 There is an interesting RFC about [Generic arrays](https://wiki.php.net/rfc/generic-arrays), but whether and when this
 feature will be added is still unclear.
