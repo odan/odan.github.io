@@ -38,15 +38,6 @@ First, we create a data object to store our data in-memory:
 
 final class User
 {
-    /**
-     * @var int
-     */
-    public int $id;
-
-    /**
-     * @var string
-     */
-    public string $username;
 }
 ```
 
@@ -65,8 +56,18 @@ final class UserList
     /**
      * @var User[] The users
      */
-    private $users = [];
+    private $list;
 
+    /**
+     * The constructor.
+     * 
+     * @param User ...$user The users
+     */
+    public function __construct(User ...$user) 
+    {
+        $this->list = $user;
+    }
+    
     /**
      * Add user to list.
      *
@@ -76,7 +77,7 @@ final class UserList
      */
     public function addUser(User $user): void
     {
-        $this->users[] = $user;
+        $this->list[] = $user;
     }
 
     /**
@@ -86,39 +87,32 @@ final class UserList
      */
     public function all(): array
     {
-        return $this->users;
+        return $this->list;
     }
 }
 ```
 
 ## Usage
 
-Let's just create a new (and empty) collection object:
-
-
 ```php
-$users = new UserList();
+// Create a new (and empty) collection object
+$userList = new UserList();
+
+// Add some new User objects to the collection
+$userList->addUser(new User());
+$userList->addUser(new User());
 ```
 
-Then we add some new User objects to the collection:
-```php
-$user = new User();
-$user->id = 1;
-$user->username = 'admin';
-
-$users->addUser($user);
-
-$user = new User();
-$user->id = 2;
-$user->username = 'operator';
-
-$users->addUser($user);
-```
-
-Now we can iterate over the collection with the method `$users->all()`:
+Iterating over the collection:
 
 ```php
-foreach ($users->all() as $user) {
+foreach ($userList->all() as $user) {
     echo sprintf("ID: %s, Username: %s\n", $user->id, $user->username);
 }
+```
+
+You could also use variadics and pass many User objects in constructor at once like:
+
+```php
+$userList = new UserList(new User(), new User());
 ```
