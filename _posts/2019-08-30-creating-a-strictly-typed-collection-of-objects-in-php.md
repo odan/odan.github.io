@@ -98,7 +98,7 @@ Iterating over the collection:
 
 ```php
 foreach ($userList->all() as $user) {
-    echo sprintf("ID: %s, Username: %s\n", $user->id, $user->username);
+    // ...
 }
 ```
 
