@@ -14,7 +14,7 @@ layout: null
     </author>
     <rights>Copyright (c) {{ site.author.name }}</rights>
     {% for post in site.posts limit:15 %}
-    {% if post.published == true %}
+    {% if post.published %}
     <entry>
         <id>{{ site.url }}{{ post.id }}</id>
         <title>{{ post.title }}</title>
