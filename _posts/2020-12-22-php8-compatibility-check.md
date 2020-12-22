@@ -9,7 +9,7 @@ keywords: php
 To check whether your code is compatible with PHP 8 or not, you may find this tool very useful.
 
 The [PHP Compatibility Coding Standard for PHP CodeSniffer](https://github.com/PHPCompatibility/PHPCompatibility)
-is a set of sniffs for [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) 
+contains a set of sniffs for [PHP CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer) 
 that checks for PHP cross-version compatibility. 
 It will allow you to analyze your code for compatibility with higher and lower versions of PHP.
 
@@ -21,7 +21,7 @@ If not already installed, install PHP CodeSniffer first:
 composer require squizlabs/php_codesniffer --dev
 ```
 
-Then install the "PHPCompatibility" rulesets using this command:
+Then install the "PHPCompatibility" rules using this command:
 
 ```
 composer require phpcompatibility/php-compatibility --dev
@@ -32,7 +32,7 @@ add the following [script](https://getcomposer.org/doc/articles/scripts.md#writi
 to your `composer.json` file:
 
 ```json
-"sniffer:php8": "phpcs -p ./src --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 8.0",
+"sniffer:php8": "phpcs -p ./src --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 8.0"
 ```
 
 ### Usage
