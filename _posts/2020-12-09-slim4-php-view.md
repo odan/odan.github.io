@@ -753,19 +753,21 @@ They call it "logic-less" because there are no `if` statements, `else` clauses, 
 Instead there are only tags (placeholder). Some tags are replaced with a value, some with nothing, 
 and others with a series of values.
 
-Currently there is only a [Framework integration for Slim 3](https://github.com/andrewslince/slim3-mustache-view),
-but not for Slim 4.
+Currently there is only a [framework integration for Slim 3](https://github.com/andrewslince/slim3-mustache-view) 
+availabe, but not for Slim 4.
 
 ### Smarty
 
 Smarty is a template engine which actually compiles the template file to the php file that 
 can be later executed. This simply saves time on parsing and variable outputs, 
 beating other Template Engines with much smaller memory use and regex.
+Slim 4 support will be available soon in the [mathmarques/smarty-view](https://github.com/mathmarques/Smarty-View) component.
 
 ### Latte (Nette)
 
 Latte is a template engine for PHP which eases your work and ensures the output is protected against vulnerabilities, 
 such as XSS. It's the first PHP engine introducing context-aware escaping and link checking.
+Latte also works with Slim 4, e.g. [LatteView](https://github.com/ujpef/latte-view/blob/master/src/LatteView.php#L57)
 
 ### Laminas-View 
 
