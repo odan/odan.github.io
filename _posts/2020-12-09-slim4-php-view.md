@@ -704,8 +704,14 @@ It’s inspired by the excellent Twig template engine and strives to bring moder
 language functionality to native PHP templates. Plates is designed for developers who 
 prefer to use native PHP templates over compiled template languages, such as Twig or Smarty.
 
+Please note, that Plates is one of the slowest template engines. See PHP Templating Performance:
+
+![image](https://user-images.githubusercontent.com/781074/103140997-5ceb0900-46ee-11eb-8ae0-80d82be63004.png)
+
+Image source: <https://twitter.com/AwilumIT/status/134250291934677811>
+
 My personal impression is that Plates is not so actively maintained and supported anymore.
-Version 4 is in Alpha since 2018.
+Version 4 is in Alpha since 2018. 
 
 **Update**: Plates v4 Alpha has been abandoned. Version 3.4.0 supports PHP 8.
 
