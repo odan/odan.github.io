@@ -716,7 +716,7 @@ Please note, that Plates is one of the slowest template engines. See PHP Templat
 
 ![image](https://user-images.githubusercontent.com/781074/103140997-5ceb0900-46ee-11eb-8ae0-80d82be63004.png)
 
-Image source: <https://twitter.com/AwilumIT/status/134250291934677811>
+*Image source:* <https://medium.com/@gotzmann/the-fastest-template-engine-for-php-b5b461b46296>
 
 My personal impression is that Plates is not so actively maintained and supported anymore.
 Version 4 is in Alpha since 2018. 
