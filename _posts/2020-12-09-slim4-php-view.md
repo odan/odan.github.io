@@ -704,13 +704,15 @@ It’s inspired by the excellent Twig template engine and strives to bring moder
 language functionality to native PHP templates. Plates is designed for developers who 
 prefer to use native PHP templates over compiled template languages, such as Twig or Smarty.
 
-My personal impression is that Plates is not so actively developed anymore.
+My personal impression is that Plates is not so actively maintained and supported anymore.
 Version 4 is in Alpha since 2018.
+
+**Update**: Plates v4 Alpha has been abandoned. Version 3.4.0 supports PHP 8.
 
 There was also the native [Symfony Templating](https://github.com/symfony/templating) component 
 that provides a lot of tools needed to build any kind of template system.
 But since Symfony 5.0 it's no longer supported.
 
-At the end of the day, I would say that the `slim/twig-view` components make 
+At the end of the day, I would say that the `slim/twig-view` components makes 
 the most sense if you are using Slim because it's maintained and the built-in support 
 for the PSR-7 request and response objects makes it much easier to use.
