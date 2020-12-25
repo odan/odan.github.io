@@ -774,8 +774,8 @@ capturing and returning the output. You can use helper, or plugin, classes for
 [html escaping](https://docs.laminas.dev/laminas-view/helpers/escape/#escapehtml),
 date formatting, generating form elements, or displaying action links.
 The [Asset helper](https://docs.laminas.dev/laminas-view/helpers/asset/) can be used to map asset 
-names to versioned assets. This Laminas View component looks very complex, 
-brings a lot of other dependencies, but looks very promising.
+names to versioned assets. The Laminas-View component looks very complex, 
+brings a lot of other dependencies, but looks very modern and promising.
 
 ### Conclusion
 
