@@ -727,8 +727,8 @@ Version 4 is in Alpha since 2018.
 
 Twig is one of the most popular template engine out there.
 Twig has a special syntax which is compiled and cached at runtime to native PHP code.
-There are two kinds of delimiters: `{% ... %}` and `{{ ... }}`. The first one is used 
-to execute statements such as for-loops, the latter outputs the result of an expression.
+There are two kinds of delimiters: {% raw %}`{% ... %}`{% endraw %} and {% raw %}`{{ ... }}`{% endraw %}.
+The first one is used to execute statements such as for-loops, the latter outputs the result of an expression.
 
 ![Twig](https://user-images.githubusercontent.com/781074/103141434-8e66d300-46f4-11eb-9e04-0265a00906d2.png)
 
