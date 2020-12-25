@@ -103,6 +103,12 @@ return [
 
 The OWASP Top 10 web security risks study lists Cross-Site Scripting (XSS) in second place.
 
+Although XSS is one of the trivial ways of exploiting a web page 
+it is the most common vulnerability but very serious. It can lead to identity theft and so on. 
+The best defense is consistent escaping of printed data, ie. converting the characters 
+which have a special meaning in the given context.
+If the developer omits the escaping a security hole is made.
+
 Note that `slim/PHP-View` has no built-in mitigation from XSS attacks. It is the developer's responsibility to
 use `htmlspecialchars()` or a component like `laminas-escaper`. In this case I want to keep it lean and we just add this
 simple but efficient html encoding function to our application instead.
@@ -699,6 +705,8 @@ to automate Javascript / CSS minification.
 
 ## Similar components
 
+### Plates
+
 [Plates](https://platesphp.com/) is a native PHP template system that’s fast, easy to use and easy to extend. 
 It’s inspired by the excellent Twig template engine and strives to bring modern template 
 language functionality to native PHP templates. Plates is designed for developers who 
@@ -715,9 +723,58 @@ Version 4 is in Alpha since 2018.
 
 **Update**: Plates v4 Alpha has been abandoned. Version 3.4.0 supports PHP 8.
 
-There was also the native [Symfony Templating](https://github.com/symfony/templating) component 
+### Twig
+
+Twig is one of the most popular template engine out there.
+Twig has a special syntax which is compiled and cached at runtime to native PHP code.
+There are two kinds of delimiters: `{% ... %}` and `{{ ... }}`. The first one is used 
+to execute statements such as for-loops, the latter outputs the result of an expression.
+
+![Twig](https://user-images.githubusercontent.com/781074/103141434-8e66d300-46f4-11eb-9e04-0265a00906d2.png)
+
+One of the main reasons for using Twig is security and the ability to NOT put complex (business) logic
+into a template file.
+There are two approaches: manually escaping each variable or automatically escaping everything.
+Twig supports both, [automatic escaping](https://twig.symfony.com/doc/3.x/templates.html#html-escaping)
+is enabled by default for secure reasons. Twig can be extended using "Extensions". 
+Twig requires a much more complex initial setup and special write permissions on the servers filesystem.
+
+### Symfony Templating
+
+There was also the native [Symfony Templating](https://github.com/symfony/templating) component
 that provides a lot of tools needed to build any kind of template system.
 But since Symfony 5.0 it's no longer supported.
+
+### Mustache.php
+
+[Mustache](https://github.com/bobthecow/mustache.php) is a simple, logic-less template engine.
+
+They call it "logic-less" because there are no `if` statements, `else` clauses, or `for` loops. 
+Instead there are only tags (placeholder). Some tags are replaced with a value, some with nothing, 
+and others with a series of values.
+
+Currently there is only a [Framework integration for Slim 3](https://github.com/andrewslince/slim3-mustache-view),
+but not for Slim 4.
+
+### Smarty
+
+Smarty is a template engine which actually compiles the template file to the php file that 
+can be later executed. This simply saves time on parsing and variable outputs, 
+beating other Template Engines with much smaller memory use and regex.
+
+### Latte (Nette)
+
+Latte is a template engine for PHP which eases your work and ensures the output is protected against vulnerabilities, 
+such as XSS. It's the first PHP engine introducing context-aware escaping and link checking.
+
+### Laminas-View 
+
+The Laminas-View [PhpRenderer](https://docs.laminas.dev/laminas-view/php-renderer/) renders view scripts written in PHP, 
+capturing and returning the output. You can use helper, or plugin, classes for 
+[html escaping](https://docs.laminas.dev/laminas-view/helpers/escape/#escapehtml),
+date formatting, generating form elements, or displaying action links.
+
+### Conclusion
 
 At the end of the day, I would say that the `slim/twig-view` component makes 
 the most sense if you are using Slim because it's maintained and the built-in support 
