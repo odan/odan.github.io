@@ -719,6 +719,6 @@ There was also the native [Symfony Templating](https://github.com/symfony/templa
 that provides a lot of tools needed to build any kind of template system.
 But since Symfony 5.0 it's no longer supported.
 
-At the end of the day, I would say that the `slim/twig-view` components makes 
+At the end of the day, I would say that the `slim/twig-view` component makes 
 the most sense if you are using Slim because it's maintained and the built-in support 
 for the PSR-7 request and response objects makes it much easier to use.
