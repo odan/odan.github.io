@@ -32,7 +32,8 @@ xdebug.start_with_request=yes
 
 ## PhpStorm
 
-* Change the Debug port from 9000 to 9003 and enable the Xdebug option: "Can accept external connections". [Screenshot](https://user-images.githubusercontent.com/781074/101086364-0daf2e00-35b1-11eb-89d3-87647d619fb1.png)
+* Enable the Xdebug option: "Can accept external connections" and "Additionally listen on Xdebug 3 default port 9003". 
+  [Screenshot](https://user-images.githubusercontent.com/781074/103152131-2e6c3d00-4785-11eb-8680-bdeb886e8bfa.png)
 * Use the [PhpStorm bookmarklets generator](https://www.jetbrains.com/phpstorm/marklets/) to activate Xdebug from the browser side.
 
 ## Netbeans
