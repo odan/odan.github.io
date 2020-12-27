@@ -707,7 +707,7 @@ to automate Javascript / CSS minification.
 
 ### Plates
 
-[Plates](https://platesphp.com/) is a native PHP template system that’s fast, easy to use and easy to extend. 
+[Plates](https://platesphp.com/) is a native PHP template system that’s easy to use and easy to extend. 
 It’s inspired by the excellent Twig template engine and strives to bring modern template 
 language functionality to native PHP templates. Plates is designed for developers who 
 prefer to use native PHP templates over compiled template languages, such as Twig or Smarty.
@@ -734,10 +734,10 @@ The first one is used to execute statements such as for-loops, the latter output
 
 One of the main reasons for using Twig is security and the ability to NOT put complex (business) logic
 into a template file.
-There are two approaches: manually escaping each variable or automatically escaping everything.
-Twig supports both, [automatic escaping](https://twig.symfony.com/doc/3.x/templates.html#html-escaping)
-is enabled by default for secure reasons. Twig can be extended using "Extensions". 
-Twig requires a much more complex initial setup and special write permissions on the servers filesystem.
+There are two supported approaches: manually escaping each variable or automatically escaping everything.
+For security reasons [automatic escaping](https://twig.symfony.com/doc/3.x/templates.html#html-escaping)
+is enabled by default. Twig can be extended using "Extensions". 
+Twig requires a more complex initial setup and special write permissions on the servers filesystem.
 
 ### Symfony Templating
 
@@ -768,6 +768,17 @@ Slim 4 support will be available soon in the [mathmarques/smarty-view](https://g
 Latte is a template engine for PHP which eases your work and ensures the output is protected against vulnerabilities, 
 such as XSS. It's the first PHP engine introducing context-aware escaping and link checking.
 Latte also works with Slim 4, e.g. [LatteView](https://github.com/ujpef/latte-view/blob/master/src/LatteView.php#L57)
+
+### Blade
+
+[Blade](https://github.com/illuminate/view) is the simple, yet powerful templating engine that is included with Laravel. 
+Unlike some PHP templating engines, Blade does not restrict you from using plain 
+PHP code in your templates. In fact, all Blade templates are compiled into 
+plain PHP code and cached until they are modified.
+
+There are some components like [jenssegers/blade](https://github.com/jenssegers/blade) 
+to use a standalone version of Laravel's Blade templating engine outside of Laravel.
+Unfortunately, this installs a lot of additional Laravel dependencies in your project.
 
 ### Laminas-View 
 
