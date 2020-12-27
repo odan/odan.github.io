@@ -22,8 +22,7 @@ keywords: php slim oauth jwt json authentication security
 
 ## Requirements
 
-* PHP 7.2+
-* Composer
+* PHP 7.4+ or 8.0+
 * [OpenSSL](https://www.openssl.org/)
 * [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
 
@@ -73,7 +72,7 @@ Think carefully about where to store the tokens:
 
 ## Installation
 
-[lcobucci/jwt](https://github.com/lcobucci/jwt) is a very good library to work 
+[lcobucci/jwt](https://github.com/lcobucci/jwt) is a very good component to work 
 with JSON Web Token (JWT) and JSON Web Signature based on RFC 7519.
 
 The Package is available on [packagist](https://packagist.org/packages/lcobucci/jwt), 
@@ -150,7 +149,7 @@ $settings['jwt'] = [
 ```
 
 Make sure that you not commit the private key into your version control (e.g git).
-In reality you could merge the private key from an external file (e.g. `env.php`) or load it
+In reality, you could merge the private key from an external file (e.g. `env.php`) or load it
 from another (secure) source.
 
 ## Creating a JWT
@@ -164,14 +163,14 @@ add the following class into this file: `src/Routing/JwtAuth.php`.
 namespace App\Routing;
 
 use Cake\Chronos\Chronos;
-use InvalidArgumentException;
-use Lcobucci\JWT\Builder;
-use Lcobucci\JWT\Parser;
-use Lcobucci\JWT\Signer\Key;
-use Lcobucci\JWT\Signer\Rsa\Sha256;
-use Lcobucci\JWT\Token;
+use Lcobucci\Clock\SystemClock;
+use Lcobucci\JWT\Configuration;
+use Lcobucci\JWT\Token\Plain;
+use Lcobucci\JWT\Validation\Constraint\IssuedBy;
+use Lcobucci\JWT\Validation\Constraint\SignedWith;
+use Lcobucci\JWT\Validation\Constraint\ValidAt;
+use Lcobucci\JWT\Validation\ConstraintViolation;
 use Lcobucci\JWT\ValidationData;
-use UnexpectedValueException;
 
 /**
  * JwtAuth.
@@ -179,49 +178,32 @@ use UnexpectedValueException;
 final class JwtAuth
 {
     /**
+     * @var Configuration
+     */
+    private Configuration $configuration;
+
+    /**
      * @var string The issuer name
      */
-    private $issuer;
+    private string $issuer;
 
     /**
      * @var int Max lifetime in seconds
      */
-    private $lifetime;
-
-    /**
-     * @var string The private key
-     */
-    private $privateKey;
-
-    /**
-     * @var string The public key
-     */
-    private $publicKey;
-
-    /**
-     * @var Sha256 The signer
-     */
-    private $signer;
+    private int $lifetime;
 
     /**
      * The constructor.
      *
+     * @param Configuration $configuration
      * @param string $issuer The issuer name
-     * @param int $lifetime The max lifetime
-     * @param string $privateKey The private key as string
-     * @param string $publicKey The public key as string
+     * @param int $lifetime The max lifetime in seconds
      */
-    public function __construct(
-        string $issuer,
-        int $lifetime,
-        string $privateKey,
-        string $publicKey
-    ) {
+    public function __construct(Configuration $configuration, string $issuer, int $lifetime)
+    {
+        $this->configuration = $configuration;
         $this->issuer = $issuer;
         $this->lifetime = $lifetime;
-        $this->privateKey = $privateKey;
-        $this->publicKey = $publicKey;
-        $this->signer = new Sha256();
     }
 
     /**
@@ -237,27 +219,36 @@ final class JwtAuth
     /**
      * Create JSON web token.
      *
-     * @param array $claims The claims
-     *
-     * @throws UnexpectedValueException
+     * @param array<string> $claims The claims
      *
      * @return string The JWT
      */
     public function createJwt(array $claims): string
     {
-        $issuedAt = Chronos::now()->getTimestamp();
+        $now = Chronos::now();
 
-        $builder = (new Builder())->issuedBy($this->issuer)
-            ->identifiedBy(uuid_create(), true)
-            ->issuedAt($issuedAt)
-            ->canOnlyBeUsedAfter($issuedAt)
-            ->expiresAt($issuedAt + $this->lifetime);
+        $builder = $this->configuration->builder()
+            // Configures the issuer (iss claim)
+            ->issuedBy($this->issuer)
+            // Configures the id (jti claim)
+            ->identifiedBy(uuid_create())
+            // Configures the time that the token was issue (iat claim)
+            ->issuedAt($now)
+            // Configures the time that the token can be used (nbf claim)
+            ->canOnlyBeUsedAfter($now)
+            // Configures the expiration time of the token (exp claim)
+            ->expiresAt($now->addSeconds($this->lifetime));
 
+        // Add claims like "uid"
         foreach ($claims as $name => $value) {
             $builder = $builder->withClaim($name, $value);
         }
 
-        return $builder->getToken($this->signer, new Key($this->privateKey));
+        // Builds a new token using the private key
+        return $builder->getToken(
+            $this->configuration->signer(),
+            $this->configuration->signingKey()
+        )->toString();
     }
 
     /**
@@ -265,13 +256,19 @@ final class JwtAuth
      *
      * @param string $token The JWT
      *
-     * @throws InvalidArgumentException
+     * @throws ConstraintViolation
      *
-     * @return Token The parsed token
+     * @return Plain The parsed token
      */
-    public function createParsedToken(string $token): Token
+    private function createParsedToken(string $token): Plain
     {
-        return (new Parser())->parse($token);
+        $token = $this->configuration->parser()->parse($token);
+
+        if (!$token instanceof Plain) {
+            throw new ConstraintViolation('You should pass a plain token');
+        }
+
+        return $token;
     }
 
     /**
@@ -279,37 +276,57 @@ final class JwtAuth
      *
      * @param string $accessToken The JWT
      *
-     * @return bool The status
+     * @return Plain|null The token, if valid
      */
-    public function validateToken(string $accessToken): bool
+    public function validateToken(string $accessToken): ?Plain
     {
         $token = $this->createParsedToken($accessToken);
+        $constraints = $this->configuration->validationConstraints();
 
-        if (!$token->verify($this->signer, $this->publicKey)) {
-            // Token signature is not valid
-            return false;
-        }
+        // Token signature must be valid
+        $constraints[] = new SignedWith(
+            $this->configuration->signer(),
+            $this->configuration->verificationKey()
+        );
+
+        // Check whether the issuer is the same
+        $constraints[] = new IssuedBy($this->issuer);
 
         // Check whether the token has not expired
-        $data = new ValidationData();
-        $data->setCurrentTime(Chronos::now()->getTimestamp());
-        $data->setIssuer($token->getClaim('iss'));
-        $data->setId($token->getClaim('jti'));
+        $constraints[] = new ValidAt(new SystemClock(Chronos::now()->getTimezone()));
 
-        return $token->validate($data);
+        if (!$this->configuration->validator()->validate($token, ...$constraints)) {
+            // Token signature is not valid
+            return null;
+        }
+
+        // Custom constraints
+        // Check whether the use id is valid
+        $userId = $token->claims()->get('uid');
+        if (!$userId) {
+            // Token related to an unknown user
+            return null;
+        }
+
+        return $token;
     }
 }
 ```
 
-Add the following container definitons, e.g. into `config/container.php`:
+Add the following container definitions, e.g. into `config/container.php`:
 
 ```php
 <?php
 
 use App\Routing\JwtAuth;
+use Lcobucci\JWT\Configuration;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
+use Lcobucci\JWT\Signer\Key\InMemory;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
+use Selective\BasePath\BasePathMiddleware;
 use Slim\App;
+use Slim\Factory\AppFactory;
 
 return [
     'settings' => function () {
@@ -329,14 +346,29 @@ return [
 
     // And add this entry
     JwtAuth::class => function (ContainerInterface $container) {
-        $config = $container->get('settings')['jwt'];
+        $configuration = $container->get(Configuration::class);
 
-        $issuer = (string)$config['issuer'];
-        $lifetime = (int)$config['lifetime'];
-        $privateKey = (string)$config['private_key'];
-        $publicKey = (string)$config['public_key'];
+        $jwtSettings = $container->get('settings')['jwt'];
+        $issuer = (string)$jwtSettings['issuer'];
+        $lifetime = (int)$jwtSettings['lifetime'];
 
-        return new JwtAuth($issuer, $lifetime, $privateKey, $publicKey);
+        return new JwtAuth($configuration, $issuer, $lifetime);
+    },
+
+    // And add this entry
+    Configuration::class => function (ContainerInterface $container) {
+        $jwtSettings = $container->get('settings')['jwt'];
+
+        $privateKey = (string)$jwtSettings['private_key'];
+        $publicKey = (string)$jwtSettings['public_key'];
+
+        // Asymmetric algorithms use a private key for signature creation
+        // and a public key for verification
+        return Configuration::forAsymmetricSigner(
+            new Sha256(),
+            InMemory::plainText($privateKey),
+            InMemory::plainText($publicKey)
+        );
     },
 ];
 
@@ -344,7 +376,7 @@ return [
 
 ## Creating a token
 
-The http client requires a special route to create a new token: `POST /api/tokens`.
+The http client requires a special route to create a new token: `POST /tokens`.
 
 Add the following route into your routing configuration file, e.g. `config/routes.php`
 
@@ -365,7 +397,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class TokenCreateAction
 {
-    private $jwtAuth;
+    private JwtAuth $jwtAuth;
 
     public function __construct(JwtAuth $jwtAuth)
     {
@@ -394,10 +426,12 @@ final class TokenCreateAction
         }
 
         // Create a fresh token
-        $token = $this->jwtAuth->createJwt([
-            'uid' => $username,
-        ]);
-        
+        $token = $this->jwtAuth->createJwt(
+            [
+                'uid' => $username,
+            ]
+        );
+
         $lifetime = $this->jwtAuth->getLifetime();
 
         // Transform the result into a OAuh 2.0 Access Token Response
@@ -477,12 +511,12 @@ final class JwtAuthMiddleware implements MiddlewareInterface
     /**
      * @var JwtAuth
      */
-    private $jwtAuth;
+    private JwtAuth $jwtAuth;
 
     /**
      * @var ResponseFactoryInterface
      */
-    private $responseFactory;
+    private ResponseFactoryInterface $responseFactory;
 
     /**
      * The constructor.
@@ -546,7 +580,7 @@ final class JwtClaimMiddleware implements MiddlewareInterface
     /**
      * @var JwtAuth
      */
-    private $jwtAuth;
+    private JwtAuth $jwtAuth;
 
     /**
      * The constructor.
@@ -574,16 +608,20 @@ final class JwtClaimMiddleware implements MiddlewareInterface
         $type = $authorization[0] ?? '';
         $credentials = $authorization[1] ?? '';
 
-        if ($type === 'Bearer' && $this->jwtAuth->validateToken($credentials)) {
+        if ($type !== 'Bearer') {
+            return $handler->handle($request);
+        }
+
+        $token = $this->jwtAuth->validateToken($credentials);
+        if ($token) {
             // Append valid token
-            $parsedToken = $this->jwtAuth->createParsedToken($credentials);
-            $request = $request->withAttribute('token', $parsedToken);
+            $request = $request->withAttribute('token', $token);
 
             // Append the user id as request attribute
-            $request = $request->withAttribute('uid', $parsedToken->getClaim('uid'));
+            $request = $request->withAttribute('uid', $token->claims()->get('uid'));
 
             // Add more claim values as attribute...
-            //$request = $request->withAttribute('locale', $parsedToken->getClaim('locale'));
+            //$request = $request->withAttribute('locale', $token->claims()->get('locale'));
         }
 
         return $handler->handle($request);
@@ -660,7 +698,7 @@ Memcached or even MySql).
 
 ### When can / should I use JWT?
 
-When your "client" is not a browser.
+In case your "client" is not a browser.
 
 As long as your client transmits its data over HTTPS, 
 it doesn't matter which Auth mechanism you use. Even BasicAuth is good enough in most cases.
@@ -677,7 +715,7 @@ You might be tempted to persist it in localstorage; you should not do it!
 This is prone to XSS attacks.
 
 Creating cookies on the client to save the JWT will also be prone to XSS. 
-If it can be read on the client from Javascript outside of your app - it can be stolen. 
+If it can be read on the client from Javascript outside your app - it can be stolen. 
 
 XSS is when users get unsafe JS running on your domain in other users browsers 
 when that happens neither JWT in localStorage or sessions and JWT in cookies are safe. 
@@ -748,7 +786,7 @@ If you still need refresh tokens, you may try the [Auth0 PHP SDK](https://auth0.
 ### How to implement a HTTP Basic or form data authentication?
 
 The [OAuth 2 spec](https://tools.ietf.org/html/rfc6749#section-2.3.1) states 
-that the username and password MAY use the HTTP Basic authentication or form data.
+that the username and password MAY uses the HTTP Basic authentication or form data.
 
 Please write into the comments if you need more information about this topic.
 
@@ -760,8 +798,8 @@ Read more: [Slim 4 - CORS Setup](https://odan.github.io/2019/11/24/slim4-cors.ht
 
 ### The `Authorization` header missing in POST request
 
-If using Apache add the following to the `.htaccess` file. 
-Otherwise PHP won't have access to the `Authorization` header.
+If using Apache, add the following to the `.htaccess` file. 
+Otherwise, PHP won't have access to the `Authorization` header.
 
 ```
 RewriteRule .* - [env=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -780,7 +818,7 @@ The approach of this article is more middleware and routing "friendly",
 while the `tuupola/slim-jwt-auth` approach uses an array to configure the different routes.
  
 I think the array based configuration is not so good to maintain in the long run, 
-for example when you add or change a route path you may miss to change the configuration
+for example when you add or change a route path you may miss changing the configuration
 and suddenly some routes are unprotected.
 
 I prefer to explicitly add the `JwtAuthMiddleware` to specific routes or route groups in `routes.php`. 
