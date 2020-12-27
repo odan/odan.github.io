@@ -301,7 +301,7 @@ final class JwtAuth
         }
 
         // Custom constraints
-        // Check whether the use id is valid
+        // Check whether the user id is valid
         $userId = $token->claims()->get('uid');
         if (!$userId) {
             // Token related to an unknown user
@@ -344,7 +344,7 @@ return [
         return $container->get(App::class)->getResponseFactory();
     },
 
-    // And add this entry
+    // Add this entry
     JwtAuth::class => function (ContainerInterface $container) {
         $configuration = $container->get(Configuration::class);
 
@@ -355,7 +355,7 @@ return [
         return new JwtAuth($configuration, $issuer, $lifetime);
     },
 
-    // And add this entry
+    // Add this entry
     Configuration::class => function (ContainerInterface $container) {
         $jwtSettings = $container->get('settings')['jwt'];
 
@@ -392,6 +392,7 @@ Then create the following action class for the route: `src/Action/Auth/TokenCrea
 namespace App\Action\Auth;
 
 use App\Routing\JwtAuth;
+use JsonException;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -399,11 +400,26 @@ final class TokenCreateAction
 {
     private JwtAuth $jwtAuth;
 
+    /**
+     * The constructor.
+     *
+     * @param JwtAuth $jwtAuth The JWT auth
+     */
     public function __construct(JwtAuth $jwtAuth)
     {
         $this->jwtAuth = $jwtAuth;
     }
 
+    /**
+     * Invoke.
+     *
+     * @param ServerRequestInterface $request The request
+     * @param ResponseInterface $response The response
+     *
+     * @throws JsonException
+     *
+     * @return ResponseInterface The response
+     */
     public function __invoke(
         ServerRequestInterface $request,
         ResponseInterface $response
@@ -432,26 +448,25 @@ final class TokenCreateAction
             ]
         );
 
-        $lifetime = $this->jwtAuth->getLifetime();
-
         // Transform the result into a OAuh 2.0 Access Token Response
         // https://www.oauth.com/oauth2-servers/access-tokens/access-token-response/
         $result = [
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => $lifetime,
+            'expires_in' => $this->jwtAuth->getLifetime(),
         ];
 
         // Build the HTTP response
         $response = $response->withHeader('Content-Type', 'application/json');
-        $response->getBody()->write((string)json_encode($result));
+        $response->getBody()->write((string)json_encode($result, JSON_THROW_ON_ERROR));
 
         return $response->withStatus(201);
     }
 }
+
 ```
 
-To create a new token, the client must send a POST request to `/api/tokens` with a valid JSON request
+To create a new token, the client must send a POST request to `/tokens` with a valid JSON request, 
 and a body content like this:
 
 ```json
