@@ -270,8 +270,9 @@ final class LogoutAction
         $this->session->invalidate();
 
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-
-        return $routeParser->urlFor('login');
+        $url = $routeParser->urlFor('login');
+        
+        return $response->withStatus(302)->withHeader('Location', $url);
     }
 }
 
