@@ -4,7 +4,7 @@ layout: post
 comments: false
 published: true
 description: 
-keywords: php validaton slim
+keywords: php validation slim
 ---
 
 ## Table of contents
