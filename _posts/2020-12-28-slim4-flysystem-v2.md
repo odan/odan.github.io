@@ -177,7 +177,7 @@ if (@file_put_contents('storage/test.txt', 'test', LOCK_EX) === false) {
 }
 ```
 
-... with the difference that Flysystem provides a very simple OOP interface, 
+The difference is that Flysystem provides a very clean and simple OOP interface, 
 better exception handling, a configured root-directory, 
 and the possibility to replace the adapter for testing purposes.
 
