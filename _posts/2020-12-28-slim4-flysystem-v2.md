@@ -98,10 +98,10 @@ $settings['storage'] = [
 The [LocalFilesystemAdapter](https://flysystem.thephpleague.com/v2/docs/adapter/local/)
 interacts with the local filesystem through Flysystem. In this example we also
 add the unix permissions for new files and directories. You can change that if you want.
-The LocalFilesystemAdapter used the `LOCK_EX` operation by default to acquire an exclusive write lock.
+The LocalFilesystemAdapter uses the `LOCK_EX` operation by default to acquire an exclusive write lock.
 
 When you run tests, you can define other adapters, for example the [Memory Filesystem Adapter](https://flysystem.thephpleague.com/v2/docs/adapter/in-memory/)
-to run all file operation in memory and not on the local filesystem.
+to run all file operations in-memory and not on the local filesystem.
 
 The [SFTP Adapter](https://flysystem.thephpleague.com/v2/docs/adapter/sftp/) uses
 Phpseclib to provide the same convenient interface for SFTP file transfers.
@@ -133,8 +133,9 @@ return [
 
 ## Usage
 
-To use inject the `Filesystem` instance via dependency injection just declare it in
-the class constructor where you need it. 
+To get the `Filesystem` instance via dependency injection, just declare it in
+the constructor where you need it. Normally you should use the filesystem instance 
+only within a domain or application service.
 
 **Example**
 
@@ -161,8 +162,8 @@ final class Example
 }
 ```
 
-The `Filesystem::write` method creates a new file within the `storage/` directory
-and put the content `test` to it.
+The `Filesystem::write` method creates a new file `test.txt` within the `storage/` directory
+and stores the content `test` in the file.
 
 ```php
 $this->filesystem->write('test.txt', 'test');
