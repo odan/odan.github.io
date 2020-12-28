@@ -16,7 +16,7 @@ I would appreciate a small donation:
 * **[PayPal](https://www.paypal.me/dopitz/5)**
 * **[Buy a Coffee](https://ko-fi.com/dopitz)**
 
-You can **buy** all Slim articles (> 270 pages) bundled into a eBook (PDF and EPUB). 
+You can **buy** all Slim articles (> 270 pages) bundled into a eBook (PDF and EPUB) for 9 EUR. 
 
 Exclusive content:
 
