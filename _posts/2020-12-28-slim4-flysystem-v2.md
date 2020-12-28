@@ -35,7 +35,7 @@ risking a complete rewrite of your application.
 Wouldn't it be nice to abstract the "filesystem" with a common 
 interface, so you can replace the actual technology when needed?
 
-The [League\Flysystem package](https://github.com/thephpleague/flysystem) 
+The [League Flysystem package](https://github.com/thephpleague/flysystem) 
 is a file storage library that provides one interface to interact with many 
 types of filesystems. 
 When you use Flysystem, you're not only protected from vendor lock-in, 
