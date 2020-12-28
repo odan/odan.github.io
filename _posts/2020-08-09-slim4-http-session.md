@@ -332,7 +332,9 @@ final class UserAuthMiddleware implements MiddlewareInterface
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
         $url = $routeParser->urlFor('login');
         
-        return $this->responseFactory->createResponse()->withStatus(302)->withHeader('Location', $url);
+        return $this->responseFactory->createResponse()
+            ->withStatus(302)
+            ->withHeader('Location', $url);
     }
 }
 
