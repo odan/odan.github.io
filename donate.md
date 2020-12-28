@@ -5,7 +5,7 @@ layout: default
 comments: true
 published: true
 description: Donate
-keywords: donate paypal stripe 
+keywords: donate paypal 
 ---
 
 # Donate
@@ -15,6 +15,7 @@ I would appreciate a small donation:
 
 * **[PayPal](https://www.paypal.me/dopitz/5)**
 * **[Buy a Coffee](https://ko-fi.com/dopitz)**
+* [Western Union](https://www.westernunion.com/)
 
 You can **buy** all Slim articles (> 270 pages) bundled into a eBook (PDF and EPUB) for 9 EUR. 
 
