@@ -206,7 +206,7 @@ final class LoginSubmitAction
         $password = (string)($data['password'] ?? '');
 
         // Pseudo example
-        // Check user credentials. You may use the database here.
+        // Check user credentials. You may use an application/domain service and the database here.
         $user = null;
         if($username === 'admin' && $password === 'secret') {
             $user = 1;
