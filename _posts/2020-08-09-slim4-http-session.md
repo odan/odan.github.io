@@ -270,7 +270,7 @@ final class LogoutAction
         $this->session->invalidate();
 
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-        $url = $routeParser->urlFor('login');
+        $url = $routeParser->urlFor('logout');
         
         return $response->withStatus(302)->withHeader('Location', $url);
     }
@@ -286,6 +286,7 @@ redirects all "invalid" requests to the login page.
 
 namespace App\Middleware;
 
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -296,12 +297,20 @@ use Symfony\Component\HttpFoundation\Session\Session;
 final class UserAuthMiddleware implements MiddlewareInterface
 {
     /**
+     * @var ResponseFactoryInterface
+     */
+    private $responseFactory;
+    
+    /**
      * @var Session
      */
     private $session;
 
-    public function __construct(Session $session)
-    {
+    public function __construct(
+        ResponseFactoryInterface $responseFactory, 
+        Session $session
+    ) {
+        $this->responseFactory = $responseFactory;
         $this->session = $session;
     }
 
@@ -316,8 +325,9 @@ final class UserAuthMiddleware implements MiddlewareInterface
 
         // User is not logged in. Redirect to login page.
         $routeParser = RouteContext::fromRequest($request)->getRouteParser();
-
-        return $routeParser->urlFor('login');
+        $url = $routeParser->urlFor('login');
+        
+        return $this->responseFactory->createResponse()->withStatus(302)->withHeader('Location', $url);
     }
 }
 
