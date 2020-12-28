@@ -27,12 +27,17 @@ Handling files is an important part of any web application.
 PHP provides several functions for creating, reading, uploading, and editing files.
 There are also extra Composer packages for proprietary cloud-based file storage, 
 such as Amazon S3.
-When writing a test, you may need to simulate different types of file systems
-without "touching" the real file system of the disk, external FTPS server, cloud API, etc.
-So you are dealing with many "file systems" today, and maybe one day you will need to replace local storage with cloud-based storage without risking a complete rewrite of your application. Wouldn't it be nice to abstract the "file system" itself with a common interface so you can replace the actual technology when needed?
+When writing a test, you may need to simulate different types of filesystems
+without "touching" the real filesystem of the disk, external FTPS server, cloud API, etc.
+So you are dealing with many "filesystems" today, and maybe one day you 
+will need to replace local storage with cloud-based storage without 
+risking a complete rewrite of your application. 
+Wouldn't it be nice to abstract the "filesystem" with a common 
+interface, so you can replace the actual technology when needed?
 
-The [League\Flysystem package](https://github.com/thephpleague/flysystem)  is a file storage library
-that provides one interface to interact with many types of filesystems. 
+The [League\Flysystem package](https://github.com/thephpleague/flysystem) 
+is a file storage library that provides one interface to interact with many 
+types of filesystems. 
 When you use Flysystem, you're not only protected from vendor lock-in, 
 you'll also have a consistent experience for which ever storage is right for you.
 
