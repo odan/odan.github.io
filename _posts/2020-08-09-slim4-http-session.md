@@ -133,6 +133,8 @@ Add a container definition for `Session:class` and `SessionInterface:class` in `
 
 use App\Middleware\SessionMiddleware;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Slim\App;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Session\Storage\MockArraySessionStorage;
@@ -143,8 +145,11 @@ use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 return [
 
     // ...
-
-   Session::class => function (ContainerInterface $container) {
+    ResponseFactoryInterface::class => function (ContainerInterface $container) {
+        return $container->get(App::class)->getResponseFactory();
+    },
+    
+    Session::class => function (ContainerInterface $container) {
         $settings = $container->get('settings')['session'];
         if (PHP_SAPI === 'cli') {
             return new Session(new MockArraySessionStorage());
