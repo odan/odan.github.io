@@ -278,13 +278,18 @@ resources/text/de_DE/LC_MESSAGES/
 * Enter a filename in this format: `<domain>_<locale>.po`
     * Example: `resources/text/de_DE/LC_MESSAGES/messages_de_DE.po`
 
-\newpage
+<div style="page-break-after: always; visibility: hidden"> 
+\pagebreak 
+</div>
+
 * Open the menu: `Catalogue` > `Properties...`
 * Open the tab `Sources path` and add the `src` and the `templates` directory to the parser.
 
 ![image](https://user-images.githubusercontent.com/781074/101632581-6570ed80-3a26-11eb-9ceb-955fa51611fc.png)
 
-\newpage
+<div style="page-break-after: always; visibility: hidden"> 
+\pagebreak 
+</div>
 
 * Open the tab `Sources keywords` and add the `__` as additional keyword.
 
@@ -292,7 +297,9 @@ resources/text/de_DE/LC_MESSAGES/
 
 Click `OK` and save the file.
 
-\newpage
+<div style="page-break-after: always; visibility: hidden"> 
+\pagebreak 
+</div>
 
 ### Translation helper
 
