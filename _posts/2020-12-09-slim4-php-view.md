@@ -518,6 +518,24 @@ echo $uri->getPath();
 
 ```
 
+**Specifying the base URL for all relative URLs in the page.**
+
+The `<base>` tag specifies the base URL and/or target for all relative URLs in a document. 
+There can only be one single `<base>` element in a document, 
+and it must be inside the `<head>` element.
+
+```php
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Title</title>
+    <base href="<?= $basePath ?>/"/>
+</head>
+<body></body>
+</html>
+```
+
 ## Assets
 
 To inform the browser where to find the assets (js, css, images) we add a `<base>` tag inside the `<head>` element of the document.
