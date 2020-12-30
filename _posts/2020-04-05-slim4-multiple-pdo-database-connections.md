@@ -3,7 +3,8 @@ title: Slim 4 - Multiple PDO database connections
 layout: post
 comments: true
 published: true
-description: keywords: php slim pdo database connection container phpdi
+description: 
+keywords: php slim pdo database connection container phpdi
 ---
 
 ## Table of contents
