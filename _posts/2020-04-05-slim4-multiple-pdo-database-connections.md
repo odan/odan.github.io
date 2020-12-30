@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Multiple PDO database connections 
+title: Slim 4 - Multiple PDO database connections
 layout: post
 comments: true
 published: true
