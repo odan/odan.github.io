@@ -116,9 +116,7 @@ final class ImageExampleAction
 
 **Image formats**
 
-The possible image formats depend on the choosen driver (GD or Imagick) 
-and your local configuration. By default Intervention Image currently supports 
-the following major formats:
+By default, Intervention Image currently supports the following major formats:
 
 * <http://image.intervention.io/getting_started/formats>
 

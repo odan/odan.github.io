@@ -13,7 +13,7 @@ keywords: php slim container psr11
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Configuration](#configuration)
-* [Bootrapping](#bootrapping)
+* [Bootstrapping](#bootstrapping)
 
 ## Requirements
 
@@ -61,9 +61,9 @@ return [
 }
 ```
 
-### Bootrapping
+### Bootstrapping
 
-In your  `config/bootstrap.php` or wherever you have your bootrap code:
+In your  `config/bootstrap.php` or wherever you have your boostrap code:
 
 ```php
 <?php

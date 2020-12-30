@@ -272,7 +272,7 @@ final class FilePondProcessAction
         ResponseInterface $response
     ): ResponseInterface {
         foreach ($submittedIds as $submittedId) {
-            // Save the file into the filestorage
+            // Save the file into the file storage
             $submittedId = FilenameFilter::createSafeFilename($submittedId);
             $sourceFile = sprintf('%s/%s', $this->tempDirectory, $submittedId);
             $targetFile = sprintf('%s/%s', $this->storageDirectory, $submittedId);
@@ -314,12 +314,12 @@ final class FilePondProcessAction
             PATHINFO_EXTENSION
         );
 
-        // Craete unique id for this file
+        // Create unique id for this file
         $filename = FilenameFilter::createSafeFilename(
             sprintf('%s.%s', (string)uuid_create(), $extension)
         );
 
-        // Save the file into the filestorage
+        // Save the file into the storage
         $targetPath = sprintf('%s/%s', $directory, $filename);
         $uploadedFile->moveTo($targetPath);
 
@@ -337,7 +337,7 @@ $app->post('/filepond/process', \App\Action\FilePondProcessAction::class);
 
 ### Revert
 
-To provide the [revert](https://pqina.nl/filepond/docs/patterns/api/server/#revert) funtionality, 
+To provide the [revert](https://pqina.nl/filepond/docs/patterns/api/server/#revert) functionality, 
 add this new action class in `src/Action/FilePondRevertAction.php`:
 
 ```php

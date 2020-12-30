@@ -161,9 +161,9 @@ $app->get('/product', \App\Action\ProductIndexAction::class);
 $app->get('/product/{id}', \App\Action\ProductEditAction::class);
 ```
 
-And immediately your IDE knows what class you mean by that. In return for your efforts, 
-you will benefit from the Refactor functionality. Also the static code analysis system 
-(e. g. phpstan) can now find bugs before they are executed. 
+Immediately your IDE knows what class you mean by that. In return for your efforts, 
+you will benefit from the Refactor functionality. Also, the static code analysis system 
+(e.g. phpstan) can now find bugs before they are executed. 
 
 Integration test writing is simplified and coupling is reduced to a minimum. 
 The SRP principle will be happy :-)

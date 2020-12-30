@@ -75,7 +75,7 @@ $settings['db'] = [
 ];
 ```
 
-Add a new container definiton for `Connection::class` and `PDO::class`, e.g. in `config/container.php`:
+Add a new container definition for `Connection::class` and `PDO::class`, e.g. in `config/container.php`:
 
 ```php
 <?php
@@ -275,7 +275,7 @@ interface TransactionInterface
 
 ## Fetching arrays
 
-In Laravel 5.4, the default (and only) fetch mode is `PDO::FETCH_OBJ`. 
+Since Laravel 5.4, the default (and only) fetch mode is `PDO::FETCH_OBJ`. 
 
 But you still have at least two options to change the fetch mode to `PDO::FETCH_ASSOC`.
 
@@ -303,13 +303,13 @@ The resolver:
 });
 ```
 
-*Thanks to devinim for this tip.*
+*Thanks to `devinim` for this tip.*
 
 ### Option 2: Using events
 
 Installation: `composer require illuminate/events`
 
-Register this event handler in your container definiton for `Connection::class`:
+Register this event handler in your container definition for `Connection::class`:
 
 ```php
 // ...
@@ -370,7 +370,8 @@ class SecondConnection extends MySqlConnection
 
 Register a new container definition for the second database connection.
 
-Please note: You also need new connection configuration (e.g. db2) and a new driver name (e.g. mysql2) for the second connection parameters.
+Please note: You also need new connection configuration (e.g. db2) and a new driver name 
+(e.g. mysql2) for the second connection parameters.
 
 ```php
 // Database settings

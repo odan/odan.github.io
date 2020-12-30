@@ -432,7 +432,7 @@ return [
 
 ## Base path
 
-Most people will get a **404 error (not found)**, because the basePath is not set corretly.
+Most people will get a **404 error (not found)**, because the basePath is not set correctly.
 
 If you run your Slim app in a sub-directory, resp. not directly within the 
 [DocumentRoot](https://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot)

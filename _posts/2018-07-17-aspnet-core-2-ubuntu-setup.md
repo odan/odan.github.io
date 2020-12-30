@@ -144,7 +144,7 @@ Now open your browser with the url you can see in the console output:
 ### Change the listening address via command line
 
 The following command allows access to the kestrel webserver from anywhere. 
-This parameter is usful to access the website from another host via docker or VirtualBox.
+This parameter is useful to access the website from another host via docker or VirtualBox.
 
 ```bash
 sudo dotnet run --urls "http://*:5000;https://*:5001"
@@ -186,9 +186,12 @@ sudo apt-get install mysql-server mysql-client libmysqlclient-dev -y
 
 ## Install Apache as reverse proxy
 
-A reverse proxy is a common setup for serving dynamic web apps. The reverse proxy terminates the HTTP request and forwards it to the ASP.NET app.
+A reverse proxy is a common setup for serving dynamic web apps. 
+The reverse proxy terminates the HTTP request and forwards it to the ASP.NET app.
 
-Your application could technically run only with the Kestrel web server and without a reverse proxy. But if you want to install and manage your own SSL (https://) certifactes you should use a reverse proxy server (Nginx, Apache, IIS).
+Your application could technically run only with the Kestrel web server and without a reverse proxy. 
+But if you want to install and manage your own SSL (https://) certificates you should use a 
+reverse proxy server (Nginx, Apache, IIS).
 
 Update Ubuntu packages to their latest stable versions:
 
@@ -221,11 +224,16 @@ sudo service apache2 restart
 
 ### Configure SSL
 
-You only need to set up a virtual host for TLS/SSL. The following example assumes that an SSL certificate is located at `/etc/ssl/certs/localhost.crt` and an associated key is located at `/etc/ssl/private/localhost.key`.
+You only need to set up a virtual host for TLS/SSL. 
+The following example assumes that an SSL certificate is located at `/etc/ssl/certs/localhost.crt` 
+and an associated key is located at `/etc/ssl/private/localhost.key`.
 
 <br>
 
-> **Security warning** For demonstration purposes I create a self-signed certificate here. If you are using a real certificate (like <https://letsencrypt.org/>), the browser should not complain about the certificate. Don't use a self-signed certificate in your production environment!
+> **Security warning** For demonstration purposes I create a self-signed certificate here. 
+> If you are using a real certificate (like <https://letsencrypt.org/>), 
+> the browser should not complain about the certificate. 
+> Don't use a self-signed certificate in your production environment!
 
 <br>
 
@@ -235,7 +243,9 @@ Create and install an Apache self signed certificate:
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:4096 -keyout /etc/ssl/private/localhost.key -out /etc/ssl/private/localhost.crt
 ```
 
-Fill out the prompts appropriately. The most important line is the one that requests the Common Name (e.g. server FQDN or YOUR name). You need to enter the domain name associated with your server or, more likely, your server's public IP address.
+Fill out the prompts appropriately. The most important line is the one that requests the 
+Common Name (e.g. server FQDN or YOUR name). You need to enter the domain name associated 
+with your server or, more likely, your server's public IP address.
 
 Output
 
@@ -302,7 +312,8 @@ Copy and save this content to `hellomvc.conf`
 </VirtualHost>
 ```
 
-See [Name-based virtual host support](https://httpd.apache.org/docs/current/vhosts/name-based.html) for more information. Requests are proxied at the root to port `5000` of the server at `127.0.0.1`. 
+See [Name-based virtual host support](https://httpd.apache.org/docs/current/vhosts/name-based.html) for more information. 
+Requests are proxied at the root to port `5000` of the server at `127.0.0.1`. 
 
 For bi-directional communication, `ProxyPass` and `ProxyPassReverse` are required. 
 
@@ -344,7 +355,7 @@ If you open http://localhost/ you should be redirected to https://localhost/.
 
 After you have accepted the self-signed certificate you should see the `Hello World!` message.
 
-### More reverse proxy setup informations
+### More reverse proxy setup information
 
 * [When to use Kestrel with a reverse proxy](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/servers/kestrel?view=aspnetcore-2.1&tabs=aspnetcore2x#when-to-use-kestrel-with-a-reverse-proxy)
 * [Host ASP.NET Core on Linux with Apache](https://docs.microsoft.com/en-us/aspnet/core/host-and-deploy/linux-nginx?view=aspnetcore-2.1&tabs=aspnetcore2x)
@@ -353,16 +364,16 @@ After you have accepted the self-signed certificate you should see the `Hello Wo
 ## Monitoring the app
 
 The website isn't up and running on localhost:5000 yet (unless you've run it yourself and kept it running!).
-So we'll need an service to start it and keep it running.
+So we'll need a service to start it and keep it running.
 
-There's an tool called [Supervisor](http://supervisord.org/) that is good at that so I'll add it.
+There's a tool called [Supervisor](http://supervisord.org/) that is good at that, so I'll add it.
 
 ```bash
 sudo apt-get install supervisor
 ```
 
-Now publish the application into a final location. Run `dotnet publish`, then copy the content of `publish/`
-into `/var/aspnetcore` where it will go live.
+Now publish the application into a final location. Run `dotnet publish`, 
+then copy the content of `publish/` into `/var/aspnetcore` where it will go live.
 
 Build the application:
 

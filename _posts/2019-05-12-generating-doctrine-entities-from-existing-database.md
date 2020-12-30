@@ -110,7 +110,10 @@ php vendor/bin/doctrine orm:convert-mapping --from-database --force annotation .
 
 Now you can find the generated files under `src/Domain/Model`.
 
-Note that Doctrine does only support PSR-0 ([and not PSR-4](https://github.com/doctrine/orm/issues/6716)) autoloading / namespaces. For this reason it's better to add the PSR-4 namespaces manually. Open the generated classes and add a new namespace like this:
+Note that Doctrine does only support PSR-0 
+([and not PSR-4](https://github.com/doctrine/orm/issues/6716)) autoloading / namespaces. 
+For this reason it's better to add the PSR-4 namespaces manually. 
+Open the generated classes and add a new namespace like this:
 
 ```php
 <?php

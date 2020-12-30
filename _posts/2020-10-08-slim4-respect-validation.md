@@ -4,7 +4,7 @@ layout: post
 comments: false
 published: true
 description: 
-keywords: php validaton slim
+keywords: php validation slim
 ---
 
 ## Table of contents
@@ -26,7 +26,7 @@ keywords: php validaton slim
 ## Introduction
 
 The `Respect/Validation` component is a popular and flexible validation library for PHP.
-It works as standalone libary and without much additional dependencies.
+It works as standalone library and without much additional dependencies.
 
 
 
@@ -203,10 +203,10 @@ $app->add(RespectValidationMiddleware::class); // <-- here
 ## Conclusion
 
 The Respect/Validation component is very flexible and provides a lot of rules out of the box.
-It's maintained and the download number on github is impressive.
+It's maintained, and the download number on github is impressive.
 
 A lot of magic is going on when you use the static method of the validator class.
-I prefer less magic and more rubust and faster code. For me a real
+I prefer less magic and more robust and faster code. For me a real
 fluent interface would be more readable and elegant, but this is just a matter of taste.
 
 It was quite hard for me to find out how to add a custom message and translations

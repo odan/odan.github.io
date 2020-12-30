@@ -18,7 +18,17 @@ This article presents a new API concept based on established web standards. If y
 
 ### Introduction
 
-Currently the API development is in a dead end. The strongly typed SOAP protocol was too "Java enterprise architect" like. REST tried to replace SOAP by saying "Do what you want, just use HTTP verbs, URIs and the HTTP payload". But sorry, this was a mess, because REST (and RESTful) is just a "Architectural Style" and was never intended to be standardized. REST with his "autodicovery" feature failed, because nobody was able to write an real universal "AI" REST client. As a developer you still have to write and maintain the API documention with Swagger (API Framework) or other tools. REST has no strongly typed validation like SOAP has, and that's what we need for a serious business / enterprise API.
+Currently, the API development is in a dead end. The strongly typed SOAP protocol was too 
+"Java enterprise architect" like. 
+REST tried to replace SOAP by saying "Do what you want, 
+just use HTTP verbs, URIs and the HTTP payload". 
+But sorry, this was a mess, because REST (and RESTful) is just a 
+"Architectural Style" and was never intended to be standardized. 
+REST with his "autodiscovery" feature failed, because nobody was able 
+to write a real universal "AI" REST client. As a developer you still 
+have to write and maintain the API documentation with Swagger (API Framework) or other tools. 
+REST has no strongly typed validation like SOAP has, 
+and that's what we need for a serious business / enterprise API.
 
 How can we solve this problem?
 
@@ -28,7 +38,10 @@ Let us focus on the good parts and filter out the bad parts.
 
 ### Transport
 
-All interaction takes place over secure HTTP (SSL) between the client application (e.g., web site or mobile app) and the service. All invocations must be made via HTTP **POST**. In particular, HTTP GET is not supported.
+All interaction takes place over secure HTTP (SSL) between the client application 
+(e.g., website or mobile app) and the service. 
+All invocations must be made via HTTP **POST**. 
+In particular, HTTP GET is not supported.
 
 Use authorization methods like a API Key or Basic Authentication.
 
@@ -66,7 +79,9 @@ The HTTP content type of the request (sent as a HTTP request header) should be s
 
 ### The JSON service descriptor
 
-Each top level property defines an available rpc methods. In addition a service descriptor should contain the "id", "description" properties, and may contain the "version" property.
+Each top level property defines an available rpc methods. 
+In addition, a service descriptor should contain the "id", "description" properties, 
+and may contain the "version" property.
 
 ```json
 {
@@ -148,4 +163,5 @@ More details about the RPC error object: http://www.jsonrpc.org/specification#er
 ### Summary
 
 This concept shows you that you could have the best of both worlds:
-A lean JSON-RPC 2.0 API with a strong schema validation. Nothing is really new, but the combination is of these parts is the key.
+A lean JSON-RPC 2.0 API with a strong schema validation. 
+Nothing is really new, but the combination is of these parts is the key.

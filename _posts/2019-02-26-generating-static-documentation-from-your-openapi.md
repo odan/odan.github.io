@@ -25,7 +25,7 @@ Other tools...
 
 ### Installation
 
-With widdershins you can produce static documentation from your OpenAPI 3.0 / Swagger 2.0 / AsyncAPI 1.x / Semoasa 0.1.0 definition.
+With widdershins you can produce a static documentation from your OpenAPI 3.0 / Swagger 2.0 / AsyncAPI 1.x / Semoasa 0.1.0 definition.
 
 To install widdershins run:
 

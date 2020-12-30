@@ -9,15 +9,24 @@ keywords:
 
 What is Chunked transfer encoding?
 
-> Chunked transfer encoding is a streaming data transfer mechanism available in version 1.1 of the Hypertext Transfer Protocol (HTTP). In chunked transfer encoding, the data stream is divided into a series of non-overlapping "chunks". The chunks are sent out and received independently of one another. No knowledge of the data stream outside the currently-being-processed chunk is necessary for both the sender and the receiver at any given time.
+> Chunked transfer encoding is a streaming data transfer mechanism available in version 1.1 of the 
+> Hypertext Transfer Protocol (HTTP). In chunked transfer encoding, 
+> the data stream is divided into a series of non-overlapping "chunks". 
+> The chunks are sent out and received independently of one another. 
+> No knowledge of the data stream outside the currently-being-processed 
+> chunk is necessary for both the sender and the receiver at any given time.
 
 [Read more](https://en.wikipedia.org/wiki/Chunked_transfer_encoding)
 
-Most PSR-7 implementations use [streams](http://php.net/manual/en/book.stream.php). Since the stream is held in memory, problems can occur if the requests/responses are too large. Depending on memory limit and configuration, the limit may vary.
+Most PSR-7 implementations use [streams](http://php.net/manual/en/book.stream.php). 
+Since the stream is held in memory, problems can occur if the requests/responses are too large. 
+Depending on memory limit and configuration, the limit may vary.
 
-The `responseChunkSize` settings is used as number of bytes to read from body until it reaches end of file. If content length is known and it is less or equal than `responseChunkSize` (Default: 4096), then it only takes one iteration to read body's content.
+The `responseChunkSize` settings is used as number of bytes to read from body until it reaches the end of file.
+If content length is known and it is less or equal than `responseChunkSize` (Default: 4096), 
+then it only takes one iteration to read body's content.
 
-Here you can see a Slim route with a callback thats reads a ZIP file into the output buffer and flushes it directly into the response.
+Here you can see a Slim route with a callback that reads a ZIP file into the output buffer and flushes it directly into the response.
 
 ```php
 use Psr\Http\Message\ResponseInterface;
@@ -39,7 +48,7 @@ You could use Guzzle to read bytes of the (response) stream until the end of the
 http://docs.guzzlephp.org/en/latest/request-options.html#stream
 
 ```php
-$client = new GuzzleHttp\Client();
+$client = new \GuzzleHttp\Client();
 
 $response = $client->request('GET', '/stream/20', ['stream' => true]);
 

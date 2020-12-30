@@ -11,9 +11,7 @@ keywords: php test testing database phpunit dbunit
 
 * [Requirements](#requirements)
 * [Introduction](#introduction)
-* [Installation](#installation)
 * [Configuration](#configuration)
-* [Usage](#usage)
 
 ## Requirements
 
@@ -22,13 +20,13 @@ keywords: php test testing database phpunit dbunit
 
 ## Introduction
 
-I would like to share some of the tips I have accumulated working with Slim writing 
+I would like to share some tips I have accumulated working with Slim writing 
 functional tests.
 
 **Testing with the persistence layer**
 
 Probably the first thing you want to achieve while running your functional tests, 
-is to seperate your testing database from your development database. 
+is to separate your testing database from your development database. 
 This is done to create a clean state for your test suite to run. 
 It will allow you to control and create a desired state of the app for your test cases. 
 Also, having a test suite write random data to your development copy of the database is not ideal.
@@ -41,7 +39,6 @@ environment variables that are going to be used while testing in a â€˜.env.testâ
 
 
 ## Configuration
-
 
 Edit the `config\settings.php` file and add a `db_testing` array:
 
@@ -115,8 +112,6 @@ Now open the generated file: `resources/migrations/schema.sql` and check the res
 
 
 ## Resetting The Database After Each Test
-
-
 
 * <https://phpunit.de/manual/6.5/en/database.html>
 * <https://blog.cemunalan.com.tr/2020/02/02/10-symfony-testing-tips/>

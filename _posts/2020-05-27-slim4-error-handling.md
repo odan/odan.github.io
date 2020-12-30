@@ -31,11 +31,11 @@ Depending on the type, different strategies must be chosen for catching and hand
 For example, how to handle exceptions using the integrated middleware is already well 
 described in the documentation.
 
-Therefore I would like to focus on special types of errors that are not yet fully documented.
+Therefore, I would like to focus on special types of errors that are not yet fully documented.
 
-Please note, that you may not need all of these error handler in your app. Just pick what you realy need.
+Please note, that you may not need all of this error handlers in your app. Just pick what you really need.
 
-But before we start you should install a PSR-3 logger implementation, 
+Before we start you should install a PSR-3 logger implementation, 
 like [Monolog](https://seldaek.github.io/monolog/). 
 
 **Read more**
@@ -129,7 +129,7 @@ final class HttpExceptionMiddleware implements MiddlewareInterface
             $response = $this->responseFactory->createResponse()->withStatus($statusCode);
             $errorMessage = sprintf('%s %s', $statusCode, $response->getReasonPhrase());
 
-            // Log the errror message
+            // Log the error message
             // $this->logger->error($errorMessage);
 
             // Render twig template or just add the content to the body
@@ -320,7 +320,7 @@ You may already have received the following error message.
 This can happen because the PSR-7 implementation doesn't support numeric header names.
 
 Since `nyholm/psr7` v1.3.0  numeric header names are supported.
-You just need to update to the latest version and the issue is fixed.
+You just need to update to the latest version, and the issue is fixed.
  
 As a workaround (for all other PSR-7 implementations) 
 you can try to catch all exceptions of the `$app->run()` method.

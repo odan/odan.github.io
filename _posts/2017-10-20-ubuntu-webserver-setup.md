@@ -75,7 +75,7 @@ Open: http://localhost/phpinfo.php
 
 ## Enable apache mod_rewrite
 
-To enable the rewrite modul, run:
+To enable the rewrite module, run:
 
 ```bash
 sudo a2enmod rewrite

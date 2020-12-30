@@ -13,7 +13,6 @@ keywords: php slim pdo database connection container phpdi
 * [Introduction](#introduction)
 * [Extending PDO](#extending-pdo)
 * [Autowired objects](#autowired-objects)
-* [Read more](#read-more)
 
 ## Requirements
 
@@ -37,8 +36,8 @@ which can be further customized.
 
 ## Extending PDO
 
-The dependecy injection container requires fully qualified name for each connection. 
-For this we have to extend a class from PDO to create a new container definiton.
+The dependency injection container requires a fully qualified name for each connection. 
+For this we have to extend a class from PDO to create a new container definition.
 
 Create a file: src/Database/PDO2.php and copy/paste this content:
 

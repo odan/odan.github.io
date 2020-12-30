@@ -28,11 +28,11 @@ JSON has its excellent use cases too, e.g. for browsers communicating via Ajax t
 
 But how to validate JSON payload against a schema? 
 
-Conceptually, RESTful API's where never designed in such a way that you need [JSON-Schema](https://json-schema.org/) for it. 
+Conceptually, RESTful APIs where never designed in such a way that you need [JSON-Schema](https://json-schema.org/) for it. 
 
 Instead of a schema, only examples are usually used.
 
-In the last years it became more and more polpular to use the (Swagger) [OpenAPI Specification](https://swagger.io/specification/), which defines a standard, language-agnostic interface to RESTful APIs which allows both humans and computers to discover and understand the capabilities of the API. Of cource there are hundreds of libs, and quite a few interpret things completely differently than others.
+In the last years it became more and more popular to use the (Swagger) [OpenAPI Specification](https://swagger.io/specification/), which defines a standard, language-agnostic interface to RESTful APIs which allows both humans and computers to discover and understand the capabilities of the API. Of cource there are hundreds of libs, and quite a few interpret things completely differently than others.
 
 A SOAP API is better suited in a larger enterprise context to ensure standardized and strong data structures between server-to-server communications.
 
@@ -48,7 +48,7 @@ While in .NET it's very simple, in PHP you need some extra work to get a SOAP AP
 * Enable `extension=php_soap.dll` in your `php.ini` file
 * [laminas-soap](https://docs.laminas.dev/laminas-soap/)
 
-I chose the Laminas SOAP library because it's compatible with .NET clients.
+I chose the Lamina's SOAP library because it's compatible with .NET clients.
 
 ### Installation
 

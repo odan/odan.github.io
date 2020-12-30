@@ -33,7 +33,7 @@ keywords:
 ## Free website templates
 
 * [Flexbox](https://webthemez.com/demo/flexbox-corporate-free-bootstrap-html5-web-template/index.html) (flat)
-* [Webthemes](https://webthemez.com/)
+* [Webthemez](https://webthemez.com/)
 * [Aries](https://www.wowthemes.net/preview/index.php?theme=arieshtml)
 * [Azmind](https://azmind.com/free-bootstrap-themes-templates/)
 * [Agency]( https://blackrockdigital.github.io/startbootstrap-agency/)

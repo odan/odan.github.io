@@ -95,7 +95,7 @@ Code | Name| What does it mean?
 405	| Method not allowed | The request type is not allowed, e.g. /users is a resource and POST /users is a valid action but PUT /users is not.
 409 | Conflict | If resource already exists.
 422	| Unprocessable entity | Validation failed. The request and the format is valid, however the request was unable to process. For instance when sent data does not pass validation tests.
-500	| Server error | 5xx Server Error. An error occured on the server which was not the consumer's fault.
+500	| Server error | 5xx Server Error. An error occurred on the server which was not the consumer's fault.
 
 <div style="page-break-after: always; visibility: hidden"> 
 \pagebreak 

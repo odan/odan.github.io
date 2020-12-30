@@ -38,7 +38,7 @@ Follow PSR-1 and PSR-2 Coding Standards.
 
 ### Class method names
 
-* camleCase
+* camelCase
 * Underscore is not allowed
 
 ### Global function names

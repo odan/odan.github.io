@@ -242,7 +242,7 @@ return [
 ];
 ```
 
-Add the `ValidationExceptionMiddleware` into your middlware stack:
+Add the `ValidationExceptionMiddleware` into your middleware stack:
 
 ```php
 <?php
@@ -265,7 +265,7 @@ $app->run();
 
 ## Conclusion
 
-The `CakePHP Validation` component is very fast, flexible and provides some usful rules out of the box.
+The `CakePHP Validation` component is very fast, flexible and provides some useful rules out of the box.
 
 Now you should be able to validate even complex API and form data.
 

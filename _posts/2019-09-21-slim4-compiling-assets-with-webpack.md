@@ -202,7 +202,7 @@ return [
 * The third parameter (publicPathCss) defines the public path for the css files.
 
 It's recommended to create the Slim app instance within the container (and not somewhere "outside").
-Just make sure that your bootstrap proccess also uses excatly this app instance from the container.
+Just make sure that your bootstrap process also uses exactly this app instance from the container.
 
 Example for `config/bootstrap.php`:
 
@@ -520,7 +520,7 @@ Swal.fire(
 
 [DataTables.net](https://datatables.net/) is a very flexible table plug-in for jQuery.
 
-You have to [setup jQuery for Webpack](#loading-jquery-with-webpack) first.
+You have to [setup jQuery for Webpack](#jquery-setup) first.
 
 To install DataTables, run:
 

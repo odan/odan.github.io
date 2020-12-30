@@ -65,9 +65,9 @@ clearSometing()
 * Don't use `DateTime`, use `DateTimeImmutable` instead.
 * Don't use a string to represent a `$filename` or `$path`, use `SplFileInfo` instead.
 * Don't use any `new` keyword in Services / Repos or a factory method.
-  * All of them must be inject through the constructor.
+  * All of them must be injected through the constructor.
   * Except for: Value Objects, DTO's and Parameter objects.
-* Built in functions are allowed to use in any class level, they are mockable with PHPUnit function mocker.
+* Built-in functions are allowed to use in any class level, they are mockable with PHPUnit function mocker.
 * You should not use reflections.
 * Don't use traits.  [Composition or inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance) is a way better solution.
 * Don't use " (double quote) for strings (use sprintf for insert variable to a string).
@@ -97,7 +97,7 @@ clearSometing()
 * Move your business logic to services - in that way you will isolate them and you will be able to treat them as ports and adapters.
 * All dependencies must be injected via constructor injection.
 * If two methods are using completely different dependencies they must be separated into other service: [SRP](https://app.letscode.hu/videos/single-responsibility).
-* A Service can accept another Service as an dependency.
+* A Service can accept another Service as a dependency.
 * Client side only validation is not allowed. All requests must be validated in the Service layer (backend).
 * If the validation is very complex, move the validation to a special validation class.
 * A service class is not a util class. Don't suffix a service class with `*Service.php`. Give the service class a specific name and make it responsible for only one thing.
@@ -139,7 +139,9 @@ clearSometing()
 
 ## Parameter Object
 
-* You have a group of parameters that naturally go together. Replace them with an object. [Read more](https://refactoring.com/catalog/introduceParameterObject.html)
+* You have a group of parameters that naturally go together. Replace them with an object. 
+  
+[Read more](https://refactoring.com/catalog/introduceParameterObject.html)
 
 ## Type Hinting
 
@@ -168,7 +170,7 @@ clearSometing()
   * testApiCallPerfect
   * testApiCallReturnFalse
 
-* If something is annotable, annotate it (like `@expectedException`)
+* If something is annotatable, annotate it (like `@expectedException`)
 * Add `@coversDefaultClass` to the test class. Test only ene class per test class.
 * Don’t add `@covers` to a test method DocBlock. Xdebug will detect it correctly for you.
 

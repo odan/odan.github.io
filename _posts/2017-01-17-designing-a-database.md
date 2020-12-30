@@ -12,17 +12,17 @@ keywords:
 * Tables: english, lower_snake_case and plural.
 * Columns: english, lower_snake_case and singular.
 * Don't use [reserved words](http://dev.mysql.com/doc/refman/5.6/en/keywords.html)
-* Every table must contain a auto increment primary key 'id' int(11)
+* Every table must contain an auto increment primary key 'id' int(11)
 * Foreign key names must be unique per database. Format: sourcetable_sourcefield_destinationtable_destinationfield
 * The name of an index should match the field name. Multiple fields can be combined with _ (underscore).
 * Views, Stored Procedures, Enums should be avoided. Use only tables.
-* All tables schould be normalized to the third normal form ([3NF](https://en.wikipedia.org/wiki/Database_normalization))
+* All tables should be normalized to the third normal form ([3NF](https://en.wikipedia.org/wiki/Database_normalization))
 * Follow the [SQL Style Guide by Simon Holywell](http://www.sqlstyle.guide/)
 
-## Best pratice, performance tipps
+## Best practice, performance tips
 
-* Use LIMT to preserve memory and speed up queries.
-* Try to prevent subqueries. MySQL subqueries are very slow.
+* Use LIMIT to preserve memory and speed up queries.
+* Try to prevent sub-queries. MySQL sub-queries are very slow.
 * JOINS with big tables are very slow. Maybe move more logic to PHP.
 * Split big queries into small queries.
 * Use an PHP array as buffer and optimize the query to a maximum.

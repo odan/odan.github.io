@@ -48,7 +48,7 @@ foreach ($statement as $row) {
     // do something with $row
 }
 
-// or with the fech method
+// or with the fetch method
 while ($row = $statement->fetch()) {
    // do something with $row
 }

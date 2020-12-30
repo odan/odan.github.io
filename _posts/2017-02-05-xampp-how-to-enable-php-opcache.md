@@ -11,6 +11,6 @@ XAMPP comes with PHP OPCache already included in the bundle, you just need to en
 
 * Open the file with Notepad++: `c:\xampp\php\php.ini`
 
-* Add this line near the extention section: `zend_extension=php_opcache.dll`
+* Add this line near the extension section: `zend_extension=php_opcache.dll`
 
 * Stop/Start Apache

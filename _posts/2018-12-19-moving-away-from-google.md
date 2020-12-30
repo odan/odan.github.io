@@ -62,7 +62,7 @@ Install the [OneDrive client](https://onedrive.live.com/about/en-US/download/) o
 
 Don't for forget to [empty your trash](https://support.google.com/drive/answer/2375102?co=GENIE.Platform%3DDesktop&hl=en).
 
-## More informations
+## More information
 
 * [No More Google](https://nomoregoogle.com/)
 * <https://dev.to/mittalyashu/i-dis-agree-to-all-googles-terms-and-policy-m5l>

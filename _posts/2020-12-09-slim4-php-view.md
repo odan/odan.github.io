@@ -328,7 +328,7 @@ function set_locale(string $locale, string $domain = 'messages'): void
     // Set locale information
     setlocale(LC_ALL, $locale);
 
-    // Check for extisting mo file (optional)
+    // Check for existing mo file (optional)
     $file = sprintf('%s/%s/LC_MESSAGES/%s_%s.mo', $directory, $locale, $domain, $locale);
 
     if ($locale !== 'en_US' && !file_exists($file)) {
@@ -411,7 +411,7 @@ to insert or update the new messages. Then translate it and save the file.
 
 ### Determining the current locale
 
-You can call setlocale like so, and it'll return the current local.
+You can call `setlocale` like so, and it'll return the current local.
 
 ```php
 $currentLocale = setlocale(LC_ALL, 0);
@@ -428,7 +428,7 @@ The [Slim Twig-View](https://github.com/slimphp/Twig-View#custom-template-functi
 provides some useful template function like `url_for()`, `current_url()` and `base_path()` etc.
 Unfortunately these functions are not available for the PHP-View component.
 
-To extend the PHP-View template enginge we add a middleware as follows.
+To extend the PHP-View template engine we add a middleware as follows.
 
 Create a new file: `src/Middleware/PhpViewExtensionMiddleware.php` and copy/paste this code:
 
@@ -748,22 +748,16 @@ For security reasons [automatic escaping](https://twig.symfony.com/doc/3.x/templ
 is enabled by default. Twig can be extended using "Extensions". 
 Twig requires a more complex initial setup and special write permissions on the servers filesystem.
 
-### Symfony Templating
-
-There was also the native [Symfony Templating](https://github.com/symfony/templating) component
-that provides a lot of tools needed to build any kind of template system.
-But since Symfony 5.0 it's no longer supported.
-
 ### Mustache.php
 
 [Mustache](https://github.com/bobthecow/mustache.php) is a simple, logic-less template engine.
 
 They call it "logic-less" because there are no `if` statements, `else` clauses, or `for` loops. 
-Instead there are only tags (placeholder). Some tags are replaced with a value, some with nothing, 
+Instead, there are only tags (placeholder). Some tags are replaced with a value, some with nothing, 
 and others with a series of values.
 
-Currently there is only a [framework integration for Slim 3](https://github.com/andrewslince/slim3-mustache-view) 
-availabe, but not for Slim 4.
+Currently, there is only a [framework integration for Slim 3](https://github.com/andrewslince/slim3-mustache-view) 
+available, but not for Slim 4.
 
 ### Smarty
 

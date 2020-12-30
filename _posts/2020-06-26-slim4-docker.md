@@ -14,6 +14,9 @@ keywords: php docker slim
 * [Installation](#installation)
 * [Configuration](#configuration)
 
+## Requirements
+
+
 ## Introduction
 
 Dev and prod containers should be similar as much as possible, it saves a lot of debugging
@@ -25,6 +28,9 @@ then restart the container based on `docker-compose.override.yml`
 
 How to set the vars on the machine instead? Just docker-compose.
 
+## Installation
+
+## Configuration
 
 ## Read more
 
