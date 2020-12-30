@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php slim pdo database connection container phpdi
+keywords: php slim pdo database connection container
 ---
 
 ## Table of contents
