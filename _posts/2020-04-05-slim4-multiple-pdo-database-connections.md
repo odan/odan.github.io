@@ -13,7 +13,7 @@ keywords: php slim pdo database connection container
 * [Introduction](#introduction)
 * [Extending PDO](#extending-pdo)
 * [Autowired objects](#autowired-objects)
-* [Multitenancy](#Multitenancy)
+* [Multitenancy](#multitenancy)
 
 ## Requirements
 
