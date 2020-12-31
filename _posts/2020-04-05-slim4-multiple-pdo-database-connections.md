@@ -278,7 +278,7 @@ final class ConnectionFactory
 The `ConnectionFactory` requires some default settings, and a custom container definition
 to inject these default settings:
 
-```
+```php
 // The ConnectionFactory default settings
 $settings['db2'] = [
     'driver' => 'mysql',
