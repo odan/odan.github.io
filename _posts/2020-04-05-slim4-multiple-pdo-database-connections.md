@@ -13,7 +13,7 @@ keywords: php slim pdo database connection container
 * [Introduction](#introduction)
 * [Extending PDO](#extending-pdo)
 * [Autowired objects](#autowired-objects)
-* [Multi-tenancy environment](#multi-tenancy-environment)
+* [Multitenancy](#Multitenancy)
 
 ## Requirements
 
@@ -102,16 +102,30 @@ Note that the use of [DI/autowire()](https://stackoverflow.com/a/57758106/146118
 could cause too much effort in container configuration and maintenance can become 
 a nightmare in bigger projects.
 
-## Multi-tenancy environment
+## Multitenancy
+
+Multitenancy is when a single instance of a software application serves multiple customers 
+within one architecture. Each customer is referred to as a client (tenant).
+
+If desired, clients are given the ability to customize some parts of the application, 
+such as the graphical user interface (GUI) design or business rules; however, 
+they cannot customize the application's code.
+
+In a multi-tenant architecture, multiple instances of an application operate 
+in a shared environment. This works by keeping each client physically integrated 
+but logically separate. Thus, a single instance of the software runs on one server, 
+but serves multiple clients. In this way, an application in a multi-tenant architecture 
+can use a dedicated instance of configurations, data, user management 
+and other features for all clients.
 
 The first approach from above makes sense when you have multiple database connections 
 with a fix configuration. In another environments you may need to configure the 
-second connection dynamically, for example by the JWT (uid), or the session of the HTTP request.
+second connection dynamically, for example by a JWT, or the session of the HTTP request.
 
 Imagine that you need at least two database connection instances.
 
-1. The default connection for the primary database.
-2. The second connection for a dynamic database connection.
+1. The default connection as the primary database.
+2. The second connection for (the tenant) as dynamic database connection.
 
 I assume that the parameters for the default connection is always the same. 
 So there is nothing special to set up here.
@@ -119,8 +133,8 @@ So there is nothing special to set up here.
 For the second connection you have multiple other options depending on your use case.
 
 **The simple approach:**
-* The DI container creates a in-memory sqlite database connection.
-* Then connect the second PDO instance into the real database when needed. 
+* The DI container creates an in-memory sqlite connection for the second database.
+* Later connect the second PDO instance with the real tenant database when needed. 
 
 Example:
 
