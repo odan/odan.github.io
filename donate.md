@@ -23,7 +23,7 @@ Exclusive content:
 * Slim 4 Introducing
 * JSON Web Token (JWT) authentication
 
-Visit my Shop: <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">Slim 4 - eBook</a>
+Shop: <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">Slim 4 - eBook</a>
 
 <div style="text-align: left;">
 <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">
