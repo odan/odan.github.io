@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Mail
+title: Slim 4 - Mailer
 layout: post
 comments: true
 published: true
