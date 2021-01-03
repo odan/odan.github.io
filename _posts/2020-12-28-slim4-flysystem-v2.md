@@ -1,7 +1,7 @@
 ---
 title: Slim 4 - League Flysystem V2
 layout: post
-comments: false
+comments: true
 published: true
 description:
 keywords: php filesystem
@@ -105,6 +105,8 @@ to run all file operations in-memory and not on the local filesystem.
 
 The [SFTP Adapter](https://flysystem.thephpleague.com/v2/docs/adapter/sftp/) uses
 Phpseclib to provide the same convenient interface for SFTP file transfers.
+
+Read more: [Slim - SFTP Connection](2021-01-03-slim4-sftp.md)
 
 ## Container Setup
 
