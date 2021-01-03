@@ -1,7 +1,7 @@
 ---
 title: Slim 4 - PHP Templates
 layout: post
-comments: false
+comments: true
 published: true
 keywords: php slim
 ---

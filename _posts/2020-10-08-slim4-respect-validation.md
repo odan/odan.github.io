@@ -1,7 +1,7 @@
 ---
 title: Slim 4 - Respect/Validation
 layout: post
-comments: false
+comments: true
 published: true
 description: 
 keywords: php validation slim

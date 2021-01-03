@@ -1,7 +1,7 @@
 ---
 title: Slim 4 - FilePond
 layout: post
-comments: false
+comments: true
 published: true
 description: 
 keywords: php filepond slim

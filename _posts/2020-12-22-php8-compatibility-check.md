@@ -1,7 +1,7 @@
 ---
 title: PHP 8 Compatibility Check
 layout: post
-comments: false
+comments: true
 published: true
 keywords: php
 ---
