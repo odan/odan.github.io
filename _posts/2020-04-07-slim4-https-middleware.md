@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php slim ssl https middleware
+keywords: php, slim, ssl, https, middleware, slim-framework
 ---
 
 ## Table of contents

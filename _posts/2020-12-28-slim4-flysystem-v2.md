@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description:
-keywords: php filesystem
+keywords: php, filesystem
 ---
 
 ## Table of contents

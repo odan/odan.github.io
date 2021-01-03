@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php slim magazine
+keywords: php, slim, magazine, slim-framework
 ---
 
 A new article by Thierry Leriche-Dessirier and me was published in the french magazine "Programmez!".

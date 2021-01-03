@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: false
 description: 
-keywords: php docker slim
+keywords: php, docker, slim
 ---
 
 ## Table of contents

@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description:
-keywords: php slim container psr11
+keywords: php, slim, container, psr11, psr-11, slim-framework
 ---
 
 ## Table of contents

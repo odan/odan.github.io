@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php slim magazin
+keywords: php, slim, magazin, slim-framework
 ---
 
 You can find my new article about Slim 4 in the german PHP Magazin 4.20:

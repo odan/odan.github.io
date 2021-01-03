@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php slim files images png jpg gif
+keywords: php, slim, files, images, png, jpg, gif, slim-framework
 ---
 
 ## Table of contents

@@ -3,7 +3,7 @@ title: PHP 8 Compatibility Check
 layout: post
 comments: true
 published: true
-keywords: php
+keywords: php, php8, codesniffer
 ---
 
 To check whether your code is compatible with PHP 8 or not, you may find this tool very useful.

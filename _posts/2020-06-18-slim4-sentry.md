@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php sentry error logging
+keywords: php, sentry, error, logging, slim-framework
 ---
 
 ## Table of contents

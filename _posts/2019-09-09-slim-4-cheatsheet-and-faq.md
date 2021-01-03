@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: slim4 php
+keywords: slim, php, slim-framework
 ---
 
 ## Table of Contents

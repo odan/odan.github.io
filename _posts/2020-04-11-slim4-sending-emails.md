@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php slim email smtp symfony
+keywords: php, slim, email, smtp, symfony, slim-framework
 ---
 
 ## Table of contents

@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: slim4 php webpack assets js css
+keywords: slim-framework, slim4, php, webpack, assets, js, css
 ---
 
 ## Table of contents

@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php slim tutorial
+keywords: php, slim, tutorial, slim-framework, slim-4
 ---
 
 This tutorial shows you how to work with the powerful and lightweight Slim 4 framework.

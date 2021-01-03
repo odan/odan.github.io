@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description:
-keywords: php slim twig templates html engine symfony
+keywords: php, slim, twig, templates, html, engine, symfony, slim-framework
 ---
 
 ## Table of contents

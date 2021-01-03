@@ -3,7 +3,7 @@ title: Slim 4 - PHP Templates
 layout: post
 comments: true
 published: true
-keywords: php slim
+keywords: php, slim-framework, templates, view, slim
 ---
 
 ## Table of contents

@@ -4,7 +4,7 @@ layout: post
 comments: false
 published: true
 description: 
-keywords: php slim oauth jwt json authentication security
+keywords: php, slim, oauth, jwt, authentication, security, slim-framework
 ---
 
 I'm sorry. Due to many support questions this article is no longer available for free,

@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php slim cakephp sql querybuilder
+keywords: php, slim, cakephp, sql, query-builder, slim-framework
 ---
 
 ## Table of contents

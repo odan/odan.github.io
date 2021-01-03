@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php validation slim
+keywords: php, validation, slim, slim-framework
 ---
 
 ## Table of contents

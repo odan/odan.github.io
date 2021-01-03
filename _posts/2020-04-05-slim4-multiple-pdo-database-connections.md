@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php slim pdo database connection container
+keywords: php, slim, pdo, database, connection, container, slim-framework
 ---
 
 ## Table of contents

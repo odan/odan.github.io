@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php slim session http cookies
+keywords: php, slim, session, http, cookies, slim-framework
 ---
 
 ## Table of contents

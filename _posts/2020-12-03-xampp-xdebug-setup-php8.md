@@ -3,7 +3,7 @@ title: XAMPP - XDebug Setup for PHP 8
 layout: post
 comments: true
 published: true
-keywords: php xdebug php8 debugger
+keywords: php, xdebug, php8, debugger
 ---
 
 ## Requirements

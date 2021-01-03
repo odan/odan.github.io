@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php filepond slim
+keywords: php, filepond, slim-framework
 ---
 
 ## Table of contents
