@@ -5,7 +5,7 @@ comments: true
 published: true
 description:
 keywords: php, filesystem
-image: https://odan.github.io/assets/images/post_default.png
+image.path: https://odan.github.io/assets/images/post_default.png
 ---
 
 ## Table of contents
