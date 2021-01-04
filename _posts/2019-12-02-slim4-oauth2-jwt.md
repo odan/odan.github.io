@@ -5,6 +5,7 @@ comments: false
 published: true
 description: 
 keywords: php, slim, oauth, jwt, authentication, security, slim-framework
+image: https://odan.github.io/assets/images/slim-logo-600x330.png
 ---
 
 I'm sorry. Due to many support questions this article is no longer available for free,

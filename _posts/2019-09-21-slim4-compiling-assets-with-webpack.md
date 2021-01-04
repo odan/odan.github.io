@@ -5,6 +5,7 @@ comments: true
 published: true
 description: 
 keywords: slim-framework, slim4, php, webpack, assets, js, css
+image: https://odan.github.io/assets/images/slim-logo-600x330.png
 ---
 
 ## Table of contents

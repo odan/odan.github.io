@@ -4,6 +4,7 @@ layout: post
 comments: true
 published: true
 keywords: php, slim-framework, templates, view, slim
+image: https://odan.github.io/assets/images/slim-logo-600x330.png
 ---
 
 ## Table of contents
@@ -127,7 +128,7 @@ Then create new file `src/Util/functions.php` and copy paste this content:
  *
  * @return string The html encoded string
  */
-function html(string $text): string
+function e(string $text): string
 {
     return htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
@@ -162,7 +163,7 @@ Then run `composer dump-autoload` to update the autoloader.
 Create a new view template: `templates/home.php`
 
 ```php
-Hello <?= html($name) ?>
+Hello <?= e($name) ?>
 ```
 
 This Action class shows how to inject the PhpRenderer to render an template:
@@ -320,7 +321,7 @@ Copy the following functions into your file: `src/Util/functions.php`:
  *
  * @retrun void
  */
-function set_locale(string $locale, string $domain = 'messages'): void
+function set_language(string $locale, string $domain = 'messages'): void
 {
     $codeset = 'UTF-8';
     $directory = __DIR__ . '/../../resources/text';
@@ -386,7 +387,7 @@ echo __('There are %s users logged in.', 7);
 You can use the same `__` function to translate messages in PHP templates.
 
 ```php
-<?= html(__('There are %s users logged in.', 7)) ?>
+<?= e(__('There are %s users logged in.', 7)) ?>
 ```
 
 **Example:**
@@ -396,10 +397,10 @@ You can use the same `__` function to translate messages in PHP templates.
 <html>
 <head>
     <meta charset="utf-8">
-    <title><?= html($title ?? 'Default title') ?></title>
+    <title><?= e($title ?? 'Default title') ?></title>
 </head>
 <body>
-<?= html(__('There are %s users logged in.', 7)) ?>
+<?= e(__('There are %s users logged in.', 7)) ?>
 </body>
 </html>
 ```
@@ -409,9 +410,39 @@ You can use the same `__` function to translate messages in PHP templates.
 To update a PO file, open it in Poedit and click `Update from code`
 to insert or update the new messages. Then translate it and save the file.
 
+### Changing the language
+
+To change the gettext catalog file you can pass the new `locale`
+as first parameter to the `set_language` helper function.
+
+A locale name usually has the form `ll_CC`. 
+Here `ll` is an ISO 639 two-letter language code, and `CC` is an ISO 3166 two-letter 
+country code. For example, for German in Germany, ll is `de`, and CC is `DE`. 
+You find a list of the language codes in appendix 
+[Language Codes](https://www.gnu.org/software/gettext/manual/html_node/Language-Codes.html#Language-Codes)
+and a list of the country codes in 
+appendix [Country Codes](https://www.gnu.org/software/gettext/manual/html_node/Country-Codes.html#Country-Codes).
+
+```php
+// English (U.S.)
+set_language('en_US');
+
+// German (Germany)
+// File: resources/text/de_DE/LC_MESSAGES/messages_de_DE.mo
+set_language('de_DE');
+
+// German (Swiss)
+// File: resources/text/de_CH/LC_MESSAGES/messages_de_CH.mo
+set_language('de_CH');
+
+// French (France)
+// File: resources/text/fr_FR/LC_MESSAGES/messages_fr_FR.mo
+set_language('fr_FR');
+```
+
 ### Determining the current locale
 
-You can call `setlocale` like so, and it'll return the current local.
+You can call [setlocale](https://www.php.net/manual/en/function.setlocale.php) like so, and it'll return the current local.
 
 ```php
 $currentLocale = setlocale(LC_ALL, 0);
@@ -419,8 +450,8 @@ $currentLocale = setlocale(LC_ALL, 0);
 
 ### Gettext pitfalls
 
-You should know that the translations are cached until you restart the Apache web server. In a production environment
-this is quite good for performance reason.
+You should know that the translations are cached until you restart the Apache web server. 
+In a production environment this is quite good for performance reason.
 
 ## URL helper
 
@@ -542,7 +573,7 @@ Create or modify your existing layout file: `templates/layout.php` using this co
 <html>
 <head>
     <meta charset="utf-8">
-    <title><?= html($title ?? 'Slim Tutorial') ?></title>
+    <title><?= e($title ?? 'Slim Tutorial') ?></title>
     <base href="<?= $basePath ?>/"/>
     <script type="text/javascript" src="js/hello.js"></script>
 </head>

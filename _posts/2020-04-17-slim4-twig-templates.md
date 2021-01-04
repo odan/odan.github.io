@@ -5,6 +5,7 @@ comments: true
 published: true
 description:
 keywords: php, slim, twig, templates, html, engine, symfony, slim-framework
+image: https://odan.github.io/assets/images/slim-logo-600x330.png
 ---
 
 ## Table of contents
