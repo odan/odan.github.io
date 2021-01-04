@@ -66,6 +66,7 @@ footer-link-col: "#404040"
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
   name: Daniel Opitz
+  twitter: dopitz
 
 defaults:
   values:
