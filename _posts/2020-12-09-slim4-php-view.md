@@ -128,7 +128,7 @@ Then create new file `src/Util/functions.php` and copy paste this content:
  *
  * @return string The html encoded string
  */
-function e(string $text): string
+function html(string $text): string
 {
     return htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
@@ -163,7 +163,7 @@ Then run `composer dump-autoload` to update the autoloader.
 Create a new view template: `templates/home.php`
 
 ```php
-Hello <?= e($name) ?>
+Hello <?= html($name) ?>
 ```
 
 This Action class shows how to inject the PhpRenderer to render an template:
@@ -387,7 +387,7 @@ echo __('There are %s users logged in.', 7);
 You can use the same `__` function to translate messages in PHP templates.
 
 ```php
-<?= e(__('There are %s users logged in.', 7)) ?>
+<?= html(__('There are %s users logged in.', 7)) ?>
 ```
 
 **Example:**
@@ -397,10 +397,10 @@ You can use the same `__` function to translate messages in PHP templates.
 <html>
 <head>
     <meta charset="utf-8">
-    <title><?= e($title ?? 'Default title') ?></title>
+    <title><?= html($title ?? 'Default title') ?></title>
 </head>
 <body>
-<?= e(__('There are %s users logged in.', 7)) ?>
+<?= html(__('There are %s users logged in.', 7)) ?>
 </body>
 </html>
 ```
@@ -573,7 +573,7 @@ Create or modify your existing layout file: `templates/layout.php` using this co
 <html>
 <head>
     <meta charset="utf-8">
-    <title><?= e($title ?? 'Slim Tutorial') ?></title>
+    <title><?= html($title ?? 'Slim Tutorial') ?></title>
     <base href="<?= $basePath ?>/"/>
     <script type="text/javascript" src="js/hello.js"></script>
 </head>
