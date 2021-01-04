@@ -21,7 +21,7 @@ github_profile:
 #  url: https://github.com/odan
 
 twitter:
-  username: @dopitz
+  username: dopitz
 #  url: https://twitter.com/dopitz
   
 #linkedin:
@@ -66,6 +66,10 @@ footer-link-col: "#404040"
 # Important: you must keep the "name" parameter, everything else you can remove
 author:
   name: Daniel Opitz
+
+defaults:
+  values:
+    image: https://odan.github.io/assets/images/post_default.png
 
 # Select your active Social Network Links.
 # Uncomment the links you want to show in the footer and add your information to each link.
