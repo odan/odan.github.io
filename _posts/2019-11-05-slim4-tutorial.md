@@ -5,7 +5,7 @@ comments: true
 published: true
 description: 
 keywords: php, slim, tutorial, slim-framework, slim-4
-image: https://odan.github.io/assets/images/slim_logo.png
+image: https://odan.github.io/assets/images/slim-logo-600x330.png
 ---
 
 This tutorial shows you how to work with the powerful and lightweight Slim 4 framework.
