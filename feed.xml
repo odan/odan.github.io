@@ -27,7 +27,7 @@ layout: null
                 <a href="{{ site.url }}{{ post.url }}">{{ site.url }}{{ post.url }}</a>
             ]]>
         </content>
-        {% if post.image %}<content type="image/png" src="{ post.image }}" />{% endif %}
+        {% if post.image %}<content type="image/png" src="{{ post.image }}" />{% endif %}
     </entry>
     {% endif %}
     {% endfor %}
