@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - League Flysystem V2
+title: Slim 4 - League Flysystem v2
 layout: post
 comments: true
 published: true
