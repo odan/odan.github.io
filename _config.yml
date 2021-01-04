@@ -70,7 +70,8 @@ author:
 
 defaults:
   values:
-    image: https://odan.github.io/assets/images/post_default.png
+    image:
+      path: https://odan.github.io/assets/images/post_default.png
 
 # Select your active Social Network Links.
 # Uncomment the links you want to show in the footer and add your information to each link.
