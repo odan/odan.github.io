@@ -21,6 +21,7 @@ github_profile:
 #  url: https://github.com/odan
 
 twitter:
+  username: @dopitz
 #  url: https://twitter.com/dopitz
   
 #linkedin:
@@ -74,8 +75,8 @@ social-network-links:
   rss: true
   email: "someone@example.com"
   facebook: acmeuser
-  github: acmeuser
-  twitter: acmeuser
+  github: odan
+  twitter: dopitz
 #  reddit: yourname
 #  stackoverflow: "23234234/acmeuser"
 
