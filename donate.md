@@ -22,6 +22,7 @@ Exclusive content:
 
 * Slim 4 Introducing
 * JSON Web Token (JWT) authentication
+* Action Domain Responder
 
 Shop: <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">Slim 4 - eBook</a>
 
