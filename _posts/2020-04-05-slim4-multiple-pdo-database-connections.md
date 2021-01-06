@@ -133,6 +133,7 @@ So there is nothing special to set up here.
 For the second connection you have multiple other options depending on your use case.
 
 **The simple approach:**
+
 * The DI container creates an in-memory sqlite connection for the second database.
 * Later connect the second PDO instance with the real tenant database when needed. 
 

@@ -84,7 +84,6 @@ CREATE TABLE `tablename_types` (
     `updated_at` DATETIME DEFAULT NULL,
     `updated_user_id` INT(11) DEFAULT NULL,
     PRIMARY KEY (`id`),
-    KEY `position` (`position`),
     KEY `created_user_id` (`created_user_id`),
     KEY `updated_user_id` (`updated_user_id`)
 ) ENGINE = INNODB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ;

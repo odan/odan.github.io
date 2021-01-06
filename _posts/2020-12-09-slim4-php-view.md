@@ -763,6 +763,10 @@ Version 4 is in Alpha since 2018.
 
 **Update**: Plates v4 Alpha has been abandoned. Version 3.4.0 supports PHP 8.
 
+<div style="page-break-after: always; visibility: hidden"> 
+\pagebreak 
+</div>
+
 ### Twig
 
 Twig is one of the most popular template engine out there.
