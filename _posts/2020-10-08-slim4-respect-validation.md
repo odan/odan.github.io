@@ -218,4 +218,4 @@ to each validation rule. In the end it worked.
 * [The Respect/Validation documentation](https://respect-validation.readthedocs.io/en/latest/)
 * [What makes Respect/Validation awesome?](https://www.reddit.com/r/PHP/comments/1telis/respectvalidation_the_most_awesome_validation/ce7hvcs/?utm_source=reddit&utm_medium=web2x&context=3)
 * [Slim forum](https://discourse.slimframework.com)
-* [Feedback and support](https://github.com/odan/slim4-tutorial/issues)
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

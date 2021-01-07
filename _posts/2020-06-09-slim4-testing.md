@@ -490,3 +490,4 @@ Stay tuned.
 * [The Differences Between Unit Testing, Integration Testing And Functional Testing](https://www.softwaretestinghelp.com/the-difference-between-unit-integration-and-functional-testing/)
 * [A Testing Strategy for Hexagonal Applications](https://www.youtube.com/watch?v=LtbHAFsEu5g)
 * <https://github.com/odan/slim4-tutorial>
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

@@ -833,3 +833,7 @@ brings a lot of other dependencies, but looks very modern and promising.
 At the end of the day, I would say that the `slim/twig-view` component makes 
 the most sense if you are using Slim because it's maintained and the built-in support 
 for the PSR-7 request and response objects makes it much easier to use.
+
+## Read more
+
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

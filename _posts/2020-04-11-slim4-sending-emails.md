@@ -219,3 +219,4 @@ try {
 
 * [Symfony Mailer documentation](https://symfony.com/doc/current/mailer.html)
 * [Symfony Mailer on Github](https://github.com/symfony/mailer)
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

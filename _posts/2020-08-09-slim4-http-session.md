@@ -366,3 +366,4 @@ $app->get('/logout', \App\Action\LogoutAction::class)->setName('logout');
 
 * <https://symfony.com/doc/current/components/http_foundation.html>
 * <https://github.com/symfony/http-foundation>
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

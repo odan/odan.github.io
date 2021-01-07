@@ -14,6 +14,7 @@ keywords: php, slim, pdo, database, connection, container, slim-framework
 * [Extending PDO](#extending-pdo)
 * [Autowired objects](#autowired-objects)
 * [Multitenancy](#multitenancy)
+* [Read more](#read-more)
 
 ## Requirements
 
@@ -349,3 +350,6 @@ public function __construct(ConnectionManager $connectionManager) {
 }
 ```
 
+## Read more
+
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

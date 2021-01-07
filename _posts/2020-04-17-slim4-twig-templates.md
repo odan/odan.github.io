@@ -513,3 +513,4 @@ Then print the result in your Twig template using this syntax:
 
 * [Twig Website](https://twig.symfony.com/)
 * [Creating and Using Templates](https://symfony.com/doc/current/templates.html)
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

@@ -180,3 +180,7 @@ Then login to your Sentry account and you should see all details of the error:
 Now that you’ve got basic reporting set up, you’ll want to explore adding additional context to your data.
 
 **Read more:** [Next Steps](https://docs.sentry.io/error-reporting/quickstart/?platform=php#next-steps)
+
+## Read more
+
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

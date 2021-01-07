@@ -194,4 +194,4 @@ you can always create your own adapter. Flysystem also provides its own mime-typ
 
 * [Flysystem Github repository](https://github.com/thephpleague/flysystem)
 * [Flysystem V2 documentation](https://flysystem.thephpleague.com/v2/docs/)
-* [Feedback and support](https://github.com/odan/slim4-tutorial/issues)
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

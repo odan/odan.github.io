@@ -444,4 +444,4 @@ FilePond offers much more plugins, e.g. for image manipulation, but this is out 
 * [FilePond API documentation](https://pqina.nl/filepond/docs/patterns/api/server/)
 * [FilePond Github repository](https://github.com/pqina/filepond)
 * [Slim forum](https://discourse.slimframework.com)
-* [Feedback and support](https://github.com/odan/slim4-tutorial/issues)
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

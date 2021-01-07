@@ -46,3 +46,7 @@ composer sniffer:php8
 Example output:
 
 ![image](https://user-images.githubusercontent.com/781074/102933727-181f6200-44a3-11eb-8028-a08d32d08ba0.png)
+
+## Read more
+
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)
