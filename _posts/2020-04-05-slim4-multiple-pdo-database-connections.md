@@ -143,7 +143,7 @@ Feel inspired by the following concepts and adapt it to your specific requiremen
 The DI container can act as a "connection manager" and also allows you to
 connect to the second PDO instance with the real tenant database (MySQL) when needed.
 
-The trick ist to set the new (dynamic) connection directly into the container using
+The trick is to set the new (dynamic) connection directly into the container using
 the PDI-DI [set](https://php-di.org/doc/container.html#set) method.
 
 This reduces the complexity, because you don't need a special ConnectionManager class,
