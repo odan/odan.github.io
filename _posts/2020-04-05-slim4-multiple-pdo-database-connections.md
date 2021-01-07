@@ -180,7 +180,7 @@ repository constructor as shown above.
 
 **Please note:** *This approach adds an extra layer of complexity
 and makes only sense when you have **multiple dynamic database connections**
-that needs to be **managed in by the application** itself.
+that needs to be **managed by the application** itself.
 For most applications the simple and container friendly approach is good enouph.*
 
 For the second connection you need a `ConnectionFactory` class, 
