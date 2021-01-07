@@ -132,49 +132,55 @@ So there is nothing special to set up here.
 
 For the second connection you have multiple other options depending on your use case.
 
-**The simple approach:**
+**The simple and container friendly approach:**
 
-* The DI container creates an in-memory sqlite connection for the second database.
-* Later connect the second PDO instance with the real tenant database when needed. 
+**Please note:** *There is no general solution, because it depends on your specific use case.
+Feel inspired by the following concepts and adapt it to your specific requirements.*
 
-Example:
+The DI container can act as a "connection manager" and also allows you to
+connect to the second PDO instance with the real tenant database (MySQL) when needed.
+
+The trick ist to set the new (dynamic) connection directly into the container using
+the PDI-DI [set](https://php-di.org/doc/container.html#set) method.
+
+This reduces the complexity, because you don't need a special ConnectionManager class,
+and you can declare the dynamic connection directly as dependency in your repository classes.
 
 ```php
-<?php
-
+// Tenant Middleware
 use App\Database\PDO2;
-use Psr\Container\ContainerInterface;
+
 // ...
 
-return [
+// Fetch the token or uid and create the connection
+// ...
 
-    // ...
-
-    PDO2::class=> function (ContainerInterface $container) {
-        // Container definition
-        $options = [
-                PDO::ATTR_PERSISTENT => false,
-                PDO::ATTR_EMULATE_PREPARES => false,
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ];
-
-        // Initial connection, only in-memory
-        return new PDO2('sqlite::memory:', null, null, $options);
-    },
-
-];
-```
-
-To change the connection of the second PDO instance, 
-just invoke the constructor with the new connection parameters:
-
-```php
 // Connect to the real database, e.g. MySQL
-$pdo2->__construct($dsn, $username, $password, $options);
+$connection = new PDO2('dsn', 'username', 'password', $options);
+
+// Set the new dynamic connection instance into the container
+$this->container->set(PDO2::class, $connection);
 ```
 
-**The complex approach:**
+In reality the database connection should be created using a `ConnectionFactory`.
+
+If you have more than one dynamic database connection, then just add
+another extended PDO class (e.g. TendantPdo, ReportPdo, LoggingPdo etc...) to your project 
+and create it in the same way.
+
+To use the second connection, it only needs to be declared within the 
+repository constructor as shown above.
+
+**The (complex) ConnectionManager approach:**
+
+* Create the dynamic connection using a custom `ConnectionFactory`
+* Hold the dynamic connection within the `ConnectionManager`
+* Inject the `ConnectionManager` and fetch the needed connection.
+
+**Please note:** *This approach adds an extra layer of complexity
+and makes only sense when you have **multiple dynamic database connections**
+that needs to be **managed in by the application** itself.
+For most applications the simple and container friendly approach is good enouph.*
 
 For the second connection you need a `ConnectionFactory` class, 
 which creates all dynamic database connections on demand 
@@ -342,3 +348,4 @@ public function __construct(ConnectionManager $connectionManager) {
     $this->pdo2 = $connectionManager->getConnection('customer');
 }
 ```
+
