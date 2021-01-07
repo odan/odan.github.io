@@ -74,6 +74,8 @@ return [
 **Usage**
 
 ```php
+<?php
+
 namespace App\Domain\User\Repository;
 
 use PDO;
@@ -161,6 +163,21 @@ $connection = new PDO2('dsn', 'username', 'password', $options);
 
 // Set the new dynamic connection instance into the container
 $this->container->set(PDO2::class, $connection);
+```
+
+The DI container definition can be set only once. 
+If you already have a container definition for PDO2 then remove the 
+existing definition from the DI container.
+
+Remove this entry in `config/container.php`:
+
+```php
+use App\Database\PDO2;
+// ...
+
+PDO2::class => function (ContainerInterface $container) {
+    return new PDO2(...);
+},
 ```
 
 In reality the database connection should be created using a `ConnectionFactory`.
