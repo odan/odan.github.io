@@ -1,16 +1,16 @@
 ---
 title: Equivalent to hash_hmac in oppenssl_* functions
 layout: post
-comments: true
-published: false
+comments: false
+published: true
 description: 
-keywords: 
+keywords: openssl, php, hmac, sha256
 ---
 
-This function uses the openssl_* extension and would be a equivalent for: 
+This function uses the openssl_* extension and would be an equivalent for: 
 
 ```php
-hash_hmac('sha256', 'data', 'key')
+hash_hmac('sha256', 'data', 'key');
 ```
 
 ## Code
@@ -64,5 +64,3 @@ Result:
 ```
 5031fe3d989c6d1537a013fa6e739da23463fdaec3b70137d828e36ace221bd0
 ```
-
-Keywords: openssl, php, hmac, sha256
