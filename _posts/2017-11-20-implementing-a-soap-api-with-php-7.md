@@ -1,46 +1,23 @@
 ---
 title: Implementing a SOAP API with PHP 7
 layout: post
-comments: true
-published: false
+comments: false
+published: true
 description: 
 keywords: 
 ---
 
 ## Table of contents
 
-* [Intro](#intro)
 * [Creating a SOAP Endpoint](#creating-a-soap-endpoint)
 * [Creating a SOAP Client](#creating-a-soap-client)
 * [Creating a SOAP Client with C#](#creating-a-soap-client-with-c)
-
-## Intro
-
-It's 2017/2018 and you're probably wondering why I'm blogging about this topic, aren't you? I'll tell you a secret: XML is not dead. No, it's more important and necessary than ever. 
-
-> "XML is crap. Really. There are no excuses. XML is nasty to parse for humans, and it's a disaster to parse even for computers. There's just no reason for that horrible crap to exist." Linus Torvalds
-
-Just because it comes from [Mr Torvalds does not necessarily make it right](http://www.kidstrythisathome.com/2014/03/why-linus-torvalds-is-wrong-about-xml/).
-
-XML is great, because it is the first time that a good standard has been set up to exchange data in a structured, machine-readable and validatable manner with minimal issues.
-
-JSON has its excellent use cases too, e.g. for browsers communicating via Ajax to the server.
-
-But how to validate JSON payload against a schema? 
-
-Conceptually, RESTful APIs where never designed in such a way that you need [JSON-Schema](https://json-schema.org/) for it. 
-
-Instead of a schema, only examples are usually used.
-
-In the last years it became more and more popular to use the (Swagger) [OpenAPI Specification](https://swagger.io/specification/), which defines a standard, language-agnostic interface to RESTful APIs which allows both humans and computers to discover and understand the capabilities of the API. Of cource there are hundreds of libs, and quite a few interpret things completely differently than others.
-
-A SOAP API is better suited in a larger enterprise context to ensure standardized and strong data structures between server-to-server communications.
 
 ## Creating a SOAP Endpoint
 
 The endpoint is the URL where your service can be accessed by a client application. To inspect the [WSDL](https://en.wikipedia.org/wiki/Web_Services_Description_Language) you just add `?wsdl` to the web service endpoint URL.
 
-### Requiremnts
+### Requirements
 
 While in .NET it's very simple, in PHP you need some extra work to get a SOAP API working.
 
