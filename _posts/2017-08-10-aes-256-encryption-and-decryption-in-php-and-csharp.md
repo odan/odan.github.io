@@ -1,13 +1,13 @@
 ---
 title: AES-256 encryption and decryption in PHP and C#
 layout: post
-comments: true
-published: false
+comments: false
+published: true
 description: 
 keywords: php, aes, openssl, encryption, csharp, dotnet
 ---
 
-**Attention:** This article is from 2017, some information may be out of date.
+> **Attention:** This article is from 2017, some information may be out of date.
 
 ## PHP
 
