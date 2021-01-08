@@ -1,10 +1,10 @@
 ---
-title: Implementing a SOAP API with PHP 7
+title: Implementing a SOAP API with PHP
 layout: post
 comments: false
 published: true
 description: 
-keywords: 
+keywords: php, soap
 ---
 
 ## Table of contents
