@@ -1,10 +1,10 @@
 ---
 title: XAMPP - How to enable PHP OPCache
 layout: post
-comments: true
-published: false
+comments: false
+published: true
 description: 
-keywords: 
+keywords: php, opcache, xampp
 ---
 
 XAMPP comes with PHP OPCache already included in the bundle, you just need to enable it. To enable the extension:

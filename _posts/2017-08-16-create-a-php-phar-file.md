@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: 
+keywords: php, phar
 ---
 
 Step by step

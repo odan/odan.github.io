@@ -1,8 +1,8 @@
 ---
 title: Using htmlspecialchars correctly
 layout: post
-comments: true
-published: false
+comments: false
+published: true
 description: 
 keywords: php, xss
 ---

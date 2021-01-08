@@ -1,8 +1,8 @@
 ---
 title: XAMPP - CURL SSL Setup
 layout: post
-comments: true
-published: false
+comments: false
+published: true
 description: 
 keywords: PHP, CURL, SSL, Twitter, CURLOPT_SSL_VERIFYPEER
 ---
@@ -23,7 +23,4 @@ curl.cainfo="C:\xampp\php\extras\ssl\cacert.pem"
 openssl.cafile="C:\xampp\php\extras\ssl\cacert.pem"
  ```
  
-* Stop / start Apache
-
-
-Keywords: PHP, CURL, SSL, Twitter, CURLOPT_SSL_VERIFYPEER
+* Restart apache
