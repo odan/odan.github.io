@@ -66,7 +66,6 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 
 ## Contact
 
-* d.opitz (at) outlook.com
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
 * [Skype](skype:dali.o)
