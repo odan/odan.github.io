@@ -4,7 +4,7 @@ layout: post
 comments: true
 published: true
 description: 
-keywords: php, slim, tutorial, slim-framework, slim-4
+keywords: php, slim, tutorial, slim-framework, slim-4, getting started
 image: https://odan.github.io/assets/images/slim-logo-600x330.png
 ---
 
