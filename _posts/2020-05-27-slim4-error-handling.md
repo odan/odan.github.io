@@ -25,22 +25,16 @@ keywords: slim, slimphp, php, monolog, logging
 ## Introduction
 
 Several types of errors can occur in a web application. 
-
 Depending on the type, different strategies must be chosen for catching and handling them. 
-
 For example, how to handle exceptions using the integrated middleware is already well 
 described in the documentation.
-
 Therefore, I would like to focus on special types of errors that are not yet fully documented.
-
 Please note, that you may not need all of this error handlers in your app. Just pick what you really need.
 
 Before we start you should install a PSR-3 logger implementation, 
 like [Monolog](https://seldaek.github.io/monolog/). 
 
-**Read more**
-
-* [The Monolog LoggerFactory](https://odan.github.io/2020/05/25/slim4-logging.html) 
+**Read more:** [The Monolog LoggerFactory](https://odan.github.io/2020/05/25/slim4-logging.html) 
  
 ## Catching 404 not found errors
 
@@ -53,7 +47,7 @@ Here you can find some examples how to add a custom error handler
 * <https://github.com/odan/slim4-skeleton/blob/master/src/Handler/DefaultErrorHandler.php>
 * <https://github.com/slimphp/Slim-Skeleton/blob/master/src/Application/Handlers/HttpErrorHandler.php>
 
-The simplest way to catch 404 (and other) http errors is to add a 
+The simplest way to catch 404 (and other) HTTP errors is to add a 
 custom middleware before the ErrorMiddleware, e.g.:
 
 ```php
@@ -84,9 +78,9 @@ $app->add(ErrorMiddleware::class);
 ```
 
 Of course this example is very limited in its functionality. To catch
-all http errors you could use the `HttpException` within the catch block.
+all HTTP errors you could use the `HttpException` within the catch block.
 
-If you want to log all http errors or render Twig templates
+If you want to log all HTTP errors or render Twig templates
 then you should implement a custom Slim DefaultErrorHandler or a 
 `HttpExceptionMiddleware`.
 
@@ -185,7 +179,7 @@ PHP has its older error level system of warnings, notices and errors.
 To "catch" this type of PHP error, you can add a custom error handler 
 using the `set_error_handler` function.
 
-Since this can be solved even more elegantly in a slim application, 
+Since this can be solved even more elegantly in a Slim application, 
 we integrate this functionality into a middleware.
 
 **Example**
