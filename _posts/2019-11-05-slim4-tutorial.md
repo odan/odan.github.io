@@ -696,8 +696,7 @@ then just invoke that service you need in your action.
 
 ### Services
 
-The [Domain](https://github.com/pmjones/adr/blob/master/ADR.md#model-versus-domain) is the place for the
-complex [business logic](https://en.wikipedia.org/wiki/Business_logic).
+The Domain is the place for the complex [business logic](https://en.wikipedia.org/wiki/Business_logic).
 
 Instead of putting the logic into gigantic (fat) "Models", we put the logic into smaller, 
 specialized **Service** classes.
