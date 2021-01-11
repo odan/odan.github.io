@@ -24,15 +24,14 @@ keywords: php, slim, pdo, database, connection, container, slim-framework
 
 ## Introduction
 
-After reading the [Slim 4 tutorial](https://odan.github.io/2019/11/05/slim4-tutorial.html), people asked me how to add
-multiple database connections to a Slim application.
+After reading the [Slim 4 Tutorial](https://odan.github.io/2019/11/05/slim4-tutorial.html),
+I was asked how to add multiple database connections to a Slim application.
 
 The challenge here is to configure the container so that different instances of a PDO instance are configured and
 injected into our repository classes.
 
-The problem is that the container just maps a string
-(e.g. a fully qualified class name) to an object. But since `PDO::class`
-can only be mapped once, we have to think of something else.
+The problem is that the container simply maps a string (e.g. a fully qualified class name) to an object. 
+Since `PDO::class` can only be mapped once, we have to come up with something else.
 
 Depending on the use case, I will present here several generic solutions, which can be further customized.
 
