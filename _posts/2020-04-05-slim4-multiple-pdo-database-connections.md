@@ -24,9 +24,7 @@ keywords: php, slim, pdo, database, connection, container, slim-framework
 
 ## Introduction
 
-After reading the [Slim 4 Tutorial](https://odan.github.io/2019/11/05/slim4-tutorial.html),
 I was asked how to add multiple database connections to a Slim application.
-
 The challenge here is to configure the container so that different instances of a PDO instance are configured and
 injected into our repository classes.
 
