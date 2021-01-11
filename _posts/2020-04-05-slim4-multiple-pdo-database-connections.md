@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Multiple PDO database connections
+title: Slim 4 - Multiple database connections
 layout: post
 comments: true
 published: true
@@ -14,6 +14,7 @@ keywords: php, slim, pdo, database, connection, container, slim-framework
 * [Extending PDO](#extending-pdo)
 * [Autowired objects](#autowired-objects)
 * [Multitenancy](#multitenancy)
+* [Conclusion](#conclusion)  
 * [Read more](#read-more)
 
 ## Requirements
@@ -136,9 +137,6 @@ So there is nothing special to set up here.
 For the second connection you have multiple other options depending on your use case.
 
 **The simple and container friendly approach:**
-
-**Please note:** *There is no general solution, because it depends on your specific use case.
-Feel inspired by the following concepts and adapt it to your specific requirements.*
 
 The DI container can act as a "connection manager" and also allows you to
 connect to the second PDO instance with the real tenant database (MySQL) when needed.
@@ -366,6 +364,14 @@ public function __construct(ConnectionManager $connectionManager) {
     $this->pdo2 = $connectionManager->getConnection('customer');
 }
 ```
+
+## Conclusion
+
+There is no universal solution, because it depends on your specific use case.
+Let these concepts inspire you and adapt them to your specific requirements.
+
+This approach does not only work with PDO. Instead of PDO, 
+you can also use another database component database components like the CakePHP QueryBuilder.
 
 ## Read more
 
