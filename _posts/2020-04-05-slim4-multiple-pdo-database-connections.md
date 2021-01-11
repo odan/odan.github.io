@@ -28,7 +28,7 @@ I was asked how to add multiple database connections to a Slim application.
 The challenge here is to configure the DI container so that different instances of a PDO instance are configured and
 injected into our repository classes.
 
-The problem is that the DI container simply maps a string (e.g. a fully qualified class name) to an object. 
+With autowiring, the DI container simply maps a string (e.g. a fully qualified class name) to an object. 
 Since `PDO::class` can only be mapped once, we have to come up with something else.
 
 Depending on the use case, I will present here several generic solutions, which can be further customized.
