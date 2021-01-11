@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - HTTP Session
+title: Slim 4 - Symfony Session
 layout: post
 comments: true
 published: true
