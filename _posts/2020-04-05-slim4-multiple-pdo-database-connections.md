@@ -14,7 +14,7 @@ keywords: php, slim, pdo, database, connection, container, slim-framework
 * [Extending PDO](#extending-pdo)
 * [Autowired objects](#autowired-objects)
 * [Multitenancy](#multitenancy)
-* [Conclusion](#conclusion)  
+* [Conclusion](#conclusion)
 * [Read more](#read-more)
 
 ## Requirements
@@ -371,7 +371,7 @@ There is no universal solution, because it depends on your specific use case.
 Let these concepts inspire you and adapt them to your specific requirements.
 
 This approach does not only work with PDO. Instead of PDO, 
-you can also use another database component database components like the CakePHP QueryBuilder.
+you can also use another database component like the CakePHP QueryBuilder.
 
 ## Read more
 
