@@ -9,7 +9,7 @@ keywords:
 
 > A good API is not just easy to use but also hard to misuse.
 
-### Ressources
+### Resources
 
 * Version your API
   * Path: /v1/users
@@ -19,20 +19,20 @@ keywords:
   * /cars
   * /users
   * /books/{id}
-* GET requests must never alter system/resource state (GET is readonly)
 * All nouns are plurals
   * GET /users
   * DELETE /users/{id}
   * GET /users/{id}/reviews
   * POST /users/{id}/reviews
-  * PUT /users/{id}/reviews/{rid}
+  * PUT /users/{id}/reviews/{reviewid}
 * Map relations by sub-resources
   * GET /users/{id}/reviews
-  * PUT /users/{id}/reviews/{rid}
+  * PUT /users/{id}/reviews/{reviewid}
 * Allow for collections filtering, sorting and paging
-  * GET /users?sort[]=-age&sort[]=+name
   * GET /users/{id}/reviews?published=1
+  * GET /users?sort[]=-age&sort[]=+name
   * GET /books?format[]=epub&format[]=mobi
+* GET requests must never alter system/resource state (GET is readonly)
 
 <div style="page-break-after: always; visibility: hidden"> 
 \pagebreak 
@@ -40,15 +40,14 @@ keywords:
 
 ### Security
 
-* Allow only SSL (HTTPS) requests
+* Allow only HTTPS requests
 
 ### Authentication
 
 * Use a standard and stateless authentication method:
   * API Key / Token (as part of the `Authorization` header)
   * Basic Authentication (Basic Auth)
-* The OAuth protocol is not stateless, because it requires the user to pass credentials one time, and then maintain state of the user’s authorization on the server side, these are not considerations of the underlying HTTP protocol.
-* If the authentication is unsuccessful, the status code `403` (Forbidden) is returned.
+* If the authentication is unsuccessful, the status code `403` (Forbidden) must be returned.
 
 ### HTTP Header
 
@@ -76,11 +75,11 @@ DELETE | /users/{id} | Delete | DELETE | deleteUser | Used for deleting resource
 
 Status codes indicate the result of the HTTP request.
 
-* 1XX - informational
-* 2XX - success
-* 3XX - redirection
-* 4XX - client error
-* 5XX - server error
+* 1XX - Informational
+* 2XX - Success
+* 3XX - Redirection
+* 4XX - Client error
+* 5XX - Server error
 
 Return meaningful status codes:
 
@@ -107,7 +106,7 @@ Code | Name| What does it mean?
 
 Send a `500 Internal Server Error` response.
 
-**HTTP Statuscode:** 500
+**HTTP status code:** 500
 
 **Content:**
 
@@ -134,7 +133,7 @@ Send a `500 Internal Server Error` response.
 
 Sending invalid JSON will result in a `400 Bad Request` response.
 
-**HTTP Statuscode:** 400
+**HTTP status code:** 400
 
 **Content:**
 
@@ -151,7 +150,7 @@ Sending invalid JSON will result in a `400 Bad Request` response.
 
 Sending invalid fields will result in a `422 Unprocessable Entity` response.
 
-**HTTP Statuscode:** 422
+**HTTP status code:** 422
 
 **Content:**
 ```json
@@ -234,7 +233,7 @@ $.ajax({
 });
 ```
 
-### Links
+### Read more
 
 * <https://blog.restcase.com/7-rules-for-rest-api-uri-design/>
 * <https://opensource.zalando.com/restful-api-guidelines/index.html#json-guidelines>
