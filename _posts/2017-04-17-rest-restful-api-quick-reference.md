@@ -1,5 +1,5 @@
 ---
-title: REST, RESTful API Quick Reference
+title: RESTful API - Quick Reference
 layout: post
 comments: true
 published: true
@@ -33,10 +33,6 @@ keywords:
   * GET /users?sort[]=-age&sort[]=+name
   * GET /books?format[]=epub&format[]=mobi
 * GET requests must never alter system/resource state (GET is readonly)
-
-<div style="page-break-after: always; visibility: hidden"> 
-\pagebreak 
-</div>
 
 ### Security
 
@@ -168,7 +164,11 @@ Sending invalid fields will result in a `422 Unprocessable Entity` response.
 }
 ```
 
-### Sample calls
+<div style="page-break-after: always; visibility: hidden"> 
+\pagebreak 
+</div>
+
+### Examples
 
 #### jQuery
 
