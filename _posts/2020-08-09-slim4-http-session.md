@@ -17,6 +17,7 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 * [Middleware](#middleware)
 * [Container setup](#container-setup)
 * [Usage](#usage)
+* [Conclusion](#conclusion)  
 * [Read more](#read-more)
 
 ## Requirements
@@ -31,18 +32,10 @@ information about the user across multiple requests. The PHP ecosystem provides 
 variety of session components to handle sessions. But there are a dozen session
 components, that are more or less well maintained.
 The bullet-proof and best maintained session component for PHP comes from symfony.
-It's part part the [HttpFoundation Component](https://github.com/symfony/http-foundation) 
+It's part of the [HttpFoundation](https://github.com/symfony/http-foundation) 
 component and handles sessions in an expressive, unified API.
 Support for popular backends such as Memcached, Redis, and databases 
 is included out of the box.
-
-Some people would say now that you have to manually convert the HttpFoundation 
-request to/from PSR-7 requests/response objects. The answer is: No.
-You don't have to convert any objects at all, because the Symfony `Session` class 
-works without the Symfony request/response classes. 
-Of course it would be much better if the entire `Symfony\Component\HttpFoundation\Session` 
-namespace would be provided in a separate Github repository without all the 
-Symfony HTTP classes ;-) 
 
 ## Installation
 
@@ -361,6 +354,39 @@ $app->get('/login', \App\Action\LoginAction::class)->setName('login');
 $app->post('/login', \App\Action\LoginSubmitAction::class);
 $app->get('/logout', \App\Action\LogoutAction::class)->setName('logout'); 
 ```
+
+## Conclusion
+
+With the time I realized that there are some issues
+with this component in combination with a middleware based approach like Slim.
+
+The first issue was the missing lazy session start support. In a middleware
+based application it's important to have full control of all HTTP specific
+operations, this also includes session start time. This means, only a middleware
+should control the start of the session and not the DI container or something else.
+The issue here is that as soon as you try to configure the FlashBag handler, the
+Session object starts the session. I have found a workaround by using
+a `TwigFunction` to address this issue, but it stills feels a little hacky to me.
+
+The second issue I had was the missing middleware support. 
+For historical and political reason the Symfony HttpFoundation is not built 
+for PSR-15 middleware. This issue can be simply solved by implementing 
+a custom middleware as shown above. The signal for me remains the same,
+it is not built for a middleware stack.
+
+The third issue is that the Symfony HttpFoundation component brings a lot of
+other non PSR-7/PSR15 HTTP classes as dependencies that do not fit into this context.
+Some people even think that you have to manually convert the HttpFoundation
+request to/from a PSR-7 request/response object. This is not true.
+You don't have to convert any objects at all, because the Symfony `Session` class
+works without the Symfony request/response classes.
+Of course, it would be much better if the entire `Symfony\Component\HttpFoundation\Session`
+namespace would be provided in a separate Github repository without all the
+Symfony HTTP classes.
+
+On the other hand, if you are looking for a very stable API and support for popular 
+backends like Memcached, Redis and databases, then this component is still a very 
+good choice for your Slim application.
 
 ## Read more
 
