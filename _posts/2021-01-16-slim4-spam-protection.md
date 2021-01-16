@@ -54,7 +54,7 @@ composer require guzzlehttp/guzzle
 
 ## Designing a Spam Checker Class
 
-Create a new class under named `SpamChecker` to wrap 
+Create a new class named `SpamChecker` to wrap 
 the logic of calling the Akismet API and interpreting its responses:
 
 File: `src/Utility/Akismet/SpamChecker.php`
@@ -273,8 +273,8 @@ return $response->withStatus(201);
 
 To test if the spam filtering is working correctly, try inputting `viagra-test-123`
 into the `author` field or `akismet-guaranteed-spam@example.com`
-into the `email` field, and submitting the form.
-With these magic words reserved for testing, Akismet must return a `spam` response.
+into the `email` field, and then submit the form.
+With these magic words reserved for testing, Akismet must return a "spam" response.
 
 ## Testing and Mocking
 
@@ -283,9 +283,9 @@ When you test with phpunit you can inject a mocked Guzzle client into the SpamCh
 to simulate the response only in memory.
 
 Guzzle provides a mock handler that can be used to fulfill HTTP requests with a response or 
-exception by shifting return values off of a queue.
+exception by shifting return values of a queue.
 
-Before a test you could define a response queue and add it to the mocked Guzzle client 
+Before each test you could define a response queue and add it to the mocked Guzzle client 
 like this:
 
 ```php
@@ -308,7 +308,7 @@ public function testAction(): void
 
     $this->container->set(SpamChecker::class, new SpamChecker($client));
 
-    $request = $this->createRequest('POST', '/');
+    $request = $this->createRequest('POST', '/blog/comments');
     $request = $request->withParsedBody(
         [
             'author' => 'viagra-test-123',
@@ -325,7 +325,7 @@ public function testAction(): void
 
 ## Conclusion
 
-Now you are able to check your comments for potential spam messages. 
+Now you are able to check the comments for possible spam.
 This general concept is testable without touching the real endpoints 
 and can be applied to other HTTP API clients / SDKs as well.
 
