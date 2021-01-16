@@ -9,7 +9,7 @@ Hello, my name is Daniel Opitz and I am a senior software developer and architec
 
 I create individual web applications for the public transport and e-government in Switzerland.
 
-In my free time I also contribute to various open source projects 
+In my free time I contribute to various open source projects 
 and like to **[blog](https://odan.github.io/)** about PHP, Slim-Framework and .NET.
 
 You can find all my open source projects on [Github](https://github.com/odan).
