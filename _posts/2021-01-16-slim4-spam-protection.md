@@ -13,11 +13,11 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 * [Requirements](#requirements)
 * [Introduction](#introduction)
 * [Installation](#installation)
-* [Designing a Spam Checker Class](#designing-a-spam-checker-class)  
+* [Designing a Spam Checker Class](#designing-a-spam-checker-class)
 * [Configuration](#configuration)
 * [Container Setup](#container-setup)
 * [Checking Comments for Spam](#checking-comments-for-spam)
-* [Testing and Mocking](#testing-and-mocking)  
+* [Testing and Mocking](#testing-and-mocking)
 * [Conclusion](#conclusion)
 * [Read more](#read-more)
 
