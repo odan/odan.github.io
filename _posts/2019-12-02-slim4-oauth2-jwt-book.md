@@ -59,7 +59,7 @@ This is because you cannot invalidate a token without keeping its status on a se
 This would break the stateless principle. However, if your client is only a browser, you
 can delete a JWT cookie with this trick: [How to implement a logout?](#how-to-implement-a-logout)
 
-Try to [avoid JWT for session management](http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/) 
+Try to **[avoid JWT for session management](http://cryto.net/~joepie91/blog/2016/06/13/stop-using-jwt-for-sessions/)** 
 or server-side storage for sessions. 
 
 Do not include sensitive information in JWT tokens.
@@ -88,7 +88,7 @@ For the JWT claim we are installing a UUID generator:
 composer require symfony/polyfill-uuid
 ```
 
-For the issue date and better testability we are installing the chronos date time library:
+For the issue date and better testability we are installing the Chronos date time library:
 
 ```
 composer require cakephp/chronos
@@ -96,7 +96,7 @@ composer require cakephp/chronos
 
 ## Generating Public and Private Keys
 
-First we have to create a **private key** for signature creation and a **public key** for verification.
+First we have to create a **private key** for signature creation, and a **public key** for verification.
 This means that it's fine to distribute your public key. However, the private key should remain secret.
 
 Generate the private key with this OpenSSL command (enter a password):
@@ -105,9 +105,13 @@ Generate the private key with this OpenSSL command (enter a password):
 openssl genrsa -out private.pem 2048
 ```
 
+> In case that openssl is not installed, this 
+> **[Online RSA Key Generator](https://travistidwell.com/jsencrypt/demo/)** 
+> can be used as well.
+
 The private key is generated and saved in a file named "private.pem", located in the same directory.
 
-**Note** The number "2048" in the above command indicates the size of the private key. 
+The number "2048" in the above command indicates the size of the private key. 
 You can choose one of these sizes: 512, 758, 1024, 2048 or 4096 (these numbers represent bits). 
 The larger sizes offer greater security, but this is offset by a penalty in CPU performance. 
 
@@ -124,10 +128,10 @@ The public key is saved in a file named `public.pem` located in the same directo
 
 ## Configuration
 
-Copy the content of your private key `private.pem` into your application 
+Copy the content of `private.pem` and `public.pem` into the application 
 configuration file, e.g. `config/settings.php`:
 
-```
+```php
 $settings['jwt'] = [
 
     // The issuer name
@@ -148,9 +152,44 @@ $settings['jwt'] = [
 ];
 ```
 
-Make sure that you not commit the private key into your version control (e.g git).
-In reality, you could merge the private key from an external file (e.g. `env.php`) or load it
-from another (secure) source.
+**Important:** Make sure that the private/public key does not contain any extra spaces or invalid newline characters.
+Newlines must be saved with `\n` and not `\r\n`. If the key is not valid, the following error could be triggered:
+
+```
+It was not possible to parse your key, 
+reason: error:0909006C:PEM routines:get_name:no start line
+```
+
+In this case, remove additional spaces at the beginning/end of the key.
+It's important to add the keys in this format:
+
+```php
+$settings['jwt'] = [
+    //...
+    'private_key' => '-----BEGIN RSA PRIVATE KEY-----\n...\n-----END RSA PRIVATE KEY-----',
+    'public_key'  => '-----BEGIN PUBLIC KEY-----\n...\n-----END PUBLIC KEY-----',
+];
+```
+
+If you still have problems getting the string into the correct format, 
+try loading the keys from an external file:
+
+```php
+$settings['jwt'] = [
+    //...
+    'private_key' => file_get_contents('path/to/private.key'),
+    'public_key'  => file_get_contents('path/to/public.key'),
+];
+```
+
+**Security note:** Make sure that you **not** commit the keys into version control.
+In reality, the keys should be included from another secure source, e.g. from `env.php`:
+
+```php
+// env.php
+$settings['jwt']['private_key'] = 'private key';
+$settings['jwt']['public_key'] = 'public key';
+```
 
 ## Creating a JWT
 
@@ -734,17 +773,20 @@ If it can be read on the client from Javascript outside your app - it can be sto
 
 XSS is when users get unsafe JS running on your domain in other users browsers 
 when that happens neither JWT in localStorage or sessions and JWT in cookies are safe. 
-With httpOnly flag on cookies, you can't directly access them, but the browser will 
+With `httpOnly` flag on cookies, you can't directly access them, but the browser will 
 still send them with AJAX requests to your server. 
 If this happens you generally out of luck. To prevent this, make sure to escape all 
 user input if it's sent to the browser.
 
-If you load 3rd party JS with script tags or iframes this might compromise localStorage 
+Another option is to store the token **in memory**. But then
+the token will be nullified when the user switches between tabs.
+
+If you load 3rd party JS with script tags or iframes this might compromise `localStorage`
 unless you are careful, but I haven't worked enough with this to help you here.
 
-You might think an HttpOnly cookie (created by the server instead of the client) 
+You might think an `HttpOnly` cookie (created by the server instead of the client) 
 will help, but cookies are vulnerable to CSRF attacks. 
-It is important to note that HttpOnly and sensible CORS policies cannot prevent 
+It is important to note that `HttpOnly` and sensible CORS policies cannot prevent 
 CSRF form-submit attacks and using cookies require a proper CSRF mitigation strategy.
 
 If you still want to store a JWT as a cookie, then as a 
@@ -753,9 +795,6 @@ Make the SameSite cookie `SameSite=Lax`, `HttpOnly` and `Secure`.
 
 A cookie with the `HttpOnly` attribute is inaccessible 
 to the JavaScript `Document.cookie` API; it is sent only to the server.
-
-Another option is to store the token **in memory**. But then
-the token will be nullified when the user switches between tabs.
 
 ### How to implement a logout?
 
@@ -775,7 +814,7 @@ return $response->withHeader(
 
 ### How does a refresh token work?
 
-This tutorial does not cover refresh tokens. A refresh token requires a
+This tutorial does not cover refresh tokens. A refresh token requires 
 some kind of state on the server-side and would go beyond the scope of this tutorial.
 
 A [refresh token](https://openid.net/specs/openid-connect-core-1_0.html#rfc.section.12) 
@@ -809,7 +848,7 @@ Read more: <https://blog.restcase.com/4-most-used-rest-api-authentication-method
 
 ### How to handle CORS with OPTIONS preflight requests?
 
-Read more: [Slim 4 - CORS Setup](https://odan.github.io/2019/11/24/slim4-cors.html)
+Read more: [Slim 4 - CORS](https://odan.github.io/2019/11/24/slim4-cors.html)
 
 ### The `Authorization` header missing in POST request
 
