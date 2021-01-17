@@ -67,7 +67,7 @@ and on [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 ## Contact
 
-For personal consultation, you can reach me by email: d.opitz (at) outlook.com
+For a personal consultation you can reach me by email: d.opitz (at) outlook.com
 
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
