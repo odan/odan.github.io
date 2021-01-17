@@ -42,6 +42,17 @@ Option 2: Automatic
 
 * From the main menu, choose: VCS > Update Project (Ctrl+T).
 
+## Rebase
+
+* Checkout the local master branch you want to rebase.
+* Select the "Remote Origin Master" upstream branch > Merge into using current using Rebase
+* Push the changes to the Repository clone master.
+
+It is best practice to always rebase your local commits when you pull before pushing them. 
+As nobody knows your commits yet, nobody will be confused when they are rebased but the
+additional commit of a merge would be unnecessarily confusing. 
+Published commits are, however, usually merged, for example when branches are merged.
+
 ## Read more
 
 * [Sync with a remote repository](https://www.jetbrains.com/help/phpstorm/sync-with-a-remote-repository.html)
