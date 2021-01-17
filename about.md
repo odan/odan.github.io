@@ -19,18 +19,19 @@ Hi, my name is Daniel Opitz
 I am a web developer located close to Basel, Switzerland. I am currently working at [ORCA](https://orca-services.ch/) 
 in Pratteln as a Software Engineer.
 
-I am [@dopitz](https://twitter.com/dopitz) on Twitter which is a great way to reach me and if 
-you prefer email you can always write to d.opitz (at) outlook.com.
+In my free time I contribute to various open source projects
+and write **[blog](https://odan.github.io/)** posts about PHP, Slim-Framework and .NET.
 
-You can find all my open source code on [GitHub](https://github.com/odan).
+Whenever possible I try to answer questions about Slim on the **[Slim-Forum](https://discourse.slimframework.com/)**
+and on [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 ## Skills
 
-* PHP, C#, ASP.NET Core, JavaScript, TypeScript
-* MySQL, MS SQL, Oracle, SQLite, InterSystems Caché
-* HTML, CSS, jQuery, Bootstrap, Vue.js
-* Slim, CakePHP, Symfony
-* REST, SOAP, XML, JSON
+* PHP, C# (.NET), JavaScript, TypeScript
+* MySQL, MS SQL, Oracle, InterSystems Caché
+* HTML, CSS, Bootstrap, jQuery, Vue.js
+* Slim, Laminas, CakePHP, Symfony
+* RESTful, SOAP, XML, JSON
 * SOLID, DDD, Hexagonal Architecture
 * Docker, IT-Security
 
@@ -66,8 +67,9 @@ You can find all my open source code on [GitHub](https://github.com/odan).
 
 ## Contact
 
+For personal consultation, you can reach me by email: d.opitz (at) outlook.com
+
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
-* [Skype](skype:dali.o)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
 * [Xing](https://www.xing.com/profile/Daniel_Opitz9)
