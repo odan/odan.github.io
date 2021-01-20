@@ -164,7 +164,7 @@ To install the Twig Bridge, run:
 composer require symfony/twig-bridge
 ```
 
-To render Twig templates in emails just add the a new container definition for 
+To render Twig templates in emails just add a new container definition for 
 `BodyRendererInterface:class` in `config/container.php`
 
 ```php
