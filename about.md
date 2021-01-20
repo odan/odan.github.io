@@ -23,7 +23,7 @@ In my free time I contribute to various open source projects
 and write **[blog](https://odan.github.io/)** posts about PHP, Slim-Framework and .NET.
 
 Whenever possible I try to answer questions about Slim on the **[Slim-Forum](https://discourse.slimframework.com/)**
-and on [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
+and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 ## Skills
 
