@@ -32,7 +32,7 @@ component for creating and sending emails.
 
 ## Installation
 
-To install the component, run:
+To install the mailer component, run:
 
 ```
 composer require symfony/mailer
@@ -156,6 +156,13 @@ final class ContactMailer
 ```
 
 ## Twig Integration
+
+The **Twig bridge** provides integration for Twig with various Symfony components.
+To install the Twig Bridge, run:
+
+```
+composer require symfony/twig-bridge
+```
 
 To render Twig templates in emails just add the a new container definition for 
 `BodyRendererInterface:class` in `config/container.php`
