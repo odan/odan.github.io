@@ -71,10 +71,14 @@ application in the production environment.
 
 ## Environment Configuration
 
+We need to persist data across deployments, and don't want to commit these files to Git.
+
 You should store all sensitive information in 'env.php' and add the file to your .gitignore, 
 so that you don't accidentally commit to source control.
 
-Just rename the file 'env.example.php' to 'env.php'
+Rename the file 'env.example.php' to 'env.php'
+
+You can store the `env.php` file in your storage directory.
 
 ### Usage
 
