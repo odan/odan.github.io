@@ -172,13 +172,13 @@ You might consider a full-stack framework if you:
 * like the risk of upgrading to the next framework version 
 * don't care about high performance response times (SEO)
 * prefer framework specific "bundles" or "plugins" over pure composer packages
-* need online resources like tutorials, videos, courses and certifications
+* need tons of online resources like tutorials, videos, courses and certifications
 * want to write something into your CV
 * and your team need a rigid structure in order to function
 * don't have the time or want to take the risk to decide which component to use
 * don't want to learn something new, like the PSR interfaces and middleware concept
 * don't feel safe enough in terms of web security
-* prefer to install tons of IDE plugins to make your framework usable
+* prefer to install a bunch of IDE plugins to make your framework usable
 
 ## Community
 
