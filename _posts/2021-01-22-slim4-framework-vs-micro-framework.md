@@ -152,6 +152,7 @@ Read more: [Architecture](https://odan.github.io/learn-php/#architecture)
 You might consider Slim if you:
 
 * meet the "Minimum Skillset for Slim" list (see above)
+* need performance and flexibility  
 * feel experienced enough, and you know what you are doing
 * really value standard interfaces like PSR-7 and PSR-15
 * want to build long-lasting software
