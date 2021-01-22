@@ -167,7 +167,7 @@ You might consider Slim if you:
 You should not consider Slim if you:
 
 * cannot fulfill all the points in the above list
-* you are a beginner and need a big community for help and support.  
+* you need support from **a big community**.  
 * don't care about vendor lock-in
 * don't care about high performance response times (SEO)
 * prefer framework specific "bundles" or "plugins" over pure composer packages
