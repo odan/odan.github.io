@@ -18,6 +18,7 @@ keywords: slim, slimphp, php, test, testing, phpunit, integration
 * [Integration Tests](#integration-tests)
 * [HTTP Tests](#http-tests)
 * [Database Testing](#database-testing)
+* [Conclusion](#conclusion)  
 * [Read more](#read-more)
 
 ## Requirements
@@ -512,6 +513,14 @@ If you also want to test against the database,
 you should read my next article post about database testing.
 
 Stay tuned.
+
+## Conclusion
+
+We have seen how to create all kinds of tests like unit- and integration tests with phpunit.
+
+**Don't mock everything, it's an anti-pattern.**
+
+If everything is mocked, are we really testing the production code? Don't hesitate to **not** mock!
 
 ## Read more
 
