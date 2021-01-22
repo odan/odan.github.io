@@ -152,7 +152,7 @@ Read more: [Architecture](https://odan.github.io/learn-php/#architecture)
 You might consider a microframework like Slim if you:
 
 * meet the "Minimum Skillset for Slim" list (see above)
-* need performance and flexibility  
+* need performance, efficiency, full control and flexibility
 * feel experienced enough, and you know what you are doing
 * really value standard interfaces like PSR-7 and PSR-15
 * want to build long-lasting software
@@ -171,6 +171,7 @@ You might consider a full-stack framework if you:
 * don't care about vendor lock-in
 * like the risk of upgrading to the next framework version 
 * don't care about high performance response times (SEO)
+* prefer to use bad and slow OOP/SQL abstractions like an ([N+1](https://stackoverflow.com/a/97253/1461181)) ORM  
 * prefer framework specific "bundles" or "plugins" over pure composer packages
 * need tons of online resources like tutorials, videos, courses and certifications
 * want to write something into your CV
