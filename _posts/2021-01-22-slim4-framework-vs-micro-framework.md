@@ -169,6 +169,7 @@ You should not consider Slim if you:
 * cannot fulfill all the points in the above list
 * you are a beginner and need a big community for help and support.  
 * don't care about vendor lock-in
+* don't care about high performance response times (SEO)
 * prefer framework specific "bundles" or "plugins" over pure composer packages
 * don't want to reinvent the wheel
 * need online resources like tutorials, videos, courses and certifications
@@ -177,6 +178,7 @@ You should not consider Slim if you:
 * don't have the time or want to take the risk to decide which component to use
 * don't want to learn something new, like the PSR interfaces and middleware concept
 * don't feel safe enough in terms of web security
+* want to install tons of IDE plugins to make your framework usable
 
 ## Community
 
