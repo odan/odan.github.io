@@ -174,6 +174,9 @@ You should not consider Slim if you:
 * need online resources like tutorials, videos, courses and certifications
 * want to write something into your CV
 * and your team need a rigid structure in order to function
+* don't have the time or want to take the risk to decide which component to use
+* don't want to learn something new, like the PSR interfaces and middleware concept
+* don't feel safe enough in terms of web security
 
 ## Community
 
