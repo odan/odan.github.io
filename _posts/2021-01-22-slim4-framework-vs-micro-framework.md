@@ -149,7 +149,7 @@ Read more: [Architecture](https://odan.github.io/learn-php/#architecture)
 
 **Is Slim the right tool for me? When should I consider Slim and when not?**
 
-You might consider Slim if you:
+You might consider a microframework like Slim if you:
 
 * meet the "Minimum Skillset for Slim" list (see above)
 * need performance and flexibility  
@@ -164,21 +164,21 @@ You might consider Slim if you:
 * know how to build and maintain complex software
 * feel familiar with enterprise architecture concepts and patterns
 
-You should not consider Slim if you:
+You might consider a full-stack framework if you:
 
 * cannot fulfill all the points in the above list
-* you need support from **a big community**.  
+* need support from a big community.  
 * don't care about vendor lock-in
+* like the risk of upgrading to the next framework version 
 * don't care about high performance response times (SEO)
 * prefer framework specific "bundles" or "plugins" over pure composer packages
-* don't want to reinvent the wheel
 * need online resources like tutorials, videos, courses and certifications
 * want to write something into your CV
 * and your team need a rigid structure in order to function
 * don't have the time or want to take the risk to decide which component to use
 * don't want to learn something new, like the PSR interfaces and middleware concept
 * don't feel safe enough in terms of web security
-* want to install tons of IDE plugins to make your framework usable
+* prefer to install tons of IDE plugins to make your framework usable
 
 ## Community
 
