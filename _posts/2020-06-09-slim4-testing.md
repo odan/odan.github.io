@@ -489,6 +489,22 @@ $request = $this->createJsonRequest('POST', '/users', ['name' => 'Sally']);
 $response = $this->app->handle($request);
 ```
 
+### Passing a query string
+
+The [http_build_query](https://www.php.net/manual/en/function.http-build-query.php) can generate 
+URL-encoded query strings. Example:
+
+```php
+$params = [
+    'limit' => 10,
+];
+
+$url = sprintf('/users?%s', http_build_query($params));
+// Result: /users?limit=10
+
+$request = $this->createRequest('GET', $url);
+```
+
 ## Database Testing
 
 The shown HTTP test doesn't hit the database and is very fast. 
