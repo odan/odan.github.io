@@ -345,12 +345,26 @@ $this->mock(UserCreatorRepository::class)
     ->willReturn(1);
 ```
 
-This could also be used to mock external API calls etc.
+**Warning: Try to avoid excessive mocking.**
 
-The downside of mocking is that you are not testing and covering 
+Try to test and cover all the code you actually deploy.
+
+The downside of mocking is that you are not testing and covering
 the code that you actually deploy and run on your real system.
-The phpunit code coverage can never be 100% when you mock your repositories. 
-and the test quality will never be as good as in real integration tests.
+The phpunit code coverage can never be 100% when you mock your repositories.
+and the test quality will never be as good as in real **integration tests**.
+
+Another problem with mocking is that your tests become very large and complex, 
+and the test needs to know all the implementation details that could change 
+quickly during the next refactoring. Maintaining such mocked tests would 
+become more difficult and expensive in the long run.
+
+Mocking makes sense if you have external APIs that must not be touched when 
+the test is running. So, for example, I would only mock HTTP requests for external APIs.
+
+When you write tests for the Actions, better write **integration tests** that cover the Actions, 
+the Services, and the Repositories all at once. Then your tests are easier 
+to setup, and you cover all the code you actually deploy.
 
 ## Integration Tests
 
