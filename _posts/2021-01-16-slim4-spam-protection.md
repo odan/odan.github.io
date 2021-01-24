@@ -57,12 +57,12 @@ composer require guzzlehttp/guzzle
 Create a new class named `SpamChecker` to wrap 
 the logic of calling the Akismet API and interpreting its responses:
 
-File: `src/Utility/Akismet/SpamChecker.php`
+File: `src/Support/Akismet/SpamChecker.php`
 
 ```php
 <?php
 
-namespace App\Utility\Akismet;
+namespace App\Support\Akismet;
 
 use GuzzleHttp\ClientInterface;
 use RuntimeException;
@@ -148,12 +148,12 @@ The `checkComment()` method returns 3 values depending on the API call response:
 
 We also need a DTO as parameter object for the spam checker.
 
-File: `src/Utility/Akismet/SpamCheckerComment.php`
+File: `src/Support/Akismet/SpamCheckerComment.php`
 
 ```php
 <?php
 
-namespace App\Utility\Akismet;
+namespace App\Support\Akismet;
 
 use DateTimeImmutable;
 
@@ -206,7 +206,7 @@ Insert a new DI container definition for `SpamChecker:class` in `config/containe
 ```php
 <?php
 
-use App\Utility\Akismet\SpamChecker;
+use App\Support\Akismet\SpamChecker;
 use GuzzleHttp\Client;
 use Psr\Container\ContainerInterface;
 
@@ -235,8 +235,8 @@ One simple way to check for spam when a new comment is submitted is to call the 
 checker before storing the data into the database:
 
 ```php
-use App\Utility\Akismet\SpamChecker;
-use App\Utility\Akismet\SpamCheckerComment;
+use App\Support\Akismet\SpamChecker;
+use App\Support\Akismet\SpamCheckerComment;
 use DateTimeImmutable;
 
 // ...

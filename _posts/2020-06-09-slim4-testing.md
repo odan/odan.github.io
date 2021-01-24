@@ -271,10 +271,10 @@ If you want to test the overall behavior of your application,
 see the section about [Integration Tests](#integration-tests).
 
 Suppose, for example, that you have an incredibly simple class called `Calculator` in 
-the `src/Util/` directory of the app:
+the `src/Support/` directory of the app:
 
 ```php
-namespace App\Util;
+namespace App\Support;
 
 class Calculator
 {
@@ -285,14 +285,14 @@ class Calculator
 }
 ```
 
-To test this, create a `CalculatorTest` file in the `tests/TestCase/Util`
+To test this, create a `CalculatorTest` file in the `tests/TestCase/Support`
 directory of your application:
 
 ```php
-// tests/TestCase/Util/CalculatorTest.php
-namespace App\Test\TestCase\Util;
+// tests/TestCase/Support/CalculatorTest.php
+namespace App\Test\TestCase\Support;
 
-use App\Util\Calculator;
+use App\Support\Calculator;
 use PHPUnit\Framework\TestCase;
 
 class CalculatorTest extends TestCase
@@ -309,8 +309,8 @@ class CalculatorTest extends TestCase
 ```
 
 By convention, the `tests/TestCase/` directory should replicate the directory of your 
-module for unit tests. So, if you're testing a class in the `src/Util/` directory, 
-put the test in the `tests/TestCase/Util/` directory.
+module for unit tests. So, if you're testing a class in the `src/Support/` directory, 
+put the test in the `tests/TestCase/Support/` directory.
 
 Now run all tests:
 
@@ -321,16 +321,16 @@ composer test
 ## Mocking
 
 When testing Slim applications, you may wish to "mock" certain aspects of your 
-application so they are not actually executed during a test. 
+application, so they are not actually executed during a test. 
 For example, when testing an HTTP endpoint that hits the database, 
-you may wish to mock the repository method so it's not actually accessing the database
+you may wish to mock the repository method, so it's not actually accessing the database
 during the test. 
 
-Phpunit itself provides some usful methods for mocking out of the box.
+Phpunit itself provides some useful methods for mocking out of the box.
 But when you use a dependency injection container (PSR-11), then you also have to
 set the mocked instances into the container. For this purpose I added
 the `mock` helper method into the `AppTestTrait`.
-This tiny helper primarily provides a convenience layer over the Phpunit MockObject so you do not 
+This tiny helper primarily provides a convenience layer over the Phpunit MockObject, so you do not 
 have to manually make complicated mocking method calls. 
 
 For example, if you want to mock the database, just use the `mock` method as follows:

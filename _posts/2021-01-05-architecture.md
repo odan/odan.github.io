@@ -483,7 +483,7 @@ src/
     Factory/
     Middleware/
     Responder/
-    Utility/
+    Support/
 ```
 
 **Grouping the Domain by Sub-Domain (Feature)**

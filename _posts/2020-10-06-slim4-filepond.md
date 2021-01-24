@@ -186,7 +186,7 @@ Create this action class in `src/Action/FilePondProcessAction.php`:
 
 namespace App\Action;
 
-use App\Util\FilenameFilter;
+use App\Support\FilenameFilter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UploadedFileInterface;
@@ -345,7 +345,7 @@ add this new action class in `src/Action/FilePondRevertAction.php`:
 
 namespace App\Action;
 
-use App\Util\FilenameFilter;
+use App\Support\FilenameFilter;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -396,12 +396,12 @@ $app->delete('/filepond/revert', \App\Action\FilePondRevertAction::class);
 For security reasons all requested filenames must be "sanitized" to prevent
 unwanted filesystem manipulations.
 
-Create a class in `src/Util/FilenameFilter.php` and copy this content:
+Create a class in `src/Support/FilenameFilter.php` and copy this content:
 
 ```php
 <?php
 
-namespace App\Util;
+namespace App\Support;
 
 final class FilenameFilter
 {

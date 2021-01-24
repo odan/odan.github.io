@@ -114,9 +114,9 @@ Note that `slim/PHP-View` has no built-in mitigation from XSS attacks. It is the
 use `htmlspecialchars()` or a component like `laminas-escaper`. In this case I want to keep it lean and we just add this
 simple but efficient html encoding function to our application instead.
 
-Create a new directory, if not exists: `src/Util`
+Create a new directory, if not exists: `src/Support`
 
-Then create new file `src/Util/functions.php` and copy paste this content:
+Then create new file `src/Support/functions.php` and copy/paste this content:
 
 ```php
 <?php
@@ -139,7 +139,7 @@ Open `composer.json` and add the `files` entry under the `autoload` property:
 
 ```
 "files": [
-    "src/Util/functions.php"
+    "src/Support/functions.php"
 ]
 ```
 
@@ -151,7 +151,7 @@ The result may look like this:
         "App\\": "src/"
     },
     "files": [
-        "src/Util/functions.php"
+        "src/Support/functions.php"
     ]
 },
 ```
@@ -308,7 +308,7 @@ To provide a convenient way to retrieve strings in various languages,
 allowing you to easily support multiple languages
 within your application, we add some helper functions.
 
-Copy the following functions into your file: `src/Util/functions.php`:
+Copy the following functions into your file: `src/Support/functions.php`:
 
 ```php
 /**
