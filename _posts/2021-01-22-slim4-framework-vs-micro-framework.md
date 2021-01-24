@@ -26,7 +26,7 @@ Over the last few years, I've noticed that there's a lot of confusion (and false
 the Slim microframework. 
 In the following chapters, I will try to explain the conceptual 
 differences between full-stack frameworks and microframeworks.
-You should not see this comparison as "Slim vs. Laravel", 
+You should not consider this comparison as "Slim vs. Laravel", 
 but rather as framework vs. micro-framework in general.
 
 ## Microframework
