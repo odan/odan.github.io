@@ -122,10 +122,14 @@ Here is a list of resources you should already be familiar with before evaluatin
 
 * [PHP 7+](https://en.wikipedia.org/wiki/PHP)
     * [OOP](https://www.php.net/manual/en/language.oop5.php)
+    * [Object Interfaces](https://www.php.net/manual/en/language.oop5.interfaces.php)  
     * [Namespaces](https://www.php.net/manual/en/language.namespaces.php)
+    * [Factory pattern](https://phptherightway.com/pages/Design-Patterns.html#factory)
 * [HTTP Basics](https://www3.ntu.edu.sg/home/ehchua/programming/webprogramming/HTTP_Basics.html)
 * [HTTP Request and Response](https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages)
 * [URL - Uniform Resource Locator](https://en.wikipedia.org/wiki/URL)
+* [Linux File System Basics](https://www.dummies.com/computers/operating-systems/linux/linux-file-system-basics/)
+  * [The Linux file system differs from the Windows file system](https://www.howtogeek.com/137096/6-ways-the-linux-file-system-is-different-from-the-windows-file-system/)
 * [Apache Module mod_rewrite](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html)
 * [Dependency management with Composer](https://getcomposer.org/doc/00-intro.md)
 * [The PSR-4 Autoloader](https://www.php-fig.org/psr/psr-4/)
@@ -134,12 +138,13 @@ Here is a list of resources you should already be familiar with before evaluatin
 * [PSR-15: HTTP Server Request Handlers](https://www.php-fig.org/psr/psr-15/)
 * [PSR-17: HTTP Factories](https://www.php-fig.org/psr/psr-17/)
 * [Middleware](https://www.slimframework.com/docs/v4/concepts/middleware.html)
+* [Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)
+* [Front controller](https://phptherightway.com/pages/Design-Patterns.html#front-controller)
+* [Model-View-Controller (MVC)](https://phptherightway.com/pages/Design-Patterns.html#front-controller)  
+  * [MVC Model 2](https://de.wikipedia.org/wiki/Model_2)
+* [PHPUnit](https://en.wikipedia.org/wiki/PHPUnit)
 * [Debugging with Xdebug](https://en.wikipedia.org/wiki/Xdebug)
 * [F12 - Developer Toolbar](https://developers.google.com/web/tools/chrome-devtools)
-* [Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)
-* [Front controller](https://en.wikipedia.org/wiki/Front_controller)
-* [MVC Model 2](https://de.wikipedia.org/wiki/Model_2)
-* [PHPUnit](https://en.wikipedia.org/wiki/PHPUnit)
 
 If you find something you feel not familiar with, please learn it **before** you try Slim.
 But that was just the beginning. You should also have a stable
