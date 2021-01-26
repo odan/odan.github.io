@@ -32,7 +32,7 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 * HTML, CSS, Bootstrap, jQuery, Vue.js
 * Slim, Laminas, CakePHP, Symfony
 * RESTful, SOAP, XML, JSON
-* SOLID, DDD, Hexagonal Architecture
+* SOLID, DDD, Clean Code, Architecture
 * Docker, IT-Security
 
 ## My projects
