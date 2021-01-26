@@ -195,13 +195,14 @@ The Laravel and Symfony community is very big and willing to help as fast as pos
 They also provide tons of tutorials, videos, online courses and certificates.
 
 Especially beginners struggle to understand Slim and think it's "simple" and
-so it must easy for them. This is not true. Slim is simple but not easy.
+so it must easy for them. This is not true. **Slim is simple but not easy.**
 Slim cannot be learned in an "afternoon". Also PHP and development in general 
 cannot be learned in an afternoon. This leads to a strange situation, 
-because in my personal experience, most support requests don't concern Slim itself, 
-but much more on the **basics** like PHP classes, Autoloading (PSR-4) and Apache mod_rewrite issues.
-This fact essentially motivated me to get this fairy tale out of the world. 
-What I try to say is: Slim is not for beginners.
+because most support requests don't concern Slim itself.
+In the last few years, most of these support issues are about teaching 
+people how to configure their webserver, especially Apache with `mod_rewrite`.
+The second most common questions are about basic PHP knowledge such as classes, 
+namespaces, and autoloading (PSR-4). What I try to say is: Slim is not for beginners.
 
 ## Bundles, Packages and Plugins
 
