@@ -537,6 +537,15 @@ and give a service a "single responsibility". What changes for the same reason s
 Please don't prefix all service classes with `*Service`.
 A service class is not a "Manager" or "Utility" class. A service is a "Do-er".
 
+Application Services are meant to provide methods for the **use cases** of an application to be performed.
+A Service should be **centered around the use cases** of a system, or a component (i.e. aggregate), 
+but the actual domain logic should be in the domain objects.
+
+Please don't implement "[Entity Services](https://www.michaelnygard.com/blog/2017/12/the-entity-service-antipattern/)"
+by creating a CustomerService or InvoiceService that contains all the data and behavior for a customer.  
+The concept of a Customer can exist within multiple boundaries.
+Each boundary having the behavior and data relevant to it.
+
 A service class can have several methods as long as they serve a narrow purpose.
 This also encourages you to name your classes more specifically. Instead of a "User" god-class,
 you might have a `UserCreator` class with a few methods focusing on creating a user.
