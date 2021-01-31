@@ -16,6 +16,7 @@ keywords: slim, slimphp, php, monolog, logging
 * [Logger Factory](#logger-factory)
 * [Usage](#usage)
 * [Logging to the console](#logging-to-the-console)
+* [Testing](#testing)
 
 ## Requirements
 
