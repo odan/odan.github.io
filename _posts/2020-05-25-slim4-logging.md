@@ -62,10 +62,10 @@ Make sure, that the `{project-root}/logs/` directory exists.
 
 ### Logger Factory
 
-By default a monolog instance would output it's messages into a single file.
+By default, a monolog instance would output its messages into a single file.
 
 Now imagine what a mess it would be if all your modules would log everything
-to the same file. Of course you could add a `RotatingFileHandler`, but
+to the same file. Of course, you could add a `RotatingFileHandler`, but
 it's still not very clean in the long run. To make our logging system more flexible,
 and compatible with a container we add a special `LoggerFactory` class
 to create a custom logger per class.
@@ -221,7 +221,7 @@ Creating a custom logger for the `ErrorMiddleware`:
 
 ```php
 $loggerFactory = $app->getContainer()->get(\App\Factory\LoggerFactory::class);
-$logger = $loggerFactory->addFileHandler('error.log')->createInstance('error');
+$logger = $loggerFactory->addFileHandler('error.log')->createLogger();
 
 $errorMiddleware = $app->addErrorMiddleware(true, true, true, $logger);
 ```
@@ -250,7 +250,7 @@ final class UserCreator
     public function __construct(LoggerFactory $logger) {
         $this->logger = $logger
             ->addFileHandler('user_creator.log')
-            ->createInstance('user_creator');
+            ->createLogger();
     }
 
     public function registerUser(array $user): int
@@ -283,7 +283,7 @@ you only need to add the console handler:
 public function __construct(LoggerFactory $logger) {
     $this->logger = $logger
         ->addConsoleHandler()
-        ->createInstance('my_console_command');
+        ->createLogger();
 }
 ```
 
@@ -294,6 +294,36 @@ public function __construct(LoggerFactory $logger) {
     $this->logger = $logger
         ->addFileHandler('my_cronjob.log')
         ->addConsoleHandler()
-        ->createInstance('my_cronjob');
+        ->createLogger();
+}
+```
+
+## Testing
+
+To disable the logger for testing, you could add this method to your phpunit test-suite
+and invoke it within the `setUp` method or per test method.
+
+```php
+<?php
+
+use App\Factory\LoggerFactory;
+use Monolog\Handler\NoopHandler;
+use Monolog\Logger;
+
+protected function disableLogger()
+{
+    $logger = new Logger('testing');
+    $logger->pushHandler(new NoopHandler());
+    
+    $factory = new LoggerFactory(
+        [
+            'path' => '',
+            'level' => 0,
+            'test' => $logger,
+        ]
+    );
+    
+    // Disable logging for testing
+    $this->container->set(LoggerFactory::class, $factory);
 }
 ```
