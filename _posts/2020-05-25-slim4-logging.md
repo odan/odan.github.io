@@ -37,6 +37,12 @@ To install monolog, run:
 composer require monolog/monolog
 ```
 
+To install the uuid generator, run:
+
+```
+composer require symfony/polyfill-uuid
+```
+
 ## Configuration
 
 Insert the logger settings into your configuration file, e.g. `config/settings.php`;
@@ -93,31 +99,45 @@ final class LoggerFactory
     private $level;
 
     /**
+     * @var array<mixed> Handler
+     */
+    private $handler = [];
+
+    /**
+     * @var LoggerInterface|null
+     */
+    private $testLogger;
+
+    /**
      * The constructor.
      *
-     * @param array $settings The settings
+     * @param array<mixed> $settings The settings
      */
     public function __construct(array $settings)
     {
         $this->path = (string)$settings['path'];
         $this->level = (int)$settings['level'];
-    }
 
-    /**
-     * @var array Handler
-     */
-    private $handler = [];
+        // This can be used for testing to make the Factory testable
+        if (isset($settings['test'])) {
+            $this->testLogger = $settings['test'];
+        }
+    }
 
     /**
      * Build the logger.
      *
-     * @param string $name The name
+     * @param string|null $name The logging channel
      *
      * @return LoggerInterface The logger
      */
-    public function createInstance(string $name): LoggerInterface
+    public function createLogger(string $name = null): LoggerInterface
     {
-        $logger = new Logger($name);
+        if ($this->testLogger) {
+            return $this->testLogger;
+        }
+
+        $logger = new Logger($name ?: uuid_create());
 
         foreach ($this->handler as $handler) {
             $logger->pushHandler($handler);
@@ -132,26 +152,17 @@ final class LoggerFactory
      * Add rotating file logger handler.
      *
      * @param string $filename The filename
-     * @param int $level The level (optional)
+     * @param int|null $level The level (optional)
      *
-     * @return LoggerFactory The logger factory
+     * @return self The logger factory
      */
     public function addFileHandler(string $filename, int $level = null): self
     {
         $filename = sprintf('%s/%s', $this->path, $filename);
-
-        $rotatingFileHandler = new RotatingFileHandler(
-            $filename, 
-            0,
-            $level ?? $this->level,
-            true,
-            0777
-        );
+        $rotatingFileHandler = new RotatingFileHandler($filename, 0, $level ?? $this->level, true, 0777);
 
         // The last "true" here tells monolog to remove empty []'s
-        $rotatingFileHandler->setFormatter(
-            new LineFormatter(null, null, false, true)
-        );
+        $rotatingFileHandler->setFormatter(new LineFormatter(null, null, false, true));
 
         $this->handler[] = $rotatingFileHandler;
 
@@ -161,9 +172,9 @@ final class LoggerFactory
     /**
      * Add a console logger.
      *
-     * @param int $level The level (optional)
+     * @param int|null $level The level (optional)
      *
-     * @return self The instance
+     * @return self The logger factory
      */
     public function addConsoleHandler(int $level = null): self
     {
@@ -175,6 +186,7 @@ final class LoggerFactory
         return $this;
     }
 }
+
 ```
 
 Add a new container definition for the `LoggerFactory::class` in `config/container.php`:
