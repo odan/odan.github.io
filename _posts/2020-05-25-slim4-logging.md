@@ -300,8 +300,8 @@ public function __construct(LoggerFactory $logger) {
 
 ## Testing
 
-To disable the logger for testing, you could add this method to your phpunit test-suite
-and invoke it within the `setUp` method or per test method.
+To disable the logger for testing, you could add this method into a phpunit test trait
+and invoke it within the `setUp` method or directly in the test.
 
 ```php
 <?php
@@ -309,6 +309,8 @@ and invoke it within the `setUp` method or per test method.
 use App\Factory\LoggerFactory;
 use Monolog\Handler\NoopHandler;
 use Monolog\Logger;
+
+// ...
 
 protected function disableLogger()
 {
@@ -326,4 +328,25 @@ protected function disableLogger()
     // Disable logging for testing
     $this->container->set(LoggerFactory::class, $factory);
 }
+```
+
+Another approach to disable the logging completely would be to define a custom `logger`
+settings array for the testing environment. In this case the DI container definition 
+for `LoggerFactory::class` will always inject the "mocked" logger.
+
+```php
+use Monolog\Handler\NoopHandler;
+use Monolog\Logger;
+
+// ...
+
+// Mocked Logger settings
+$logger = new Logger('testing');
+$logger->pushHandler(new NoopHandler());
+    
+$settings['logger'] = [
+    'path' => '',
+    'level' => 0,
+    'test' => $logger,
+];
 ```
