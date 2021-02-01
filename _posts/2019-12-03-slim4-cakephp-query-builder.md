@@ -29,7 +29,7 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 * MySQL 5.7+
 * Composer
 * [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
-* [The LoggerFactory](2020-05-25-slim4-logging.md)
+* [The LoggerFactory](https://odan.github.io/2020/05/25/slim4-logging.html)
 
 ## Introduction
 
