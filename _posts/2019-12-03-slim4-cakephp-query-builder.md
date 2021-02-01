@@ -221,13 +221,12 @@ namespace App\Domain\User\Repository;
 
 use App\Domain\User\Data\UserData;
 use App\Factory\QueryFactory;
-use App\Repository\TableName;
 use Cake\Database\StatementInterface;
 
 /**
  * Repository.
  */
-class UserRepository
+final class UserRepository
 {
     /**
      * @var QueryFactory The query factory
