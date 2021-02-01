@@ -29,6 +29,7 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 * MySQL 5.7+
 * Composer
 * [A Slim 4 application](https://odan.github.io/2019/11/05/slim4-tutorial.html)
+* [The LoggerFactory](2020-05-25-slim4-logging.md)
 
 ## Introduction
 
@@ -502,7 +503,7 @@ final class UserCreator
         $this->transaction = $transaction;
         $this->logger = $loggerFactory
             ->addFileHandler('user_creator.log')
-            ->createInstance('user_creator');
+            ->createLogger();
     }
 
     public function createUser(array $formData): void

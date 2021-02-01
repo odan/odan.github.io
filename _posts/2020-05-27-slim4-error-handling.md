@@ -219,7 +219,7 @@ final class ErrorHandlerMiddleware implements MiddlewareInterface
     {
         $this->logger = $loggerFactory
             ->addFileHandler('errors.log')
-            ->createInstance('error_handler_middleware');
+            ->createLogger();
     }
 
     /**
