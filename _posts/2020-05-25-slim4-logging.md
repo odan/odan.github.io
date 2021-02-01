@@ -333,21 +333,12 @@ protected function disableLogger()
 
 Another approach to disable the logging completely would be to define a custom `logger`
 settings array for the testing environment. In this case the DI container definition 
-for `LoggerFactory::class` will always inject the "mocked" logger.
+for `LoggerFactory::class` will always inject a `NullLogger` logger instance.
 
 ```php
-use Monolog\Handler\NoopHandler;
-use Monolog\Logger;
-
-// ...
-
-// Mocked Logger settings
-$logger = new Logger('testing');
-$logger->pushHandler(new NoopHandler());
-    
 $settings['logger'] = [
     'path' => '',
     'level' => 0,
-    'test' => $logger,
+    'test' => new \Psr\Log\NullLogger(),
 ];
 ```
