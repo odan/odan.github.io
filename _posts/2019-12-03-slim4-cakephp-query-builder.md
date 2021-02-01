@@ -106,12 +106,12 @@ return [
 ];
 ```
 
-Create a new PHP file: `src/Repository/QueryFactory.php` and copy / paste this content:
+Create a new PHP file: `src/Factory/QueryFactory.php` and copy / paste this content:
 
 ```php
 <?php
 
-namespace App\Repository;
+namespace App\Factory;
 
 use Cake\Database\Connection;
 use Cake\Database\Query;
@@ -220,7 +220,7 @@ You can inject the query factory instance into your repository like this:
 namespace App\Domain\User\Repository;
 
 use App\Domain\User\Data\UserData;
-use App\Repository\QueryFactory;
+use App\Factory\QueryFactory;
 use App\Repository\TableName;
 use Cake\Database\StatementInterface;
 
