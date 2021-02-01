@@ -33,8 +33,13 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 
 ## Introduction
 
-You can use the [CakePHP Query Builder](https://book.cakephp.org/4/en/orm/query-builder.html)
-to connect your Slim 4 application to a database.
+The [CakePHP query builder](https://book.cakephp.org/4/en/orm/query-builder.html) 
+provides a simple-to-use fluent interface 
+for creating and running database queries. By composing queries together, 
+you can create advanced queries using unions and subqueries with ease.
+
+Underneath the covers, the query builder uses PDO prepared statements 
+which protect against SQL injection attacks.
 
 ## Installation
 
