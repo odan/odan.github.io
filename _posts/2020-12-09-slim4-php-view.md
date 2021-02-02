@@ -695,6 +695,8 @@ Example: `webpack.config.js`
 
 ```js
 const path = require('path');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
@@ -714,17 +716,17 @@ module.exports = (env, argv) => ({
 
             const basename = path.basename(match, ext);
             const onlyPath = path.dirname(match);
-            const key = onlyPath.replace('\.\/public\/', '');
+            const key = onlyPath.replace('\.\/templates\/', '');
 
             object[key + '/' + basename] = match;
         });
 
         return object;
-    }('./public/**'),
+    }('./templates/**'),
 
     output: {
-        path: path.resolve(__dirname, 'public/assets'),
-        publicPath: '/',
+        path: path.resolve(__dirname, 'public/assets/'),
+        publicPath: 'assets/',
     },
 
     mode: 'development',
@@ -743,6 +745,8 @@ module.exports = (env, argv) => ({
     },
 
     plugins: [
+        new CleanWebpackPlugin(),
+        new ManifestPlugin(),
         new MiniCssExtractPlugin({
             ignoreOrder: false
         }),
@@ -766,6 +770,22 @@ npm run build
 The minified files are stored under: `public/assets/*`
 
 The manifest file is located at: `public/assets/manifest.json`
+
+Example template:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <base href="<?= $basePath ?>/"/>
+</head>
+<body>
+<script src="assets/app.js"></script>
+</body>
+</html>
+```
 
 If you are looking for a simpler way, you may
 take a look at **[Apache ant](https://stackoverflow.com/a/1498830/1461181)**
