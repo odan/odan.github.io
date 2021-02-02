@@ -784,7 +784,7 @@ The manifest file is located at: `public/assets/manifest.json`
 
 Template that loads the minified JS file:
 
-```html
+```php
 <!DOCTYPE html>
 <html>
 <head>
