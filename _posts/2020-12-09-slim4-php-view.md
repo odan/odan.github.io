@@ -22,7 +22,7 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
   * [Simple Layouts](#simple-layouts)
   * [Complex Layouts](#complex-layouts)
 * [Nesting](#nesting)
-* [Sections](#sections)  
+* [Sections](#sections)
 * [Translations](#translations)
   * [Requirements](#translator-requirements)
   * [Translation helper](#translation-helper)

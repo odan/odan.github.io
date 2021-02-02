@@ -18,11 +18,11 @@ I would appreciate a small donation:
 
 You can **buy** all Slim articles bundled into a eBook (PDF and EPUB). 
 
-Exclusive content:
+**Exclusive content:**
 
 * Slim 4 Introducing
+* Architecture, Action Domain Responder
 * JSON Web Token (JWT) authentication
-* Action Domain Responder
 
 Shop: <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">Slim 4 - eBook</a>
 
