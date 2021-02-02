@@ -364,10 +364,10 @@ and how to render it into the layout page:
 ```php
 <?php $this->setLayout('layout.php'); ?>
 
-<?php $this->addAttribute('css', ['page.js']); ?>
+<?php $this->addAttribute('css', ['page.css']); ?>
 <?php $this->addAttribute('js', ['page.js']); ?>
 
-My Content
+My page content
 ```
 
 The `layout.php` file:
@@ -392,8 +392,9 @@ The `layout.php` file:
 
 The section template for the JavaScript assets, `js.php`:
 
-```
+```php
 <?php
+
 foreach ($assets ?? [] as $asset) {
     echo sprintf('<script type="text/javascript" src="%s"></script>', $asset);
 }
@@ -401,7 +402,7 @@ foreach ($assets ?? [] as $asset) {
 
 The section template for the CSS assets, `css.php`:
 
-```
+```php
 <?php
 
 foreach ($assets ?? [] as $asset) {
