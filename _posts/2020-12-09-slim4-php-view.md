@@ -678,6 +678,7 @@ Example: `package.json`
     },
     "devDependencies": {
         "autoprefixer": "^9.8.6",
+        "clean-webpack-plugin": "^3.0.0",
         "css-loader": "^3.6.0",
         "file-loader": "^4.3.0",
         "mini-css-extract-plugin": "^0.8.2",
