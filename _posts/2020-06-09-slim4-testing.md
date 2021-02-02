@@ -367,6 +367,10 @@ When you write tests for the Actions, better write **integration tests** that co
 the Services, and the Repositories all at once. Then your tests are easier 
 to setup, and you cover all the code you actually deploy.
 
+Conclusion: **Don't mock everything, it's an anti-pattern.**
+If everything is mocked, are we really testing the production code? 
+Don't hesitate to **not** mock!
+
 ## Integration Tests
 
 Integration tests ensure that component collaborations work as expected. 
@@ -632,10 +636,6 @@ $this->insertFixture('tablename', $row);
 ## Conclusion
 
 We have seen how to create all kinds of tests like unit- and integration tests with phpunit.
-
-**Don't mock everything, it's an anti-pattern.**
-
-If everything is mocked, are we really testing the production code? Don't hesitate to **not** mock!
 
 ## Read more
 
