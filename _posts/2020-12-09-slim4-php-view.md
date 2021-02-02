@@ -763,6 +763,10 @@ To minify all assets for production run:
 npm run build
 ```
 
+The minified files are stored under: `public/assets/*`
+
+The manifest file is located at: `public/assets/manifest.json`
+
 If you are looking for a simpler way, you may
 take a look at **[Apache ant](https://stackoverflow.com/a/1498830/1461181)**
 to automate Javascript / CSS minification.
