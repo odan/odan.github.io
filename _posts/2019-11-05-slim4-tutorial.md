@@ -1060,7 +1060,7 @@ If successful, the result should look like this:
 For deployment on a productive server, there are some important settings and security related things to consider.
 
 You can use composer to generate an optimized build of your application. 
-All dev-dependencies are removed and the Composer autoloader is optimized for performance. 
+All dev-dependencies are removed, and the Composer autoloader is optimized for performance. 
 
 Run this command in the same directory as the project’s composer.json file:
 
@@ -1068,9 +1068,9 @@ Run this command in the same directory as the project’s composer.json file:
 composer install --no-dev --optimize-autoloader
 ```
 
-You don't have to run composer on your production server. Instead you should implement a 
-[build pipeline](https://www.amazon.com/dp/B003YMNVC0) that creates
-an so called "artifact". An artifact is an ZIP file you can upload and deploy on 
+You don't have to run composer on your production server. Instead, you should implement a 
+[build pipeline](https://www.amazon.com/dp/B003YMNVC0) that creates a
+so called "artifact". An artifact is an ZIP file you can upload and deploy on 
 your production server.
 
 These tools are very useful for creating artifacts:
@@ -1093,7 +1093,8 @@ DocumentRoot /var/www/example.com/htdocs/public
 ```
 
 **Tip:** Never store secret passwords in your git / SVN repository. 
-Instead you could store them in a file like `env.php` and place this file one directory above your application directory. e.g.
+Instead, you could store them in a file like `env.php` and place this file 
+one directory above your application directory. e.g.
 
 ```
 /var/www/example.com/env.php

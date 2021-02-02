@@ -14,7 +14,10 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [Container setup](#container-setup)
-* [Helper functions](#helper-functions)
+* [Escaping](#escaping)
+  * [Escaping values](#escaping-values)
+  * [Escaping HTML attributes](#escaping-html-attributes)
+  * [Automatic escaping](#automatic-escaping)
 * [Usage](#usage)
   * [Simple Layouts](#simple-layouts)
   * [Complex Layouts](#complex-layouts)
@@ -104,7 +107,10 @@ return [
 
 ```
 
-## Helper functions
+## Escaping
+
+Escaping is a form of data filtering which sanitizes unsafe, 
+user supplied input prior to outputting it as HTML. 
 
 The OWASP Top 10 web security risks study lists Cross-Site Scripting (XSS) in second place.
 
@@ -162,13 +168,39 @@ The result may look like this:
 
 Then run `composer dump-autoload` to update the autoloader.
 
-## Usage
-
-Create a new view template: `templates/home.php`
+### Escaping values
 
 ```php
 Hello <?= html($name) ?>
 ```
+
+or
+
+```php
+Hello <?php echo html($name) ?>
+```
+
+
+### Escaping HTML attributes
+
+Don't forget to properly quote an HTML attribute, 
+they will likely also forget to use this special function.
+Here is how you properly escape HTML attributes:
+
+```php
+<!-- Good -->
+<img src="portrait.jpg" alt="<?=html($name)?>">
+
+<!-- BAD -->
+<img src="portrait.jpg" alt='<?=html($name)?>'>
+
+<!-- BAD -->
+<img src="portrait.jpg" alt=<?=html($name)?>>
+```
+
+## Usage
+
+Create a new view template: `templates/home.php`
 
 This Action class shows how to inject the PhpRenderer to render an template:
 
