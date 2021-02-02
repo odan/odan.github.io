@@ -16,6 +16,10 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 * [Container setup](#container-setup)
 * [Helper functions](#helper-functions)
 * [Usage](#usage)
+  * [Simple Layouts](#simple-layouts)
+  * [Complex Layouts](#complex-layouts)
+* [Nesting](#nesting)
+* [Sections](#sections)  
 * [Translations](#translations)
   * [Requirements](#translator-requirements)
   * [Translation helper](#translation-helper)
@@ -198,7 +202,7 @@ final class HomeAction
 }
 ```
 
-### Layouts
+### Simple Layouts
 
 The simplest form would be to include recurring elements such as the page header, 
 navigation and footer, as a ready-made layout template. 
@@ -249,6 +253,129 @@ Hello World</body>
 
 Please consult the **[documentation](https://github.com/slimphp/PHP-View#template-variables)**
 to learn more about layout templates and global templates variables.
+
+## Complex Layouts
+
+Complexer layouts can be created by defining the layout page
+within the page specific template, e.g. with `$this->setLayout('layout.php');`
+
+The global layout file: `templates/layout.php`:
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <base href="<?= $basePath ?>/"/>
+</head>
+<body>
+<?= $content ?>
+</body>
+</html>
+```
+
+The page that defines the layout. File: `templates/home.php`:
+
+```php
+<?php $this->setLayout('layout.php'); ?>
+
+My Content of the page
+```
+
+Output:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <base href="/slim4-skeleton/"/>
+</head>
+<body>
+My Content
+</body>
+</html>
+```
+
+## Nesting
+
+Including another template (partials) into the current template is done using the `fetch()` function:
+
+```php
+<?= $this->fetch('footer.php') ?>
+```
+
+**Assign data**
+
+To assign data (variables) to a nested template, pass them as an array to the
+`fetch()` method. This data will then be available as locally scoped
+variables within the nested template.
+
+```php
+<?= $this->fetch('footer.php', ['year' => date('Y')]) ?>
+```
+
+The `footer.php` file:
+
+```php
+<hr>Copyright <?= $year ?><br>
+```
+
+## Sections
+
+Sections or "blocks" can be rendered using the `addAttribute` and `fetch` method.
+This example shows how to define the assets within a specific page
+and how to render it into the layout page:
+
+```php
+<?php $this->setLayout('layout.php'); ?>
+
+<?php $this->addAttribute('css', ['page.js']); ?>
+<?php $this->addAttribute('js', ['page.js']); ?>
+
+My Content
+```
+
+The `layout.php` file:
+
+```php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Specification - Swagger UI</title>
+    <base href="<?= $basePath ?>/"/>
+    <?= $this->fetch('css.php', ['assets' => $css ?? []]) ?>
+    <?= $this->fetch('js.php', ['assets' => $js ?? []]) ?>
+</head>
+<body>
+<?= $content ?>
+
+<?= $this->fetch('footer.php', ['year' => date('Y')]) ?>
+</body>
+</html>
+```
+
+The section template for the JavaScript assets, `js.php`:
+
+```
+<?php
+foreach ($assets ?? [] as $asset) {
+    echo sprintf('<script type="application/javascript" src="%s"></script>', $asset);
+}
+```
+
+The section template for the CSS assets, `css.php`:
+
+```
+<?php
+
+foreach ($assets ?? [] as $asset) {
+    echo sprintf('<link rel="stylesheet" type="text/css" href="%s">', $asset);
+}
+```
 
 ## Translations
 
@@ -798,10 +925,6 @@ Template that loads the minified JS file:
 </body>
 </html>
 ```
-
-If you are looking for a simpler way, you may
-take a look at **[Apache ant](https://stackoverflow.com/a/1498830/1461181)**
-to automate Javascript / CSS minification.
 
 ## Similar components
 
