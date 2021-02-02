@@ -755,6 +755,15 @@ module.exports = (env, argv) => ({
 
 ```
 
+
+Create a simple JavaScript file in `templates/home/hello.js`:
+
+```js
+document.addEventListener('DOMContentLoaded', function () {
+  alert('Hello World');
+});
+```
+
 Install the packages:
 
 ```
@@ -771,18 +780,19 @@ The minified files are stored under: `public/assets/*`
 
 The manifest file is located at: `public/assets/manifest.json`
 
-Example template:
+Template that loads the minified JS file:
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Example</title>
+    <meta charset="utf-8">
+    <title>Slim Tutorial</title>
     <base href="<?= $basePath ?>/"/>
+    <script type="text/javascript" src="assets/home/hello.js"></script>
 </head>
 <body>
-<script src="assets/app.js"></script>
+<?= $content ?>
 </body>
 </html>
 ```
