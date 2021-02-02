@@ -345,7 +345,7 @@ The `layout.php` file:
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>API Specification - Swagger UI</title>
+    <title>Title</title>
     <base href="<?= $basePath ?>/"/>
     <?= $this->fetch('css.php', ['assets' => $css ?? []]) ?>
     <?= $this->fetch('js.php', ['assets' => $js ?? []]) ?>
