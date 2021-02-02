@@ -554,8 +554,8 @@ protected function setUp(): void
 The `setUpDatabase` method installs the database schema into a phpunit specific test database.
 The database trait fetches the `PDO::class` instance directly from the DI container. So make sure
 that the DI container returns the connection from a testing-, and not from a development database.
-You can do this by defining another database name within an environment specific
-configuration file or by setting a custom PDO instance "manually" into the DI container.
+You can do this by defining a different database name in an environment-specific configuration 
+file or by "manually" placing a custom PDO instance in the DI container.
 
 Example configuration file for phpunit: `config/local.testing.php`
 
