@@ -651,7 +651,9 @@ Hello World
 
 You should only use minified assets on your **production** server to speed up performance (SEO). 
 To bundle assets, you can add [Webpack](https://webpack.js.org/) to your build process.
-A webpack script could, for example, recursively traverse the JS and CSS directories and minify its content.
+A webpack script could, for example, recursively traverse the `templates/` directory
+and minify all JS and CSS files. The output should be place in the `public/assets/` directory
+because its content is public accessible from the web.
 
 First download and install the **latest** version of [Node.js](https://nodejs.org/en/download/) to get NPM.
 
@@ -754,7 +756,6 @@ module.exports = (env, argv) => ({
 });
 
 ```
-
 
 Create a simple JavaScript file in `templates/home/hello.js`:
 
