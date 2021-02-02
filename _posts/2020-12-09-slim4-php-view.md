@@ -653,13 +653,26 @@ You should only use minified assets on your **production** server to speed up pe
 To bundle assets, you can add [Webpack](https://webpack.js.org/) to your build process.
 A webpack script could, for example, recursively traverse the JS and CSS directories and minify its content.
 
+First download and install the **latest** version of [Node.js](https://nodejs.org/en/download/) to get NPM.
+
+Update NPM:
+
+```
+npm install npm@latest -g
+```
+
 Example: `package.json`
 
 ```
 {
+    "name": "my-app",
+    "version": "1.0.0",
+    "license": "MIT",
+    "private": true,
     "scripts": {
         "build": "npx webpack --mode=production",
-        "build:dev": "npx webpack --mode=development"
+        "build:dev": "npx webpack --mode=development",
+        "watch": "npx webpack --watch"
     },
     "devDependencies": {
         "autoprefixer": "^9.8.6",
@@ -671,10 +684,11 @@ Example: `package.json`
         "terser-webpack-plugin": "^2.3.8",
         "webpack": "^4.44.2",
         "webpack-assets-manifest": "^3.1.1",
-        "webpack-cli": "^3.3.12",
+        "webpack-cli": "^4.4.0",
         "webpack-manifest-plugin": "^2.2.0"
     }
 }
+
 ```
 
 Example: `webpack.config.js`
@@ -709,7 +723,7 @@ module.exports = (env, argv) => ({
     }('./public/**'),
 
     output: {
-        path: path.resolve(__dirname, 'public'),
+        path: path.resolve(__dirname, 'public/assets'),
         publicPath: '/',
     },
 
@@ -737,7 +751,17 @@ module.exports = (env, argv) => ({
 
 ```
 
-To minify all assets for production run: `npm run build`
+Install the packages:
+
+```
+npm install
+```
+
+To minify all assets for production run:
+
+```
+npm run build
+```
 
 If you are looking for a simpler way, you may
 take a look at **[Apache ant](https://stackoverflow.com/a/1498830/1461181)**
