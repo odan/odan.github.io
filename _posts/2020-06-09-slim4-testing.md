@@ -18,7 +18,7 @@ keywords: slim, slimphp, php, test, testing, phpunit, integration
 * [Integration Tests](#integration-tests)
 * [HTTP Tests](#http-tests)
 * [Database Testing](#database-testing)
-* [Conclusion](#conclusion)  
+* [Conclusion](#conclusion)
 * [Read more](#read-more)
 
 ## Requirements
@@ -508,11 +508,126 @@ $request = $this->createRequest('GET', $url);
 
 ## Database Testing
 
-The shown HTTP test doesn't hit the database and is very fast. 
-If you also want to test against the database, 
-you should read my next article post about database testing.
+The `selective/test-traits` component provides a variety of helpful tools to make it easier 
+to test your database driven applications. 
 
-Stay tuned.
+Installation:
+
+```
+composer require selective/test-traits --dev
+```
+
+The `DatabaseTestTrait` provides methods for all these stages of a database test:
+
+* Import the database schema (table structure)
+* Insert the fixtures (rows) required for the test.
+* Execute the test
+* Verify the state of the tables
+* Cleanup the tables for each new test
+
+Add the `DatabaseTestTrait` only to a phpunit test class 
+where you want to write a database test:
+
+```php
+use PHPUnit\Framework\TestCase;
+use Selective\TestTrait\Traits\DatabaseTestTrait;
+// ...
+
+class UserCreateActionTest extends TestCase
+{
+    use AppTestTrait;
+    // ...
+}
+```
+
+Then invoke the `setUpDatabase` method and pass the full path to the sql schema file:
+
+```php
+protected function setUp(): void
+{
+    // ...
+    
+    $this->setUpDatabase(__DIR__ . '/../../resources/schema/schema.sql');
+}
+```
+
+The `setUpDatabase` method installs the database schema into a phpunit specific test database.
+The database trait fetches the `PDO::class` instance directly from the DI container. So make sure
+that the DI container returns the connection from a testing-, and not from a development database.
+You can do this by defining another database name within an environment specific
+configuration file or by setting a custom PDO instance "manually" into the DI container.
+
+Example configuration file for phpunit: `config/local.testing.php`
+
+```php
+// Phpunit test database
+$settings['db']['database'] = 'slim_skeleton_test';
+```
+
+### Database asserts
+
+Assert a number of rows in a given table:
+
+```php
+$this->assertTableRowCount(1, 'users');
+```
+
+Assert the given row exists:
+
+```php
+$this->assertTableRowExists('users', 1);
+```
+
+Assert that the given row does not exist:
+
+```php
+$this->assertTableRowNotExists('users', 1);
+```
+
+Assert row values:
+
+```php
+$this->assertTableRow($expected, 'users', 1);
+```
+
+Assert a specific set of row values:
+
+```php
+$this->assertTableRow($expected, 'users', 1, ['email', 'url']);
+```
+
+```php
+$this->assertTableRow($expected, 'users', 1, array_keys($expected));
+```
+
+Assert a specific value in a given table, row and field:
+
+```php
+$this->assertTableRowValue('1', 'users', 1, 'id');
+```
+
+Read single value from table by id:
+
+```php
+$password = $this->getTableRowById('users', 1)['password'];
+```
+
+### Test fixtures
+
+Insert multiple fixtures at once:
+
+```php
+use App\Test\Fixture\UserFixture;
+
+$this->insertFixtures([UserFixture::class]);
+```
+
+Insert manual fixtures:
+
+```php
+$this->insertFixture('tablename', $row);
+```
+
 
 ## Conclusion
 
