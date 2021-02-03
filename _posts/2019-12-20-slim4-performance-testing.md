@@ -73,4 +73,5 @@ Please note: Most of these tips are only useful for the production environment.
 * Load only middleware that is really needed.
 * Minify and bundle your assets, e.g. JavaScript, CSS and images.
 * Make proper use of database indexes.
+* Docker containers are slow on Windows and Mac. Consider a local webserver.
 * Run Lighthouse in Chrome DevTools.
