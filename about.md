@@ -67,7 +67,7 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 ## Contact
 
-* [Support request](https://github.com/odan/slim4-tutorial/issues/new)
+* [Slim-Framework Support Request](https://github.com/odan/slim4-tutorial/issues/new)
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
