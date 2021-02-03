@@ -293,7 +293,7 @@ within the page specific template, e.g. with `$this->setLayout('layout.php');`
 
 The global layout file: `templates/layout.php`:
 
-```
+```php
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -312,7 +312,7 @@ The page that defines the layout. File: `templates/home.php`:
 ```php
 <?php $this->setLayout('layout.php'); ?>
 
-My Content of the page
+My page content
 ```
 
 Output:
@@ -326,7 +326,7 @@ Output:
     <base href="/slim4-skeleton/"/>
 </head>
 <body>
-My Content
+My page content
 </body>
 </html>
 ```
