@@ -1,10 +1,10 @@
 ---
-title: RabbitMQ
+title: PHP - RabbitMQ
 layout: post
 comments: true
 published: false
 description:
-keywords: php, rabbitmq, queue
+keywords: php, rabbitmq, queue, work, worker, queues
 image: 
 ---
 
@@ -21,7 +21,7 @@ image:
 ## Requirements
 
 * PHP 7.2+
-* XAMPP for Windows
+* Windows
 
 ## Introduction
 
@@ -79,7 +79,9 @@ At this point in time we have now queue, see `Queues`.
 
 Next we have to install a RabbitMQ client for PHP.
 
-RabbitMQ speaks multiple protocols. This tutorial covers [AMQP 0-9-1](https://www.rabbitmq.com/tutorials/amqp-concepts.html),
+RabbitMQ uses a protocol called AMQP by default. 
+To be able to communicate with RabbitMQ you need a library that understands 
+the same protocol as RabbitMQ. This tutorial covers [AMQP 0-9-1](https://www.rabbitmq.com/tutorials/amqp-concepts.html),
 which is an open, general-purpose protocol for messaging. There are a number of clients for RabbitMQ 
 in many languages. We'll use the `php-amqplib` in this tutorial, and Composer for dependency management.
 
@@ -93,8 +95,44 @@ Now that we have the php-amqplib library installed, we can write some code.
 
 ## Usage
 
+Message queueing allows web servers to respond to requests quickly instead
+of being forced to perform resource-heavy procedures on the spot that may
+delay response time. Message queueing is also good when you want to distribute
+a message to multiple consumers or to balance loads between workers.
+
+The consumer takes a message off the queue and starts processing the PDF or E-Mails.
+At the same time, the producer is queueing up new messages.
+The consumer can be on a totally different server than the producer or they
+can be located on the same server. The request can be created in one
+programming language and handled in another programming language.
+The point is, the two applications will only communicate through the
+messages they are sending to each other, which means the sender and
+receiver have low coupling.
+
 ### Sending
 
+Send a new message to a queue is quite "simple":
+
+```php
+use PhpAmqpLib\Connection\AMQPStreamConnection;
+use PhpAmqpLib\Message\AMQPMessage;
+
+$connection = new AMQPStreamConnection('localhost', 5672, 'guest', 'guest');
+$channel = $connection->channel();
+
+$channel->queue_declare('hello', false, false, false, false);
+
+$msg = new AMQPMessage('Hello World!');
+$channel->basic_publish($msg, '', 'hello');
+
+$channel->close();
+$connection->close();
+```
+
+The example from above will push a `Hello World!` payload into a queue with the name `hello`.
+When the queue name does not exist, it will be created. Instead of a plain string, it's
+also possible to send a JSON, XML string as payload. Just make sure
+that the consumer can decode it.
 
 ### Receiving
 
@@ -105,8 +143,8 @@ solution would be to start the consumer script via crontab every minute or so.
 The more accepted method is to keep your consumer running. 
 There are tools like [Supervisor](http://supervisord.org/) and 
 [Circus](https://circus.readthedocs.io/en/latest/) that can help you with that. 
-But if you can get your consumer to exit when there 
-are no more messages, you could also use cron. Although this might cause 
+If you can get your consumer to exit when there 
+are no more messages, you could also use cron. This might cause 
 a delay in consuming the messages. You can't react on messages instantly. 
 Users might have to wait a minute before any task is started / mail is received.
 
@@ -137,11 +175,19 @@ tries to identify and standardize a common way for PHP programs to create,
 send, receive and read MQ messages to achieve interoperability.
 
 For testing purpose it would be better to abstract away the real `php-amqplib`
-implementation behind a queue interface. With a memory queue you
+implementation behind an Interface. With a memory queue you
 would then be able to publish and receive messages without a real RabbitMQ server.   
 
 ## Conclusion
 
+Installing a RabbitMQ server on Windows was not that complicated as it might sound.
+You may know that PHP is not the best tool for long-running tasks. So be careful
+to not generate memory leaks and monitor (or restart) the consumer(s).
+In some very special cases you could also consider other programming languages
+to implement the consumers as well. It always depends on your specific requirements.
+Don't forget: *Keep it simple.*
+
 ## Read more
 
 * [The RabbitMQ  website](https://www.rabbitmq.com/)
+* [RabbitMQ Tutorial for PHP](https://www.rabbitmq.com/tutorials/tutorial-one-php.html)
