@@ -75,7 +75,7 @@ This is the web based management interface:
 
 ![image](https://user-images.githubusercontent.com/781074/107159865-fb77b480-6992-11eb-8377-d4cdf396b001.png)
 
-At this point in time we have now queue, see `Queues`.
+At this point in time we have no queues, see `Queues`.
 
 Next we have to install a RabbitMQ client for PHP.
 
