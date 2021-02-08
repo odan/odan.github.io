@@ -23,6 +23,7 @@ You can **buy** all Slim articles bundled into a eBook (PDF and EPUB).
 * Slim 4 Introducing
 * Architecture, Action Domain Responder
 * JSON Web Token (JWT) authentication
+* Queues in RabbitMQ
 
 Shop: <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">Slim 4 - eBook</a>
 
