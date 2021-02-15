@@ -236,9 +236,11 @@ the default settings with environment specific settings.
 ```php
 <?php
 
-// Error reporting for production
-error_reporting(0);
-ini_set('display_errors', '0');
+// Should be set to 0 in production
+error_reporting(E_ALL);
+
+// Should be set to '0' in production
+ini_set('display_errors', '1');
 
 // Timezone
 date_default_timezone_set('Europe/Berlin');
@@ -845,7 +847,7 @@ If you like this pattern for validation, I recommend to have a look at this libr
 
 ### Repositories
 
-A repository is responsible for the data access logic, communication with database(s).
+A repository is responsible for the data access logic, communication with a database.
 
 There are two types of repositories: collection-oriented and persistence-oriented repositories. 
 In this case, we are talking about **persistence-oriented repositories**, since these are better 
@@ -901,6 +903,9 @@ $settings['db'] = [
     ],
 ];
 ```
+
+> **Note:** I use PDO and SQL here for learning purposes only. In a real application the use 
+> of an SQL QuickBuilder would be recommended from a maintainability and security point of view.
 
 Insert a `PDO::class` container definition to `config/container.php`:
 

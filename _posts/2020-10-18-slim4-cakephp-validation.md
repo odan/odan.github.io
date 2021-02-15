@@ -106,7 +106,7 @@ To start the validation use the `validate` method.
 $errors = $validator->validate($formData);
 ```
 
-As result you should get a list of validation errors like this:
+As result, you should get a list of validation errors like this:
 
 ```php
 array (
