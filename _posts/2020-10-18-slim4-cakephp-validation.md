@@ -100,6 +100,29 @@ More specific (and precise) rules can be added using a custom regex.
 ->regex('mobile', '/^\+[0-9]{6,}$/', 'Invalid mobile number');
 ```
 
+```php
+->regex('password', '/[0-9]+/', 'Password must include at least one number!')
+->regex('password', '/[a-zA-Z]+/', 'Password must include at least one letter!');
+```
+
+It is possible to add a custom callback function if the default validation methods do not fit your needs.
+If the callback functions return `true` the validation has passed and `false` if the validation of the
+field has failed.
+
+```php
+$validator
+    ->add(
+        'field_name',
+        'field_name',
+        [
+            'rule' => function ($value) {
+                return my_custom_function($value);
+            },
+            'message' => 'Invalid',
+        ]
+    );
+```
+
 To start the validation use the `validate` method.
 
 ```php
@@ -127,8 +150,8 @@ array (
 
 With this result you should be able to render the error messages into a twig template.
 
-But if you implement a RESTful API, you usually don't use a server-side template engine (like Twig).
-In this case I would recommend to throw a `ValidationException` to catch it in a special `ValidationExceptionMiddleware`.
+If you implement a RESTful API, you usually don't use a server-side template engine (like Twig).
+In this case I would recommend throwing a `ValidationException` to catch it in a special `ValidationExceptionMiddleware`.
  
 For this purpose we add a [selective/validation](https://github.com/selective-php/validation) component 
 to our application. Run:
