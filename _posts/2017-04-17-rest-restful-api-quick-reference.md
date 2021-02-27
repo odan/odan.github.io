@@ -154,7 +154,7 @@ Sending invalid fields will result in a `422 Unprocessable Entity` response.
   "error": {
     "code": 422,
     "message": "Validation failed",
-    "errors": [
+    "details": [
       {
         "field": "email",
         "message": "Email is required"
@@ -220,7 +220,7 @@ $.ajax({
         // Show validation errors
         var response = xhr.responseJSON;
         alert(response.error.message);
-        $(response.error.errors).each(function (i, error) {
+        $(response.error.details).each(function (i, error) {
            console.log("Error in field [" + error.field + "]: " + error.message);
         });
     } else {
