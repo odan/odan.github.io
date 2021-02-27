@@ -30,6 +30,26 @@ $options = [
 $pdo = new PDO($dsn, $username, $password, $options);
 ```
 
+**Security note:** When connecting to a database with PDO, 
+it is important to ensure that the database credentials are not published if the connection fails.
+To do this, wrap the PDO DSN in a try/catch block to catch any connection exception.
+If your application does not catch the exception thrown from the PDO constructor, 
+the default action taken by the zend engine is to terminate the script and display 
+a back trace. This back trace will likely reveal the full database connection details, 
+including the username and password. It is your responsibility to catch this exception.
+
+**Example:**
+
+```php
+// ...
+
+try {
+    $pdo = new PDO($dsn, $username, $password, $options);
+} catch (Exception $exception) {
+    throw new RuntimeException('Error establishing a database connection.');
+}
+```
+
 ## Select multiple rows
 
 Without parameters:
