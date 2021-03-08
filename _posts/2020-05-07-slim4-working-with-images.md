@@ -24,8 +24,22 @@ keywords: php, slim, files, images, png, jpg, gif, slim-framework
 
 ## Introduction
 
-This tutorial explains how to create images and stream that files
-as download or inline image to the client (browser).
+To display **static** images in the browser you can simply store 
+your image files in a public accessible directory, e.g. in `public/images`
+and link them in HTML using the **[img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)**
+element.
+
+For example:
+
+```html
+<img src="images/logo.png" width="120">
+```
+
+However, this tutorial explains how to generate or convert **dynamic** images 
+and stream these files to the client as a download or inline image.
+
+This technique can be useful if your client uploads some photos, and you want to display them
+in a smaller size. It can also be used to display dynamic charts, etc. The use cases are not limited.
 
 ## Installation
 
