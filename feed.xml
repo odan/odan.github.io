@@ -2,7 +2,7 @@
 layout: null
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="https://www.w3.org/2005/Atom">
+<feed xmlns="http://www.w3.org/2005/Atom">
     <title>{{ site.title | default: site.github.repository_name }}</title>
     <link href="{{ site.url }}/atom.xml" rel="self" />
     <link href="{{ site.url }}" />
@@ -10,7 +10,6 @@ layout: null
     <id>{{ site.url }}</id>
     <author>
         <name>{{ site.author.name }}</name>
-        <email>{{ site.author.email }}</email>
     </author>
     <rights>Copyright (c) {{ site.author.name }}</rights>
     {% for post in site.posts limit:15 %}
