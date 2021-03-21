@@ -195,8 +195,7 @@ $value = $this->config->get('timezone', 'Europe/Berlin');
 
 As you can see, it is now possible to inject the Config object where 
 you want to read configuration values. The use of an object also 
-has the advantage that the configuration can now be injected automatically 
-via autowiring, without having to implement an extra DI container entry.
+has the advantage that the configuration can now be injected automatically via autowiring.
 
 ## Read more
 
