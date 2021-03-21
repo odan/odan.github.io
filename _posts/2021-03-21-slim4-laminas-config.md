@@ -148,10 +148,7 @@ Remove this entry, if exists:
 To access the `Config` object, we must first declare it in the constructor so that it can
 be automatically injected by the DI Container.
 
-I want to show a simple login/logout mechanism to demonstrate the session
-and flash message handling.
-
-Create a new file `src/Action/LoginSubmitAction.php` and copy/paste this content:
+Example:
 
 ```php
 <?php
