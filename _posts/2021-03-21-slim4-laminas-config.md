@@ -29,8 +29,6 @@ Configuration files allow you to configure things like your database
 connection information, your mail server information, as well as various
 other core configuration values such as your application timezone and encryption key.
 
-All the configuration files will be stored in the `config/` directory. 
-
 ## Installation
 
 The `laminas/laminas-config` component is designed to simplify access to configuration 
@@ -47,13 +45,13 @@ composer require laminas/laminas-config
 PHP-based configuration files are often recommended due to the speed with
 which they are parsed, and the fact that they can be cached by opcode caches.
 
+Configuration data are made accessible to the `Laminas\Config\Config`
+constructor via an associative array, which may be multi-dimensional
+so data can be organized from general to specific.
+
 The following code illustrates how to use PHP configuration files.
 
 Add a DI container definition for `Laminas\Config\Config:class` in `config/container.php`.
-
-Configuration data are made accessible to the `Laminas\Config\Config` 
-constructor via an associative array, which may be multi-dimensional 
-so data can be organized from general to specific.
 
 ```php
 <?php
@@ -71,6 +69,8 @@ return [
 ```
 
 ## Configuration
+
+All the configuration files will be stored in the `config/` directory.
 
 If not exists, create a file `config/settings.php`.
 
@@ -117,7 +117,7 @@ $loggerSettings = $config->get('logger');
 
 If you still have the DI container "settings" entry
 from the previous Slim tutorial, you can refactor the
-revise the settings array and remove the "settings" entry afterwards.
+settings array and remove it from the DI container.
 
 Old:
 
