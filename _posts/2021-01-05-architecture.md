@@ -95,7 +95,7 @@ The following image shows a more detailed HTTP request/response flow:
 6. The service is a use case handler and responsible for:
     * The business logic (validation, calculation, transaction handling, etc.)
     * Returning the result (optional)
-7. The service can read ir write data to the database using a repository
+7. The service can read or write data to the database using a repository
 8. The repository query handler creates a so called "use case optimal query" using a QueryBuilder
 9. Execute the database query
 10. Fetch the rows (result set) or the new primary key (ID) from the database
