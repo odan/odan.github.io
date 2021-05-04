@@ -61,6 +61,7 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 ## Conferences
 
+* [BASTA! .NET, Windows & Web Development - Online](https://basta.net/mainz/) (2021)
 * [International PHP Conference - Online](https://phpconference.com/) (2020)
 * [International PHP Conference - Berlin](https://phpconference.com/) (2015, 2016, 2017, 2018, 2019)
 * [International PHP Conference - Munich](https://phpconference.com/) (2013)
