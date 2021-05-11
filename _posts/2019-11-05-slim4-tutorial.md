@@ -842,7 +842,7 @@ final class ValidationException extends RuntimeException
 }
 ```
 
-If you like this pattern for validation, I recommend to have a look at this library: 
+If you like this pattern for validation, I recommend having a look at this library: 
 [selective/validation](https://github.com/selective-php/validation)
 
 ### Repositories
@@ -942,7 +942,7 @@ use PDO;
 /**
  * Repository.
  */
-class UserCreatorRepository
+final class UserCreatorRepository
 {
     /**
      * @var PDO The database connection
