@@ -18,12 +18,12 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
   * [Application- and Domain Services](#application--and-domain-services)
   * [Infrastructure Service](#infrastructure-service)
   * [Services and Data](#services-and-data)
-* [Naming convention](#naming-convention)
-* [Directory structure](#directory-structure)
-* [Best practices](#best-practices)
 * [Repositories](#repositories)
 * [Data Transfer Objects](#data-transfer-objects-dto)
 * [Types and enums](#types-and-enums)
+* [Naming convention](#naming-convention)
+* [Directory structure](#directory-structure)
+* [Best practices](#best-practices)
 * [Read more](#read-more)
 
 ## Action Domain Responder (ADR)
@@ -423,6 +423,110 @@ $service = new AccountService();
 $service->transfer(100, $sourceAccount, $destinationAccount);
 ```
 
+### Repositories
+
+A [repository](https://designpatternsphp.readthedocs.io/en/latest/More/Repository/README.html)
+abstracts the database access to the real database.
+A repository improves code maintainability, testing and readability by separating **business logic**
+from **data access logic** and provides centrally managed and consistent access rules for a data source.
+
+There are two typed of Repositories:
+
+**Collection-Oriented Repositories:**
+
+DDD advocates for Collection-Oriented Repositories. Using this pattern makes most sense when you also
+use it in combination with the [Unit of Work](https://martinfowler.com/eaaCatalog/unitOfWork.html) pattern.
+
+**Persistence-Oriented Repository**: 
+
+There are times when collection-oriented Repositories don't fit well with our 
+persistence mechanism. If you don't have a unit of work, keeping track of 
+Aggregate changes is a difficult task.
+
+In this case, we I'm talking about **persistence-oriented repositories**,
+since these are better suited for processing large amounts of data.
+
+Repositories often use the [Data Mapper](https://designpatternsphp.readthedocs.io/de/latest/Structural/DataMapper/README.html)
+pattern to translate between representations.
+
+The key point of this pattern is,
+unlike the **[ORM Active Record Anti-pattern](https://www.mehdi-khalili.com/orm-anti-patterns-part-1-active-record)**,
+the data model follows Single Responsibility Principle.
+
+So instead of loading associated entity objects, the repository methods may return 
+use case specific "domain objects" (DTO), scalar values or an array.
+
+From a DDD perspective it would make sense to put the Repositories classes into the 
+Infrastructure and not into the Domain. The Repository Interfaces should then be placed under the Domain.
+In practice, I had a lot of troubles with this directory structure because 
+it takes more and more time to switch between these directories when you have 
+a project with 1000+ classes. When I open a "module / feature" I want to see 
+the services, and the repositories at the same "place" to be faster and more productive.
+
+Each public repository method represents a query.
+The return value represents the "result set" of a query and can be a primitive type, object or list (array) of them.
+Database transactions must be handled on a higher level (service) and not within a repository.
+
+**Quick summary:**
+
+* Communication with the database.
+* Place for the data access (query) logic.
+* Uses data mapper to create domain objects
+* This is no place for the business logic. Use [services](#services) for the business logic.
+
+<div style="page-break-after: always; visibility: hidden"> 
+\pagebreak 
+</div>
+
+### Data Transfer Objects (DTO)
+
+A DTO contains only pure **data**. There is no business or domain specific logic.
+There is also no database access within a DTO.
+A service fetches data from a repository and  the repository (or the service)
+fills the DTO with data. A DTO can be used to transfer data inside or outside the domain.
+
+**Example:**
+
+```php
+<?php
+
+namespace App\Domain\Customer\Data;
+
+use DateTimeImmutable;
+
+final class CustomerData
+{
+    public string $name = '';
+    
+    public string $email = '';
+    
+    public DateTimeImmutable $dateOfBirth = null;
+}
+```
+
+**Note:** Typed class properties have been added in PHP 7.4. [Read more](https://stitcher.io/blog/typed-properties-in-php-74)
+
+### Types and enums
+
+You should not use fixed strings and integer codes as values. Use class constants instead.
+
+**Example:**
+
+```php
+<?php
+
+final class LevelType
+{
+    public const LOW = 1;
+    public const MEDIUM = 2;
+    public const HIGH = 3;
+}
+```
+
+<div style="page-break-after: always; visibility: hidden"> 
+\pagebreak 
+</div>
+
 ### Naming convention
 
 An indispensable part of every programming project is how you structure it, 
@@ -538,7 +642,7 @@ Please don't prefix all service classes with `*Service`.
 A service class is not a "Manager" or "Utility" class. A service is a "Do-er".
 
 Application Services are meant to provide methods for the **use cases** of an application to be performed.
-A Service should be **centered around the use cases** of a system, or a component (i.e. aggregate), 
+A Service should be **centered around the use cases** of a system, or a component (i.e. aggregate),
 but the actual domain logic should be in the domain objects.
 
 Please don't implement "[Entity Services](https://www.michaelnygard.com/blog/2017/12/the-entity-service-antipattern/)"
@@ -552,10 +656,10 @@ you might have a `UserCreator` class with a few methods focusing on creating a u
 
 **Q:** Why would I change my UserCreator class?
 
-**A:** Because I'm changing how I create a user and not because 
+**A:** Because I'm changing how I create a user and not because
 I'm changing how I assign a user to a task. Because that's being handled by the UserTaskAssignor class.
 
-**Q:** Can I use a repository in multiple services OR 
+**Q:** Can I use a repository in multiple services OR
 can I use services in other services OR
 can I use multiple services in an action class?
 
@@ -588,83 +692,8 @@ Engineering disciplines can help us.
 * **Refactoring.** Refactoring allows us to keep knowledge up to date in the code.
 * **Pair/Mob Programming.** Pair/mob programming spread knowledge among team members, contributing to build a shared understanding.
 * **Test-Driven Development.** TDD makes us specify our current knowledge even before we write the code of the system.
-* **Manage Priorities.** Decide about priorities you need knowledge about how important something is to your users. 
+* **Manage Priorities.** Decide about priorities you need knowledge about how important something is to your users.
   If you haven't any knowledge, build something that generates data, insights, etc. *(by Simon Schubert)*
-
-### Repositories
-
-A [repository](https://designpatternsphp.readthedocs.io/en/latest/More/Repository/README.html)
-abstracts the database access to the real database.
-A repository improves code maintainability, testing and readability by separating **business logic**
-from **data access logic** and provides centrally managed and consistent access rules for a data source.
-
-There are two types of repositories: collection-oriented and persistence-oriented repositories.
-In this case, we are talking about **persistence-oriented repositories**, since these are better
-suited for processing large amounts of data.
-
-Each public repository method represents a query. 
-The return value represents the "result set" of a query and can be a primitive type, object or list (array) of them. 
-Database transactions must be handled on a higher level (service) and not within a repository.
-
-**Quick summary:**
-
-* Communication with the database.
-* Place for the data access (query) logic.
-* Uses data mapper to create domain objects
-* This is no place for the business logic. Use [services](#services) for the business logic.
-
-<div style="page-break-after: always; visibility: hidden"> 
-\pagebreak 
-</div>
-
-### Data Transfer Objects (DTO)
-
-A DTO contains only pure **data**. There is no business or domain specific logic.
-There is also no database access within a DTO.
-A service fetches data from a repository and  the repository (or the service)
-fills the DTO with data. A DTO can be used to transfer data inside or outside the domain.
-
-**Example:**
-
-```php
-<?php
-
-namespace App\Domain\Customer\Data;
-
-use DateTimeImmutable;
-
-final class CustomerData
-{
-    public string $name = '';
-    
-    public string $email = '';
-    
-    public DateTimeImmutable $dateOfBirth = null;
-}
-```
-
-**Note:** Typed class properties have been added in PHP 7.4. [Read more](https://stitcher.io/blog/typed-properties-in-php-74)
-
-### Types and enums
-
-You should not use fixed strings and integer codes as values. Use class constants instead.
-
-**Example:**
-
-```php
-<?php
-
-final class LevelType
-{
-    public const LOW = 1;
-    public const MEDIUM = 2;
-    public const HIGH = 3;
-}
-```
-
-<div style="page-break-after: always; visibility: hidden"> 
-\pagebreak 
-</div>
 
 ## Read more
 
