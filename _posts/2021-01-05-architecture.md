@@ -423,7 +423,7 @@ $service = new AccountService();
 $service->transfer(100, $sourceAccount, $destinationAccount);
 ```
 
-### Repositories
+## Repositories
 
 A [repository](https://designpatternsphp.readthedocs.io/en/latest/More/Repository/README.html)
 abstracts the database access to the real database.
@@ -478,7 +478,7 @@ Database transactions must be handled on a higher level (service) and not within
 \pagebreak 
 </div>
 
-### Data Transfer Objects (DTO)
+## Data Transfer Objects (DTO)
 
 A DTO contains only pure **data**. There is no business or domain specific logic.
 There is also no database access within a DTO.
@@ -506,7 +506,7 @@ final class CustomerData
 
 **Note:** Typed class properties have been added in PHP 7.4. [Read more](https://stitcher.io/blog/typed-properties-in-php-74)
 
-### Types and enums
+## Types and enums
 
 You should not use fixed strings and integer codes as values. Use class constants instead.
 
@@ -527,7 +527,7 @@ final class LevelType
 \pagebreak 
 </div>
 
-### Naming convention
+## Naming convention
 
 An indispensable part of every programming project is how you structure it, 
 which involves organizing files and sources into directories, naming conventions, and similar. 
@@ -542,7 +542,7 @@ that works really well for me for small and very big enterprise applications at 
 \pagebreak 
 </div>
 
-### Directory structure
+## Directory structure
 
 ```
 bin/              # command-line executables
