@@ -21,7 +21,7 @@ You can **buy** all Slim articles bundled into a eBook (PDF and EPUB).
 **Exclusive content:**
 
 * Slim 4 Introducing
-* Architecture, Action Domain Responder
+* Clean Architecture and ADR (Action Domain Responder)
 * JSON Web Token (JWT) authentication
 * Queues in RabbitMQ
 
