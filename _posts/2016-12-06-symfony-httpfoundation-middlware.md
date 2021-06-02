@@ -7,7 +7,7 @@ description:
 keywords: 
 ---
 
-Der Aufbau einer typische Symfony Middleware ist fast identisch mit einer PSR-7 middleware. 
+Der Aufbau einer typischen Symfony Middleware ist fast identisch mit einer PSR-7 middleware. 
 Der einzige Unterschied ist das Symfony Request- und Response Objekt (siehe Namespace).
 
 Eine Symfony-Middleware muss folgende Signatur besitzen:
