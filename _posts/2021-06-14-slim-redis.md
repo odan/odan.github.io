@@ -107,7 +107,7 @@ If you use any of the forbidden characters you will get an exception.
 Other characters (like `-`) are not forbidden nor valid. 
 It is up to the implementation if they support that character or not.
 
-I recommend to always use valid characters in the cache key.
+**I recommend to always use valid characters in the cache key.**
 
 To make sure you do not use an invalid character by mistake, you should hash your keys.
 
@@ -137,8 +137,10 @@ final class HomeAction
         $this->cache = $cache;
     }
 
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
-    {
+    public function __invoke(
+        ServerRequestInterface $request, 
+        ResponseInterface $response
+    ): ResponseInterface {
         $value = $this->cache->get('my_cache_key');
 
         if ($value === null) {
@@ -202,7 +204,7 @@ Examples could be:
 
 * cache expires for something that is often under very heavy load
 * sudden unexpected high load on something that is likely to not be in cache
-  
+
 In those cases, this huge amount of requests for data that is not at that
 time in cache, causes that expensive operation to be executed a lot of times,
 all at once.
