@@ -31,7 +31,8 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 ## Introduction
 
 Redis is an in-memory database with a simple key-value data structure and belongs to the family of NoSQL databases.
-Redis is open source and, according to a [survey by db-engines.com](https://db-engines.com/de/ranking/key-value+store),
+Redis is open source and, according to a 
+[survey by db-engines.com](https://db-engines.com/en/ranking/key-value+store),
 the most popular key-value store.
 
 ## Redis Setup on Linux
