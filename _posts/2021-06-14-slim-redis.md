@@ -40,7 +40,7 @@ For this demo you need at least a running Redis server.
 
 Please follow the official installation guide of Redis or search for a manual for you specific Linux distribution.
 
-* https://redis.io/topics/quickstart
+* <https://redis.io/topics/quickstart>
 
 ## Redis Setup on Windows
 
@@ -77,7 +77,7 @@ For performance reason you may better use the IP address of the redis server.
 
 ## DI Container Setup
 
-Add a DI container definition for `Predis\Client:class` in `config/container.php`.
+Add a DI container definition for `Predis\ClientInterface:class` in `config/container.php`.
 
 ```php
 <?php
@@ -85,8 +85,6 @@ Add a DI container definition for `Predis\Client:class` in `config/container.php
 use Predis\Client;
 use Predis\ClientInterface;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\Cache\Adapter\RedisAdapter;
-use Symfony\Contracts\Cache\CacheInterface;
 // ...
 
 return [
@@ -96,12 +94,6 @@ return [
         $settings = $container->get('settings')['redis'];
 
         return new Client($settings['server'], $settings['options']);
-    },
-
-    CacheInterface::class => function (ContainerInterface $container) {
-        $client = $container->get(ClientInterface::class);
-
-        return new RedisAdapter($client);
     },
 ];
 ```
@@ -122,7 +114,8 @@ To make sure you do not use an invalid character by mistake, you should hash you
 ## Usage
 
 To access the `Predis\Client` object, we must first declare the
-`Predis\ClientInterface` in the constructor, so that it can be automatically injected by the DI Container.
+`Predis\ClientInterface` in the constructor, so that it can be automatically 
+injected by the DI Container.
 
 Example:
 
