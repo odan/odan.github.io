@@ -1089,9 +1089,10 @@ You don't have to run composer on your production server. Instead, you should im
 so called "artifact". An artifact is an ZIP file you can upload and deploy on 
 your production server.
 
-These tools are very useful for creating artifacts:
+These tools are very useful to automate your software build processes:
 
-* [Apache Ant](https://ant.apache.org/bindownload.cgi) to automate your software build processes. Requires Java.
+* [Apache Ant](https://ant.apache.org/bindownload.cgi) - It's similar to Make, but it's implemented in Java.
+* [Phing](https://www.phing.info/) - A PHP build tool inspired by Apache Ant.
 
 For security reasons, you should switch off the output of all error details in production:
 
