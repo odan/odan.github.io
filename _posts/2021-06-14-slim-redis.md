@@ -208,13 +208,13 @@ Examples could be:
 * sudden unexpected high load on something that is likely to not be in cache
 
 In those cases, this huge amount of requests for data that is not at that
-time in cache, causes that expensive operation to be executed a lot of times,
+time in the cache, causes that expensive operation to be executed a lot of times,
 all at once.
 
 The first solution is to use **locking**: only allow one PHP process (on a per-host basis) 
-to compute a specific key at a time. Locking is not built-in by default, but can be added
-for example with the [Symfony Lock](https://symfony.com/doc/current/components/lock.html)
-component. In reality, you don't need to reinvent to this mechanism, because
+to compute a specific key at a time. Locking a key is [not built-in](https://redis.io/topics/distlock) 
+by default, but can be added for example with the [Symfony Lock](https://symfony.com/doc/current/components/lock.html)
+component. In reality, you don't need to reinvent to this algorithm, because
 the [Symfony Cache](https://symfony.com/doc/current/components/cache.html) component
 comes with a built-in Stampede prevention.
 
