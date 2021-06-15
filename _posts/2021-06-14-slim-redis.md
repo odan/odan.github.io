@@ -216,7 +216,7 @@ to compute a specific key at a time. Locking is not built-in by default, but can
 for example with the [Symfony Lock](https://symfony.com/doc/current/components/lock.html)
 component. In reality, you don't need to reinvent to this mechanism, because
 the [Symfony Cache](https://symfony.com/doc/current/components/cache.html) component
-comes with a built in Stampede prevention.
+comes with a built-in Stampede prevention.
 
 ## Conclusion
 
