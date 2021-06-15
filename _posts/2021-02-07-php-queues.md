@@ -207,3 +207,4 @@ Don't forget: *Keep it simple.*
 
 * [The RabbitMQ  website](https://www.rabbitmq.com/)
 * [RabbitMQ Tutorial for PHP](https://www.rabbitmq.com/tutorials/tutorial-one-php.html)
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

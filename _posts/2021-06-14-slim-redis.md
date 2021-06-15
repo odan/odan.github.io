@@ -228,3 +228,4 @@ the Symfony Cache component in the next article.
 ## Read more
 
 * [The Predis Github Repository](https://github.com/predis/predis)
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

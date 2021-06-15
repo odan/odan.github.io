@@ -201,3 +201,4 @@ has the advantage that the configuration can now be injected automatically via a
 
 * [Laminas-Config Documentation](https://docs.laminas.dev/laminas-config/)
 * [Github Repository](https://github.com/laminas/laminas-config/)
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)

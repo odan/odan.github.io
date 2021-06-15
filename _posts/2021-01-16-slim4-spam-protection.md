@@ -332,4 +332,4 @@ and can be applied to other HTTP API clients / SDKs as well.
 ## Read more
 
 * [Documentation](https://akismet.com/development/api/#detailed-docs)
-* [Ask a question or report an issue](https://github.com/odan/session/issues)
+* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)
