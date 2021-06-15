@@ -258,6 +258,7 @@ $comment->referrer = $request->getHeaderLine('Referer');
 $comment->permalink = (string)$request->getUri();
 
 $score = $this->spamChecker->checkComment($comment);
+
 if ($score !== SpamChecker::NOT_SPAM) {
     $response->getBody()->write('Spam detected!');
 
