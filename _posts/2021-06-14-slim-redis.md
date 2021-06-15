@@ -39,18 +39,19 @@ the most popular key-value store.
 
 For this demo you need at least a running Redis server.
 
-Please follow the official installation guide of Redis or search for a manual for you specific Linux distribution.
+Please follow the official installation guide of Redis:
 
-* <https://redis.io/topics/quickstart>
+* [Redis Quick Start](https://redis.io/topics/quickstart)
+* [How To Install and Secure Redis on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04)
 
 ## Redis Setup on Windows
 
-For people like me who develop on Windows there is a special setup file for the Redis server.
+For people like me who develop on Windows, there is a special setup file for the Redis server.
 
 * Download Redis for Windows: <https://github.com/microsoftarchive/redis/releases>
 * Extract the ZIP file
 * Open `cmd` and `cd` into the `Redis-x64-3.2.100` directory.
-* To start the Redis server, run: `redis-server.exe`
+* The Redis servers starts automatically as a Windows service. To start the Redis server manually, run: `C:\Program Files\Redis\redis-server.exe`
 * The server is now ready to accept connections on port `6379`
 
 ## Installation
@@ -129,7 +130,7 @@ use Predis\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class HomeAction
+final class ExampleAction
 {
     private ClientInterface $cache;
 
@@ -214,7 +215,7 @@ The first solution is to use **locking**: only allow one PHP process (on a per-h
 to compute a specific key at a time. Locking is not built-in by default, but can be added
 for example with the [Symfony Lock](https://symfony.com/doc/current/components/lock.html)
 component. In reality, you don't need to reinvent to this mechanism, because
-the [Symfony Cache](https://symfony.com/doc/current/components/cache.html) components
+the [Symfony Cache](https://symfony.com/doc/current/components/cache.html) component
 comes with built in Stampede prevention.
 
 ## Conclusion
