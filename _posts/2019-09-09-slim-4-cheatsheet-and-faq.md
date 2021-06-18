@@ -97,7 +97,7 @@ $routeParser = \Slim\Routing\RouteContext::fromRequest($request)->getRouteParser
 ### Retrieving the base path
 
 ```php
-$basePath = \Slim\Routing\RouteContext::fromRequest($request)->getBasePath(),
+$basePath = \Slim\Routing\RouteContext::fromRequest($request)->getBasePath();
 ```
 
 ### Reading the response body
@@ -124,7 +124,8 @@ $app->addBodyParsingMiddleware(); // <--- here
 $app->run();
 ```
 
-Notice: The `BodyParsingMiddleware` will only parse the body if the request header `Content-Type` contains a supported value. Supported values are:
+Notice: The `BodyParsingMiddleware` will only parse the body if the request 
+header `Content-Type` contains a supported value. Supported values are:
 
 * `application/json`
 * `application/x-www-form-urlencoded`
@@ -152,7 +153,8 @@ As a general rule:
 
 > Your entire app should be unaware of the container.
 
-Injecting the container is an **anti-pattern**. Please declare all class dependencies in your constructor explicitly instead.
+Injecting the container is an **anti-pattern**. Please declare all class dependencies 
+in your constructor explicitly instead.
 
 Why is injecting the container (in the most cases) an anti-pattern?
 
@@ -163,8 +165,18 @@ In Slim 3 the [Service Locator (anti-pattern)](https://blog.ploeh.dk/2010/02/03/
 
 Q: How can I make it better? 
 
-A: Use [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance) and constructor [dependency injection](http://fabien.potencier.org/what-is-dependency-injection.html). Dependency injection is a programming practice of passing into an object it’s collaborators, rather the object itself creating them. 
+A: Use [Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance) and constructor [dependency injection](http://fabien.potencier.org/what-is-dependency-injection.html). 
+Dependency injection is a programming practice of passing into an object it’s collaborators, 
+rather the object itself creating them. 
 
-Since **Slim 4** you can use modern [Dependency Injection Container (DIC)](http://fabien.potencier.org/do-you-need-a-dependency-injection-container.html) like [PHP-DI](http://php-di.org/) and [league/container](https://container.thephpleague.com/) with the awesome [autowire](https://container.thephpleague.com/3.x/auto-wiring/) feature. This means: Now you can declare all dependencies explicitly in your constructor and let the DIC inject these dependencies for you. 
+Since **Slim 4** you can use modern [Dependency Injection Container (DIC)](http://fabien.potencier.org/do-you-need-a-dependency-injection-container.html) 
+like [PHP-DI](http://php-di.org/) or [league/container](https://container.thephpleague.com/) 
+with the awesome [autowire](https://php-di.org/doc/autowiring.html) feature. 
+This means: Now you can declare all dependencies explicitly in your constructor 
+and let the DIC inject these dependencies for you. 
 
-To be more clear: "Composition" has nothing to do with the "Autowire" feature of the DIC. You can use composition with pure classes and without a container or anything else. The autowire feature just uses the [PHP Reflection](https://www.php.net/manual/en/book.reflection.php) classes to resolve and inject the dependencies automatically for you.
+To be more clear: "Composition" has nothing to do with the "Autowire" feature of the DIC. 
+You can use composition with pure classes and without a container or anything else. 
+The autowire feature just uses 
+the [PHP Reflection](https://www.php.net/manual/en/book.reflection.php) classes 
+to resolve and inject the dependencies automatically for you.
