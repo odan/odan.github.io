@@ -35,14 +35,12 @@ Redis is open source and, according to a
 [survey by db-engines.com](https://db-engines.com/en/ranking/key-value+store),
 the most popular key-value store.
 
-One of the most apparent use cases for Redis is using it as a **session cache**.
+Redis is very often used for as a **session cache**.
 The advantages of using Redis over other session stores, such as Memcached,
 is that Redis offers persistence.
 
 Outside of basic session tokens, Redis can be used as a **Full Page Cache (FPC)**
 to make your websites even faster.
-
-As a result,  your server response time will be much faster after the initial load.
 
 Please note that Redis is primarily a key-value store and
 [not a task queue](https://redislabs.com/ebook/part-2-core-concepts/chapter-6-application-components-in-redis/6-4-task-queues/).
