@@ -29,6 +29,14 @@ Configuration files allow you to configure things like your database
 connection information, your mail server information, as well as various
 other core configuration values such as your application timezone and encryption key.
 
+In my tutorials, I use the `settings` DI container key to load and fetch 
+the settings for the sake of simplicity, flexibility and performance. 
+For some people, this style is not DI container friendly, or OOP, or modern enough, 
+because they prefer to declare a Config class within their application class 
+instead of a simple array. The advantage of using a Config object is that 
+the DI container can **autowire** this Config object, 
+so you don't need to wire the class manually within the DI container.
+
 ## Installation
 
 The `laminas/laminas-config` component is designed to simplify access to configuration 
