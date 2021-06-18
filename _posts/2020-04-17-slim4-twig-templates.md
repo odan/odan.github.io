@@ -455,10 +455,10 @@ Change the value in a middleware:
 $currentUser = $this->twig->getEnvironment()->getGlobals()['current_user'];
 
 // Set the new value
-$currentUser->id = 1234
+$currentUser->id = 1234;
 ```
 
-In twig:
+In Twig:
 
 {% raw %}
 ```twig
@@ -489,7 +489,7 @@ To invoke the service method in a Twig template use this syntax:
 
 > Please note that calling higher level services should only be used carefully,
 because it could break the principles of MVC. As long as you are only invoking
-infrastructure services it should be fine.
+infrastructure services this trick should be fine.
  
 In the most cases it's better to return a simple value or an array.
 
@@ -505,7 +505,7 @@ Then print the result in your Twig template using this syntax:
 
 {% raw %}
 ```twig
-{{ user.id }}
+{{ user().id }}
 ```
 {% endraw %}
 
