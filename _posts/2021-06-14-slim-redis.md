@@ -12,6 +12,8 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 
 * [Introduction](#introduction)
 * [Requirements](#requirements)
+* [Redis Setup on Linux](#redis-setup-on-linux)
+* [Redis Setup on Windows](#redis-setup-on-windows)
 * [Installation](#installation)
 * [Configuration](#configuration)
 * [DI Container Setup](#di-container-setup)
