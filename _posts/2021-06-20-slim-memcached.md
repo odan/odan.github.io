@@ -20,7 +20,6 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 * [Cache Keys](#cache-keys)
 * [Usage](#usage)
 * [Cache Invalidation](#cache-invalidation)
-* [Stampede prevention](#stampede-prevention)
 * [Conclusion](#conclusion)
 * [Read more](#read-more)
 
@@ -37,17 +36,6 @@ generic in nature, but intended for use in speeding up dynamic web applications 
 
 Memcached is an in-memory key-value store for small chunks of arbitrary data (strings, objects) 
 from results of database calls, API calls, or page rendering.
-
-Please note that it doesn't always make sense to add memcached to your application.
-To guarantee latency and speed memcached stores everything in RAM.
-Even if the memcache instance appears to have free space, it may need to remove data due to memory limitations.
-
-For this reason memcached is 
-[not recommended for sessions](https://github.com/memcached/memcached/wiki/ProgrammingFAQ#why-is-memcached-not-recommended-for-sessions-everyone-does-it),
-as a database, and a (reliable) queue server, because the data would be lost if you restart the server 
-or when Memcached flushes its memory.
-
-If you need **persistence**, you might want to look at other solutions like Redis.
 
 ## Memcached Setup on Linux
 
@@ -218,6 +206,18 @@ Getting Memcached and the PECL extension up and running requires quite some time
 In my opinion, the setup and the many technical limitations are not really worth the effort.
 Anyway, Memcached is still very fast and works well for storing results of heavy database queries, 
 API calls or as a page cache.
+
+Please note that it doesn't always make sense to add memcached to your application.
+To guarantee latency and speed memcached stores everything in RAM.
+Even if the memcache instance appears to have free space, it may need to remove data due to memory limitations.
+
+For this reason memcached is
+[not recommended for sessions](https://github.com/memcached/memcached/wiki/ProgrammingFAQ#why-is-memcached-not-recommended-for-sessions-everyone-does-it),
+as a database, and a (reliable) queue server, because the data would be lost if you restart the server
+or when Memcached flushes its memory.
+
+If you need **persistence**, you might want to look at other solutions like 
+[Redis](https://odan.github.io/2021/06/14/slim-redis.html).
 
 ## Read more
 
