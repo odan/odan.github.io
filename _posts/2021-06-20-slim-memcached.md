@@ -56,8 +56,8 @@ For people like me who develop on Windows, there is a free binary version.
 
 ## Memcached Extension Setup
 
-The Memcached API is available as a [PECL extension](https://www.php.net/manual/en/book.memcache.php)
-and is not bundled with PHP. Information for installing this PECL extension may be found
+The Memcached API is available as a PHP [PECL extension](https://www.php.net/manual/en/book.memcache.php). 
+Information for installing this PECL extension may be found
 on [PHP.net](https://www.php.net/manual/en/memcache.installation.php)
 
 ### Memcached Extension Setup on XAMPP for Windows
