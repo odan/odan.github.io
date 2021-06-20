@@ -41,16 +41,14 @@ from results of database calls, API calls, or page rendering.
 
 For this demo you need at least a running Memcached instance.
 
-Please follow the official installation guide:
-
-* [Memcached Installation](https://github.com/memcached/memcached/wiki/Install)
+Please follow the official installation guide: [Memcached Installation](https://github.com/memcached/memcached/wiki/Install)
 
 ## Memcached Setup on Windows
 
 Memcached works on most Linux and BSD like systems. There is no official support for windows builds.
-For people like me who develop on Windows, there is an unofficial binary version.
+For people like me who develop on Windows, there is a free binary version.
 
-* Download Redis for Windows: <https://github.com/nono303/memcached/releases>
+* Download Memcached for Windows: <https://github.com/nono303/memcached/releases>
 * Extract the ZIP file
 * Open `cmd` and `cd` into the `memcached-1.6.9/cygwin/x64` directory.
 * To start the Memcached server, run: `memcached.exe`
@@ -84,7 +82,7 @@ $settings['memcache'] = [
 
 ## DI Container Setup
 
-Add a DI container definition for `Predis\ClientInterface:class` in `config/container.php`.
+Add a DI container definition for `Memcache:class` in `config/container.php`.
 
 ```php
 <?php
@@ -147,7 +145,7 @@ echo "Store data in the cache (data will expire in 10 seconds)<br/>\n";
 
 namespace App\Action\Example;
 
-use Predis\ClientInterface;
+use Memcache;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
