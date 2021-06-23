@@ -136,21 +136,21 @@ To make sure you do not use an invalid character by mistake, you should hash you
 
 ## Usage
 
-To access the `Memcache` object, we must first declare it in the constructor so that it can
-be automatically injected by the DI Container.
-
-**Example:** Store data in the cache (data will expire in 10 seconds):
+The first example shows how to cache data that expires after 10 seconds:
 
 ```php
-$object = new \stdClass();
+$object = new stdClass();
 $object->message = 'test';
 $object->number = 123;
 
 $memcache->set('key', $object, false, 10);
-echo "Store data in the cache (data will expire in 10 seconds)<br/>\n";
 ```
 
-**Example:** HTTP page cache example, without [cache stampede](https://en.wikipedia.org/wiki/Cache_stampede) prevention.
+To access the `Memcache` object, we must first declare it in the class constructor so that it can 
+be automatically injected by the DI container.
+
+The following example shows a very simple page cache  
+(without [cache stampede](https://en.wikipedia.org/wiki/Cache_stampede) prevention).
 
 ```php
 <?php
