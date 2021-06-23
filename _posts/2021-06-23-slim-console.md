@@ -176,7 +176,7 @@ Hello, console
 
 ## Conclusion
 
-In my opinion, the Symfony Console component is the perfect tool for implementing
+From my point of view, the Symfony Console component is the perfect tool for implementing
 custom console commands. Of course there is much more to discover in the
 [documentation](https://symfony.com/doc/current/console.html), like parameters,
 Console input, different colors, testing, etc.
