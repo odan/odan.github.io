@@ -149,8 +149,7 @@ $memcache->set('key', $object, false, 10);
 To access the `Memcache` object, we must first declare it in the class constructor so that it can 
 be automatically injected by the DI container.
 
-The following example shows a very simple page cache  
-(without [cache stampede](https://en.wikipedia.org/wiki/Cache_stampede) prevention).
+The following example shows a very simple page cache (without [cache stampede](https://en.wikipedia.org/wiki/Cache_stampede) prevention).
 
 ```php
 <?php
