@@ -165,21 +165,21 @@ After configuring and registering the command, you can run it in the terminal:
 php bin/console.php example
 ```
 
-As you might expect, this command will not do that much as you didn't write 
-any logic yet. Add your own logic inside the `execute()` method.
-
 The output:
 
 ```
 Hello, console
 ```
 
+As you might expect, this command will not do that much as you didn't write
+any complex logic yet. Add your own logic inside the `execute()` method.
+
 ## Conclusion
 
 From my point of view, the Symfony Console component is the perfect tool for implementing
 custom console commands. Of course there is much more to discover in the
 [documentation](https://symfony.com/doc/current/console.html), like parameters,
-Console input, different colors, testing, etc.
+user console input, different colors, testing, etc.
 
 ## Read more
 
