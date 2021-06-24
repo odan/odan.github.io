@@ -122,16 +122,14 @@ At this point in time we have no queues, see `Queues`.
 
 ## Installation
 
-Next we have to install a RabbitMQ client for PHP.
-
 RabbitMQ uses a protocol called AMQP by default. 
 To be able to communicate with RabbitMQ you need a library that understands the same protocol as RabbitMQ. 
 This tutorial covers [AMQP 0-9-1](https://www.rabbitmq.com/tutorials/amqp-concepts.html), 
 which is an open, general-purpose protocol for messaging. 
 There are a number of clients for RabbitMQ in many languages. 
-We'll use the `php-amqplib` in this tutorial.
 
-Open your PHP project and run:
+Next we have to install a RabbitMQ client for PHP. We'll use the `php-amqplib` in this tutorial. 
+Open your project and run:
 
 ```
 composer require php-amqplib/php-amqplib
@@ -152,7 +150,8 @@ In the next step we will create a very lightweight dispatcher
 so that the events can be dispatched from an event dispatcher instance.
 The event dispatcher follows the PSR-14 guidelines for implementation.
 
-First we create an interface.
+First we extend an interface from `EventDispatcherInterface` to have a unique identifier
+for the DI container.
 
 Filename: `src/Queue/Dispatcher/MessageDispatcherInterface.php`.
 
@@ -246,7 +245,7 @@ Insert the settings into your configuration file, e.g. `config/settings.php`;
 $settings['queue'] = [
     'driver' => \App\Queue\Dispatcher\RabbitMessageDispatcher::class,
     // For testing with phpunit
-    //'driver' => \App\Queue\Bus\NullMessageDispatcher::class,
+    //'driver' => \App\Queue\Dispatcher\NullMessageDispatcher::class,
     'config' => [
         'host' => '127.0.0.1',
         'port' => 5672,
@@ -445,14 +444,14 @@ final class NullMessageDispatcher implements MessageDispatcherInterface
 Then change the transport driver in your test environment specific config file to:
 
 ```php
-'driver' => \App\Queue\Bus\NullMessageDispatcher::class,
+'driver' => \App\Queue\Dispatcher\NullMessageDispatcher::class,
 ```
 
 Example:
 
 ```php
 $settings['queue'] = [
-    'driver' => \App\Queue\Bus\NullMessageDispatcher::class,
+    'driver' => \App\Queue\Dispatcher\NullMessageDispatcher::class,
     'config' => [],
 ];
 ```
@@ -476,7 +475,7 @@ Don't keep appending to arrays without ever clearing them.
 This means, for instance, that you **shouldn't**
 use the [FingersCrossedHandler](https://github.com/Seldaek/monolog/blob/main/src/Monolog/Handler/FingersCrossedHandler.php)
 in Monolog since this keeps a buffer of log messages. Even when you are careful,
-PHP might **leak memory**. Well it's, PHP...
+PHP might **leak memory**.
 
 **Restart Workers on Deploy**
 
