@@ -258,19 +258,19 @@ You can define relationships directly with a [join clause](https://docs.laminas.
 
 ```php
 use Laminas\Db\Sql\Join;
-
 // ...
 
 $table = $this->queryFactory->table('users');
 
 $select = $table->getSql()->select();
+
 $select->columns(['id']);
 $select->where(['id' => 1]);
 
-$rows = $table->selectWith($select);
-
 $select->join('contacts', 'users.id = contacts.user_id');
 $select->join('orders', 'users.id = orders.user_id', Join::JOIN_LEFT);
+
+$rows = $table->selectWith($select);
 ```
 
 ## Transactions
