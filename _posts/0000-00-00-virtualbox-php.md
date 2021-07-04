@@ -47,6 +47,8 @@ Read more: [How to Install VirtualBox Guest Additions on Ubuntu](https://linuxiz
 * Mount point: `/shared`
 * Mount permanent: yes
 
+Read more: <https://gist.github.com/estorgio/1d679f962e8209f8a9232f7593683265>
+
 ## Network Adapter Setup
 
 * Open the VM settings > Network
@@ -91,6 +93,9 @@ php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 php -r "unlink('composer-setup.php');"
 composer self-update
+
+# Disable cloud-init in Ubuntu
+touch /etc/cloud/cloud-init.disabled
 ```
 
 Set execute permission:
@@ -120,3 +125,19 @@ sudo service apache2 restart
 On the guest VM open `http://192.168.0.172`in your browser to the hosted website.
 Change the IP address as shown in `ifconfig`
 
+Please note: When you start the VM it will take some seconds until
+apache is started. 
+
+## Other settings
+
+### Disable cloud-init in Ubuntu
+
+```
+sudo dpkg-reconfigure cloud-init
+sudo apt-get purge cloud-init
+sudo apt autoremove
+sudo rm -rf /etc/cloud/ && sudo rm -rf /var/lib/cloud/
+sudo reboot now
+```
+
+Read more: <https://gist.github.com/zoilomora/f862f76335f5f53644a1b8e55fe98320>
