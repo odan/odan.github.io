@@ -16,9 +16,9 @@ keywords: php, mysql, css, html, bootstrap, slim, framework, c#, csharp, dotnet
 
 Hello, my name is Daniel Opitz.
 
-I'm a software developer and architect at [ORCA Services AG](https://orca-services.ch/) in Pratteln (Switzerland).
+I'm a Senior Software Engineer at [ORCA Services AG](https://orca-services.ch/) in Pratteln (Switzerland).
 
-I have over 20 years of software development experience, with a focus on web development.
+I have over 20 years of software development experience.
 
 In my free time I contribute to various open source projects
 and write **[blog](https://odan.github.io/)** posts about PHP, Slim-Framework and .NET.
