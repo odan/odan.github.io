@@ -54,7 +54,7 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 * [Learn modern PHP](https://odan.github.io/learn-php/) A curated list of resources for PHP
 * [All projects](https://github.com/odan?tab=repositories)
 
-## Projects I contribute to
+## Open Source Contributions
 
 * [Slim Framework](https://github.com/slimphp/Slim) A PHP micro framework
 * [Laminas](https://github.com/laminas) A collection of enterprise-ready PHP components
