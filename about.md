@@ -60,6 +60,7 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 * [Laminas](https://github.com/laminas) A collection of enterprise-ready PHP components
 * [CakePHP](https://github.com/cakephp/cakephp) A rapid development framework for PHP
 * [Chronos](https://github.com/cakephp/chronos) A standalone DateTime library
+* [All contributions](https://github.com/odan)
 
 ## Conferences
 
