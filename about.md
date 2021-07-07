@@ -46,10 +46,10 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 ## Projects I contribute to
 
-* [slimphp/slim](https://github.com/slimphp/Slim) A PHP micro framework
-* [slimphp/slim-website](https://github.com/slimphp/Slim-Website) The Slim framework website
-* [cakephp/cakephp](https://github.com/cakephp/cakephp) A rapid development framework for PHP
-* [cakephp/chronos](https://github.com/cakephp/chronos) A standalone DateTime library
+* [Slim Framework](https://github.com/slimphp/Slim) A PHP micro framework
+* [Laminas](https://github.com/laminas) A collection of enterprise-ready PHP components
+* [CakePHP](https://github.com/cakephp/cakephp) A rapid development framework for PHP
+* [Chronos](https://github.com/cakephp/chronos) A standalone DateTime library
 
 ## Interviews
 
