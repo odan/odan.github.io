@@ -16,8 +16,8 @@ keywords: php, mysql, css, html, bootstrap, slim, framework, c#, csharp, dotnet
 
 Hi, my name is Daniel Opitz
 
-I am a web developer located close to Basel, Switzerland. I am currently working at [ORCA](https://orca-services.ch/) 
-in Pratteln as a Software Engineer.
+I am a web developer located close to Basel, Switzerland.
+I am currently working at [ORCA](https://orca-services.ch/) in Pratteln as a Software Engineer.
 
 In my free time I contribute to various open source projects
 and write **[blog](https://odan.github.io/)** posts about PHP, Slim-Framework and .NET.
@@ -28,12 +28,12 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 ## Skills
 
 * PHP, C# (.NET), JavaScript, TypeScript
-* MySQL, MS SQL, Oracle, InterSystems Caché
+* MySQL, MariaDB, MS SQL, Oracle, SQLite, InterSystems Caché, Memcached, Redis, RabbitMQ
 * HTML, CSS, Bootstrap, jQuery, Vue.js
 * Slim, Laminas, CakePHP, Symfony
 * RESTful, SOAP, XML, JSON
-* SOLID, DDD, Clean Code, Architecture
-* Docker, IT-Security
+* SOLID, DDD, Clean Code, Clean Architecture
+* Docker, Network and Web Security
 
 ## My projects
 

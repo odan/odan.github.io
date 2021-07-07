@@ -42,7 +42,7 @@ We also need a [middleware](https://github.com/middlewares/whoops) to use Whoops
 composer require middlewares/whoops
 ```
 
-Now add the `Middlewares\Whoops` middleware, before the `RoutingMiddleware`, 
+Now add the `Middlewares\Whoops` middleware, before the `ErrorMiddleware`, 
 into your Slim middleware stack.
 
 ```php
