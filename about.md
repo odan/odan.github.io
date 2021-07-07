@@ -36,6 +36,16 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 * SOLID, DDD, Clean Code, Clean Architecture
 * Windows, Linux, Docker, Network, Web Security
 
+## Publications
+
+* [The Slim 4 eBook](https://ko-fi.com/s/5f182b4b22) (2021)
+* Fachartikel zu Slim 4 im [PHP Magazin Ausgabe 4.20](https://odan.github.io/2020/05/20/slim4-php-magazin-420.html) (2020)
+* Programmez! [À la découverte de Slim 4](https://www.programmez.com/magazine/article/la-decouverte-de-slim-4) (2020)
+
+## Interviews
+
+* [PHP Microframework Slim auch für größere Anwendungen geeignet](https://entwickler.de/online/php/php-microframework-slim-579928772.html)
+
 ## My projects
 
 * [odan/slim4-skeleton](https://github.com/odan/slim4-skeleton) A Slim 4 skeleton for apache
@@ -50,16 +60,6 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 * [Laminas](https://github.com/laminas) A collection of enterprise-ready PHP components
 * [CakePHP](https://github.com/cakephp/cakephp) A rapid development framework for PHP
 * [Chronos](https://github.com/cakephp/chronos) A standalone DateTime library
-
-## Interviews
-
-* [PHP Microframework Slim auch für größere Anwendungen geeignet](https://entwickler.de/online/php/php-microframework-slim-579928772.html)
-
-## Publications
-
-* [The Slim 4 eBook](https://ko-fi.com/s/5f182b4b22) (2021)
-* Fachartikel zu Slim 4 im [PHP Magazin Ausgabe 4.20](https://odan.github.io/2020/05/20/slim4-php-magazin-420.html) (2020)
-* Programmez! [À la découverte de Slim 4](https://www.programmez.com/magazine/article/la-decouverte-de-slim-4) (2020)
 
 ## Conferences
 
