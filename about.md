@@ -14,7 +14,7 @@ keywords: php, mysql, css, html, bootstrap, slim, framework, c#, csharp, dotnet
 <img src="https://odan.github.io/assets/images/dopitz.png" width="120" alt="Daniel Opitz" class="avatar">
 </p>
 
-Hi, my name is Daniel Opitz.
+Hello, my name is Daniel Opitz.
 
 I'm a software developer and architect at [ORCA Services AG](https://orca-services.ch/) in Pratteln (Switzerland).
 
