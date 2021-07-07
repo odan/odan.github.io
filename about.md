@@ -14,10 +14,11 @@ keywords: php, mysql, css, html, bootstrap, slim, framework, c#, csharp, dotnet
 <img src="https://odan.github.io/assets/images/dopitz.png" width="120" alt="Daniel Opitz" class="avatar">
 </p>
 
-Hi, my name is Daniel Opitz
+Hi, my name is Daniel Opitz.
 
-I am a web developer located close to Basel, Switzerland.
-I am currently working at [ORCA](https://orca-services.ch/) in Pratteln as a Software Engineer.
+I'm a software developer and architect at [ORCA Services AG](https://orca-services.ch/) in Pratteln (Switzerland).
+
+I have over 20 years of software development experience, with a focus on web development.
 
 In my free time I contribute to various open source projects
 and write **[blog](https://odan.github.io/)** posts about PHP, Slim-Framework and .NET.
@@ -68,6 +69,7 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 ## Contact
 
+* [E-Mail](mailto:d.opitz@outlook.com)
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
