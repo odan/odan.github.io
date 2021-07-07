@@ -34,7 +34,7 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 * Slim Framework, Laminas, CakePHP, Symfony, ASP.NET
 * RESTful, SOAP, XML, JSON
 * SOLID, DDD, Clean Code, Clean Architecture
-* Docker, Network and Web Security
+* Windows, Linux, Docker, Network, Web Security
 
 ## My projects
 
