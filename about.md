@@ -74,4 +74,3 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 * [GitHub](https://github.com/odan)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
 * [Xing](https://www.xing.com/profile/Daniel_Opitz9)
-* [Slim-Framework Forum](https://discourse.slimframework.com/)
