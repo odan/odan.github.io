@@ -38,9 +38,9 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 ## Publications
 
-* [The Slim 4 eBook](https://ko-fi.com/s/5f182b4b22) (2021)
-* Fachartikel zu Slim 4 im [PHP Magazin Ausgabe 4.20](https://odan.github.io/2020/05/20/slim4-php-magazin-420.html) (2020)
-* Programmez! [À la découverte de Slim 4](https://www.programmez.com/magazine/article/la-decouverte-de-slim-4) (2020)
+* [The Slim 4 eBook](https://ko-fi.com/s/5f182b4b22)
+* [Das PHP Micro-Framework Slim 4](https://odan.github.io/2020/05/20/slim4-php-magazin-420.html) (PHP Magazin Ausgabe 4.20)
+* [À la découverte de Slim 4](https://www.programmez.com/magazine/article/la-decouverte-de-slim-4) (Programmez!)
 
 ## Interviews
 
