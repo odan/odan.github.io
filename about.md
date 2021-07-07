@@ -31,7 +31,7 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 * PHP, C# (.NET), JavaScript, TypeScript
 * MySQL, MariaDB, MS SQL, Oracle, SQLite, InterSystems Caché, Memcached, Redis, RabbitMQ
 * HTML, CSS, Bootstrap, jQuery, Vue.js
-* Slim, Laminas, CakePHP, Symfony
+* Slim Framework, Laminas, CakePHP, Symfony, ASP.NET
 * RESTful, SOAP, XML, JSON
 * SOLID, DDD, Clean Code, Clean Architecture
 * Docker, Network and Web Security
