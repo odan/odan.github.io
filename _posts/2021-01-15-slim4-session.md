@@ -139,12 +139,12 @@ be automatically injected by the DI Container.
 I want to show a simple login/logout mechanism to demonstrate the session 
 and flash message handling.
 
-Create a new file `src/Action/LoginSubmitAction.php` and copy/paste this content:
+Create a new file `src/Action/Auth/LoginSubmitAction.php` and copy/paste this content:
 
 ```php
 <?php
 
-namespace App\Action;
+namespace App\Action\Auth;
 
 use Odan\Session\SessionInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -153,10 +153,7 @@ use Slim\Routing\RouteContext;
 
 final class LoginSubmitAction
 {
-    /**
-     * @var SessionInterface
-     */
-    private $session;
+    private SessionInterface $session;
 
     public function __construct(SessionInterface $session)
     {
@@ -175,7 +172,7 @@ final class LoginSubmitAction
         // Check user credentials. You may use an application/domain service and the database here.
         $user = null;
         if($username === 'admin' && $password === 'secret') {
-            $user = 1;
+            $user = 'admin';
         }
 
         // Clear all flash messages
@@ -196,7 +193,7 @@ final class LoginSubmitAction
             $flash->add('success', 'Login successfully');
     
             // Redirect to protected page
-            $url = $routeParser->urlFor('users-get');
+            $url = $routeParser->urlFor('users');
         } else {
             $flash->add('error', 'Login failed!');
 
@@ -209,12 +206,42 @@ final class LoginSubmitAction
 }
 ```
 
-Create a new file `src/Action/LogoutAction.php` and copy/paste this content:
+To render the login page create a new file `src/Action/Auth/LoginAction.php`
+and copy/paste this content:
 
 ```php
 <?php
 
-namespace App\Action;
+namespace App\Action\Auth;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+final class LoginAction
+{
+    public function __invoke(
+        ServerRequestInterface $request, 
+        ResponseInterface $response
+    ): ResponseInterface {
+        $html = '<form action="login" method="POST">
+        Username:<input type="text" name="username"><br>
+        Password:<input type="password" name="password"><br>
+        <input type="submit" value="Login">
+        </form>';
+        $response->getBody()->write($html);
+
+        return $response;
+    }
+}
+
+```
+
+Create a new file `src/Action/Auth/LogoutAction.php` and copy/paste this content:
+
+```php
+<?php
+
+namespace App\Action\Auth;
 
 use App\Responder\Responder;
 use Psr\Http\Message\ResponseInterface;
@@ -224,10 +251,7 @@ use Odan\Session\SessionInterface;
 
 final class LogoutAction
 {
-    /**
-     * @var SessionInterface
-     */
-    private $session;
+    private SessionInterface $session;
 
     public function __construct(SessionInterface $session)
     {
@@ -245,6 +269,42 @@ final class LogoutAction
         $url = $routeParser->urlFor('logout');
         
         return $response->withStatus(302)->withHeader('Location', $url);
+    }
+}
+
+```
+
+To render the welcome page create a new file `src/Action/User/UserAction.php`
+and copy/paste this content:
+
+```php
+<?php
+
+namespace App\Action\User;
+
+use App\Responder\Responder;
+use Odan\Session\SessionInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+final class UserAction
+{
+    private SessionInterface $session;
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
+    
+    public function __invoke(
+        ServerRequestInterface $request, 
+        ResponseInterface $response
+    ): ResponseInterface {
+        $username = $this->session->get('user');
+        
+        $response->getBody()->write(sprintf('Welcome %s', $username));
+        
+        return $response;
     }
 }
 
@@ -268,15 +328,9 @@ use Slim\Routing\RouteContext;
 
 final class UserAuthMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var ResponseFactoryInterface
-     */
-    private $responseFactory;
+    private ResponseFactoryInterface $responseFactory;
     
-    /**
-     * @var SessionInterface
-     */
-    private $session;
+    private SessionInterface $session;
 
     public function __construct(
         ResponseFactoryInterface $responseFactory, 
@@ -307,7 +361,8 @@ final class UserAuthMiddleware implements MiddlewareInterface
 
 ```
 
-You can add the `UserAuthMiddleware::class` to individual routes and/or route groups you want to protect.
+You can add the `UserAuthMiddleware::class` to individual routes and/or route 
+groups you want to protect.
 
 ```php
 use App\Middleware\UserAuthMiddleware;
@@ -316,16 +371,18 @@ use Slim\Routing\RouteCollectorProxy;
 
 // Password protected area
 $app->group('/users', function (RouteCollectorProxy $group) {
-    // ...
+    $group->get('/', \App\Action\User\UserAction::class)->setName('users');
+    // add more routes ...
 })->add(UserAuthMiddleware::class);
 ```
 
 Add the routes as follows:
 
-```
-$app->get('/login', \App\Action\LoginAction::class)->setName('login');
-$app->post('/login', \App\Action\LoginSubmitAction::class);
-$app->get('/logout', \App\Action\LogoutAction::class)->setName('logout'); 
+```php
+$app->get('/users', \App\Action\User\UserAction::class)->setName('users');
+$app->get('/login', \App\Action\Auth\LoginAction::class)->setName('login');
+$app->post('/login', \App\Action\Auth\LoginSubmitAction::class);
+$app->get('/logout', \App\Action\Auth\LogoutAction::class)->setName('logout'); 
 ```
 
 ## Conclusion

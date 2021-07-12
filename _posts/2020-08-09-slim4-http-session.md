@@ -170,12 +170,12 @@ be automatically injected by the IoC Container.
 
 I want to show a simple login/logout to demonstrate the session and flash message handling.
 
-Create a new file `src/Action/LoginSubmitAction.php` and copy/paste this content:
+Create a new file `src/Action/Auth/LoginSubmitAction.php` and copy/paste this content:
 
 ```php
 <?php
 
-namespace App\Action;
+namespace App\Action\Auth;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -184,10 +184,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 final class LoginSubmitAction
 {
-    /**
-     * @var Session
-     */
-    private $session;
+    private Session $session;
 
     public function __construct(Session $session)
     {
@@ -203,10 +200,11 @@ final class LoginSubmitAction
         $password = (string)($data['password'] ?? '');
 
         // Pseudo example
-        // Check user credentials. You may use an application/domain service and the database here.
+        // Check user credentials. You may use an application/domain service
+        // and the database here.
         $user = null;
         if($username === 'admin' && $password === 'secret') {
-            $user = 1;
+            $user = 'admin';
         }
 
         // Clear all flash messages
@@ -226,7 +224,7 @@ final class LoginSubmitAction
             $flash->set('success', 'Login successfully');
     
             // Redirect to protected page
-            $url = $routeParser->urlFor('users-get');
+            $url = $routeParser->urlFor('users');
         } else {
             $flash->set('error', 'Login failed!');
 
@@ -239,12 +237,12 @@ final class LoginSubmitAction
 }
 ```
 
-Create a new file `src/Action/LogoutAction.php` and copy/paste this content:
+Create a new file `src/Action/Auth/LogoutAction.php` and copy/paste this content:
 
 ```php
 <?php
 
-namespace App\Action;
+namespace App\Action\Auth;
 
 use App\Responder\Responder;
 use Psr\Http\Message\ResponseInterface;
@@ -254,12 +252,9 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 final class LogoutAction
 {
-    /**
-     * @var Session
-     */
-    private $session;
+    private Session $session;
 
-    public function __construct(SessionInterface $session)
+    public function __construct(Session $session)
     {
         $this->session = $session;
     }
@@ -275,6 +270,72 @@ final class LogoutAction
         $url = $routeParser->urlFor('logout');
         
         return $response->withStatus(302)->withHeader('Location', $url);
+    }
+}
+
+```
+
+To render the login page create a new file `src/Action/Auth/LoginAction.php`
+and copy/paste this content:
+
+```php
+<?php
+
+namespace App\Action\Auth;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+
+final class LoginAction
+{
+    public function __invoke(
+        ServerRequestInterface $request, 
+        ResponseInterface $response
+    ): ResponseInterface {
+        $html = '<form action="login" method="POST">
+        Username:<input type="text" name="username"><br>
+        Password:<input type="password" name="password"><br>
+        <input type="submit" value="Login">
+        </form>';
+        $response->getBody()->write($html);
+
+        return $response;
+    }
+}
+
+```
+
+To render the welcome page create a new file `src/Action/User/UserAction.php` 
+and copy/paste this content:
+
+```php
+<?php
+
+namespace App\Action\User;
+
+use App\Responder\Responder;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+
+final class UserAction
+{
+    private Session $session;
+
+    public function __construct(Session $session)
+    {
+        $this->session = $session;
+    }
+    
+    public function __invoke(
+        ServerRequestInterface $request, 
+        ResponseInterface $response
+    ): ResponseInterface {
+        $username = $this->session->get('user');
+        
+        $response->getBody()->write(sprintf('Welcome %s', $username));
+        
+        return $response;
     }
 }
 
@@ -298,15 +359,9 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 final class UserAuthMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var ResponseFactoryInterface
-     */
-    private $responseFactory;
+    private ResponseFactoryInterface $responseFactory;
     
-    /**
-     * @var Session
-     */
-    private $session;
+    private Session $session;
 
     public function __construct(
         ResponseFactoryInterface $responseFactory, 
@@ -346,16 +401,18 @@ use Slim\Routing\RouteCollectorProxy;
 
 // Password protected area
 $app->group('/users', function (RouteCollectorProxy $group) {
-    // ...
+    $group->get('/', \App\Action\User\UserAction::class)->setName('users');
+    // add more routes ...
 })->add(UserAuthMiddleware::class);
 ```
 
 Add the routes as follows:
 
-```
-$app->get('/login', \App\Action\LoginAction::class)->setName('login');
-$app->post('/login', \App\Action\LoginSubmitAction::class);
-$app->get('/logout', \App\Action\LogoutAction::class)->setName('logout'); 
+```php
+$app->get('/users', \App\Action\User\UserAction::class)->setName('users');
+$app->get('/login', \App\Action\Auth\LoginAction::class)->setName('login');
+$app->post('/login', \App\Action\Auth\LoginSubmitAction::class);
+$app->get('/logout', \App\Action\Auth\LogoutAction::class)->setName('logout'); 
 ```
 
 ## Conclusion
