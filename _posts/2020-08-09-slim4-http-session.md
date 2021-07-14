@@ -293,8 +293,8 @@ final class LoginAction
         ResponseInterface $response
     ): ResponseInterface {
         $html = '<form action="login" method="POST">
-        Username:<input type="text" name="username"><br>
-        Password:<input type="password" name="password"><br>
+        Username: <input type="text" name="username"><br>
+        Password: <input type="password" name="password"><br>
         <input type="submit" value="Login">
         </form>';
         $response->getBody()->write($html);
