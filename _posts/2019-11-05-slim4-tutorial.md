@@ -1132,7 +1132,7 @@ The source code with more examples (e.g. reading a user) can be found here: <htt
 
 A complete skeleton for Slim 4 can be found here: <https://github.com/odan/slim4-skeleton>
 
-#### Support
+### Support
 
 For technical questions create an issue here:
 
