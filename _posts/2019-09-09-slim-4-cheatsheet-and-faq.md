@@ -45,6 +45,11 @@ keywords: slim, php, slim-framework
 * <https://github.com/adriansuter/Slim4-Skeleton>
 * <https://github.com/akrabat/slim4-starter>
 
+### Videos
+
+* [Slim 4 - Hallo Welt](https://www.youtube.com/watch?v=c6IMi3NlIeU) (german)
+
+
 ### Error 404
 
 In the beginning many people have an issue with the error message: **Error 404 (Not found)**
@@ -180,3 +185,52 @@ You can use composition with pure classes and without a container or anything el
 The autowire feature just uses 
 the [PHP Reflection](https://www.php.net/manual/en/book.reflection.php) classes 
 to resolve and inject the dependencies automatically for you.
+
+### How to run tests?
+
+Read this topic: [Slim 4 - Testing](https://odan.github.io/2020/06/09/slim4-testing.html)
+
+### How to add JSON Web Token (JWT) / Bearer authentication?
+
+Read this article: [Slim 4 - OAuth 2.0 and JSON Web Token Setup](https://odan.github.io/2019/12/02/slim4-oauth2-jwt.html)
+
+### How to set up CORS?
+
+Read this article:  [Slim 4 - CORS setup](https://odan.github.io/2019/11/24/slim4-cors.html)
+
+### I get a 404 (not found) error
+
+Follow the instructions and use the [BasePathMiddleware](https://github.com/selective-php/basepath).
+
+### How to add a database connection?
+
+You can add a query builder as described here:
+
+* [CakePHP Query Builder Setup](https://odan.github.io/2019/12/03/slim4-cakephp-query-builder.html)
+* [Eloquent Query Builder Setup](https://odan.github.io/2019/12/03/slim4-eloquent.html)
+* [Laminas Query Builder Setup](https://odan.github.io/2019/12/01/slim4-laminas-db-query-builder-setup.html)
+
+### How to add multiple database connections?
+
+* [Eloquent multiple connections setup](https://odan.github.io/2019/12/03/slim4-eloquent.html#setup-multiple-connections)
+* [Multiple PDO database connections](https://odan.github.io/2020/04/05/slim4-multiple-pdo-database-connections.html)
+
+### How to build assets with webpack?
+
+* [Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
+
+### How to serve Slim with NGINX and PHP-FPM?
+
+If you run Slim with Nginx you don't need the `.htaccess` files and the `BasePathMiddleware`.
+Configure Nginx with this [configuration](https://www.slimframework.com/docs/v4/start/web-servers.html#nginx-configuration).
+
+### How to use the PHP built-in server?
+
+Run the following command in terminal to start localhost web server:
+
+```
+cd public/
+php -S localhost:8080
+```
+
+Then navigate to: `http://localhost:8080/`

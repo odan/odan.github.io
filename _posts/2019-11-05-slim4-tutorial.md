@@ -42,7 +42,8 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
   * [Repositories](#repositories)
 * [Deployment](#deployment)
 * [Conclusion](#conclusion)
-* [FAQ](#faq)
+* [Support](#support)
+* [Read more](#read-more)
 
 ## Requirements
 
@@ -1127,76 +1128,11 @@ Remember the relationships:
 * Services - To handle business logic
 * Repositories - To execute database queries
 
-## FAQ
-
-### General questions
-
-Read more: [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-4-cheatsheet-and-faq.html)
-
-### Where can I find the code on github?
-
 The source code with more examples (e.g. reading a user) can be found here: <https://github.com/odan/slim4-tutorial>
 
 A complete skeleton for Slim 4 can be found here: <https://github.com/odan/slim4-skeleton>
 
-### How can I add unit and integration / functional tests?
-
-Read this topic: [Slim 4 - Testing](https://odan.github.io/2020/06/09/slim4-testing.html)
-
-### How to add JSON Web Token (JWT) / Bearer authentication?
-
-Read this article: [Slim 4 - OAuth 2.0 and JSON Web Token Setup](https://odan.github.io/2019/12/02/slim4-oauth2-jwt.html) 
-
-### How to setup CORS?
-
-Read this article:  [Slim 4 - CORS setup](https://odan.github.io/2019/11/24/slim4-cors.html) 
-
-### How to add a logger?
-
-Read this article: [Slim 4 - Logging](https://odan.github.io/2020/05/25/slim4-logging.html)
-
-### I get a 404 (not found) error
-
-Follow the instructions and use the [BasePathMiddleware](https://github.com/selective-php/basepath).
-
-### Error message: Callable (...) does not exist
-
-Run `composer update` to fix it.
-
-### How to add a database connection?
-
-You can add a query builder as described here:
-
-* [CakePHP Query Builder Setup](https://odan.github.io/2019/12/03/slim4-cakephp-query-builder.html)
-* [Eloquent Query Builder Setup](https://odan.github.io/2019/12/03/slim4-eloquent.html)
-* [Laminas Query Builder Setup](https://odan.github.io/2019/12/01/slim4-laminas-db-query-builder-setup.html)
-
-### How to add multiple database connections?
-
-* [Eloquent multiple connections setup](https://odan.github.io/2019/12/03/slim4-eloquent.html#setup-multiple-connections)
-* [Multiple PDO database connections](https://odan.github.io/2020/04/05/slim4-multiple-pdo-database-connections.html)
-
-### How to build assets with webpack?
-
-* [Compiling Assets with Webpack](https://odan.github.io/2019/09/21/slim4-compiling-assets-with-webpack.html)
-
-### How to serve Slim with NGINX and PHP-FPM?
-
-If you run Slim with Nginx you don't need the `.htaccess` files and the `BasePathMiddleware`.
-Configure Nginx with this [configuration](https://www.slimframework.com/docs/v4/start/web-servers.html#nginx-configuration).
-
-### How to use the PHP built-in server?
-
-Run the following command in terminal to start localhost web server:
-
-```
-cd public/
-php -S localhost:8080
-```
-
-Then navigate to: `http://localhost:8080/`
-
-### Support
+#### Support
 
 For technical questions create an issue here:
 
@@ -1205,3 +1141,11 @@ For technical questions create an issue here:
 If you have Slim-Framework specific questions, visit:
 
 * <https://discourse.slimframework.com/>
+
+### Read more
+
+* [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-4-cheatsheet-and-faq.html)
+
+#### Videos
+
+* [Slim 4 - Hallo Welt](https://www.youtube.com/watch?v=c6IMi3NlIeU) (german)
