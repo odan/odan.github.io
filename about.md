@@ -73,6 +73,7 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 * [E-Mail](mailto:d.opitz@outlook.com)
 * [Twitter](https://twitter.com/dopitz)
+* [YouTube](https://www.youtube.com/channel/UCP9FiJ_7W5u6L1bgKSEEKdQ)  
 * [GitHub](https://github.com/odan)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
 * [Xing](https://www.xing.com/profile/Daniel_Opitz9)
