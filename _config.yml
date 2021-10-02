@@ -1,0 +1,99 @@
+theme: jekyll-theme-cayman
+
+# Name of your site (displayed in the header)
+name: Daniel Opitz - Blog
+
+# Name of website (site.title)
+title: Daniel Opitz - Blog
+
+# Short description of your site
+description: Developer, Trainer, Open Source Contributor
+
+# url is the full website URL
+# baseurl is the website's URL without the hostname
+url: https://odan.github.io
+#baseurl: "/projectname"
+
+github:
+  is_project_page: false
+
+github_profile:
+#  url: https://github.com/odan
+
+twitter:
+  username: dopitz
+#  url: https://twitter.com/dopitz
+  
+#linkedin:
+#  url: https://www.linkedin.com/in/daniel-opitz-493816111/
+
+# Disqus comments
+comments: false
+
+# List of links in the navigation bar
+navbar-links:
+  About Me: "aboutme"
+  Resources:
+    - Beautiful Jekyll: "http://example.com/beautiful-jekyll/"
+    - Learn markdown: "http://www.example.com/"
+    - GitHub Pages: "https://pages.example.com/"
+  Author's home: "http://example.com"
+
+# --- Background colour/image options --- #
+
+# Personalize the colors in your website. Colour values can be any valid CSS colour
+
+navbar-col: "#F5F5F5"
+navbar-text-col: "#404040"
+navbar-children-col: "#F5F5F5"
+page-col: "#FFFFFF"
+link-col: "#008AFF"
+hover-col: "#0085A1"
+footer-col: "#F5F5F5"
+footer-text-col: "#777777"
+footer-link-col: "#404040"
+
+# Alternatively, the navbar, footer, and page background can be set to use background images
+# instead of colour
+
+# navbar-img: "/img/bgimage.png"
+# footer-img: "/img/bgimage.png"
+# page-img: "/img/bgimage.png"
+
+# --- Footer options --- #
+
+# Change all these values or delete the ones you don't want.
+# Important: you must keep the "name" parameter, everything else you can remove
+author:
+  name: Daniel Opitz
+  twitter: dopitz
+
+image:
+  path: https://odan.github.io/assets/images/post_default.png
+
+defaults:
+  image:
+    path: https://odan.github.io/assets/images/post_default.png
+
+# Select your active Social Network Links.
+# Uncomment the links you want to show in the footer and add your information to each link.
+# You can reorder the items to define the link order.
+# If you want to add a new link that isn't here, you'll need to also edit the file _data/SocialNetworks.yml
+social-network-links:
+  rss: true
+  email: "someone@example.com"
+  facebook: acmeuser
+  github: odan
+  twitter: dopitz
+#  reddit: yourname
+#  stackoverflow: "23234234/acmeuser"
+
+
+# Select which share links to show in posts
+share-links-active:
+  twitter: true
+  facebook: true
+  google: false
+  linkedin: true
+
+google_analytics: UA-135908404-1

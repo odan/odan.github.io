@@ -1,0 +1,50 @@
+---
+layout: default
+---
+
+<h1 id="blog">Blog</h1>
+
+<a href="https://odan.github.io/feed.xml" target="_blank" style="float:left; width:40px;">
+    <img src="https://user-images.githubusercontent.com/781074/53696957-3d257b00-3dcc-11e9-8b7f-f8e5fa7dbb9d.png" width="32">
+</a>
+
+<a href="https://odan.github.io/search.html" style="float:left; width:40px;">
+    <img src="https://user-images.githubusercontent.com/781074/67159940-7acf1800-f34b-11e9-9af5-ed3b571d90ff.png" width="32">
+</a>
+<br>
+
+<p>
+    {% include adsense.html %}
+</p>
+
+{% assign postsByYear = site.posts | group_by_exp:"post", "post.date | date: '%Y'" %}
+{% for year in postsByYear %}
+<h2 class="blog-year" id="{{ year.name }}">{{ year.name }}</h2>
+<ul aria-label="posts from {{ year.name }}" style="display: none;">
+    {% for post in year.items %}
+    <li><a href="{{ post.url }}">{{ post.title }}</a> ({{ post.date | date: "%Y-%m-%d" }})</li>
+    {% endfor %}
+</ul>
+{% endfor %}
+
+<script>
+    $(function () {
+        $('.blog-year').each(function(el) {
+            var currentYear = (new Date()).getFullYear();
+            var blogYear = $(this).html();
+            var count = $(this).next('ul').find('li').length;
+            $(this).html($(this).html() + ' (' + count + ')')
+
+            if(blogYear >= currentYear - 2) {
+                // show
+                $(this).next('ul').toggle();
+            }
+        });
+
+        $('.blog-year').on('click', function () {
+            $(this).next('ul').toggle();
+        });
+    });
+</script>
+
+{% include adsense.html %}
