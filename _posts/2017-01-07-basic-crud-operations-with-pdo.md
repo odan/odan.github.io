@@ -144,10 +144,11 @@ $row = [
 ];
 
 $sql = "UPDATE users SET updated_at=:updated_at";
-$pdo->prepare($sql)->execute($row);
+$statement = $pdo->prepare($sql);
+$statement->execute($row);
 
 // optional
-$affected = $pdo->rowCount();
+$affected = $statement->rowCount();
 ```
 
 ## Delete a single row
