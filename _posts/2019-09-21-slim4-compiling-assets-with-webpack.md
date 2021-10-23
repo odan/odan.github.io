@@ -581,7 +581,7 @@ Add a new webpack entry in `webpack.config.js`:
 ```js
 module.exports = {
     entry: {
-        'layout/layout': './templates/layout/layout.js',     // <- jquery is loaded here
+        'layout/layout': './templates/layout/layout.js',
         'layout/datatables': './templates/layout/datatables.js', // <-- add this line
         'user/user-list': './templates/user/user-list.js', // <-- add this line
         // other pages ...
