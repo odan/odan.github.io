@@ -19,12 +19,12 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 * [Compiling assets](#compiling-assets)
 * [Useful tips](#useful-tips)
   * [Recompiling on change](#recompiling-on-change)
-  * [jQuery setup](#jquery-setup)
-  * [Bootstrap setup](#bootstrap-setup)
-  * [Fontawesome setup](#fontawesome-setup)
-  * [SweetAlert2 setup](#sweetalert2-setup)
-  * [DataTables setup](#datatables-setup)
-  * [Babel setup](#babel-setup)
+  * [jQuery Setup](#jquery-setup)
+  * [Bootstrap Setup](#bootstrap-setup)
+  * [Fontawesome Setup](#fontawesome-setup)
+  * [SweetAlert2 Setup](#sweetalert2-setup)
+  * [DataTables Setup](#datatables-setup)
+  * [Babel Setup](#babel-setup)
 
 ## Requirements
 
@@ -365,7 +365,7 @@ To stop the webpack watch process, press `Ctrl+C`.
 Read more:
 * [Webpack Watch and WatchOptions](https://webpack.js.org/configuration/watch/)
 
-### jQuery setup
+### jQuery Setup
 
 jQuery uses the global variable `global.jQuery` and the 
 alias `global.$`. The problem ist that Webpack will wrap all 
@@ -449,7 +449,7 @@ require('@popperjs/core');
 require('bootstrap/dist/css/bootstrap.css');
 ```
 
-### Fontawesome setup
+### Fontawesome Setup
 
 [Fontawesome](https://fontawesome.com/) is the world's most popular 
 and easiest to use icon set.
@@ -518,7 +518,7 @@ add this rule to your `webpack.config.js` file:
     },
 ```
 
-### SweetAlert2 setup
+### SweetAlert2 Setup
 
 [SweetAlert2](https://sweetalert2.github.io/) is a beautiful, 
 responsive, customizable and accessible replacement for JavaScript's popup boxes.
@@ -556,7 +556,7 @@ Swal.fire(
 );
 ```
 
-### DataTables setup
+### DataTables Setup
 
 [DataTables.net](https://datatables.net/) is a very flexible table plug-in for jQuery.
 
@@ -648,7 +648,7 @@ $(function() {
 });
 ```
 
-## Babel setup
+## Babel Setup
 
 Installation:
 
