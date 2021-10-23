@@ -441,6 +441,7 @@ using this command:
 ```
 npm install @popperjs/core
 ```
+
 Import boostrap in a global available webpack entry point like: `templates/layout/layout.js`:
 
 ```js
@@ -453,6 +454,7 @@ require('bootstrap/dist/css/bootstrap.css');
 
 [Fontawesome](https://fontawesome.com/) is the world's most popular 
 and easiest to use icon set.
+
 To install Fontawesome, run:
 
 ```
@@ -522,6 +524,7 @@ add this rule to your `webpack.config.js` file:
 
 [SweetAlert2](https://sweetalert2.github.io/) is a beautiful, 
 responsive, customizable and accessible replacement for JavaScript's popup boxes.
+
 To install SweetAlert2, run:
 
 ```
