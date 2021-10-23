@@ -65,16 +65,21 @@ Create a new `package.json` file at the root of your project. This file lists th
     "dependencies": {
     },
     "devDependencies": {
-        "clean-webpack-plugin": "^3.0.0",
-        "css-loader": "^3.2.0",
-        "file-loader": "^4.2.0",
-        "mini-css-extract-plugin": "^0.8.0",
-        "optimize-css-assets-webpack-plugin": "^5.0.3",
-        "terser-webpack-plugin": "latest",
-        "webpack": "^4.40.2",
-        "webpack-assets-manifest": "^3.1.1",
-        "webpack-cli": "^3.3.9",
-        "webpack-manifest-plugin": "^2.0.4"
+        "autoprefixer": "^10",
+        "clean-webpack-plugin": "^4",
+        "css-loader": "^6",
+        "css-minimizer-webpack-plugin": "^3",
+        "file-loader": "^6",
+        "identity-obj-proxy": "^3",
+        "mini-css-extract-plugin": "^2",
+        "postcss-loader": "^6",
+        "sass-loader": "^12",
+        "style-loader": "^3",
+        "terser-webpack-plugin": "^5",
+        "webpack": "^5",
+        "webpack-assets-manifest": "^5",
+        "webpack-cli": "^4",
+        "webpack-manifest-plugin": "^4"
     }
 }
 
@@ -86,15 +91,15 @@ Create a new `webpack.config.js` file at the root of your project. This is the m
 const path = require('path');
 const webpack = require('webpack');
 const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
+const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 
 module.exports = {
     entry: {
         'home/home-index': './templates/home/home-index.js'
-        // here you can add more entries for each page or global assets like jQuery and bootstrap
+        // here you can add more entries for each page or global assets 
         // 'layout/layout': './templates/layout/layout.js'
     },
     output: {
@@ -108,12 +113,26 @@ module.exports = {
         maxEntrypointSize: 1024000,
         maxAssetSize: 1024000
     },
+    resolve: {
+        extensions: ['.js']
+    },
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
-            }
+                use: [
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            url: true,
+                            esModule: false,
+                        },
+                    },
+                ],
+            },
         ],
     },
     plugins: [
@@ -348,7 +367,11 @@ Read more:
 
 ### jQuery setup
 
-jQuery uses the global variable `window.jQuery` and the alias `window.$`. The problem ist that Webpack will wrap all modules within a closure function to protect the global scope. For this reason we have to bind the jQuery instance to the global scope manually.
+jQuery uses the global variable `global.jQuery` and the 
+alias `global.$`. The problem ist that Webpack will wrap all 
+modules within a closure function to protect the global scope. 
+For this reason we have to bind the jQuery instance to the 
+global scope manually.
 
 To install jQuery, run:
 
@@ -359,7 +382,7 @@ npm install jquery
 The browser must load jQuery before other jQuery plugins can be used.
 For this reason, I would recommend bundling jQuery into a generally available asset file.
 
-Add a new weback entry in `webpack.config.js`:
+Add a new webpack entry in `webpack.config.js`:
 
 ```js
 module.exports = {
@@ -403,32 +426,33 @@ Add the assets {% raw %}`{% webpack_entry_css 'layout/layout' %}`{% endraw %} an
 ```
 {% endraw %}
 
-### Bootstrap setup
+### Bootstrap Setup
 
-Bootstrap 4 uses jQuery and Popper.js for JavaScript components (like modals, tooltips, popovers etc).
-You have to [setup jQuery for Webpack](#jquery-setup) first.
-
-To install Bootstrap, run:
+To install Bootstrap 5, run:
 
 ```
 npm install bootstrap
 ```
 
+Bootstrap depends on Popper, which is specified in the peerDependencies property. 
+This means that you will have to make sure to add it to your package.json 
+using this command:
+
+```
+npm install @popperjs/core
+```
 Import boostrap in a global available webpack entry point like: `templates/layout/layout.js`:
 
 ```js
-window.jQuery = require('jquery');
-window.$ = window.jQuery;
-
-require('bootstrap');
-require('popper.js');
+global.bootstrap = require('bootstrap');
+require('@popperjs/core');
 require('bootstrap/dist/css/bootstrap.css');
 ```
 
 ### Fontawesome setup
 
-[Fontawesome](https://fontawesome.com/) is the world's most popular and easiest to use icon set.
-
+[Fontawesome](https://fontawesome.com/) is the world's most popular 
+and easiest to use icon set.
 To install Fontawesome, run:
 
 ```
@@ -441,8 +465,8 @@ We also need the file-loader for the webfonts:
 npm install file-loader --save-dev
 ```
 
-We want to copy the Fontawesome fonts automatically into the assets directory. The file-loader copies the font files, to the build directory.
-
+We want to copy the Fontawesome fonts automatically into the `assets` directory. 
+The file-loader copies the font files, to the build directory.
 To install the file-loader, run:
 
 ```
@@ -467,9 +491,12 @@ require('@fortawesome/fontawesome-free/css/solid.css');
 require('@fortawesome/fontawesome-free/css/brands.css');
 ```
 
-**Note:** We don't install the js dependencies here, because it would blow up your js build to >1 MB of usless javascript. We only need the plain css and webfont files for fontawesome.
+**Note:** We don't install the js dependencies here, because it would blow up 
+your js build to >1 MB of useless javascript. We only need the plain 
+css and webfont files for fontawesome.
 
-To copy the fonts into the `assets/webfonts/` directory, add this rule to your `webpack.config.js` file:
+To copy the fonts into the `assets/webfonts/` directory, 
+add this rule to your `webpack.config.js` file:
 
 ```js
  module: {
@@ -493,8 +520,8 @@ To copy the fonts into the `assets/webfonts/` directory, add this rule to your `
 
 ### SweetAlert2 setup
 
-[SweetAlert2](https://sweetalert2.github.io/) is a beautiful, responsive, customizable and accessible replacement for JavaScript's popup boxes.
-
+[SweetAlert2](https://sweetalert2.github.io/) is a beautiful, 
+responsive, customizable and accessible replacement for JavaScript's popup boxes.
 To install SweetAlert2, run:
 
 ```
@@ -505,6 +532,18 @@ Import the sweetalert2 module and bind `Swal` to the global scope:
 
 ```js
 window.Swal = require('sweetalert2');
+```
+
+Swal for Bootstrap 5:
+
+
+```js
+global.sweetalert2 = require('sweetalert2');
+global.Swal = global.sweetalert2.mixin({
+    // Fix for Bootstrap 5
+    scrollbarPadding: false,
+    heightAuto: false,
+});
 ```
 
 Usage:
@@ -523,13 +562,22 @@ Swal.fire(
 
 You have to [setup jQuery for Webpack](#jquery-setup) first.
 
-To install DataTables, run:
+To install the DataTables Core library, run:
 
 ```
-npm install datatables.net-bs4 datatables.net-responsive-bs4 datatables.net-select-bs4
+npm install datatables.net
+npm install datatables.net-dt
 ```
 
-Add a new weback entry in `webpack.config.js`:
+To install the DataTables Bootstrap 5 styles, run:
+
+```
+npm install datatables.net-bs5
+npm install datatables.net-responsive-bs5
+npm install datatables.net-select-bs5
+```
+
+Add a new webpack entry in `webpack.config.js`:
 
 ```js
 module.exports = {
@@ -543,11 +591,15 @@ module.exports = {
 };
 ```
 
-Import datatables in a global available webpack entry point like: `templates/layout/datatables.js`:
+Import datatables in a global available webpack entry point like: 
+`templates/layout/datatables.js`:
 
 ```js
-window.$.fn.DataTable = require('datatables.net-bs4');
-require('datatables.net-bs4/css/dataTables.bootstrap4.css');
+// Register a jQuery Plugin
+global.$.fn.DataTable = require('datatables.net-bs5');
+
+// Datatables Bootstrap 5 styles
+require('datatables.net-bs5/css/dataTables.bootstrap5.css');
 ```
 
 Create a new Twig template: `templates/user/user-list.twig`:
