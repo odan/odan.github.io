@@ -397,8 +397,8 @@ module.exports = {
 Bind jQuery to the global scope in your webpack entry point `templates/layout/layout.js`:
 
 ```js
-window.jQuery = require('jquery');
-window.$ = window.jQuery;
+global.jQuery = require('jquery');
+global.$ = global.jQuery;
 ```
 
 Add the assets {% raw %}`{% webpack_entry_css 'layout/layout' %}`{% endraw %} and {% raw %}`{% webpack_entry_js 'layout/layout' %}`{% endraw %} to the Twig template `layout/layout.twig`:
@@ -531,11 +531,10 @@ npm install sweetalert2
 Import the sweetalert2 module and bind `Swal` to the global scope:
 
 ```js
-window.Swal = require('sweetalert2');
+global.Swal = require('sweetalert2');
 ```
 
 Swal for Bootstrap 5:
-
 
 ```js
 global.sweetalert2 = require('sweetalert2');
