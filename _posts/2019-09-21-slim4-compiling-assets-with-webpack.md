@@ -63,6 +63,9 @@ Create a new `package.json` file at the root of your project. This file lists th
     "license": "MIT",
     "private": true,
     "dependencies": {
+        "foreach": "^2",
+        "promise-polyfill": "8",
+        "url-search-params-polyfill": "^8"
     },
     "devDependencies": {
         "autoprefixer": "^10",
@@ -70,12 +73,12 @@ Create a new `package.json` file at the root of your project. This file lists th
         "css-loader": "^6",
         "css-minimizer-webpack-plugin": "^3",
         "file-loader": "^6",
-        "identity-obj-proxy": "^3",
         "mini-css-extract-plugin": "^2",
         "postcss-loader": "^6",
         "sass-loader": "^12",
         "style-loader": "^3",
         "terser-webpack-plugin": "^5",
+        "url-loader": "^4",
         "webpack": "^5",
         "webpack-assets-manifest": "^5",
         "webpack-cli": "^4",
