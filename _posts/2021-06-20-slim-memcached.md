@@ -14,7 +14,6 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 * [Requirements](#requirements)
 * [Memcached Setup on Linux](#memcached-setup-on-linux)
 * [Memcached Setup on Windows](#memcached-setup-on-windows)
-* [Memcached Extension Setup](#memcached-extension-setup)
 * [Configuration](#configuration)
 * [DI Container Setup](#di-container-setup)
 * [Cache Keys](#cache-keys)
@@ -49,11 +48,58 @@ or when Memcached flushes its memory.
 If you need **persistence**, you might want to look at other solutions like
 [Redis](https://odan.github.io/2021/06/14/slim-redis.html).
 
+Please note that there are two PHP extensions,
+`php-memcached` and `php-memcache`, which are not identical.
+
+PHP-Memcache is older, very stable but has a few limitations.
+The PHP Memcache module utilizes the daemon directly, 
+while the PHP-Memcached module uses the libMemcached client 
+library and contains some added features.
+
+You can compare features and differences between them 
+[here](https://github.com/memcached/old-wiki/blob/master/PHPClientComparison.wiki).
+
 ## Memcached Setup on Linux
 
 For this demo you need at least a running Memcached instance.
 
 Please follow the official installation guide: [Memcached Installation](https://github.com/memcached/memcached/wiki/Install)
+
+Install memcached and libmemcached:
+
+```
+sudo apt install memcached libmemcached-tools
+```
+
+Check service status:
+
+```
+sudo systemctl status memcached
+```
+
+If the service is not startet, restart with:
+
+```
+sudo service memcached restart
+```
+
+Install the php-memcache extension:
+
+```
+sudo apt install php-memcache
+sudo apt install php8.0-memcache
+```
+
+Optional, install the php-memcached extension:
+
+```
+sudo apt install php-memcached
+sudo apt install php8.0-memcached
+```
+
+Restart Apache:
+
+`sudo service apache2 restart`
 
 ## Memcached Setup on Windows
 
@@ -66,13 +112,9 @@ For people like me who develop on Windows, there is a free binary version.
 * To start the Memcached server, run: `memcached.exe`
 * The server is now ready to accept connections on port `11211`
 
-## Memcached Extension Setup
-
 The Memcached API is available as a PHP [PECL extension](https://www.php.net/manual/en/book.memcache.php). 
 Information for installing this PECL extension may be found
 on [PHP.net](https://www.php.net/manual/en/memcache.installation.php)
-
-### Memcached Extension Setup on XAMPP for Windows
 
 * Open: <http://pecl.php.net/package/memcache/4.0.5.2/windows>
 * Download the `7.x Thread Safe (TS) x64` version, e.g. [7.4 Thread Safe (TS) x64](https://windows.php.net/downloads/pecl/releases/memcache/4.0.5.2/php_memcache-4.0.5.2-7.4-ts-vc15-x64.zip)
