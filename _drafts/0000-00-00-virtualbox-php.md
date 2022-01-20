@@ -73,7 +73,7 @@ Read more: <https://gist.github.com/estorgio/1d679f962e8209f8a9232f7593683265>
 * Login as super user with `sudo su`
 * Enter `ifconfig` to find the local ip address, e.g. `192.168.0.172`
 
-## Installing Apache with PHP 8.0 
+## Installing Apache with PHP 8.1
 
 * Start the VM
 * Login as super user `sudo su`
@@ -93,13 +93,13 @@ apt update
 
 apt update
 apt install vim unzip -y
-apt install libapache2-mod-php8.0 php8.0
+apt install libapache2-mod-php8.1 php8.1
 apt install mysql-client libmysqlclient-dev -y
-apt install php8.0-mysql php8.0-sqlite3 -y
-#apt install php8.0-mbstring php8.0-curl php8.0-intl php8.0-gd php8.0-zip php8.0-bz2 -y
-apt install php8.0-dom php8.0-xml php8.0-soap -y
+apt install php8.1-mysql php8.1-sqlite3 -y
+#apt install php8.1-mbstring php8.1-curl php8.1-intl php8.1-gd php8.1-zip php8.1-bz2 -y
+apt install php8.1-dom php8.1-xml php8.1-soap -y
 
-a2enmod php8.0
+a2enmod php8.1
 a2enmod rewrite
 a2enmod actions
 
@@ -145,7 +145,7 @@ service apache2 restart
 Add current user to vboxsf group:
 
 ```
-sudo usermod -aG vboxusers $USER
+sudo usermod -aG vboxsf $USER
 ```
 
 Logout and in for the change to take effect.
