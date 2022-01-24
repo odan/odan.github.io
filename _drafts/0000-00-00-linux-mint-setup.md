@@ -2,16 +2,62 @@
 
 ## Linux Mint Setup
 
-* Download the latest ISO file from [the Linux mint website](https://blog.linuxmint.com/?p=4013)
+* Download the latest ISO from [the Linux mint website](https://blog.linuxmint.com/?p=4013)
 * Copy the ISO file with [E](https://www.balena.io/etcher/) to a USB stick and install it.
 
 ## Install Virtualbox guest extension
 
 * From the virtual machine menu, click `Devices` -> `Insert Guest Additions CD Image`.
 * Open the terminal and enter:
-* `cd /media/user/VBox_GAs_6.1.22/`
+* `cd /media/user/VBox_GAs_6.1.26/`
 * `sudo sh ./VBoxLinuxAdditions.run --nox11`  
 * Reboot the VM for changes to take effect: `sudo shutdown -r now`
+
+## Uninstall Software
+
+```
+# LibreOffice
+sudo apt remove --purge -y libreoffice*
+sudo apt remove --purge -y libjuh*
+
+# Remove all LibreOffice start menu icons
+find ~/.local/share/applications/ -type f -name '*libreoffice*.desktop' -delete
+
+# Gimp
+sudo apt remove --purge -y gimp
+
+# Thunderbird
+sudo apt remove --purge -y thunderbird
+
+sudo apt clean
+sudo apt autoremove
+```
+
+## System Updates
+
+Update all Packages
+
+```
+sudo apt update
+```
+
+Update only security updates
+
+```
+sudo apt install unattended-upgrades
+```
+
+Upgrade the Linux system
+
+```
+sudo apt upgrade
+```
+
+Upgrade the Linux distribution
+
+```
+sudo apt dist-upgrade
+```
 
 ## BIOS
 
@@ -141,28 +187,4 @@ wget -q https://raw.githubusercontent.com/IBM/plex/master/IBM-Plex-Mono/fonts/co
 fc-cache -frv
 ```
 
-## System Updates
 
-Update all Packages
-
-```
-sudo apt-get update
-```
-
-Update only security updates
-
-```
-sudo apt-get install unattended-upgrades
-```
-
-Upgrade the Linux system
-
-```
-sudo apt-get upgrade
-```
-
-Upgrade the Linux distribution
-
-```
-sudo apt-get dist-upgrade
-```
