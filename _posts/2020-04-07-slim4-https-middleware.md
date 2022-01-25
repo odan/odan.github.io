@@ -150,3 +150,11 @@ You should now be automatically redirected to the secure `https://` url.
 ## Other solutions
 
 You could also use a `.htaccess` file to redirect the http traffic to https.
+
+If you have existing code in your .htaccess, add the following:
+
+```
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+```
