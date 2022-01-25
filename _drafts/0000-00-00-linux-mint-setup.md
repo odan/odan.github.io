@@ -107,15 +107,15 @@ To install Google Chrome, run the following:
 
 ```
 cd ~/Downloads
-sudo apt-get install libxss1 libappindicator1 libindicator7
+sudo apt install libxss1 libappindicator1 libindicator7
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install ./google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb -y
 ```
 
 If error messages pop up after running the command sudo apt install ./google-chrome*.deb then run the command
 
 ```
-sudo apt-get install -f.
+sudo apt install -f.
 ```
 
 If you want to install chromium instead, run:
@@ -127,7 +127,13 @@ sudo snap install chromium
 Or with apt-get:
 
 ```
-sudo apt-get install chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg 
+sudo apt install chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg 
+```
+
+## Wine
+
+```
+sudo apt install wine-stable 
 ```
 
 ## Install Apache and PHP with XDebug
