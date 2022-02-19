@@ -539,7 +539,7 @@ return function (App $app) {
 
 ```
 
-Now open your website, e.g. http://localhost and you should see the message `Hello, World!`.
+Now open your website, e.g. `http://localhost` and you should see the message `Hello, World!`.
 
 ## Good URLs
 
@@ -557,6 +557,7 @@ but it's never part of your base path and the official url.
  
 * `https://www.example.com/public`
 * `https://www.example.com/public/users`
+* `https://www.example.com/public/index.php`
 * `https://www.example.com/my-app/public`
 * `https://www.example.com/my-app/public/users`
 
@@ -939,7 +940,7 @@ and an in memory data representation (the domain layer).
 The goal of the pattern is to keep the in memory representation and the 
 persistent data store independent of each other and the data mapper itself.
 
-Generic mappers will handle many different domain entity types, 
+Generic mappers will handle many domain entity types, 
 dedicated mappers will handle one or a few.
 
 The key point of this pattern is, unlike Active Record pattern, 
