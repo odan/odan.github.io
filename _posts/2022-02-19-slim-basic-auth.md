@@ -68,7 +68,7 @@ composer require tuupola/slim-basic-auth
 ## Configuration
 
 Configuration options are passed as an array. 
-Only mandatory parameter is users. 
+The only mandatory parameter is `users`. 
 This is an array where you pass one or more 
 `'username' => 'password'` combinations. 
 Username is the key and password is the value.
@@ -83,7 +83,7 @@ $settings['api_auth'] = [
 ```
 
 Next, add a DI container definitions for the `HttpBasicAuthentication` class
-that also loads and passes the settings array with all users and password.
+which also loads and passes the settings array with all users and password.
 
 ```php
 <?php
