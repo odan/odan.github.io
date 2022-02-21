@@ -1,5 +1,5 @@
 ---
-title: Emitting chunked stream responses with Slim
+title: Slim Framework - Emitting chunked stream responses
 layout: post
 comments: true
 published: false

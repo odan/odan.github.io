@@ -20,7 +20,7 @@ npm install -g eslint
 eslint --init
 ```
 
-* Choose wtih the arrow keys (up and down)
+* Select with the arrow keys (up and down)
 > Answer questions about your style
 
 * Example config file (.eslintrc.json):

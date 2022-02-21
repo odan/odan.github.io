@@ -2,7 +2,7 @@
 title: Slim 4 - Laminas Config
 layout: post
 comments: true
-published: true
+published: false
 description:
 keywords: php, slim, configuration, config
 image: https://odan.github.io/assets/images/slim-logo-600x330.png

@@ -1,5 +1,5 @@
 ---
-title: Creating and downloading Excel files in Slim 3
+title: Slim Framework - Export Excel and CSV
 layout: post
 comments: true
 published: true
@@ -98,32 +98,5 @@ $app->get('/csv', function (ServerRequestInterface $request, ResponseInterface $
     $response = $response->withHeader('Content-Disposition', 'attachment; filename="file.csv"');
 
     return $response->withBody(new \Slim\Http\Stream($stream));
-});
-```
-
-## Generating images
-
-Example:
-
-```php
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-
-$app->get('/image', function (ServerRequestInterface $request, ResponseInterface $response) {
-    $image = imagecreate(200, 80);
-    imagecolorallocate($image, 255, 255, 255);
-    $textColor = imagecolorallocate($image, 113, 158, 64);
-    $lineColor = imagecolorallocate($image, 170, 170, 170);
-    imagestring($image, 8, 35, 25, 'slim framework', $textColor);
-    imagesetthickness($image, 2);
-    imageline($image, 35, 45, 160, 45, $lineColor);
-
-    ob_start();
-    imagepng($image);
-    $image = ob_get_clean();
-
-    $response->write($image);
-
-    return $response->withHeader('Content-Type', 'image/png');
 });
 ```

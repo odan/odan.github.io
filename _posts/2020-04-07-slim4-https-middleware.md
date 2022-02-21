@@ -2,7 +2,7 @@
 title: Slim 4 - HTTPS Middleware
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: php, slim, ssl, https, middleware, slim-framework
 ---

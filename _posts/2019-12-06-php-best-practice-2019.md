@@ -7,7 +7,7 @@ description:
 keywords: php
 ---
 
-I think it's time for an fresh and simplified blog post about the latest PHP Best Practices in 2019 / 2020. 
+I think it's time for a fresh and simplified blog post about the latest PHP Best Practices in 2019 / 2020. 
 A lot has changed within the last time I have written about this topic in [2018](https://odan.github.io/2018/04/05/php-best-practices.html).
 
 ## Principles and rules

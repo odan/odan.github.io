@@ -9,7 +9,7 @@ keywords:
 
 [Slim 3 cannot work in a subdirectory](https://github.com/slimphp/Slim/issues/1529) by default. 
 
-Here I will show you a simple soultion to run multiple Slim applications under Apache.
+Here I will show you a simple solution to run multiple Slim applications under Apache.
 
 ### Fixing the slim environment
 
@@ -47,7 +47,7 @@ $container['environment'] = function () {
     $scriptName = $_SERVER['SCRIPT_NAME'];
     $_SERVER['REAL_SCRIPT_NAME'] = $scriptName;
     $_SERVER['SCRIPT_NAME'] = dirname(dirname($scriptName)) . '/' . basename($scriptName);
-    return new Slim\Http\Environment($_SERVER);
+    return new \Slim\Http\Environment($_SERVER);
 };
 ```
 

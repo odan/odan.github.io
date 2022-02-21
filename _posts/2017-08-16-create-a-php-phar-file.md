@@ -2,7 +2,7 @@
 title: Creating a PHP Phar file
 layout: post
 comments: true
-published: true
+published: false
 description: 
 keywords: php, phar
 ---

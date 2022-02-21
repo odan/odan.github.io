@@ -2,7 +2,7 @@
 title: Implementing a SOAP API with PHP
 layout: post
 comments: false
-published: true
+published: false
 description: 
 keywords: php, soap
 ---

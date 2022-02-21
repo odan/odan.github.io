@@ -12,7 +12,7 @@ keywords:
 The latest version of XAMPP contains [MariaDB](https://mariadb.org/) instead of [MySQL](https://www.mysql.com/).
 
 But [MariaDB is not 100% compatible with MySQL](https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-compatibility/) 
-and can be replaced with the "orginal" MySQL server.
+and can be replaced with the "original" MySQL server.
 
 ## Requirements
 
