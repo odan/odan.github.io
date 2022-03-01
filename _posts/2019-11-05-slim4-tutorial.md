@@ -1008,7 +1008,8 @@ final class UserCreatorRepository
 
 ```
 
-Note that we have declared `PDO` as a dependency, because the repository requires a database connection.
+Note that we have declared `PDO` as a dependency, 
+because the repository requires a database connection.
 
 The last part is to register a new route for `POST /users`.
 
@@ -1148,11 +1149,3 @@ For technical questions create an issue here:
 If you have Slim-Framework specific questions, visit:
 
 * <https://discourse.slimframework.com/>
-
-### Read more
-
-* [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-4-cheatsheet-and-faq.html)
-
-#### Videos
-
-* [Slim 4 - Hallo Welt](https://www.youtube.com/watch?v=c6IMi3NlIeU) (german)
