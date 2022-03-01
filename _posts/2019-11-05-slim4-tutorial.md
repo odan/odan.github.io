@@ -910,10 +910,10 @@ $settings['db'] = [
 ];
 ```
 
-> **Note:** I use PDO and SQL here for learning purposes only. In a real application the use 
-> of an SQL QuickBuilder would be recommended from a maintainability and security point of view.
+> **Note:** PDO and SQL is used here for learning purposes only. In a real application the use 
+> of a SQL QueryBuilder would be better for maintainability and security.
 
-Insert a `PDO::class` container definition to `config/container.php`:
+Insert a `PDO::class` DI container definition to `config/container.php`:
 
 ```php
 PDO::class => function (ContainerInterface $container) {
