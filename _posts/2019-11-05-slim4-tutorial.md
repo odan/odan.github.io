@@ -1100,7 +1100,7 @@ your production server.
 
 These tools are very useful to automate your software build processes:
 
-* [Apache Ant](https://ant.apache.org/bindownload.cgi) - It's similar to Make, but it's implemented in Java.
+* [Apache Ant](https://ant.apache.org/bindownload.cgi) - A Java command line tool that helps building software.
 * [Phing](https://www.phing.info/) - A PHP build tool inspired by Apache Ant.
 
 For security reasons, you should switch off the output of all error details in production:
