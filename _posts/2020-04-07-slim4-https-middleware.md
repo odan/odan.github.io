@@ -97,6 +97,7 @@ If not exists, insert a container definition for `ResponseFactoryInterface::clas
 ```php
 <?php
 
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\App;
 use Slim\Factory\AppFactory;
@@ -105,7 +106,7 @@ return [
     // ...
 
     ResponseFactoryInterface::class => function (ContainerInterface $container) {
-        return $container->get(App::class)->getResponseFactory();
+       return $container->get(Psr17Factory::class);
     },
 
     App::class => function (ContainerInterface $container) {

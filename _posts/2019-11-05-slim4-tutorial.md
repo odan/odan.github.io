@@ -400,6 +400,7 @@ Create a new file for the container entries `config/container.php` and copy/past
 ```php
 <?php
 
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\App;
@@ -418,7 +419,7 @@ return [
     },
 
     ResponseFactoryInterface::class => function (ContainerInterface $container) {
-        return $container->get(App::class)->getResponseFactory();
+        return $container->get(Psr17Factory::class);
     },
 
     ErrorMiddleware::class => function (ContainerInterface $container) {
