@@ -232,6 +232,7 @@ Insert a container definition for the `ValidationExceptionMiddleware::class`:
 ```php
 <?php
 
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Selective\Validation\Encoder\JsonEncoder;
@@ -253,9 +254,7 @@ return [
     },
 
     ResponseFactoryInterface::class => function (ContainerInterface $container) {
-        $app = $container->get(App::class);
-
-        return $app->getResponseFactory();
+        return $container->get(Psr17Factory::class);
     },
 
     App::class => function (ContainerInterface $container) {

@@ -400,6 +400,7 @@ Create a new file for the container entries `config/container.php` and copy/past
 ```php
 <?php
 
+use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\App;
@@ -418,7 +419,7 @@ return [
     },
 
     ResponseFactoryInterface::class => function (ContainerInterface $container) {
-        return $container->get(App::class)->getResponseFactory();
+        return $container->get(Psr17Factory::class);
     },
 
     ErrorMiddleware::class => function (ContainerInterface $container) {
@@ -909,10 +910,10 @@ $settings['db'] = [
 ];
 ```
 
-> **Note:** I use PDO and SQL here for learning purposes only. In a real application the use 
-> of an SQL QuickBuilder would be recommended from a maintainability and security point of view.
+> **Note:** PDO and SQL is used here for learning purposes only. In a real application the use 
+> of a SQL QueryBuilder would be better for maintainability and security.
 
-Insert a `PDO::class` container definition to `config/container.php`:
+Insert a `PDO::class` DI container definition to `config/container.php`:
 
 ```php
 PDO::class => function (ContainerInterface $container) {
@@ -1007,7 +1008,8 @@ final class UserCreatorRepository
 
 ```
 
-Note that we have declared `PDO` as a dependency, because the repository requires a database connection.
+Note that we have declared `PDO` as a dependency, 
+because the repository requires a database connection.
 
 The last part is to register a new route for `POST /users`.
 
@@ -1098,7 +1100,7 @@ your production server.
 
 These tools are very useful to automate your software build processes:
 
-* [Apache Ant](https://ant.apache.org/bindownload.cgi) - It's similar to Make, but it's implemented in Java.
+* [Apache Ant](https://ant.apache.org/bindownload.cgi) - A Java command line tool that helps building software.
 * [Phing](https://www.phing.info/) - A PHP build tool inspired by Apache Ant.
 
 For security reasons, you should switch off the output of all error details in production:
@@ -1147,11 +1149,3 @@ For technical questions create an issue here:
 If you have Slim-Framework specific questions, visit:
 
 * <https://discourse.slimframework.com/>
-
-### Read more
-
-* [Slim 4 - Cheatsheet and FAQ](https://odan.github.io/2019/09/09/slim-4-cheatsheet-and-faq.html)
-
-#### Videos
-
-* [Slim 4 - Hallo Welt](https://www.youtube.com/watch?v=c6IMi3NlIeU) (german)
