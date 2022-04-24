@@ -114,16 +114,8 @@ use Doctrine\DBAL\Connection;
 
 class UserRepository
 {
-    /**
-     * @var Connection The database connection
-     */
-    private $connection;
+    private Connection $connection;
 
-    /**
-     * The constructor.
-     *
-     * @param Connection $connection The database connection
-     */
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;

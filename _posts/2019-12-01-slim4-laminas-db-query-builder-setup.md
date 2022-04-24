@@ -116,10 +116,7 @@ use Laminas\Db\TableGateway\TableGateway;
 
 final class QueryFactory
 {
-    /**
-     * @var AdapterInterface The database connection
-     */
-    private $adapter;
+    private AdapterInterface $adapter;
 
     public function __construct(AdapterInterface $adapter)
     {
@@ -154,16 +151,8 @@ use App\Factory\QueryFactory;
  */
 class UserCreatorRepository
 {
-    /**
-     * @var QueryFactory The query builder factory
-     */
-    private $queryFactory;
+    private QueryFactory $queryFactory;
 
-    /**
-     * Constructor.
-     *
-     * @param QueryFactory $queryFactory The query builder factory
-     */
     public function __construct(QueryFactory $queryFactory)
     {
         $this->queryFactory = $queryFactory;

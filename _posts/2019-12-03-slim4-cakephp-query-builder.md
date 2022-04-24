@@ -405,10 +405,7 @@ use Cake\Database\Connection;
  */
 final class Transaction implements TransactionInterface
 {
-    /**
-     * @var Connection The database connection
-     */
-    private $connection;
+    private Connection $connection;
 
     public function __construct(Connection $connection)
     {

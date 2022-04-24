@@ -47,7 +47,7 @@ final class UserList
     /**
      * @var User[] The users
      */
-    private $list;
+    private array $list;
 
     /**
      * The constructor.

@@ -118,10 +118,7 @@ use Symfony\Component\Mime\Email;
 
 final class ContactMailer
 {
-    /**
-     * @var MailerInterface
-     */
-    private $mailer;
+    private MailerInterface $mailer;
 
     public function __construct(MailerInterface $mailer)
     {

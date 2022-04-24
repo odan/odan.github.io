@@ -734,21 +734,10 @@ namespace App\Domain\User\Service;
 use App\Domain\User\Repository\UserCreatorRepository;
 use App\Exception\ValidationException;
 
-/**
- * Service.
- */
 final class UserCreator
 {
-    /**
-     * @var UserCreatorRepository
-     */
-    private $repository;
+    private UserCreatorRepository $repository;
 
-    /**
-     * The constructor.
-     *
-     * @param UserCreatorRepository $repository The repository
-     */
     public function __construct(UserCreatorRepository $repository)
     {
         $this->repository = $repository;
@@ -963,16 +952,8 @@ use PDO;
  */
 final class UserCreatorRepository
 {
-    /**
-     * @var PDO The database connection
-     */
-    private $connection;
+    private PDO $connection;
 
-    /**
-     * Constructor.
-     *
-     * @param PDO $connection The database connection
-     */
     public function __construct(PDO $connection)
     {
         $this->connection = $connection;

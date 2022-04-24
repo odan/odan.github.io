@@ -46,29 +46,13 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 final class HttpsMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var ResponseFactoryInterface
-     */
-    private $responseFactory;
+    private ResponseFactoryInterface $responseFactory;
 
-    /**
-     * The constructor.
-     *
-     * @param ResponseFactoryInterface $responseFactory The response factory
-     */
     public function __construct(ResponseFactoryInterface $responseFactory)
     {
         $this->responseFactory = $responseFactory;
     }
 
-    /**
-     * Invoke middleware.
-     *
-     * @param ServerRequestInterface $request The request
-     * @param RequestHandlerInterface $handler The handler
-     *
-     * @return ResponseInterface The response
-     */
     public function process(
         ServerRequestInterface $request, 
         RequestHandlerInterface $handler

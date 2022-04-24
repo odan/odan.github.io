@@ -62,27 +62,12 @@ use UnexpectedValueException;
  */
 class FifoMiddlewareDispatcher implements MiddlewareDispatcherInterface
 {
+    private array $queue = [];
 
-    /**
-     * @var array
-     */
-    private $queue = [];
+    private RequestHandlerInterface $kernel;
 
-    /**
-     * @var RequestHandlerInterface
-     */
-    private $kernel;
+    private Closure $resolver;
 
-    /**
-     * @var Closure
-     */
-    private $resolver;
-
-    /**
-     * The constructor.
-     *
-     * @param ContainerInterface $container The container
-     */
     public function __construct(ContainerInterface $container)
     {
         $this->resolver = function ($resolve) use ($container) {
