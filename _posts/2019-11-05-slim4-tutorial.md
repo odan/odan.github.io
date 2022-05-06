@@ -720,7 +720,8 @@ another service, the CLI (console) and the unit-test environment (phpunit).
 
 Each service class should have only one responsibility, e.g. to transfer money from A to B, and not more.
 
-Separate **data** from **behavior** by using services for the behavior and [Data transfer objects](https://en.wikipedia.org/wiki/Data_transfer_object) for the data.
+Separate **data** from **behavior** by using services for the behavior and 
+[Data transfer objects](https://en.wikipedia.org/wiki/Data_transfer_object) for the data.
 
 The directory for all (domain) modules and sub-modules is: `src/Domain`
 
@@ -1076,12 +1077,12 @@ composer install --no-dev --optimize-autoloader
 
 You don't have to run composer on your production server. Instead, you should implement a 
 [build pipeline](https://www.amazon.com/dp/B003YMNVC0) that creates a
-so called "artifact". An artifact is an ZIP file you can upload and deploy on 
+so-called "artifact". An artifact is an ZIP file you can upload and deploy on 
 your production server.
 
 These tools are very useful to automate your software build processes:
 
-* [Apache Ant](https://ant.apache.org/bindownload.cgi) - A Java command line tool that helps building software.
+* [Apache Ant](https://ant.apache.org/bindownload.cgi) - A Java command line tool that helps to build software.
 * [Phing](https://www.phing.info/) - A PHP build tool inspired by Apache Ant.
 
 For security reasons, you should switch off the output of all error details in production:
