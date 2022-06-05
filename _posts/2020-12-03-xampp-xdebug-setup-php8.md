@@ -14,8 +14,8 @@ keywords: php, xdebug, php8, debugger
 ## Setup
 
 * Download Xdebug for the specific PHP version:
-  * PHP 8.0 (64-Bit): <https://xdebug.org/files/php_xdebug-3.1.2-8.0-vs16-x86_64.dll>
-  * PHP 8.1 (64-Bit): <https://xdebug.org/files/php_xdebug-3.1.2-8.1-vs16-x86_64.dll>
+  * PHP 8.0 (64-Bit): <https://xdebug.org/files/php_xdebug-3.1.4-8.0-vs16-x86_64.dll>
+  * PHP 8.1 (64-Bit): <https://xdebug.org/files/php_xdebug-3.1.4-8.1-vs16-x86_64.dll>
 * Move the downloaded dll file to: `C:\xampp\php\ext`
 * Rename the dll file to: `php_xdebug.dll`
 * Open the file `C:\xampp\php\php.ini` with Notepad++
