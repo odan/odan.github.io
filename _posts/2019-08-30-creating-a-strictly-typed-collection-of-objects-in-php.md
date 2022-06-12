@@ -102,7 +102,8 @@ foreach ($userList->all() as $user) {
 }
 ```
 
-You could also use variadics and pass many User objects in constructor at once like:
+You can also use [variadics](https://www.phptutorial.net/php-tutorial/php-variadic-functions/)
+and pass any number of arguments into it:
 
 ```php
 $userList = new UserList(new User(), new User());
