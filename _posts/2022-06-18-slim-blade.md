@@ -289,23 +289,23 @@ the `\Illuminate\Foundation\Application` class instead of the usual
 `Illuminate\Contracts\Container\Container`.
 This is only possible with some tricks and will probably only work
 properly in a Laravel project.
-The usage of components without Laravel is therefore not recommended.
+The usage of Components without Laravel is therefore not recommended.
 However, this functionality can also be implemented with the existing
-Blade features, so the use of components is not really necessary.
+Blade features, so the use of Components is not really necessary.
 
 ## Conclusion
 
-The reason blade is so popular, is because of Laravel.
+The reason Blade is so popular is because of Laravel.
 
 The Blade syntax stays much closer to PHP (which was a template engine itself 25 years ago).
 For example, Twig is by design another language, making it much more difficult to wrap your head around.
 
 I think blade is **not** the best example of software design, because
 it's really hard to get running without Laravel. Even then, you may
-never get all features (like components) without installing the full Laravel package.
-The Laravel DI container is a complex beast that has be configured within (and besides)
-the PSR-11 DI container. Due tue the setup the package adds a lot global
-singleton (Anti-pattern) to you project scope, which is something I really try to avoid.
+never get all features (like Components) without installing the full Laravel framework package.
+The Laravel DI container is a complex "beast" that has to be configured within (and partly beside) 
+the PSR-11 DI container. Unfortunately, the package adds a lot of global
+singletons (anti-pattern) to the project scope, which I really try to avoid.
 
 Using Blade only makes sense in combination with Laravel.
 Outside of Laravel I would not use this package and would not recommend it to anyone.
