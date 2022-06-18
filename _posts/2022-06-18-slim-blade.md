@@ -39,7 +39,7 @@ and how to integrate it into a Slim 4 project.
 
 ## Installation
 
-First, install the package using composer:
+First, install the following packages using composer:
 
 ```php
 composer require illuminate/view
@@ -64,19 +64,10 @@ Make sure the directory `{project}/tmp/templates` exists and has read and write 
 
 ## Configuration
 
-Add a new `template` configuration key in your `config/defaults.php` file:
+Add the new configuration keys in your `config/defaults.php` file:
 
 ```php
 $settings['template'] = __DIR__ . '/../templates';
-```
-
-Blade "compiles" the templates to native PHP code and stores them in
-a cache on the disk. So they are as fast as if they
-had been written in native PHP.
-
-Add a new `template_temp` configuration key in your `config/defaults.php` file:
-
-```php
 $settings['template_temp'] = __DIR__ . '/../tmp/templates';
 ```
 
