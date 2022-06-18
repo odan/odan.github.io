@@ -233,7 +233,7 @@ Hello, World.
 ## Sharing Data With All Views
 
 Occasionally, you may need to share data with all views that are rendered by your application.
-You may do so using by adding a `share` method to the `App\Renderer\TemplateRenderer` class.
+You may do so by adding a `share` method to the `App\Renderer\TemplateRenderer` class.
 Typically, you should place calls to the `share` method within a **middleware** `process` method.
 
 ```php
