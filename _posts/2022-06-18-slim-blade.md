@@ -114,8 +114,9 @@ return [
     IlluminateViewFactoryInterface::class => function (ContainerInterface $container) {
         $illuminateContainer = $container->get(IlluminateContainerInterface::class);
 
-        $viewPaths = (array)$container->get('settings')['template'];
-        $cachePath = (string)$container->get('settings')['template_temp'];
+        $settings = $container->get('settings');
+        $viewPaths = (array)$settings['template'];
+        $cachePath = (string)$settings['template_temp'];
 
         /** @var Repository $config */
         $config = $illuminateContainer->get('config');
@@ -137,7 +138,7 @@ return [
 ];
 ```
 
-This alone would technically work to render a latte template,
+This alone would technically work to render a Blade template,
 but we also need to make it work with the PSR-7 response object.
 
 For this purpose we create a special `TemplateRenderer`
