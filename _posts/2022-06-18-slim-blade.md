@@ -220,7 +220,7 @@ final class HomeAction
 
 To make it work, create a template file in `templates/home.blade.php` with this content:
 
-```html
+```twig
 Hello, {{ $name }}.
 ```
 
