@@ -25,6 +25,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Configuration](#configuration)
 * [DI Container](#di-container)
 * [Bootstrap](#bootstrap)
+* [Front Controller](#front-controller)
 * [Middleware](#middleware)
 * [Routes](#routes)
 * [Base Path](#base-path)
@@ -122,7 +123,7 @@ Add this autoloader settings into `composer.json`:
   "psr-4": {
     "App\\": "src/"
   }
-},
+}
 ```
 
 The complete `composer.json` file should look like this:
@@ -224,7 +225,7 @@ dependency to other objects. Dependency injection makes testing easier.
 
 [Autowiring](http://php-di.org/doc/autowiring.html) means,
 that you can declare all dependencies explicitly
-in your class constructor and let the DI Container inject these
+in your class constructor and let the DI container inject these
 dependencies automatically.
 
 My favorite DI Container implementation is [PHP-DI](http://php-di.org/).
@@ -309,6 +310,8 @@ $app = $container->get(App::class);
 return $app;
 ```
 
+## Front Controller
+
 The [front controller](https://en.wikipedia.org/wiki/Front_controller) is the entry point
 to your slim application and handles all requests by channeling
 requests through a single handler object.
@@ -323,15 +326,13 @@ Create the front-controller file `public/index.php` and copy/paste this content:
 
 ## Middleware
 
-A middleware can be executed before and after your Slim application
+A [middleware](https://www.slimframework.com/docs/v4/concepts/middleware.html) can be executed before and after your Slim application
 to manipulate the request and response object according to your requirements.
 
-[Read more](https://www.slimframework.com/docs/v4/concepts/middleware.html)
+To get Slim running we need to add the Slim `RoutingMiddleware`, `ErrorMiddleware`.
+The `BodyParsingMiddleware` is just optional, but I recommend if you work with JSON or form data.
 
-In the first step we need to add the Slim `RoutingMiddleware`, `ErrorMiddleware`
-and the `BodyParsingMiddleware` the get the most basic features for a running application.
-
-Create a file to load global middleware handler `config/middleware.php`
+Create a file `config/middleware.php` to load global middleware handler 
 and copy/paste this content:
 
 ```php
@@ -353,6 +354,13 @@ return function (App $app) {
 ```
 
 ### Routes
+
+A "route" is a URL path that can be mapped to a specific handler.
+Such a handler can be a simple function or an invokable class.
+Under the hood Slim uses the `nikic/FastRoute` package but it
+also adds some nice features for routing names, groups and middlewares etc.
+
+The routes will be defined in plain PHP files.
 
 Create a file for all routes `config/routes.php` and copy/paste this content:
 
@@ -396,9 +404,9 @@ Now open your website, e.g. `http://localhost` and you should see the message `H
 
 When you set up your first Slim project, you may get an **404 error (not found)**.
 
-If you run your Slim app in a sub-directory, resp. not directly within the
+This can happen when you run your Slim app in a sub-directory, and not directly within the
 [DocumentRoot](https://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot)
-of your webserver, you must set the "correct" base path.
+of your webserver. To fix this you have to set the correct "base path".
 
 Ideally the `DoumentRoot` of your production server points directly to the `public/` directory.
 
@@ -411,7 +419,7 @@ and **not** the `public/` directory. For example when you place your app not dir
 under the webservers `DocumentRoot`.
 
 For security reasons you should always place your front-controller (index.php) into the `public/`
-directory. Don't place your front controller directly into the project root directory.
+directory. Do not place your front controller directly into the project root directory.
 
 You can manually set the base path in Slim using the `setBasePath` method:
 
@@ -424,7 +432,7 @@ But the problem is, that the basePath can be different for each host (dev, testi
 The [BasePathMiddleware](https://github.com/selective-php/basepath) detects and sets
 the base path into the Slim app instance.
 
-To install the BasePathMiddleware, run:
+To install the package, run:
 
 ```
 composer require selective/basepath
