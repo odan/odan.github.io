@@ -204,9 +204,6 @@ error_reporting(E_ALL);
 // Should be set to '0' in production
 ini_set('display_errors', '1');
 
-// Timezone
-date_default_timezone_set('Europe/Berlin');
-
 // Settings
 $settings = [];
 
@@ -326,10 +323,15 @@ Create the front-controller file `public/index.php` and copy/paste this content:
 
 ## Middleware
 
-A [middleware](https://www.slimframework.com/docs/v4/concepts/middleware.html) can be executed before and after your Slim application
-to manipulate the request and response object according to your requirements.
+A [middleware](https://www.slimframework.com/docs/v4/concepts/middleware.html) 
+can be executed before and after your Slim application
+to read or manipulate the request and response object.
 
-To get Slim running we need to add the Slim `RoutingMiddleware`, `ErrorMiddleware`.
+To get Slim running we need to add the Slim `RoutingMiddleware` and `ErrorMiddleware`.
+
+The `RoutingMiddleware` will route and dispatch the incoming requests
+and the `ErrorMiddleware` is able to catch all runtime exceptions.
+
 The `BodyParsingMiddleware` is just optional, but recommend if you work with JSON or form data.
 
 Create a file `config/middleware.php` to set up the global middlewares
