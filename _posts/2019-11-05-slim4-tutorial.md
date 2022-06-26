@@ -55,20 +55,18 @@ composer require slim/slim:"4.*"
 ```
 
 In Slim 4 the PSR-7 implementation is decoupled from the App core.
-This means you can also install other PSR-7 implementations like [nyholm/psr7](https://github.com/Nyholm/psr7).
 
-In our case we are installing the Slim PSR-7 implementations using this command:
+In our case we are installing the `nyholm/psr7` PSR-7 implementations using this command:
 
 ```
-composer require slim/psr7
+composer require nyholm/psr7
 ```
 
 Ok nice, now we have installed the most basic dependencies for our project.
 Later we will add more dependencies to the project.
 
-**Note:** Please don't commit the `vendor/` to your git repository.
-To set up the git repository correctly,
-create a file called `.gitignore` in the project root folder and
+Note that you should not commit the `vendor/` directory to your git repository.
+Create a file `.gitignore` in the project root directory and
 add the following lines to this file:
 
 ```
@@ -80,6 +78,17 @@ vendor/
 
 A good directory structure helps you organize your code,
 simplifies setup on the webserver and increases the security of the entire application.
+
+In a web application, it is important to distinguish between the public and
+non-public areas.
+
+The `public/` directory serves your application and will therefore also be
+directly accessible by all browsers, search engines and API clients.
+All other folders are not public and must not be accessible online.
+This can be done by defining the `public` folder in Apache as `DocumentRoot`
+of your website. But more about that later.
+
+Create a new directory: `public/`
 
 In the next steps of this tutorial we will create a project directory structure
 that will look like this:
@@ -97,27 +106,14 @@ that will look like this:
 └── composer.json       Project dependencies and autoloader
 ```
 
-In a web application, it is important to distinguish between the public and
-non-public areas.
-
-Create a new directory: `public/`
-
-The `public/` directory serves your application and will therefore also be
-directly accessible by all browsers, search engines and API clients.
-All other folders are not public and must not be accessible online.
-This can be done by defining the `public` folder in Apache as `DocumentRoot`
-of your website. But more about that later.
-
-Create a new directory: `src/`
-
-The `src/` directory contains all the project specific PHP classes and
-acts as the root for the `\App` namespace.
-
 ## Autoloader
 
 One of the most fundamental and important thing is to have a
 working [PSR-4 autoloader](https://www.php-fig.org/psr/psr-4/).
-For the next steps we have to define the `src/` directory as root for the `\App` namespace.
+
+So the next step is to define the `src/` directory as root for the `\App` namespace.
+
+Create a new directory: `src/`
 
 Add this autoloader settings into `composer.json`:
 
