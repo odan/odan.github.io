@@ -131,9 +131,9 @@ The complete `composer.json` file should look like this:
 ```json
 {
   "require": {
-    "php-di/php-di": "^6.0",
+    "php-di/php-di": "^6",
     "slim/psr7": "^1",
-    "slim/slim": "^4.4"
+    "slim/slim": "^4"
   },
   "autoload": {
     "psr-4": {
@@ -141,6 +141,7 @@ The complete `composer.json` file should look like this:
     }
   }
 }
+
 ```
 
 Run `composer update` for the changes to take effect.
