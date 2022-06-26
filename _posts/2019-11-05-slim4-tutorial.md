@@ -217,7 +217,7 @@ return $settings;
 ## DI Container
 
 As next, we need a [PSR-11](https://www.php-fig.org/psr/psr-11/)
-**dependencies injection container** (DI Container)
+**dependencies injection container** (DI container)
 implementation for **dependency injection** and **autowiring**.
 
 [Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) is passing
@@ -228,9 +228,8 @@ that you can declare all dependencies explicitly
 in your class constructor and let the DI container inject these
 dependencies automatically.
 
-My favorite DI Container implementation is [PHP-DI](http://php-di.org/).
-
-To install the PHP-DI package, run:
+My favorite DI container implementation is [PHP-DI](http://php-di.org/).
+To install the package, run:
 
 ```
 composer require php-di/php-di
@@ -238,7 +237,7 @@ composer require php-di/php-di
 
 ### DI Container Definitions
 
-Create a new file for the container entries `config/container.php`
+Create a new file for the DI container entries `config/container.php`
 and copy/paste this content:
 
 ```php
@@ -330,9 +329,9 @@ A [middleware](https://www.slimframework.com/docs/v4/concepts/middleware.html) c
 to manipulate the request and response object according to your requirements.
 
 To get Slim running we need to add the Slim `RoutingMiddleware`, `ErrorMiddleware`.
-The `BodyParsingMiddleware` is just optional, but I recommend if you work with JSON or form data.
+The `BodyParsingMiddleware` is just optional, but recommend if you work with JSON or form data.
 
-Create a file `config/middleware.php` to load global middleware handler 
+Create a file `config/middleware.php` to set up the global middlewares
 and copy/paste this content:
 
 ```php
@@ -357,12 +356,12 @@ return function (App $app) {
 
 A "route" is a URL path that can be mapped to a specific handler.
 Such a handler can be a simple function or an invokable class.
-Under the hood Slim uses the `nikic/FastRoute` package but it
+Under the hood Slim uses the `nikic/FastRoute` package, but it
 also adds some nice features for routing names, groups and middlewares etc.
 
-The routes will be defined in plain PHP files.
+The application routes will be defined in plain PHP files.
 
-Create a file for all routes `config/routes.php` and copy/paste this content:
+Create a file `config/routes.php` and copy/paste this content:
 
 ```php
 <?php
@@ -406,9 +405,10 @@ When you set up your first Slim project, you may get an **404 error (not found)*
 
 This can happen when you run your Slim app in a sub-directory, and not directly within the
 [DocumentRoot](https://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot)
-of your webserver. To fix this you have to set the correct "base path".
+of the webserver. To fix this you have to set the correct "base path".
 
 Ideally the `DoumentRoot` of your production server points directly to the `public/` directory.
+In this case you don't need to configure the Slim base path.
 
 In all other cases you have to make sure, that your base path is correct. For example,
 the DocumentRoot directory is `/var/www/domain.com/htdocs/`, but the application
@@ -438,7 +438,7 @@ To install the package, run:
 composer require selective/basepath
 ```
 
-Add the following container definition into `config/container.php`:
+Add the following DI container definition into `config/container.php`:
 
 ```php
 use Selective\BasePath\BasePathMiddleware;
@@ -542,10 +542,6 @@ it might be something like JSON for RESTful API requests.
 handlers are quite "expensive", because PHP has to create all closures for each request.
 The use of class names is more lightweight, faster and scales better for larger applications.
 
-More details about the flow of everything that happens when arriving a route
-and the communication between the different layers can be found
-here: [Action](https://odan.github.io/slim4-skeleton/action.html)
-
 Create a sub-directory: `src/Action`
 
 Create this action class in: `src/Action/HomeAction.php`
@@ -626,17 +622,9 @@ Remember the relationships:
 * Slim - To handle routing and dispatching
 * Single Action Controllers - Request and response handling.
 
-The source code with more examples (e.g. reading a user) can be found here: 
+The source code with for this tutorial can be found here: 
 
 * <https://github.com/odan/slim4-tutorial>
-
-A complete skeleton for Slim 4 can be found here: 
-
-* <https://github.com/odan/slim4-skeleton>
-
-For technical questions create an issue here:
-
-* <https://github.com/odan/slim4-tutorial/issues>
 
 If you have Slim-Framework specific questions, visit:
 
