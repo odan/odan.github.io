@@ -35,9 +35,6 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 ## Requirements
 
 * PHP 7.4+
-* MySQL 5.7+ or MariaDB
-* Apache webserver with [mod_rewrite](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html)
-  and [.htaccess](https://httpd.apache.org/docs/2.4/howto/htaccess.html)
 * Composer (only for development)
 
 ## Introduction
@@ -126,9 +123,9 @@ Add this autoloader settings into `composer.json`:
 
 ```json
 "autoload": {
-"psr-4": {
-"App\\": "src/"
-}
+  "psr-4": {
+    "App\\": "src/"
+  }
 },
 ```
 
@@ -154,6 +151,9 @@ Run `composer update` for the changes to take effect.
 ## Apache URL Rewrite Rules
 
 This step is optional, and only needed if you plan to develop or host your Slim app on Apache.
+
+Make sure that the Apache [mod_rewrite](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html) module
+is installed and enabled.
 
 To run a Slim app with apache we have to add url rewrite rules to redirect
 the web traffic to a so-called [front controller](https://en.wikipedia.org/wiki/Front_controller).
