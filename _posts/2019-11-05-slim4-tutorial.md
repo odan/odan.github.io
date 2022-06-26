@@ -29,7 +29,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Middleware](#middleware)
 * [Routes](#routes)
 * [Base Path](#base-path)
-* [Actions](#actions)
+* [Single Action Controller](#single-action-controller)
 * [Creating a JSON Response](#creating-a-json-response)
 * [Conclusion](#conclusion)
 
@@ -500,7 +500,7 @@ but it's never part of your base path and the official url.
 * `https://www.example.com/my-app/public`
 * `https://www.example.com/my-app/public/users`
 
-## Actions
+## Single Action Controller
 
 Slim provides some methods for adding controller logic directly in a route callback.
 The PSR-7 request object is injected into your Slim application routes as the first
@@ -526,7 +526,7 @@ Unless your logic is very simple, I don't recommend using route callbacks.
 Isn't it a better practice to implement these handlers in their own classes? Yes.
 This is the moment where a **Single Action Controller** come into play.
 
-Each **Single Action Controller** is represented by its own class.
+Each **Single Action Controller** is represented by its own class and has only one public method.
 
 The *Action* does only these things:
 
