@@ -272,7 +272,7 @@ Note that we use the DI container to build the Slim App instance and to load the
 application settings. This allows us to configure the infrastructure services,
 like the database connection mailer etc. within the DI container.
 
-### Bootstrap
+## Bootstrap
 
 The app startup process contains the code that is executed when the
 application (request) is started.
