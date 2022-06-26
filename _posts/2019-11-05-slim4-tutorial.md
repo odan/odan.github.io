@@ -355,7 +355,7 @@ return function (App $app) {
 };
 ```
 
-### Routes
+## Routes
 
 A "route" is a URL path that can be mapped to a specific handler.
 Such a handler can be a simple function or an invokable class.
