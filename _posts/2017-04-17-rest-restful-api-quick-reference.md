@@ -57,9 +57,7 @@ keywords:
 
 * Content-type: application/json
 
-<div style="page-break-after: always; visibility: hidden"> 
 \pagebreak 
-</div>
 
 ### HTTP Methods
 
@@ -71,9 +69,7 @@ POST | /users | Create | INSERT | createUser or addUser | Used for creating reso
 PUT | /users/{id} | Update	| UPDATE | updateUser | Used for updating resources | 200 (OK), 204 (No Content), 404 (Not Found)
 DELETE | /users/{id} | Delete | DELETE | deleteUser | Used for deleting resources | 200 (OK), 404 (Not Found)
 
-<div style="page-break-after: always; visibility: hidden"> 
 \pagebreak 
-</div>
 
 ### HTTP Status Codes
 
@@ -100,9 +96,7 @@ Code | Name| What does it mean?
 422	| Unprocessable entity | Validation failed. The request and the format is valid, however the request was unable to process. For instance when sent data does not pass validation tests.
 500	| Server error | 5xx Server Error. An error occurred on the server which was not the consumer's fault.
 
-<div style="page-break-after: always; visibility: hidden"> 
 \pagebreak 
-</div>
 
 ### Error handling
 
@@ -172,9 +166,7 @@ Sending invalid fields will result in a `422 Unprocessable Entity` response.
 }
 ```
 
-<div style="page-break-after: always; visibility: hidden"> 
 \pagebreak 
-</div>
 
 ### Examples
 
