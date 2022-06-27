@@ -521,8 +521,8 @@ remove this line (if exists): `$app->setBasePath('...');`.
 ## Single Action Controller
 
 Slim provides some methods for adding controller logic directly in a route callback.
-The PSR-7 request object is injected into your Slim application routes as the first
-argument to the route callback like this:
+The request/response object (and optionally the route arguments) are passed by Slim 
+to a callack function as follows:
 
 ```php
 <?php
