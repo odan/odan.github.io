@@ -55,12 +55,13 @@ Create a new project directory and run this command to install the Slim 4 core c
 composer require slim/slim:"4.*"
 ```
 
-In Slim 4 the PSR-7 implementation is decoupled from the App core.
-
-In our case we are installing the `nyholm/psr7` PSR-7 implementations using this command:
+Since Slim 4 the most implementations are decoupled from the App core.
+The Nyholm PSR-7 package a super strict implementation of PSR-7 that is blazing fast.
+To install the needed PSR-7 implementations, run:
 
 ```
 composer require nyholm/psr7
+composer require nyholm/psr7-server
 ```
 
 Ok nice, now we have installed the most basic dependencies for our project.
@@ -80,8 +81,8 @@ vendor/
 A good directory structure helps you organize your code,
 simplifies setup on the webserver and increases the security of the entire application.
 
-In a web application, it is important to distinguish between the public and
-non-public areas.
+In a web application, it is important to distinguish between the **public** and
+**non-public** areas.
 
 The `public/` directory serves your application and will therefore also be
 directly accessible by all browsers, search engines and API clients.
@@ -131,9 +132,10 @@ The complete `composer.json` file should look like this:
 ```json
 {
   "require": {
+    "nyholm/psr7": "^1.5",
+    "nyholm/psr7-server": "^1.0",
     "php-di/php-di": "^6",
-    "slim/psr7": "^1",
-    "slim/slim": "^4"
+    "selective/basepath": "^2"
   },
   "autoload": {
     "psr-4": {
