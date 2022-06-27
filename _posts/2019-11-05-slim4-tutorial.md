@@ -161,7 +161,7 @@ The front controller is just a `index.php` file and the entry point to the appli
 
 Create a `.htaccess` file in your `public/` directory and copy/paste this content:
 
-```htaccess
+```
 # Redirect to front controller
 RewriteEngine On
 # RewriteBase /
@@ -176,7 +176,7 @@ Note that only one some webhosts, you may need to uncomment the line `# RewriteB
 
 Create a second `.htaccess` file in your project root-directory and copy/paste this content:
 
-```htaccess
+```
 RewriteEngine on
 RewriteRule ^$ public/ [L]
 RewriteRule (.*) public/$1 [L]
