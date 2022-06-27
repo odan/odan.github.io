@@ -270,11 +270,11 @@ application settings. This allows us to configure the infrastructure services,
 like the database connection, mailer etc. within the DI container.
 All settings are just passed as an simple array, so we have no special class identifier (FQCN) here.
 
-The `App::class` identifier is needed to ensure that we use the same App object
-in the whole application and to ensure that the App object uses the same DI container object.
+The `App::class` identifier is needed to ensure that we use the same App object 
+across the application and to ensure that the App object uses the same DI container object.
 
-The `ResponseFactoryInterface` entry is optional, but later needed for some custom middlewares
-that depend of that specific interface.
+The `ResponseFactoryInterface::class` identifier is optional, but will be needed later for some custom 
+middlewares that depend on this specific interface.
 
 ## Bootstrap
 
@@ -455,10 +455,10 @@ You can manually set the base path in Slim using the `setBasePath` method:
 $app->setBasePath('/slim4-tutorial');
 ```
 
-But the problem is, that the basePath can be different for each host (dev, testing, staging, prod etc...).
+The problem is, that the basePath can be different for each host (dev, testing, staging, prod etc...).
 
-The [BasePathMiddleware](https://github.com/selective-php/basepath) detects and sets
-the base path into the Slim app instance.
+Luckily, the [BasePathMiddleware](https://github.com/selective-php/basepath) is able to detect
+and configure the Slim App basePath.
 
 To install the package, run:
 
