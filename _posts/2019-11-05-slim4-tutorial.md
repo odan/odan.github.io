@@ -134,7 +134,6 @@ The complete `composer.json` file should look like this:
   "require": {
     "nyholm/psr7": "^1.5",
     "nyholm/psr7-server": "^1.0",
-    "php-di/php-di": "^6",
     "slim/slim": "^4"
   },
   "autoload": {
@@ -216,7 +215,7 @@ return $settings;
 
 ## DI Container
 
-As next, we need a [PSR-11](https://www.php-fig.org/psr/psr-11/)
+Next, we need a [PSR-11](https://www.php-fig.org/psr/psr-11/)
 **dependencies injection container** (DI container)
 implementation for **dependency injection** and **autowiring**.
 
@@ -228,7 +227,7 @@ that you can declare all dependencies explicitly
 in your class constructor and let the DI container inject these
 dependencies automatically.
 
-My favorite DI container implementation is [PHP-DI](http://php-di.org/).
+One of the best DI container implementation is [PHP-DI](http://php-di.org/).
 To install the package, run:
 
 ```
@@ -269,6 +268,13 @@ return [
 Note that we use the DI container to build the Slim App instance and to load the
 application settings. This allows us to configure the infrastructure services,
 like the database connection, mailer etc. within the DI container.
+All settings are just passed as an simple array, so we have no special class identifier (FQCN) here.
+
+The `App::class` identifier is needed to ensure that we use the same App object
+in the whole application and to ensure that the App object uses the same DI container object.
+
+The `ResponseFactoryInterface` entry is optional, but later needed for some custom middlewares
+that depend of that specific interface.
 
 ## Bootstrap
 
