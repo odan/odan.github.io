@@ -533,7 +533,8 @@ use Psr\Http\Message\ServerRequestInterface;
 // ...
 
 $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response) {
-    $response->getBody()->write('Hello World');
+    $response->getBody()->write('Hello, World!');
+    
     return $response;
 });
 ```
