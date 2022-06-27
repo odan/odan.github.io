@@ -56,7 +56,7 @@ composer require slim/slim:"4.*"
 ```
 
 Since Slim 4 the most implementations are decoupled from the App core.
-The Nyholm PSR-7 package a super strict implementation of PSR-7 that is blazing fast.
+The Nyholm PSR-7 package is a super strict implementation of PSR-7 that is blazing fast.
 To install the needed PSR-7 implementations, run:
 
 ```
@@ -88,7 +88,7 @@ The `public/` directory serves your application and will therefore also be
 directly accessible by all browsers, search engines and API clients.
 All other folders are not public and must not be accessible online.
 This can be done by defining the `public` folder in Apache as `DocumentRoot`
-of your website. But more about that later.
+of your website.
 
 Create a new directory: `public/`
 
@@ -135,7 +135,6 @@ The complete `composer.json` file should look like this:
     "nyholm/psr7": "^1.5",
     "nyholm/psr7-server": "^1.0",
     "php-di/php-di": "^6",
-    "selective/basepath": "^2",
     "slim/slim": "^4"
   },
   "autoload": {
@@ -533,10 +532,12 @@ $app->get('/', function (ServerRequestInterface $request, ResponseInterface $res
 });
 ```
 
-While such interfaces look intuitive, they are not suitable for complex business logic scenarios.
-Assuming there are tens or even hundreds of route handlers that need to be registered.
+While such interfaces look intuitive, they are not suitable for complexer scenarios.
+
+[Closures](https://www.php.net/manual/en/class.closure.php) (functions) as routing
+handlers are quite "expensive", because PHP has to create all closures for each request.
+The use of class names is more lightweight, faster and scales better for larger applications.
 Unless your logic is very simple, I don't recommend using route callbacks.
-Isn't it a better practice to implement these handlers in their own classes? Yes.
 This is the moment where a **Single Action Controller** come into play.
 
 Each **Single Action Controller** is represented by its own class and has only one public method.
@@ -551,12 +552,8 @@ All other logic, including all forms of input validation, error handling, and so
 are therefore pushed out of the Action and into the **Domain**
 (for domain logic concerns) or the response renderer (for presentation logic concerns).
 
-A response could be rendered to HTML (e.g with Twig) for a standard web request; or
-it might be something like JSON for RESTful API requests.
-
-**Note:** [Closures](https://www.php.net/manual/en/class.closure.php) (functions) as routing
-handlers are quite "expensive", because PHP has to create all closures for each request.
-The use of class names is more lightweight, faster and scales better for larger applications.
+A response could be rendered to HTML for a standard web request; or
+it might be something like JSON for a RESTful API.
 
 Create a sub-directory: `src/Action`
 
@@ -601,7 +598,7 @@ return function (App $app) {
 };
 ```
 
-Now open your website, e.g. http://localhost and you should see the message `Hello, World!`.
+Now open the URL, e.g. `http://localhost` and you should see the message `Hello, World!`.
 
 ### Creating a JSON Response
 
