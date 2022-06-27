@@ -541,10 +541,10 @@ $app->get('/', function (ServerRequestInterface $request, ResponseInterface $res
 
 While such interfaces look intuitive, they are not suitable for complexer scenarios.
 
-[Closures](https://www.php.net/manual/en/class.closure.php) (functions) as routing
-handlers are quite "expensive", because PHP has to create all closures for each request.
+Anonymous functions as routing handlers are quite "expensive", 
+because PHP has to create all functions for each request.
 The use of class names is more lightweight, faster and scales better for larger applications.
-Unless your logic is very simple, I don't recommend using route callbacks.
+Unless your logic is very simple, I don't recommend using callback functions.
 This is the moment where a **Single Action Controller** come into play.
 
 Each **Single Action Controller** is represented by its own class and has only one public method.
