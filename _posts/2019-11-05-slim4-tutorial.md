@@ -135,7 +135,8 @@ The complete `composer.json` file should look like this:
     "nyholm/psr7": "^1.5",
     "nyholm/psr7-server": "^1.0",
     "php-di/php-di": "^6",
-    "selective/basepath": "^2"
+    "selective/basepath": "^2",
+    "slim/slim": "^4"
   },
   "autoload": {
     "psr-4": {
@@ -248,7 +249,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\App;
 use Slim\Factory\AppFactory;
-use Slim\Middleware\ErrorMiddleware;
 
 return [
     'settings' => function () {
@@ -291,13 +291,13 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $containerBuilder = new ContainerBuilder();
 
-// Set up settings
+// Add DI container definitions
 $containerBuilder->addDefinitions(__DIR__ . '/container.php');
 
-// Build PHP-DI Container instance
+// Create DI container instance
 $container = $containerBuilder->build();
 
-// Create App instance
+// Create Slim App instance
 $app = $container->get(App::class);
 
 // Register routes
@@ -307,6 +307,7 @@ $app = $container->get(App::class);
 (require __DIR__ . '/middleware.php')($app);
 
 return $app;
+
 ```
 
 ## Front Controller
@@ -315,6 +316,9 @@ The [front controller](https://en.wikipedia.org/wiki/Front_controller) is the en
 to your slim application and handles all requests by channeling
 requests through a single handler object.
 
+For security reasons you should always place your front-controller (index.php) into the `public/`
+directory. You should never place the front controller directly into the project root directory.
+
 Create the front-controller file `public/index.php` and copy/paste this content:
 
 ```php
@@ -322,6 +326,24 @@ Create the front-controller file `public/index.php` and copy/paste this content:
 
 (require __DIR__ . '/../config/bootstrap.php')->run();
 ```
+
+Be careful: The `public/` directory is only the `DoumentRoot` of your webserver,
+but it's never part of your base path and the official url.
+
+<span style="color:green">Good URLs:</span>
+
+* `https://www.example.com`
+* `https://www.example.com/users`
+* `httsp://www.example.com/my-app`
+* `https://www.example.com/my-app/users`
+
+<span style="color:red">Bad URLs:</span>
+
+* `https://www.example.com/public`
+* `https://www.example.com/public/users`
+* `https://www.example.com/public/index.php`
+* `https://www.example.com/my-app/public`
+* `https://www.example.com/my-app/public/users`
 
 ## Middleware
 
@@ -343,7 +365,6 @@ and copy/paste this content:
 <?php
 
 use Slim\App;
-use Slim\Middleware\ErrorMiddleware;
 
 return function (App $app) {
     // Parse json, form data and xml
@@ -423,9 +444,6 @@ To be more precise: In this context "sub-directory" means a sub-directory of the
 and **not** the `public/` directory. For example when you place your app not directly
 under the webservers `DocumentRoot`.
 
-For security reasons you should always place your front-controller (index.php) into the `public/`
-directory. Do not place your front controller directly into the project root directory.
-
 You can manually set the base path in Slim using the `setBasePath` method:
 
 ```php
@@ -446,7 +464,9 @@ composer require selective/basepath
 Add the following DI container definition into `config/container.php`:
 
 ```php
+use Psr\Container\ContainerInterface;
 use Selective\BasePath\BasePathMiddleware;
+use Slim\App;
 // ...
 
 return [
@@ -458,7 +478,16 @@ return [
 ];
 ``` 
 
-Then add the `BasePathMiddleware::class` to the middleware stack in `config/middleware.php`:
+Then add the `BasePathMiddleware::class`, right after the `RoutingMiddleware`,
+to the middleware stack in `config/middleware.php`:
+
+```php
+use Selective\BasePath\BasePathMiddleware;
+
+$app->add(BasePathMiddleware::class);
+```
+
+The result:
 
 ```php
 <?php
@@ -474,7 +503,7 @@ return function (App $app) {
     // Add the Slim built-in routing middleware
     $app->addRoutingMiddleware();
 
-    $app->add(BasePathMiddleware::class); // <--- here
+    $app->add(BasePathMiddleware::class);
 
     // Catch exceptions and errors
     $app->add(ErrorMiddleware::class);
@@ -483,24 +512,6 @@ return function (App $app) {
 
 Now that you have installed the `BasePathMiddleware`,
 remove this line (if exists): `$app->setBasePath('...');`.
-
-Be careful: The `public/` directory is only the `DoumentRoot` of your webserver,
-but it's never part of your base path and the official url.
-
-<span style="color:green">Good URLs:</span>
-
-* `https://www.example.com`
-* `https://www.example.com/users`
-* `httsp://www.example.com/my-app`
-* `https://www.example.com/my-app/users`
-
-<span style="color:red">Bad URLs:</span>
-
-* `https://www.example.com/public`
-* `https://www.example.com/public/users`
-* `https://www.example.com/public/index.php`
-* `https://www.example.com/my-app/public`
-* `https://www.example.com/my-app/public/users`
 
 ## Single Action Controller
 
