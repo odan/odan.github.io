@@ -268,7 +268,7 @@ return [
 
 Note that we use the DI container to build the Slim App instance and to load the
 application settings. This allows us to configure the infrastructure services,
-like the database connection mailer etc. within the DI container.
+like the database connection, mailer etc. within the DI container.
 
 ## Bootstrap
 
