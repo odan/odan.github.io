@@ -17,16 +17,9 @@ If you think my blog and support is useful to you, I would appreciate a donation
 
 You can **buy** all Slim articles (~400 pages) bundled into a eBook (PDF and EPUB). 
 
-**Exclusive content:**
-
-* Slim 4 Introducing
-* Clean Architecture and ADR (Action Domain Responder)
-* JSON Web Token (JWT) authentication
-* Queues with RabbitMQ
-
 **Ko-Fi Shop: <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">Slim 4 - eBook</a>**
 <br>
-**Stripe Shop** <a href="https://buy.stripe.com/aEUbKydHlbjt4hi7ss" target="_blank">Slim 4 - eBook</a>
+**Stripe Shop: <a href="https://buy.stripe.com/aEUbKydHlbjt4hi7ss" target="_blank">Slim 4 - eBook</a>**
 
 <div style="text-align: left;">
 <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">
