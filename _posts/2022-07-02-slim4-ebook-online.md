@@ -26,7 +26,7 @@ the ordering process. This means that you will now get a link to
 the new eBook online portal directly after the checkout process. 
 
 For the future I also plan the possibility to unlock single articles there. 
-In addition, I will log all changes and enhancements in a changelog file. 
+In addition, I will log all changes and new articles in a changelog file. 
 
 If you have already purchased this eBook I can send you a link via email. 
 Please just contact me.
