@@ -9,7 +9,7 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 ---
 
 I must say that I am really pleasantly surprised by the success of the 
-Slim 4 eBook. Many developers who want to get to learn more about 
+Slim 4 eBook. Many developers who want to learn more about 
 the Slim framework or want to improve their expertise in 
 web development have already bought this eBook. 
 
