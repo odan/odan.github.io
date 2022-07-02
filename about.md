@@ -44,10 +44,6 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 * [The Slim 4 eBook](https://ko-fi.com/s/5f182b4b22)
 * [Software Architecture for Web Applications and APIs](https://ko-fi.com/s/811e7a3593)
-* [Slim 4 - Twig](https://ko-fi.com/s/8864b52774)
-* [Slim 4 - JSON Web Token (JWT)](https://ko-fi.com/s/ba4c29270c)
-* [Slim 4 - Rabbit MQ](https://ko-fi.com/s/55aaac1cf7)
-* [Slim 4 - Error Handling](https://ko-fi.com/s/5870155f2a)
 * [Das PHP Micro-Framework Slim 4](https://odan.github.io/2020/05/20/slim4-php-magazin-420.html) (PHP Magazin Ausgabe 4.20)
 * [À la découverte de Slim 4](https://www.programmez.com/magazine/article/la-decouverte-de-slim-4) (Programmez!)
 
@@ -69,7 +65,6 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 * [Laminas](https://github.com/laminas) A collection of enterprise-ready PHP components
 * [CakePHP](https://github.com/cakephp/cakephp) A rapid development framework for PHP
 * [Chronos](https://github.com/cakephp/chronos) A standalone DateTime library
-* [All contributions](https://github.com/odan)
 
 ## Conferences
 
