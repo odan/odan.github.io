@@ -10,11 +10,10 @@ image: https://odan.github.io/assets/images/slim-logo-600x330.png
 
 I must say that I am really pleasantly surprised by the success of the 
 Slim 4 eBook. Many developers who want to learn more about 
-the Slim framework or want to improve their expertise in 
-web development have already bought this eBook. 
+the Slim framework or want to improve their web development skills
+have already bought this eBook. 
 
-Almost daily I update parts of the content or even write new articles for it. 
-As a buyer you also get a link with the current version. 
+Almost every day I update the content or even write new articles for it.
 Due to the high update rate, I decided to put an HTML version of it online, 
 in addition to the PDF and EPUB format. 
 This should make it even easier to read the current content directly in the browser.
