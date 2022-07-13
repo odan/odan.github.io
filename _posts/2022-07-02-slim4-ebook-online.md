@@ -32,4 +32,4 @@ Please just contact me.
 
 **Ko-Fi Shop: <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">Slim 4 - eBook</a>**
 <br>
-**Stripe: <a href="https://buy.stripe.com/aEUbKydHlbjt4hi7ss" target="_blank">Slim 4 - eBook</a>**
+**Stripe: <a href="https://buy.stripe.com/3cs7ui5aP9bl156aEF" target="_blank">Slim 4 - eBook</a>**
