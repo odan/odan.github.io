@@ -19,7 +19,7 @@ You can **buy** all Slim articles (~400 pages) bundled into a eBook (PDF and EPU
 
 **Ko-Fi Shop: <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">Slim 4 - eBook</a>**
 <br>
-**Stripe Shop: <a href="https://buy.stripe.com/aEUbKydHlbjt4hi7ss" target="_blank">Slim 4 - eBook</a>**
+**Stripe Shop: <a href="https://buy.stripe.com/3cs7ui5aP9bl156aEF" target="_blank">Slim 4 - eBook</a>**
 
 <div style="text-align: left;">
 <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">
