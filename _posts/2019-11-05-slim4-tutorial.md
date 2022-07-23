@@ -231,7 +231,7 @@ One of the best DI container implementation is [PHP-DI](http://php-di.org/).
 To install the package, run:
 
 ```
-composer require php-di/php-di
+composer require php-di/php-di --with-all-dependencies
 ```
 
 ### DI Container Definitions
