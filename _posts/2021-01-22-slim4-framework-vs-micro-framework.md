@@ -233,7 +233,7 @@ This ensures that you are able to replace the HTTP message or DI container packa
 
 I think that Slim does exactly what a micro framework should do: routing. 
 The DI container is optional, but recommended. If that's still too much or too magical for you,
-you can take a look at [nikic/FastRoute](https://github.com/nikic/FastRoute).
+you may take a look at [nikic/FastRoute](https://github.com/nikic/FastRoute).
 
 Everything is relative, even complexity. 
 Everything in life has its advantages and disadvantages. We have to find the right balance. 
