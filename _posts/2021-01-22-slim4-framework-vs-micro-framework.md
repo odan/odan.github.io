@@ -1,5 +1,5 @@
 ---
-title: Slim 4 - Framework vs. Microframework
+title: Slim 4 - Framework vs. Micro Framework
 layout: post
 comments: true
 published: true
@@ -11,7 +11,7 @@ image:
 ## Table of contents
 
 * [Introduction](#introduction)
-* [Microframework](#microframework)
+* [Micro Framework](#micro-framework)
 * [Full-stack Framework](#full-stack-framework)
 * [Slim](#slim)
 * [Evaluating Slim](#evaluating-slim)
@@ -22,28 +22,29 @@ image:
 
 ## Introduction
 
-Over the last few years, I've noticed that there's a lot of confusion (and false expectations) around 
-the Slim microframework. 
+Over the last few years, I've noticed that there's a lot 
+of confusion (and false expectations) around the Slim micro framework. 
 In the following chapters, I will try to explain the conceptual 
-differences between full-stack frameworks and microframeworks.
+differences between full-stack frameworks and micro frameworks.
 You should not consider this comparison as "Slim vs. Laravel", 
 but rather as framework vs. micro-framework in general.
 
-## Microframework
+## Micro Framework
 
 A **microframework** is a term used to refer to minimalistic web application frameworks.
 It is contrasted with full-stack frameworks.
 
-According to Wikipedia a microframework typically...
+According to Wikipedia a micro framework typically...
 
 > ... facilitates receiving an HTTP request, routing the HTTP request 
 > to the appropriate controller, dispatching the controller, and returning an HTTP response. 
 
-Microframeworks are often specifically designed for building the APIs for another service 
-or application. For example, the Slim microframework is designed for Microservices development 
- and API development.
+Micro frameworks are often specifically designed for building the APIs for another service 
+or application. For example, the Slim micro framework is designed for Microservices development 
+ and **APIs**.
 
-It **lacks most of the functionality** which is common to expect in a full-fledged web application framework, such as:
+It lacks most of the functionality which is common to expect in a 
+full-fledged web application framework, such as:
 
 * Database abstraction
 * Web template engine
@@ -54,7 +55,7 @@ It **lacks most of the functionality** which is common to expect in a full-fledg
 
 Web **frameworks** provide a standard way to build and deploy web applications on the web.
 
-Many web frameworks provide libraries for database access, templating frameworks, 
+Many web frameworks provide libraries for database access, template engines, 
 and session management, and they often promote code reuse.
 
 Although they often target development of dynamic websites, 
@@ -67,23 +68,24 @@ could almost considered a microframework approach as well.
 
 ## Slim
 
-Slim is a microframework.
+Slim is a micro framework.
 
 Although the idea behind Slim is relatively simple, it still requires a lot of explanation.
 
 You might know this Unix philosophy:
 
-> **Make each program do one thing well. To do a new job, build afresh rather 
-> than complicate old programs by adding new "features".**
+> **Make each program do one thing well.**
 
-According to this philosophy the Slim microframeworks will only
-do one task right: **Routing and dispatching**.
+According to this philosophy the Slim core is just a "routing library". 
+Other thinks like Environment loading, configuration, database abstractions etc.
+is a different set of concerns that other packages do very well and there's no 
+reason for Slim to reinvent that wheel.
 
-This sounds simple, but in reality this is not so easy as you might think.
-Depending on your technical background it may take a long period of time
-to understand and successfully use this tool.
+It may sounds simple, but in reality it's not as easy as you might think.
+Depending on your technical background, 
+it may take a long time to understand and successfully use this tool.
 
-What’s the difference between **routing** and **dispatching**?
+What is **routing**?
 
 **Routing** is the process of taking a **URI path** and decomposing 
 it into parameters to determine which module, controller, 
@@ -91,13 +93,11 @@ and action of that controller should receive the request.
 Routing occurs only once: when the request is initially received and before 
 the first controller is dispatched.
 
-**Dispatching** is the process of taking the request object, extracting the module name, 
-controller name, action name, and optional parameters contained in it, and then 
-instantiating a controller and calling an action of that controller.
-
 In Slim all this happens when you add a route as follows:
 
 ```php
+<?php
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
@@ -113,12 +113,18 @@ $app->get('/', function (Request $request, Response $response) {
 $app->run();
 ```
 
+Output:
+
+```
+Hello, World!
+```
+
 ## Evaluating Slim
 
 Besides the technical requirements, developers should also be "fit" enough for Slim.
 Here is a list of resources you should already be familiar with before evaluating Slim.
 
-**Minimum Skillset for Slim:**
+**Minimum skill set for Slim:**
 
 * [PHP 7+](https://en.wikipedia.org/wiki/PHP)
     * [OOP](https://www.php.net/manual/en/language.oop5.php)
@@ -140,9 +146,7 @@ Here is a list of resources you should already be familiar with before evaluatin
 * [Middleware](https://www.slimframework.com/docs/v4/concepts/middleware.html)
 * [Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection)
 * [Front controller](https://phptherightway.com/pages/Design-Patterns.html#front-controller)
-* [Model-View-Controller (MVC)](https://phptherightway.com/pages/Design-Patterns.html#front-controller)  
-  * [MVC Model 2](https://de.wikipedia.org/wiki/Model_2)
-* [PHPUnit](https://en.wikipedia.org/wiki/PHPUnit)
+* [MVC Model 2](https://de.wikipedia.org/wiki/Model_2)
 * [Debugging with Xdebug](https://en.wikipedia.org/wiki/Xdebug)
 * [F12 - Developer Toolbar](https://developers.google.com/web/tools/chrome-devtools)
 
@@ -154,9 +158,9 @@ Read more: [Architecture](https://odan.github.io/learn-php/#architecture)
 
 **Is Slim the right tool for me? When should I consider Slim and when not?**
 
-You might consider a microframework like Slim if you:
+You might consider a micro framework like Slim if you:
 
-* meet the "Minimum Skillset for Slim" list (see above)
+* meet the "minimum skill set for Slim" list (see above)
 * need performance, efficiency, full control and flexibility
 * feel experienced enough, and you know what you are doing
 * really value standard interfaces like PSR-7 and PSR-15
@@ -174,7 +178,7 @@ You might consider a full-stack framework if you:
 * cannot fulfill all the points in the above list
 * need support from a big community.  
 * don't care about vendor lock-in
-* accept the risk of upgrading to the next framework version 
+* accept the risks and costs of upgrading to the next framework version 
 * don't care about high performance response times (SEO)
 * prefer to use bad and slow OOP/SQL abstractions like an ([N+1](https://stackoverflow.com/a/97253/1461181)) ORM  
 * prefer framework specific "bundles" or "plugins" over pure composer packages
@@ -210,7 +214,7 @@ A general-purpose framework can integrate other plugins or bundles based on a fi
 
 In Slim, however, such an ecosystem cannot emerge because this “plugin mechanism” is missing. 
 In Slim however each individual component can be integrated with the help of “Composer” 
-and some container definitions. This is more complex, but also more independent and flexible.
+and some DI container definitions. This is more complex, but also more independent and flexible.
 
 ## Standards
 
@@ -221,13 +225,13 @@ Symfony are not yet ready to implement these standards, probably to strengthen
 their own ecosystem (a.k.a. vendor lock-in).
 
 On the other hand, Slim (and Laminas) provides full support for most standard [PSR 
-interfaces](https://www.php-fig.org/psr/) to ensure very good interoperability between other components. 
-This ensures that you are able to replace the HTTP message or container component 
+interfaces](https://www.php-fig.org/psr/) to ensure very good interoperability between other packages. 
+This ensures that you are able to replace the HTTP message or DI container package 
 "relatively" easily without risking too much dependency on a particular vendor.
 
 ## Conclusion
 
-I think that Slim does exactly what a microframework should do: routing and dispatching. 
+I think that Slim does exactly what a micro framework should do: routing. 
 The DI container is optional, but recommended. If that's still too much or too magical for you,
 you can take a look at [nikic/FastRoute](https://github.com/nikic/FastRoute).
 
