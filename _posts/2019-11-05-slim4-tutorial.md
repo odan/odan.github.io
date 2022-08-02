@@ -653,7 +653,7 @@ The source code with for this tutorial can be found here:
 
 You can post your questions, comments or technical issue here:
 
-* <https://github.com/odan/support/issues/new>
+* <https://github.com/odan/slim4-tutorial/issues/new>
 
 If you have Slim-Framework specific questions, visit:
 
