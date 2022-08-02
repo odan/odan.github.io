@@ -49,4 +49,4 @@ Example output:
 
 ## Read more
 
-* [Ask a question or report an issue](https://github.com/odan/slim4-tutorial/issues)
+* [Ask a question or report an issue](https://github.com/odan/support/issues/new)
