@@ -99,11 +99,9 @@ that will look like this:
 .
 ├── config/             Configuration files
 ├── public/             Web server files (DocumentRoot)
-│   └── .htaccess       Apache redirect rules for the front controller
 │   └── index.php       The front controller
 ├── src/                PHP source code (The App namespace)
 ├── vendor/             Reserved for composer
-├── .htaccess           Internal redirect to the public/ directory
 ├── .gitignore          Git ignore rules
 └── composer.json       Project dependencies and autoloader
 ```
@@ -146,44 +144,6 @@ The complete `composer.json` file should look like this:
 ```
 
 Run `composer update` for the changes to take effect.
-
-## Apache URL Rewrite Rules
-
-This step is optional, and only needed if you plan to develop or host your Slim app on Apache.
-
-Make sure that the Apache [mod_rewrite](https://httpd.apache.org/docs/2.4/mod/mod_rewrite.html) module
-is installed and enabled.
-
-To run a Slim app with apache we have to add url rewrite rules to redirect
-the web traffic to a so-called [front controller](https://en.wikipedia.org/wiki/Front_controller).
-
-The front controller is just a `index.php` file and the entry point to the application.
-
-Create a `.htaccess` file in your `public/` directory and copy/paste this content:
-
-```
-# Redirect to front controller
-RewriteEngine On
-# RewriteBase /
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.php [QSA,L]
-```
-
-Please **do not** change the `RewriteRule` directive. It must be exactly as shown above.
-
-Note that only one some webhosts, you may need to uncomment the line `# RewriteBase /` to make it work.
-
-Create a second `.htaccess` file in your project root-directory and copy/paste this content:
-
-```
-RewriteEngine on
-RewriteRule ^$ public/ [L]
-RewriteRule (.*) public/$1 [L]
-```
-
-Do not skip this step. This second `.htaccess` file is important to run your Slim
-app in a sub-directory and within your development environment.
 
 ## Configuration
 
@@ -474,7 +434,7 @@ composer start
 
 Slim provides some methods for adding controller logic directly in a route callback.
 The request/response object (and optionally the route arguments) are passed by Slim 
-to a callack function as follows:
+to a callback function as follows:
 
 ```php
 <?php
@@ -557,7 +517,7 @@ return function (App $app) {
 };
 ```
 
-Now open the URL, e.g. `http://localhost` and you should see the message `Hello, World!`.
+Now open the URL, e.g. <http://localhost:8080> and you should see the message `Hello, World!`.
 
 ### Creating a JSON Response
 
@@ -585,7 +545,7 @@ final class HomeAction
 }
 ```
 
-Open your website, e.g. `http://localhost` and you should see the JSON response `{"hello":"world"}`.
+Open your website, e.g. <http://localhost:8080> and you should see the JSON response `{"hello":"world"}`.
 
 ## Conclusion
 
