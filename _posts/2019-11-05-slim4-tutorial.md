@@ -320,7 +320,7 @@ To get Slim running we need to add the Slim `RoutingMiddleware` and `ErrorMiddle
 The `RoutingMiddleware` will route and dispatch the incoming requests
 and the `ErrorMiddleware` is able to catch all runtime exceptions.
 
-The `BodyParsingMiddleware` is just optional, but recommend if you work with JSON or form data.
+The `BodyParsingMiddleware` is optional, but recommend if you work with JSON or form data.
 
 Create a file `config/middleware.php` to set up the global middlewares
 and copy/paste this content:
@@ -337,9 +337,10 @@ return function (App $app) {
     // Add the Slim built-in routing middleware
     $app->addRoutingMiddleware();
 
-    // Catch exceptions and errors
+    // Handle exceptions
     $app->addErrorMiddleware(true, true, true);
 };
+
 ```
 
 ## Routes
@@ -347,7 +348,7 @@ return function (App $app) {
 A "route" is a URL path that can be mapped to a specific handler.
 Such a handler can be a simple function or an invokable class.
 Under the hood Slim uses the `nikic/FastRoute` package, but it
-also adds some nice features for routing names, groups and middlewares etc.
+also adds some nice features for routing groups, names and middlewares etc.
 
 The application routes will be defined in plain PHP files.
 
@@ -409,7 +410,7 @@ It should not be used on a public network.
 The parameter `-S localhost:8080` defines the server hostname and port.
 The parameter `-t public/` specifies the document root directory with the index.php file.
 
-Now open your website, e.g. <http://localhost:8080> and you should see the message `Hello, World!`.
+Now open your website, e.g. <http://localhost:8080> and you should see the message: `Hello, World!`
 
 To simplify this step you may add a script command `start` 
 and the config key `process-timeout` into your composer.json file:
@@ -553,7 +554,18 @@ Remember the relationships:
 * Slim - To handle routing and dispatching
 * Single Action Controllers - Request and response handling.
 
-The source code with for this tutorial can be found here: 
+Slim does not force you into a corset like other major frameworks do.
+You are also not forced to use any anti-patterns (e.g. facade or active-record),
+and you can build modern, clean code. 
+
+Slim provides a solid foundation for packages
+that can be installed as needed.
+Thanks to the PSR interfaces, composer and the DI container,
+packages can be replaced quite easily. Updates can
+be done in smaller steps without risking too much.
+
+How to add a database connection and much more can 
+be found in my [Slim 4 eBook](https://ko-fi.com/s/5f182b4b22). 
 
 ## Support
 
