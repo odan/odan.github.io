@@ -21,7 +21,6 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Installation](#installation)
 * [Directory Structure](#directory-structure)
 * [Autoloader](#autoloader)
-* [Apache URL Rewrite Rules](#apache-url-rewrite-rules)
 * [Configuration](#configuration)
 * [DI Container](#di-container)
 * [Bootstrap](#bootstrap)
