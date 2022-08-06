@@ -28,7 +28,6 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Front Controller](#front-controller)
 * [Middleware](#middleware)
 * [Routes](#routes)
-* [Base Path](#base-path)
 * [Single Action Controller](#single-action-controller)
 * [Creating a JSON Response](#creating-a-json-response)
 * [Conclusion](#conclusion)
@@ -333,7 +332,7 @@ Create the front-controller file `public/index.php` and copy/paste this content:
 (require __DIR__ . '/../config/bootstrap.php')->run();
 ```
 
-Be careful: The `public/` directory is only the `DoumentRoot` of your webserver,
+**Note:** The `public/` directory is only the `DoumentRoot` of your webserver,
 but it's never part of your base path and the official url.
 
 <span style="color:green">Good URLs:</span>
@@ -429,95 +428,47 @@ return function (App $app) {
 
 ```
 
-Now open your website, e.g. `http://localhost` and you should see the message `Hello, World!`.
-
-## Base Path
-
-When you set up your first Slim project, you may get an **404 error (not found)**.
-
-This can happen when you run your Slim app in a sub-directory, and not directly within the
-[DocumentRoot](https://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot)
-of the webserver. To fix this you have to set the correct "base path".
-
-Ideally the `DoumentRoot` of your production server points directly to the `public/` directory.
-In this case you don't need to configure the Slim base path.
-
-In all other cases you have to make sure, that your base path is correct. For example,
-the DocumentRoot directory is `/var/www/domain.com/htdocs/`, but the application
-is stored under `/var/www/domain.com/htdocs/my-app/`, then you have to set `/my-app` as base path.
-
-To be more precise: In this context "sub-directory" means a sub-directory of the project,
-and **not** the `public/` directory. For example when you place your app not directly
-under the webservers `DocumentRoot`.
-
-You can manually set the base path in Slim using the `setBasePath` method:
-
-```php
-$app->setBasePath('/slim4-tutorial');
-```
-
-The problem is, that the basePath can be different for each host (dev, testing, staging, prod etc...).
-
-Luckily, the [BasePathMiddleware](https://github.com/selective-php/basepath) is able to detect
-and configure the Slim App basePath.
-
-To install the package, run:
+Open a new console and start the [built-in development server](https://www.php.net/manual/en/features.commandline.webserver.php)
+using this command:
 
 ```
-composer require selective/basepath
+php -S localhost:8080 -t public/
 ```
 
-Add the following DI container definition into `config/container.php`:
+The terminal will show:
 
-```php
-use Psr\Container\ContainerInterface;
-use Selective\BasePath\BasePathMiddleware;
-use Slim\App;
-// ...
-
-return [
-    // ...
-
-    BasePathMiddleware::class => function (ContainerInterface $container) {
-        return new BasePathMiddleware($container->get(App::class));
-    },
-];
-``` 
-
-Then add the `BasePathMiddleware::class`, right after the `RoutingMiddleware`,
-to the middleware stack in `config/middleware.php`:
-
-```php
-use Selective\BasePath\BasePathMiddleware;
-
-$app->add(BasePathMiddleware::class);
+```
+[Sat Aug  6 10:38:50 2022] PHP 8.1.6 Development Server (http://localhost:8080) started
 ```
 
-The result:
+**Note:** This web server is designed to aid application development. 
+It may also be useful for testing purposes or for application 
+demonstrations that are run in controlled environments. 
+It is not intended to be a full-featured web server. 
+It should not be used on a public network.
 
-```php
-<?php
+The parameter `-S localhost:8080` defines the server hostname and port.
+The parameter `-t public/` specifies the document root directory with the index.php file.
 
-use Selective\BasePath\BasePathMiddleware;
-use Slim\App;
-use Slim\Middleware\ErrorMiddleware;
+Now open your website, e.g. <http://localhost:8080> and you should see the message `Hello, World!`.
 
-return function (App $app) {
-    // Parse json, form data and xml
-    $app->addBodyParsingMiddleware();
+To simplify this step you may add a script command `start` 
+and the config key `process-timeout` into your composer.json file:
 
-    // Add the Slim built-in routing middleware
-    $app->addRoutingMiddleware();
-
-    $app->add(BasePathMiddleware::class);
-
-    // Catch exceptions and errors
-    $app->add(ErrorMiddleware::class);
-};
+```json
+"config": {
+  "process-timeout": 0
+},
+"scripts": {
+  "start": "php -S localhost:8080 -t public/",
+}
 ```
 
-Now that you have installed the `BasePathMiddleware`,
-remove this line (if exists): `$app->setBasePath('...');`.
+To start the web-server you can then use this command:
+
+```
+composer start
+```
 
 ## Single Action Controller
 
