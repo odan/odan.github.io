@@ -34,7 +34,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 
 ## Requirements
 
-* PHP 7.4+
+* PHP 7.4 or PHP 8+
 * Composer (only for development)
 
 ## Introduction
