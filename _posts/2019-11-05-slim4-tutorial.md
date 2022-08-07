@@ -442,7 +442,7 @@ $app->get('/', function (ServerRequestInterface $request, ResponseInterface $res
 });
 ```
 
-Such interfaces may look intuitive, but they are not suitable for more complex scenarios.
+Such interface may look intuitive, but it is not suitable for more complex scenarios.
 
 Anonymous functions as routing handlers are quite "expensive", 
 because PHP has to create all functions for each request.
