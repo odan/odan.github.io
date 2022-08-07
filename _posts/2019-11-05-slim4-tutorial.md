@@ -450,7 +450,7 @@ The use of class names is more lightweight, faster and scales better for larger 
 Unless your logic is very simple, I don't recommend using callback functions.
 This is the moment where a **Single Action Controller** come into play.
 
-Each Single Action Controller is represented by its own class and has **only one public method**.
+Each Single Action Controller is represented by its own class and has only **one public method**.
 
 The *Action* does only these things:
 
