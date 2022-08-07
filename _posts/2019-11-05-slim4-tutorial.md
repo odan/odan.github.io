@@ -202,9 +202,7 @@ and copy/paste this content:
 ```php
 <?php
 
-use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Container\ContainerInterface;
-use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\App;
 use Slim\Factory\AppFactory;
 
@@ -218,10 +216,6 @@ return [
 
         return AppFactory::create();
     },
-
-    ResponseFactoryInterface::class => function (ContainerInterface $container) {
-        return $container->get(Psr17Factory::class);
-    },
 ];
 ```
 
@@ -232,9 +226,6 @@ All settings are just passed as an simple array, so we have no special class ide
 
 The `App::class` identifier is needed to ensure that we use the same App object 
 across the application and to ensure that the App object uses the same DI container object.
-
-The `ResponseFactoryInterface::class` identifier is optional, but will be needed later for some custom 
-middlewares that depend on this specific interface.
 
 ## Bootstrap
 
