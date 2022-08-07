@@ -73,6 +73,7 @@ add the following lines to this file:
 ```
 vendor/
 .idea/
+.env
 ```
 
 ## Directory Structure
@@ -102,7 +103,7 @@ that will look like this:
 ├── src/                PHP source code (The App namespace)
 ├── vendor/             Reserved for composer
 ├── .gitignore          Git ignore rules
-└── composer.json       Project dependencies and autoloader
+└── composer.json       Project dependencies
 ```
 
 ## Autoloader
