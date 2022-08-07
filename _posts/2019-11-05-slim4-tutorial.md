@@ -522,10 +522,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class HomeAction
 {
-    public function __invoke(
-        ServerRequestInterface $request, 
-        ResponseInterface $response
-    ): ResponseInterface {
+    public function __invoke(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface {
         $response->getBody()->write(json_encode(['hello' => 'world']));
 
         return $response->withHeader('Content-Type', 'application/json');
