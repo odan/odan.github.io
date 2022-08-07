@@ -415,7 +415,7 @@ and the config key `process-timeout` into your composer.json file:
 
 To stop the built-in web server, press: `Ctrl+C`.
 
-To start the built-in web server you can then use this command:
+To start the built-in web server, you can now use this command:
 
 ```
 composer start
