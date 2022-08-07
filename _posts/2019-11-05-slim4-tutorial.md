@@ -377,10 +377,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Slim\App;
 
 return function (App $app) {
-    $app->get('/', function (
-        ServerRequestInterface $request,
-        ResponseInterface $response
-    ) {
+    $app->get('/', function (ServerRequestInterface $request, ResponseInterface $response) {
         $response->getBody()->write('Hello, World!');
 
         return $response;
@@ -425,7 +422,9 @@ and the config key `process-timeout` into your composer.json file:
 }
 ```
 
-To start the web-server you can then use this command:
+To stop the built-in web server, press: `Ctrl+C`.
+
+To start the built-in web server you can then use this command:
 
 ```
 composer start
@@ -489,10 +488,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class HomeAction
 {
-    public function __invoke(
-        ServerRequestInterface $request, 
-        ResponseInterface $response
-    ): ResponseInterface {
+    public function __invoke(ServerRequestInterface $request,  ResponseInterface $response): ResponseInterface {
         $response->getBody()->write('Hello, World!');
 
         return $response;
@@ -581,3 +577,4 @@ You can post your questions, comments or technical issue here:
 If you have Slim-Framework specific questions, visit:
 
 * <https://discourse.slimframework.com/>
+* <https://www.slimframework.com/docs/v4/>
