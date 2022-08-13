@@ -541,15 +541,19 @@ Remember the relationships:
 * Slim - To handle routing and dispatching
 * Single Action Controllers - Request and response handling.
 
-Slim does not force you into a corset like other major frameworks do.
-You are also not forced to use any anti-patterns (e.g. facade or active-record),
-and you can build modern, clean code. 
+Slim follows the Unix philosophy in regard to software
+selection and programming as it applies to the modern era,
+select and write programs that do one thing and do it well.
 
 Slim provides a solid foundation for packages
 that can be installed as needed.
 Thanks to the PSR interfaces, composer and the DI container,
 packages can be replaced quite easily. Updates can
 be done in smaller steps without risking too much.
+
+Slim does not force you into a corset like other major frameworks do.
+You are also not forced to use any anti-patterns (e.g. facade or active-record),
+and you can build modern, clean code.
 
 How to add a database connection and much more can 
 be found in my [Slim 4 eBook](https://ko-fi.com/s/5f182b4b22). 
