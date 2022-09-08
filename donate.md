@@ -22,7 +22,7 @@ You can **buy** all Slim framework articles bundled as PDF and online version.
 ### Ko-Fi Shop
 
 * [Slim 4 - eBook Vol. 1](https://ko-fi.com/s/5f182b4b22)
-* [Slim 4 - eBook Vol. 2](https://ko-fi.com/dopitz) **(NEW)**
+* [Slim 4 - eBook Vol. 2](https://ko-fi.com/s/e592c10b5f) **(NEW)**
 
 ### Stripe Shop
 
