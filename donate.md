@@ -15,11 +15,19 @@ If you think my blog and support is useful to you, I would appreciate a donation
 * **[Ko-Fi](https://ko-fi.com/dopitz)**
 * **[PayPal](https://www.paypal.me/dopitz)**
 
-You can **buy** all Slim articles (~400 pages) bundled into a eBook (PDF and EPUB). 
+## eBooks
 
-**Ko-Fi Shop: <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">Slim 4 - eBook</a>**
-<br>
-**Stripe Shop: <a href="https://buy.stripe.com/3cs7ui5aP9bl156aEF" target="_blank">Slim 4 - eBook</a>**
+You can **buy** all Slim framework articles bundled as PDF and online version.
+
+### Ko-Fi Shop
+
+* [Slim 4 - eBook Vol. 1](https://ko-fi.com/s/5f182b4b22)
+* [Slim 4 - eBook Vol. 2](https://ko-fi.com/dopitz) **NEW!**
+
+### Stripe Shop
+
+* [Slim 4 - eBook Vol. 1](https://buy.stripe.com/3cs7ui5aP9bl156aEF)
+* [Slim 4 - eBook Vol. 2](https://buy.stripe.com/00g5maeLpfzJ29a7su) **NEW!**
 
 <div style="text-align: left;">
 <a href="https://ko-fi.com/s/5f182b4b22" target="_blank">
