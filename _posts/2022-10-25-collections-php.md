@@ -14,10 +14,10 @@ For many applications, you want to create and manage groups of related objects. 
 I already wrote a [blog post](https://odan.github.io/2019/08/30/creating-a-strictly-typed-collection-of-objects-in-php.html) about this topic a few years ago,
 but this time I want to present an even simpler approach.
 
-As a goal I have set the following criteria.
+As goal, I have defined the following criteria.
 
 * No dependencies (no library must be used)
-* Write as little code as possible
+* Write as less code as possible
 * No fancy language features should be used
 * It must be type safe
 * The collection must be iterable using `foreach`
