@@ -24,7 +24,7 @@ As goal, I have defined the following criteria.
 * It must be compatible with the [PHPStorm code completion](https://www.jetbrains.com/help/phpstorm/auto-completing-code.html) feature
 * It must comply [PHPStan level 9](https://phpstan.org/user-guide/rule-levels)
 
-## Implementing of a String Collection
+## Implementing a String Collection
 
 For the sake of simplicity, I want to start with `string` collection.
 
@@ -46,7 +46,7 @@ class StringCollection
 }
 ```
 
-The next challenge is to read the list of string using a [foreach](https://www.php.net/manual/en/control-structures.foreach.php) loop.
+The next challenge is to read the list of strings using a [foreach](https://www.php.net/manual/en/control-structures.foreach.php) loop.
 
 
 To achieve this, we need to implement a method that returns something
@@ -154,7 +154,7 @@ foo
 bar
 ```
 
-## Implementing of an Object Collection
+## Implementing an Object Collection
 
 That approach works with objects too.
 
