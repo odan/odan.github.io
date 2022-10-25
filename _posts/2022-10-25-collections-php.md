@@ -22,7 +22,7 @@ As goal, I have defined the following criteria.
 * It must be type safe
 * The collection must be iterable using `foreach`
 * It must be compatible with the [PHPStorm code completion](https://www.jetbrains.com/help/phpstorm/auto-completing-code.html) feature
-* It must be compatible with [PHPStan level 9](https://phpstan.org/user-guide/rule-levels)
+* It must comply with [PHPStan level 9](https://phpstan.org/user-guide/rule-levels)
 
 ## Implementing of a String Collection
 
