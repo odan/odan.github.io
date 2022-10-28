@@ -18,6 +18,7 @@ If you think my blog and support is useful to you, I would appreciate a donation
 ## eBooks
 
 You can **buy** all Slim framework articles bundled as PDF and online version.
+If there is any issue in your country with the payment, please contact me by email.
 
 ### Ko-Fi Shop
 
