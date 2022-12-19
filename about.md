@@ -38,7 +38,7 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 ## Videos
 
-* Follow me on [YouTube](https://www.youtube.com/c/DanielOpitz)
+* Follow me on [YouTube](https://www.youtube.com/@DanielOpitz)
 
 ## Publications
 
