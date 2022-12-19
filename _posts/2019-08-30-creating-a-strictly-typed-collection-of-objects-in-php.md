@@ -7,6 +7,8 @@ description:
 keywords: php array generics
 ---
 
+> **Attention:** This article has been updated. Here is the new link: [Collections in PHP](https://odan.github.io/2022/10/25/collections-php.html)
+
 ## Table of contents
 
 * [Intro](#intro)
