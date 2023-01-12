@@ -21,7 +21,7 @@ if ($x = getValue()) {
 ```
 
 In this example, the developer probably meant to check if `getValue()` returns 
-a truthy value, but instead they accidentally assigned the return value 
+a boolean value, but instead they accidentally assigned the return value 
 of `getValue()` to `$x`. This can cause unexpected behavior in the code 
 and be hard to track down.
 
