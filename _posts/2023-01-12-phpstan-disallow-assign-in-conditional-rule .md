@@ -62,12 +62,7 @@ class DisallowAssignInConditionalRule implements Rule
 
     public function processNode(Node $node, Scope $scope): array
     {
-        $expressionNode = $this->nodeFinder->findFirstInstanceOf($node, Expr::class);
-        if (!$expressionNode instanceof Expr) {
-            return [];
-        }
-
-        $assignNode = $this->nodeFinder->findFirstInstanceOf($expressionNode, Assign::class);
+        $assignNode = $this->nodeFinder->findFirstInstanceOf($node->cond, Assign::class);
         if (!$assignNode instanceof Assign) {
             return [];
         }
@@ -88,13 +83,11 @@ returns the type of node that the rule should be applied to,
 in this case it's `Node\Stmt\If_` which is a node that represents an if statement.
 
 The `processNode()` method gets called by PHPStan for each `Node\Stmt\If_` it encounters. 
-It finds the first instance of `Expr` node within the `If` statement node, 
-if it's not found it returns an empty array, indicating that there's no issue found. 
 
-Then, it finds the first instance of `Assign` node within the found `Expr` node, 
+It finds the first instance of `Assign` node within the `If` condition node, 
 if it's not found it returns an empty array, indicating that there's no issue found.
 
-If both conditions are not met, it means that there's a conditional statement 
+If this condition does not meet, it means that there's a conditional statement 
 containing an assignment, so it raises an error with a message indicating 
 that the assignment is not allowed.
 
