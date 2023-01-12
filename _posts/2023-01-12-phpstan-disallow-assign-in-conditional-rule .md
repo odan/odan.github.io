@@ -1,5 +1,5 @@
 ---
-title: Creating a custom rule in PHPStan to disallow accidental assignments in conditionals
+title: Creating a custom PHPStan rule to disallow accidental assignments in conditionals
 layout: post
 comments: true
 published: true
