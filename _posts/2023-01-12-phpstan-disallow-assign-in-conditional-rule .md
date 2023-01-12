@@ -10,7 +10,7 @@ keywords: php phpstan
 PHPStan is a great tool for catching common mistakes and bugs in your PHP code, 
 but sometimes you may need to create your own custom rules to catch specific issues. 
 One common issue that can be hard to catch is accidental assignments in conditionals. 
-In this post, we'll show you how to create a custom rule in PHPStan to catch this issue.
+In this post, I will show you how to create a custom rule in PHPStan to catch this issue.
 
 First, let's take a look at an example of an accidental assignment in a conditional:
 
