@@ -58,6 +58,7 @@ class DisallowAssignInConditionalRule implements Rule
         if ($parent instanceof Node\Stmt\If_ ||
             $parent instanceof Node\Stmt\While_ ||
             $parent instanceof Node\Stmt\For_) {
+            
             return [
                 sprintf(
                     'Assignment in conditional statement on line %d is not allowed.',
