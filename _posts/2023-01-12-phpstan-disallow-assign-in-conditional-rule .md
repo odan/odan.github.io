@@ -72,7 +72,7 @@ class DisallowAssignInConditionalRule implements Rule
 ```
 
 This implementation checks if the parent node of the assignment 
-is a conditional statement (if, while, for), If the parent node 
+is a conditional statement (if, while, for). If the parent node 
 is a conditional statement, it raises an error.
 
 To use this rule, you need to include the class in your 
