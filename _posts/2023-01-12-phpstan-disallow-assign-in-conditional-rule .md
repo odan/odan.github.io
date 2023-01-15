@@ -1,5 +1,5 @@
 ---
-title: Creating a PHPStan rule to disallow assignments in a conditional expression
+title: PHPStan - Creating a rule to disallow assignments in a conditional expression
 layout: post
 comments: true
 published: true
