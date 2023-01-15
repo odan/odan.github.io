@@ -114,4 +114,4 @@ you can create your own rules to catch common mistakes
 and bugs in your code, and make your development
 process more efficient and effective.
 
-Update: I have made the source code available. See here [odan/phpstan-rules](https://github.com/odan/phpstan-rules).
+Update: You can find the source code on GitHub: [odan/phpstan-rules](https://github.com/odan/phpstan-rules).
