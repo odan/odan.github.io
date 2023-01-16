@@ -4,7 +4,8 @@ layout: post
 comments: true
 published: true
 description:
-keywords: php phpstan
+keywords: php slim youtube
+image: https://odan.github.io/assets/images/slim-logo-600x330.png
 ---
 
 I am excited to announce that I have just published a new video on my YouTube channel! 
