@@ -24,7 +24,7 @@ composer require squizlabs/php_codesniffer --dev
 Then install the "PHPCompatibility" rules using this command:
 
 ```
-composer require phpcompatibility/php-compatibility --dev
+composer require phpcompatibility/php-compatibility @develop --dev
 ```
 
 In order to run the PHPCompatibility checker as native Composer command,
@@ -32,12 +32,12 @@ add the following [script](https://getcomposer.org/doc/articles/scripts.md#writi
 to your `composer.json` file:
 
 ```json
-"sniffer:php8": "phpcs -p ./src --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 8.0"
+"sniffer:php8": "phpcs -p ./src --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 8.2"
 ```
 
 ### Usage
 
-To check your codebase for PHP 8 compatibility issues execute the script as follows:
+To check your codebase for PHP 8.2 compatibility issues execute the script as follows:
 
 ```
 composer sniffer:php8
