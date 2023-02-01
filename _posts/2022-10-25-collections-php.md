@@ -34,6 +34,8 @@ an internal array of strings. For this purpose, I add a method called `add`.
 ```php
 <?php
 
+namespace Example;
+
 class StringCollection
 {
     /** @var string[] */
@@ -56,6 +58,8 @@ The implementation is quite simple, add the `IteratorAggregate` to your collecti
 
 ```php
 <?php
+
+namespace Example;
 
 use ArrayIterator;
 use IteratorAggregate;
@@ -103,7 +107,7 @@ This means that our collection returns a list of strings as value and an integer
 ```php
 <?php
 
-namespace App\Collection;
+namespace Example;
 
 use ArrayIterator;
 use IteratorAggregate;
@@ -163,6 +167,8 @@ Let's say you want to implement a collection for a class called `User`:
 ```php
 <?php
 
+namespace Example;
+
 class User
 {
     public string $username;
@@ -174,6 +180,8 @@ The Collection class can be implemented as follows:
 
 ```php
 <?php
+
+namespace Example;
 
 use ArrayIterator;
 use IteratorAggregate;
