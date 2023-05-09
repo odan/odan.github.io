@@ -1,5 +1,5 @@
 ---
-title: Unraveling the Origins of a Video: A Guide to Source Discovery
+title: Unraveling the Origins of a Video - A Guide to Source Discovery
 layout: post
 comments: true
 published: true
