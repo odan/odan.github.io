@@ -144,7 +144,7 @@ The usage of the collection class is quite simple:
 $strings = new StringCollection();
 
 $strings->add('foo');
-$strings->add('var');
+$strings->add('bar');
 
 foreach ($strings as $value) {
     echo $value . "\n";
