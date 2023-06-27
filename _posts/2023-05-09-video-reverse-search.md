@@ -86,12 +86,8 @@ of the movie to get a better result.
 
 ## Conclusion
 
-Finding the source of a video is a rewarding journey that helps us 
-verify information and understand the context behind captivating visuals. 
-By following the steps outlined in this guide, 
-you can download a video from a social media platform, 
-convert it into screenshots using FFmpeg, 
-and utilize image reverse search engines to locate its source. 
+Finding the source of a video is an exciting thing that helps us 
+verify information and understand the context behind the video and photos. 
 
 Remember to **respect copyright and usage policies** when sharing 
 or utilizing the information you discover during your investigation. 
