@@ -47,12 +47,16 @@ To enable testing your ASP.NET Core applications, I would like to share the foll
 
 [.NET Core Test Explorer](https://marketplace.visualstudio.com/items?itemName=formulahendry.dotnet-test-explorer): This extension integrates with the Test Explorer UI extension and provides test discovery and execution capabilities specifically for .NET Core projects.
 
-<img src="https://github.com/odan/slim4-skeleton/assets/781074/bc296a9d-59b4-44ed-aa49-e0ea73ea6eee" loading="lazy" alt="Test Explorer UI">
-
 [Test Adapter Converter](https://marketplace.visualstudio.com/items?itemName=ms-vscode.test-adapter-converter): Converts from the Test Explorer UI API into native VS Code testing.
 
 As a useful helper, the [Test Explorer Status Bar](https://marketplace.visualstudio.com/items?itemName=connorshea.vscode-test-explorer-status-bar)
 adds some some test statistics into the status bar.
+
+The result should look and work pretty awesome:
+
+<img src="https://github.com/odan/slim4-skeleton/assets/781074/bc296a9d-59b4-44ed-aa49-e0ea73ea6eee" loading="lazy" alt="Test Explorer UI">
+
+**Code Coverage**
 
 [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters): Helps you visualize code coverage in your project by displaying colored gutters in the editor, indicating which lines are covered by tests.
 
