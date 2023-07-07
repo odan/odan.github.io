@@ -80,7 +80,7 @@ Coverage Gutters in action:
 <img src="https://github.com/odan/slim4-skeleton/assets/781074/664ba642-bacc-4f18-9049-1ee608051000" loading="lazy" alt="Coverage Gutters">
 
 
-#### Useful Extensions
+### Useful Extensions
 
 Besides the the essential extensions, I would like to recommend other
 very useful extensions, that will give you a even better developer experience.
