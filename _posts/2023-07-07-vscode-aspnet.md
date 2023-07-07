@@ -60,8 +60,6 @@ The result should look and work pretty awesome:
 
 [Coverage Gutters](https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters): Helps you visualize code coverage in your project by displaying colored gutters in the editor, indicating which lines are covered by tests.
 
-<img src="https://github.com/odan/slim4-skeleton/assets/781074/664ba642-bacc-4f18-9049-1ee608051000" loading="lazy" alt="Coverage Gutters">
-
 To make Coverage Gutters work, you should configure the "Test Explorer UI"
 key `dotnet-test-explorer.testArguments` to `/p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput=./lcov.info`.
 
@@ -76,6 +74,11 @@ Example: `.vscode/settings.json`
   "coverage-gutters.showGutterCoverage": true,
 }
 ```
+
+Coverage Gutters in action:
+
+<img src="https://github.com/odan/slim4-skeleton/assets/781074/664ba642-bacc-4f18-9049-1ee608051000" loading="lazy" alt="Coverage Gutters">
+
 
 #### Useful Extensions
 
