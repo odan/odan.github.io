@@ -21,10 +21,10 @@ I'm a Senior Software Engineer at [ORCA Services AG](https://orca-services.ch/) 
 I have over 20 years of software development experience.
 
 In my free time I contribute to various open source projects
-and write **[blog](https://odan.github.io/)** posts about PHP, Slim-Framework and .NET.
+and write **[blog](https://odan.github.io/)** posts about PHP, 
+Slim-Framework and .NET.
 
-Whenever possible I try to answer questions about Slim on the **[Slim-Forum](https://discourse.slimframework.com/)**
-and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
+Whenever possible, I try to answer questions about Slim in the **[Slim forum](https://discourse.slimframework.com/)**.
 
 ## Skills
 
@@ -42,8 +42,8 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 
 ## Publications
 
-* [The Slim 4 eBook](https://ko-fi.com/s/5f182b4b22)
-* [Software Architecture for Web Applications and APIs](https://ko-fi.com/s/811e7a3593)
+* [The Slim 4 eBook Vol. 1](https://ko-fi.com/s/5f182b4b22)
+* [The Slim 4 eBook Vol. 2](https://ko-fi.com/s/e592c10b5f)
 * [Das PHP Micro-Framework Slim 4](https://odan.github.io/2020/05/20/slim4-php-magazin-420.html) (PHP Magazin Ausgabe 4.20)
 * [À la découverte de Slim 4](https://www.programmez.com/magazine/article/la-decouverte-de-slim-4) (Programmez!)
 
@@ -54,7 +54,6 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 ## My projects
 
 * [odan/slim4-skeleton](https://github.com/odan/slim4-skeleton) A Slim 4 skeleton for apache
-* [odan/phinx-migrations-generator](https://github.com/odan/phinx-migrations-generator) Migration Code Generator for Phinx
 * [Selective PHP](https://github.com/selective-php) A collection of awesome PHP packages
 * [Learn modern PHP](https://odan.github.io/learn-php/) A curated list of resources for PHP
 * [All projects](https://github.com/odan?tab=repositories)
@@ -69,8 +68,7 @@ and [StackOverflow](https://stackoverflow.com/questions/tagged/slim).
 ## Conferences
 
 * [BASTA! .NET, Windows & Web Development - Online](https://basta.net/mainz/) (2021)
-* [International PHP Conference - Online](https://phpconference.com/) (2020)
-* [International PHP Conference - Berlin](https://phpconference.com/) (2015, 2016, 2017, 2018, 2019)
+* [International PHP Conference](https://phpconference.com/) (2015, 2016, 2017, 2018, 2019, 2020, 2023)
 * [International PHP Conference - Munich](https://phpconference.com/) (2013)
 
 ## Contact
