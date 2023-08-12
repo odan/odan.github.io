@@ -42,8 +42,9 @@ Whenever possible, I try to answer questions about Slim in the **[Slim forum](ht
 
 ## Publications
 
-* [The Slim 4 eBook Vol. 1](https://ko-fi.com/s/5f182b4b22)
-* [The Slim 4 eBook Vol. 2](https://ko-fi.com/s/e592c10b5f)
+* [Slim 4 eBook Vol. 1](https://ko-fi.com/s/5f182b4b22)
+* [Slim 4 eBook Vol. 2](https://ko-fi.com/s/e592c10b5f)
+* [Slim 4 eBook Vol. 3](https://ko-fi.com/s/3698cf30f3)
 * [Das PHP Micro-Framework Slim 4](https://odan.github.io/2020/05/20/slim4-php-magazin-420.html) (PHP Magazin Ausgabe 4.20)
 * [À la découverte de Slim 4](https://www.programmez.com/magazine/article/la-decouverte-de-slim-4) (Programmez!)
 
