@@ -12,7 +12,7 @@ Hi! The "Slim 4 Vol. 3 eBook" is now available
 for you to download and explore. 
 
 This eBook contains interesting articles for everyone passionate 
-about web development and the Slim 4 framework.
+about web development and the [Slim 4 framework](https://www.slimframework.com/).
 
 Here is a sneak peek of the chapters you will find inside:
 
