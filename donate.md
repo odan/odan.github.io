@@ -24,7 +24,7 @@ If there is any issue in your country with the payment, please contact me by ema
 
 * [Slim 4 - eBook Vol. 1](https://ko-fi.com/s/5f182b4b22)
 * [Slim 4 - eBook Vol. 2](https://ko-fi.com/s/e592c10b5f) 
-* [Slim 4 eBook Vol. 3](https://ko-fi.com/s/3698cf30f3) **(NEW)**
+* [Slim 4 - eBook Vol. 3](https://ko-fi.com/s/3698cf30f3) **(NEW)**
 
 ### Stripe Shop
 
