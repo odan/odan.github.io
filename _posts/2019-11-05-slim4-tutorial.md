@@ -212,9 +212,15 @@ return [
     },
 
     App::class => function (ContainerInterface $container) {
-        AppFactory::setContainer($container);
+        $app = AppFactory::createFromContainer($container);
 
-        return AppFactory::create();
+        // Register routes
+        (require __DIR__ . '/routes.php')($app);
+
+        // Register middleware
+        (require __DIR__ . '/middleware.php')($app);
+
+        return $app;
     },
 ];
 ```
@@ -226,6 +232,9 @@ All settings are just passed as an simple array, so we have no special class ide
 
 The `App::class` identifier is needed to ensure that we use the same App object 
 across the application and to ensure that the App object uses the same DI container object.
+
+Make sure you add the required `use` statements at the top of the PHP 
+file to ensure that the correct namespaces are defined.
 
 ## Bootstrap
 
@@ -245,22 +254,13 @@ use Slim\App;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-$containerBuilder = new ContainerBuilder();
+// Build DI container instance
+$container = (new ContainerBuilder())
+    ->addDefinitions(__DIR__ . '/container.php')
+    ->build();
 
-// Add DI container definitions
-$containerBuilder->addDefinitions(__DIR__ . '/container.php');
-
-// Create DI container instance
-$container = $containerBuilder->build();
-
-// Create Slim App instance
+// Create App instance
 $app = $container->get(App::class);
-
-// Register routes
-(require __DIR__ . '/routes.php')($app);
-
-// Register middleware
-(require __DIR__ . '/middleware.php')($app);
 
 return $app;
 
@@ -387,7 +387,7 @@ php -S localhost:8080 -t public/
 The terminal will show:
 
 ```
-[Sat Aug  6 10:38:50 2022] PHP 8.1.6 Development Server (http://localhost:8080) started
+[Sat Aug  6 10:38:50 2022] PHP 8.x Development Server (http://localhost:8080) started
 ```
 
 **Note:** This web server is designed to aid application development. 
