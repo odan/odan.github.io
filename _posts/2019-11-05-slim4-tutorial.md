@@ -260,9 +260,7 @@ $container = (new ContainerBuilder())
     ->build();
 
 // Create App instance
-$app = $container->get(App::class);
-
-return $app;
+return $container->get(App::class);
 
 ```
 
