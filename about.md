@@ -16,29 +16,24 @@ keywords: php, mysql, css, html, bootstrap, slim, framework, c#, csharp, dotnet
 
 Hello, my name is Daniel Opitz.
 
-I'm a Senior Software Engineer at [ORCA Services AG](https://orca-services.ch/) in Pratteln (Switzerland).
+I create scalable web solutions for public services in Switzerland.
 
-I have over 20 years of software development experience.
-
-In my free time I contribute to various open source projects
-and write **[blog](https://odan.github.io/)** posts about PHP, 
-Slim-Framework and .NET.
-
-Whenever possible, I try to answer questions about Slim in the **[Slim forum](https://discourse.slimframework.com/)**.
+In my spare time, I contribute to various open-source projects
+and write **[blog](https://odan.github.io/)** posts about PHP, Slim Framework, and .NET.
 
 ## Skills
 
-* PHP, C# (.NET), JavaScript, TypeScript
+* PHP, C#, JavaScript
 * MySQL, MariaDB, MS SQL, Oracle, SQLite, InterSystems Caché, Memcached, Redis, RabbitMQ
-* HTML, CSS, Bootstrap, Vue.js
-* Slim Framework, Laminas, CakePHP, Symfony, .NET Core
+* HTML, CSS, Bootstrap
+* Slim Framework, CakePHP, Symfony, .NET Core
 * RESTful, SOAP, XML, JSON
 * SOLID, DDD, Clean Code, Clean Architecture
 * Windows, Linux, Docker, Network, Web Security
 
 ## Videos
 
-* Follow me on [YouTube](https://www.youtube.com/@DanielOpitz)
+* My [YouTube Channel](https://www.youtube.com/@DanielOpitz)
 
 ## Publications
 
@@ -61,9 +56,8 @@ Whenever possible, I try to answer questions about Slim in the **[Slim forum](ht
 
 ## Open Source Contributions
 
-* [Slim Framework](https://github.com/slimphp/Slim) A PHP micro framework
-* [Laminas](https://github.com/laminas) A collection of enterprise-ready PHP components
-* [CakePHP](https://github.com/cakephp/cakephp) A rapid development framework for PHP
+* [Slim Framework](https://www.slimframework.com/) A PHP micro framework
+* [CakePHP](https://cakephp.org/) A rapid development framework for PHP
 * [Chronos](https://github.com/cakephp/chronos) A standalone DateTime library
 
 ## Conferences
