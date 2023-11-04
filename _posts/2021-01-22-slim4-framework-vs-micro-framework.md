@@ -77,7 +77,7 @@ You might know this Unix philosophy:
 > **Make each program do one thing well.**
 
 According to this philosophy the Slim core is just a "routing library". 
-Other thinks like Environment loading, configuration, database abstractions etc.
+Other things like Environment loading, configuration, database abstractions etc.
 is a different set of concerns that other packages do very well and there's no 
 reason for Slim to reinvent that wheel.
 
