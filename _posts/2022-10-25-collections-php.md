@@ -133,14 +133,14 @@ class StringCollection implements IteratorAggregate
 }
  ```
 
-That's it, only 26 lines of code for the implementation of a strictly typed and iterable collection class.
+That's it, just a few lines of code for the implementation of a 
+strictly typed and iterable collection class.
  
 **Usage**
 
 The usage of the collection class is quite simple:
 
 ```php
-
 $strings = new StringCollection();
 
 $strings->add('foo');
@@ -210,7 +210,6 @@ class UserCollection implements IteratorAggregate
 **Usage**
 
 ```php
-
 $users = new UserCollection();
 
 $users->add(new User());
