@@ -31,6 +31,7 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Slim\Http\Stream;
 
 $app->get('/excel', function (ServerRequestInterface $request, ResponseInterface $response) {
     $excel = new Spreadsheet();
@@ -46,7 +47,6 @@ $app->get('/excel', function (ServerRequestInterface $request, ResponseInterface
     // We have to create a real temp file here because the
     // save() method doesn't support in-memory streams.
     $tempFile = tempnam(File::sysGetTempDir(), 'phpxltmp');
-    $tempFile = $tempFile ?: __DIR__ . '/temp.xlsx';
     $excelWriter->save($tempFile);
 
     // For Excel2007 and above .xlsx files   
@@ -55,7 +55,7 @@ $app->get('/excel', function (ServerRequestInterface $request, ResponseInterface
 
     $stream = fopen($tempFile, 'r+');
 
-    return $response->withBody(new \Slim\Http\Stream($stream));
+    return $response->withBody(new Stream($stream));
 });
 ```
 
@@ -71,32 +71,3 @@ return $response;
 
 Then open the url: http://localhost/excel and the download should start automatically.
 
-## Downloading CSV files
-
-Creating an CSV file is much simpler.
-
-```php
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-
-$app->get('/csv', function (ServerRequestInterface $request, ResponseInterface $response) {
-    $list = array(
-        array('aaa', 'bbb', 'ccc', 'dddd'),
-        array('123', '456', '789'),
-        array('"aaa"', '"bbb"')
-    );
-
-    $stream = fopen('php://memory', 'w+');
-
-    foreach ($list as $fields) {
-        fputcsv($stream, $fields, ';');
-    }
-    
-    rewind($stream);
-
-    $response = $response->withHeader('Content-Type', 'text/csv');
-    $response = $response->withHeader('Content-Disposition', 'attachment; filename="file.csv"');
-
-    return $response->withBody(new \Slim\Http\Stream($stream));
-});
-```
