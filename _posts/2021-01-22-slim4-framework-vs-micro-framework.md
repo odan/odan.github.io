@@ -126,7 +126,7 @@ Here is a list of resources you should already be familiar with before evaluatin
 
 **Minimum skill set for Slim:**
 
-* [PHP 7+](https://en.wikipedia.org/wiki/PHP)
+* [PHP](https://en.wikipedia.org/wiki/PHP)
     * [OOP](https://www.php.net/manual/en/language.oop5.php)
     * [Object Interfaces](https://www.php.net/manual/en/language.oop5.interfaces.php)  
     * [Namespaces](https://www.php.net/manual/en/language.namespaces.php)
@@ -166,7 +166,7 @@ You might consider a micro framework like Slim if you:
 * really value standard interfaces like PSR-7 and PSR-15
 * want to build long-lasting software
 * want to prevent vendor lock-in
-* have special requirements and want exchange components
+* have special requirements and may want to change packages
 * want to follow industry standards and best practices (like dependency injection)
 * want to build a "SOLID" software
 * stay up to date with web development and security related topics
