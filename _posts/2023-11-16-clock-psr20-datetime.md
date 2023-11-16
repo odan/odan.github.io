@@ -145,8 +145,8 @@ echo $now->format('Y-m-d H:i:s');
 
 ## Use Dependency Injection
 
-Now, you can use dependency injection to inject the ClockInterface into 
-classes that need to access the current time.
+You can now use dependency injection to provide a `ClockInterface`
+implementation to objects requiring access to the current time.
 
 **Example**
 
