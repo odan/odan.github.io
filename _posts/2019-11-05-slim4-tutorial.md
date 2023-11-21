@@ -34,29 +34,36 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 
 ## Requirements
 
-* PHP 7.4 or PHP 8+
-* Composer (only for development)
+* PHP 8
+* Composer
 
 ## Introduction
 
-Slim Framework is a great microframework for web applications, RESTful API's and websites.
+Welcome to this Slim 4 Tutorial!
 
-Our aim is to create a RESTful API with routing, business logic and database operations.
-
-Standards like [PSR](https://www.php-fig.org/psr/) and best practices
-are very important and integrated part of this tutorial.
+In this guide, we will explore the fundamentals of Slim 4, 
+a lightweight and powerful PHP micro-framework for building
+efficient and scalable web applications and RESTful APIs.
 
 ## Installation
 
-Create a new project directory and run this command to install the Slim 4 core components:
+To set up your Slim 4 project, follow these steps:
+
+Create a new project directory.
+
+Install the Slim main package using Composer:
 
 ```
-composer require slim/slim:"4.*"
+composer require slim/slim
 ```
 
-Since Slim 4 the most implementations are decoupled from the App core.
-The Nyholm PSR-7 package is a super strict implementation of PSR-7 that is blazing fast.
-To install the needed PSR-7 implementations, run:
+Slim 4 has decoupled most implementations from the App core. 
+
+Next, we need packages to manage HTTP requests and responses within the application. 
+The Nyholm PSR-7 packages offer the fastest and strictest implementation of the PSR-7 
+standard for HTTP messages.
+
+Install the packages, run:
 
 ```
 composer require nyholm/psr7
@@ -66,9 +73,9 @@ composer require nyholm/psr7-server
 Ok nice, now we have installed the most basic dependencies for our project.
 Later we will add more dependencies to the project.
 
-Note that you should not commit the `vendor/` directory to your git repository.
-Create a file `.gitignore` in the project root directory and
-add the following lines to this file:
+Please keep in mind not to include the `vendor/` directory in your Git repository. 
+To avoid this, create a `.gitignore` file in your project root 
+directory and add the following lines:
 
 ```
 vendor/
@@ -78,17 +85,20 @@ vendor/
 
 ## Directory Structure
 
-A good directory structure helps you organize your code,
-simplifies setup on the webserver and increases the security of the entire application.
+A well-organized directory structure is essential for code organization,
+and enhances the overall application security.
 
-In a web application, it is important to distinguish between the **public** and
+In a web application, it is important to differentiate between the **public** and
 **non-public** areas.
 
-The `public/` directory serves your application and will therefore also be
-directly accessible by all browsers, search engines and API clients.
-All other folders are not public and must not be accessible online.
-This can be done by defining the `public` folder in Apache as `DocumentRoot`
-of your website.
+The `public/` is directly accessible from the Web by all browsers and API clients.
+
+This means, that the `public/` folder, should be defined the 
+[DocumentRoot](https://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot)
+for your site.
+
+All other directories (within the project root-directory)
+should remain **non-public** and must not be accessible from the web.
 
 Create a new directory: `public/`
 
@@ -108,14 +118,15 @@ that will look like this:
 
 ## Autoloader
 
-One of the most fundamental and important thing is to have a
-working [PSR-4 autoloader](https://www.php-fig.org/psr/psr-4/).
+We need a [PSR-4 autoloader](https://www.php-fig.org/psr/psr-4/) to 
+manage the loading of PHP classes in our project. 
 
-So the next step is to define the `src/` directory as root for the `\App` namespace.
+PSR-4 defines a standard for class naming and directory structure, 
+making it easier to organize and autoload classes without the need for manual `require` statements.
 
 Create a new directory: `src/`
 
-Add this autoloader settings into `composer.json`:
+Add the following `autoload` settings to your `composer.json` file:
 
 ```json
 "autoload": {
@@ -125,13 +136,16 @@ Add this autoloader settings into `composer.json`:
 }
 ```
 
-The complete `composer.json` file should look like this:
+With this configuration, your application will efficiently
+autoload classes within the `\App` namespace from the `src/` directory.
+
+Here's how your complete `composer.json` file should look now:
 
 ```json
 {
   "require": {
-    "nyholm/psr7": "^1.5",
-    "nyholm/psr7-server": "^1.0",
+    "nyholm/psr7": "^1",
+    "nyholm/psr7-server": "^1",
     "slim/slim": "^4"
   },
   "autoload": {
@@ -147,14 +161,15 @@ Run `composer update` for the changes to take effect.
 
 ## Configuration
 
+Let's set up the configuration files.
+
 The directory for all configuration files is: `config/`
 
-Create a directory: `config/`
+Create a directory `config/` in your project.
 
-The file `config/settings.php` is the main configuration file and combines
-the default settings with environment specific settings.
+Inside the `config/` directory, create a file named `settings.php`.
 
-Create a configuration file `config/settings.php` and copy/paste this content:
+Copy and paste the following content into `config/settings.php`:
 
 ```php
 <?php
@@ -173,25 +188,67 @@ $settings = [];
 return $settings;
 ```
 
+This `settings.php` file serves as the main configuration file, 
+merging default settings with environment-specific ones. 
+
+You can further populate the `$settings` array with your project's 
+specific configuration options.
+
 ## DI Container
 
-Next, we need a [PSR-11](https://www.php-fig.org/psr/psr-11/)
-**dependencies injection container** (DI container)
-implementation for **dependency injection** and **autowiring**.
+[Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) is a programming 
+technique that separates object creation from their use, 
+aiming to create loosely coupled programs.
 
-[Dependency injection](https://en.wikipedia.org/wiki/Dependency_injection) is passing
-dependency to other objects. Dependency injection makes testing easier.
+Without dependency injection, classes often hard-code their dependencies.
 
-[Autowiring](http://php-di.org/doc/autowiring.html) means,
-that you can declare all dependencies explicitly
-in your class constructor and let the DI container inject these
-dependencies automatically.
+Dependency injection separates concerns by ensuring that objects receive their 
+required dependencies from "outside". Constructor injection is the most common form, 
+where dependencies are injected through a constructor.
 
-One of the best DI container implementation is [PHP-DI](http://php-di.org/).
-To install the package, run:
+**Example**
+
+```php
+
+final class Logger
+{
+    public function log(string $message): void
+    {
+        echo "Logging: " . $message . "\n";
+    }
+}
+
+final class UserCreator
+{
+    private Logger $logger;
+
+    public function __construct(Logger $logger)
+    {
+        $this->logger = $logger;
+    }
+    
+    public function createUser(string $username): void
+    {
+        // ...
+        $this->logger->log("User created: " . $username);
+    }
+}
+
+// Usage
+$logger = new Logger();
+$userCreator = new UserCreator($logger);
+
+$userCreator->createUser('john.doe');
+```
+
+Manual construction of dependencies can become complex, 
+while a Dependency Injection (DI) container like [PHP-DI](http://php-di.org/) 
+can automate this process, see [Autowiring](https://php-di.org/doc/autowiring.html).
+
+To install PHP-DI, run:
 
 ```
-composer require php-di/php-di --with-all-dependencies
+composer require php-di/php-di
 ```
 
 ### DI Container Definitions
@@ -228,7 +285,7 @@ return [
 Note that we use the DI container to build the Slim App instance and to load the
 application settings. This allows us to configure the infrastructure services,
 like the database connection, mailer etc. within the DI container.
-All settings are just passed as an simple array, so we have no special class identifier (FQCN) here.
+All settings are just passed as a simple array, so we have no special class identifier (FQCN) here.
 
 The `App::class` identifier is needed to ensure that we use the same App object 
 across the application and to ensure that the App object uses the same DI container object.
@@ -288,7 +345,7 @@ but it's never part of your base path and the official url.
 
 * `https://www.example.com`
 * `https://www.example.com/users`
-* `httsp://www.example.com/my-app`
+* `https://www.example.com/my-app`
 * `https://www.example.com/my-app/users`
 
 <span style="color:red">Bad URLs:</span>
