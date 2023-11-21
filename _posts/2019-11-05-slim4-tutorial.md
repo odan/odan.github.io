@@ -91,7 +91,7 @@ and enhances the overall application security.
 In a web application, it is important to differentiate between the **public** and
 **non-public** areas.
 
-The `public/` is directly accessible from the Web by all browsers and API clients.
+The `public/` is directly accessible from the web by all browsers and API clients.
 
 This means, that the `public/` folder, should be defined the 
 [DocumentRoot](https://httpd.apache.org/docs/2.4/en/mod/core.html#documentroot)
@@ -118,15 +118,15 @@ that will look like this:
 
 ## Autoloader
 
-We need a [PSR-4 autoloader](https://www.php-fig.org/psr/psr-4/) to 
-manage the loading of PHP classes in our project. 
+To manage the loading of PHP classes in our project, 
+we need a [PSR-4 Autoloader](https://www.php-fig.org/psr/psr-4/).
 
 PSR-4 defines a standard for class naming and directory structure, 
 making it easier to organize and autoload classes without the need for manual `require` statements.
 
 Create a new directory: `src/`
 
-Add the following `autoload` settings to your `composer.json` file:
+Add the following `autoload` section to your `composer.json` file:
 
 ```json
 "autoload": {
@@ -137,7 +137,7 @@ Add the following `autoload` settings to your `composer.json` file:
 ```
 
 With this configuration, your application will efficiently
-autoload classes within the `\App` namespace from the `src/` directory.
+autoload all classes within the `\App` namespace from the `src/` directory.
 
 Here's how your complete `composer.json` file should look now:
 
