@@ -365,7 +365,7 @@ to read or manipulate the request and response object.
 To get Slim running we need to add the Slim `RoutingMiddleware` and `ErrorMiddleware`.
 
 The `RoutingMiddleware` will route and dispatch the incoming requests
-and the `ErrorMiddleware` is able to catch all runtime exceptions.
+and the `ErrorMiddleware` is able to catch all exceptions to render a pretty error page.
 
 The `BodyParsingMiddleware` is optional, but recommend if you work with JSON or form data.
 
@@ -448,8 +448,8 @@ The terminal will show:
 **Note:** This web server is designed to aid application development. 
 It may also be useful for testing purposes or for application 
 demonstrations that are run in controlled environments. 
-It is not intended to be a full-featured web server. 
-It should not be used on a public network.
+It is not intended to be a full-featured web server, and 
+it should not be used in a public network.
 
 The parameter `-S localhost:8080` defines the server hostname and port.
 The parameter `-t public/` specifies the document root directory with the index.php file.
