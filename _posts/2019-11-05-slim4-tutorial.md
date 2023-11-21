@@ -31,6 +31,7 @@ This tutorial shows you how to work with the powerful and lightweight Slim 4 fra
 * [Creating a JSON Response](#creating-a-json-response)
 * [Conclusion](#conclusion)
 * [Support](#support)
+* [eBooks](#slim-ebooks)
 
 ## Requirements
 
@@ -628,7 +629,7 @@ If you have Slim-Framework specific questions, visit:
 * <https://discourse.slimframework.com/>
 * <https://www.slimframework.com/docs/v4/>
 
-**Slim eBooks**
+## Slim eBooks
 
 * [Slim 4 - eBook Vol. 1](https://ko-fi.com/s/5f182b4b22)
 * [Slim 4 - eBook Vol. 2](https://ko-fi.com/s/e592c10b5f)
