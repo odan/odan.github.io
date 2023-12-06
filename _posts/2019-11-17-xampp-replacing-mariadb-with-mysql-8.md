@@ -1,7 +1,7 @@
 ---
 title: XAMPP - Replacing MariaDB with MySQL 8
 layout: post
-comments: false
+comments: true
 published: true
 description: 
 keywords: mysql

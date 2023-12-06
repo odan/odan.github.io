@@ -1,7 +1,7 @@
 ---
 title: XAMPP - How to enable PHP OPCache
 layout: post
-comments: false
+comments: true
 published: true
 description: 
 keywords: php, opcache, xampp
