@@ -28,7 +28,7 @@ twitter:
 #  url: https://www.linkedin.com/in/daniel-opitz-493816111/
 
 # Disqus comments
-comments: false
+comments: true
 
 # List of links in the navigation bar
 navbar-links:
