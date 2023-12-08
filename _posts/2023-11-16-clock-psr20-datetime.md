@@ -246,8 +246,8 @@ trait ClockTestTrait
 
 ```
 
-Note: This example assumes that you have `$this->container` member variable
-in your PHPUnit test class with your applications DI container instance.
+Note: This example assumes that you have a `$this->container` member variable
+in your PHPUnit test class with the applications DI container instance.
 
 **Usage**
 
