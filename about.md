@@ -62,8 +62,8 @@ and write **[blog](https://odan.github.io/)** posts about PHP, Slim Framework, a
 
 ## Conferences
 
+* [International PHP Conference](https://phpconference.com/) (2015-2023)
 * [BASTA! .NET, Windows & Web Development - Online](https://basta.net/mainz/) (2021)
-* [International PHP Conference](https://phpconference.com/) (2015, 2016, 2017, 2018, 2019, 2020, 2023)
 * [International PHP Conference - Munich](https://phpconference.com/) (2013)
 
 ## Contact
