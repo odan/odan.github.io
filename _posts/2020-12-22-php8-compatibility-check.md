@@ -27,12 +27,14 @@ Then install the "PHPCompatibility" rules using this command:
 composer require phpcompatibility/php-compatibility @develop --dev
 ```
 
-In order to run the PHPCompatibility checker as native Composer command,
-add the following [script](https://getcomposer.org/doc/articles/scripts.md#writing-custom-commands)
-to your `composer.json` file:
+Add a custom [script](https://getcomposer.org/doc/articles/scripts.md#writing-custom-commands) in the correct place in your `composer.json` file. 
+It should be added in the "scripts" section as follows:
+
 
 ```json
-"sniffer:php8": "phpcs -p ./src --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 8.2"
+"scripts": {
+    "sniffer:php8": "phpcs -p ./src --standard=vendor/phpcompatibility/php-compatibility/PHPCompatibility --runtime-set testVersion 8.2"
+}
 ```
 
 ### Usage
@@ -43,10 +45,7 @@ To check your codebase for PHP 8.2 compatibility issues execute the script as fo
 composer sniffer:php8
 ```
 
-Example output:
+**Example Output**
 
 ![image](https://user-images.githubusercontent.com/781074/102933727-181f6200-44a3-11eb-8028-a08d32d08ba0.png)
 
-## Read more
-
-* [Ask a question or report an issue](https://github.com/odan/support/issues/new)
