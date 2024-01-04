@@ -66,6 +66,8 @@ and write **[blog](https://odan.github.io/)** posts about PHP, Slim Framework, a
 * [BASTA! .NET, Windows & Web Development - Online](https://basta.net/mainz/) (2021)
 * [International PHP Conference - Munich](https://phpconference.com/) (2013)
 
+<a id="contact"></a>
+
 ## Contact
 
 * [E-Mail](mailto:d.opitz@outlook.com)
