@@ -71,6 +71,7 @@ and write **[blog](https://odan.github.io/)** posts about PHP, Slim Framework, a
 ## Contact
 
 * [E-Mail](mailto:d.opitz@outlook.com)
+* [Skype](skype:dali.o)
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
