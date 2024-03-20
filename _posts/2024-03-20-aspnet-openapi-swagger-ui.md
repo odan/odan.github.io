@@ -184,7 +184,7 @@ Example project:
 To serve the static files you've placed in the `wwwroot` folder and its 
 subdirectories, you'll need to enable the static files middleware in your 
 ASP.NET Core application. This is done by adding `app.UseStaticFiles();` 
-to the Configure method in your `Startup.cs` or directory in the `Program.cs` file. 
+to the Configure method in your `Startup.cs` or `Program.cs` file. 
 
 ```cs
 // ...
@@ -208,6 +208,8 @@ With the setup complete, you can access your Swagger UI by navigating to
 `https://<your-host>/docs/v1/index.html` or just `https://<your-host>/docs/v1/`
 in a web browser. This will render your API documentation using Swagger UI, 
 allowing you to interact with your API’s endpoints directly.
+
+**Preview**
 
 ![swagger](https://github.com/odan/odan.github.io/assets/781074/cd5c106c-f918-4e12-b7f7-b5737442850e)
 
@@ -236,12 +238,12 @@ to more sophisticated editors like Visual Studio or Visual Studio Code.
 When introducing a new version (e.g., v2) of your API, 
 follow these steps to ensure your Swagger UI documentation reflects the updated version:
 
-* Inside the `wwwroot/docs` folder, create a new subfolder named v2 to host the Swagger UI 
+* Inside the `wwwroot/docs` folder, create a new subfolder named `v2` to host the Swagger UI 
 and the OpenAPI schema for the new version of your API.
-* Place a new `index.html` file within the docs/v2 directory with the same contents.
+* Place a new `index.html` file within the `docs/v2` directory with the same contents.
 * Create a new YAML file within `docs/v2` that contains the OpenAPI schema for API version 2. 
 This file should reflect all the new endpoints, parameters, responses, and any other changes or additions specific to version 2.
-*  No additional changes are required if you're already serving static files with the StaticFiles middleware.
+* No additional changes are required if you're already serving static files with the StaticFiles middleware.
 * You can access the version 2 documentation by navigating to `https://<your-host>/docs/v2/index.html` in a web browser.
 
 ## Conclusion
