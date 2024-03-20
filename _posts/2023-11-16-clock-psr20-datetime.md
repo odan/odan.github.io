@@ -143,7 +143,7 @@ $now = $clock->now();
 echo $now->format('Y-m-d H:i:s');
 ```
 
-## Use Dependency Injection
+## Using Dependency Injection
 
 You can now use dependency injection to provide a `ClockInterface`
 implementation to objects requiring access to the current time.
@@ -180,7 +180,7 @@ final class MyService
 In this class, the `ClockInterface` is injected through the constructor, 
 allowing you to use it to get the current time.
 
-## Define Services in a DI Container
+## Defining Services in a DI Container
 
 To use the `ClockInterface` within your class, you need to tell
 the DI container what implementation should be used and injected.

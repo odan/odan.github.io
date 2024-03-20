@@ -1,11 +1,10 @@
 ---
 title: Streamlining OpenAPI Documentation in ASP.NET Core
-date: 2024-03-20
 layout: post
 comments: true
-published: false
+published: true
 description: 
-keywords: 
+keywords: aspnet, csharp, dotnet, openapi, swagger, documentation
 ---
 
 ## A Web-Centric Approach
@@ -24,7 +23,7 @@ Swagger UI is a collection of HTML, JavaScript, and CSS assets that dynamically
 generate beautiful documentation from a OpenAPI specification (Yaml file)
 without requiring the implementation of its server logic.
 
-![Swagger-UI](https://static1.smartbear.co/swagger/media/images/tools/opensource/swagger_ui.png)
+![Swagger UI](https://github.com/odan/odan.github.io/assets/781074/c828a84b-65dc-43f3-98fb-471f96c360ae)
 
 ## Using HTML and YAML for OpenAPI Documentation
 
@@ -43,7 +42,7 @@ capturing the full capabilities, endpoints, parameters, and responses of the API
 
 ## Benefits of the HTML/YAML Approach
 
-Besides the accessibility, there are even more bebenits such as:
+Besides the accessibility, there are even more benefits such as:
 
 **Simplicity:** By relying on static assets like HTML and YAML, 
 this approach minimizes the complexity involved in API documentation, 
@@ -72,28 +71,83 @@ in the evolving landscape of web development.
 To set up a directory structure for hosting Swagger UI and your OpenAPI schema in an 
 ASP.NET Core project, follow these instructions. 
 
-* If your ASP.NET Core project does not already have a `wwwroot` folder at its root, create one. 
+**Create the wwwroot Folder**
+
+If your ASP.NET Core project does not already have a `wwwroot` folder at its root, create one. 
 This folder is the web root directory and serves as the base path for your web application's static files.
 
-* Inside the `wwwroot` folder, create a new folder path `docs/v1`. 
+**Add a docs/v1 Subfolder**
+
+Inside the `wwwroot` folder, create a new folder path `docs/v1`. 
 This path will host the Swagger UI and your OpenAPI schema for version 1 of your API.
 
-* Inside the `docs/v1` folder, create a file named `index.html`. This HTML file will include the Swagger UI setup. 
+**Add index.html for Swagger UI**
+
+Inside the `docs/v1` folder, create a file named `index.html`. This HTML file will include the Swagger UI setup. 
 
 Copy / paste the following source-code into the `index.html` file:
 
 ```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Specification - Swagger UI</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.12.0/swagger-ui.min.css">
+</head>
+<body>
+    <div id="swagger-ui"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.12.0/swagger-ui-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.12.0/swagger-ui-standalone-preset.min.js"></script>
+    <script>
+        window.onload = async function () {
+            try {
+                const response = await fetch('openapi.yml');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok.');
+                }
+                const yaml = await response.text();
+                const ui = SwaggerUIBundle({
+                    spec: jsyaml.load(yaml.trim()),
+                    dom_id: '#swagger-ui',
+                    deepLinking: true,
+                    supportedSubmitMethods: [],
+                    presets: [
+                        SwaggerUIBundle.presets.apis,
+                    ],
+                    plugins: [
+                        SwaggerUIBundle.plugins.DownloadUrl
+                    ],
+                });
+                window.ui = ui;
+            } catch (error) {
+                alert("Error loading YAML file: " + error.message);
+            }
+        }
+    </script>
+</body>
+</html>
 
 ```
 
-Explaination: ...
+This HTML file serves to display an API specification using Swagger UI, 
+a tool that renders OpenAPI specifications into interactive API documentation. 
 
-* Still within the `docs/v1` directory, create your OpenAPI schema file with 
-a .yaml extension (e.g., `openapi.yaml`). This YAML file contains your API's 
-specification in the OpenAPI format. Ensure that your `index.html` Swagger UI 
-is set up to load this YAML file as its source for API documentation.
+Upon loading, the file fetches an API schema from a `openapi.yml` file using a HTTPS network request, processes the YAML content to JSON 
+using the `js-yaml` library, and then initializes the Swagger UI with this
+processed specification. 
 
-Example file:
+The HTML includes links to CSS for styling and JavaScript libraries 
+for Swagger UI functionality and YAML processing.
+
+**Add Your OpenAPI Schema YAML File**
+
+Within the `docs/v1` directory, create your OpenAPI schema file with 
+a `.yml` extension (e.g., `openapi.yml`). This YAML file contains your API's 
+specification in the OpenAPI format. 
+
+Copy the following sample API specification or use your own file:
 
 ```yaml
 openapi: 3.0.0
@@ -124,7 +178,12 @@ paths:
                   type: string
 ```
 
-* To serve the static files you've placed in the `wwwroot` folder and its 
+Example project:
+
+![image](https://github.com/odan/odan.github.io/assets/781074/d4f10aea-eac8-4d75-a9f4-ce91dc2e6456)
+
+
+To serve the static files you've placed in the `wwwroot` folder and its 
 subdirectories, you'll need to enable the static files middleware in your 
 ASP.NET Core application. This is done by adding `app.UseStaticFiles();` 
 to the Configure method in your `Startup.cs` or directory in the `Program.cs` file. 
@@ -132,18 +191,28 @@ to the Configure method in your `Startup.cs` or directory in the `Program.cs` fi
 ```cs
 // ...
 
-app.UseStaticFiles(); // Enable static file serving
+app.UseDefaultFiles();
+app.UseStaticFiles(new StaticFileOptions
+{
+    ServeUnknownFileTypes = true
+});
+
+// app.MapControllers();
 
 app.UseRouting();
 
 // ...
 ```
 
-Notice: The StaticFiles middleware should be added before the Routing middleware.
+**Notice:** The StaticFiles middleware should be added before the Routing or Controllers middleware.
 
-* With the setup complete, you can access your Swagger UI by navigating to `https://<your-host>/docs/v1/index.html`
+With the setup complete, you can access your Swagger UI by navigating to 
+`https://<your-host>/docs/v1/index.html` or just `https://<your-host>/docs/v1/`
 in a web browser. This will render your API documentation using Swagger UI, 
 allowing you to interact with your API’s endpoints directly.
+
+![swagger](https://github.com/odan/odan.github.io/assets/781074/cd5c106c-f918-4e12-b7f7-b5737442850e)
+
 
 ## API Changes
 
@@ -177,7 +246,7 @@ This file should reflect all the new endpoints, parameters, responses, and any o
 *  No additional changes are required if you're already serving static files with the StaticFiles middleware.
 * You can access the version 2 documentation by navigating to `https://<your-host>/docs/v2/index.html` in a web browser.
 
-## Conculsion
+## Conclusion
 
 This straightforward setup organizes your API documentation neatly within your ASP.NET Core project, 
 making it easily accessible while keeping it separate from your application logic.
