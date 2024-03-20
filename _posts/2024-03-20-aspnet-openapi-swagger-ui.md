@@ -9,13 +9,15 @@ keywords: aspnet, csharp, dotnet, openapi, swagger, documentation
 
 ## A Web-Centric Approach
 
-ASP.NET Core's move away from Swashbuckle creates room for creativity as the framework develops, 
+The ASP.NET Core team [moves away from Swashbuckle](https://github.com/dotnet/aspnetcore/issues/54599) 
+creates room for creativity as the framework develops, 
 especially in how it handles API documentation and integrates OpenAPI (previously Swagger). 
-Since Microsoft.AspNetCore.OpenApi will be improved in.NET 9 with a focus toward document generation, 
+Since `Microsoft.AspNetCore.OpenApi` will be improved in.NET 9 with a focus toward document generation, 
 other approaches have a chance to adopt and expand OpenAPI support. 
 In the middle of this shift, I offer a different approach for integrating 
 Swagger OpenAPI that makes use of the web's simplicity and universality: 
-supplying an HTML file (Swagger-UI) and a YAML file that are rendered in the browser to show the OpenAPI specification.
+Supplying an HTML file (Swagger-UI) and a YAML file that are rendered 
+in the browser to show the OpenAPI specification.
 
 ## Swagger-UI
 
