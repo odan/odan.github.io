@@ -235,6 +235,15 @@ to more sophisticated editors like Visual Studio or Visual Studio Code.
 
 ## New API Versions
 
+With this YAML-based documentation approach for your Swagger UI, 
+it becomes possible to adopt a "design-first" methodology for your APIs. 
+This means you can design and prototype new APIs or endpoints without 
+writing any actual code (such as actions or controllers) upfront. 
+You can outline the entire API structure, define endpoints, parameters, 
+and responses directly within the YAML file. This enables you to present 
+a comprehensive proposal of the new API version or changes to 
+stakeholders or customers for discussion and approval before any development starts.
+
 When introducing a new version (e.g., v2) of your API, 
 follow these steps to ensure your Swagger UI documentation reflects the updated version:
 
