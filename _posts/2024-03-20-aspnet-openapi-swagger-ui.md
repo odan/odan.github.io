@@ -265,6 +265,6 @@ This file should reflect all the new endpoints, parameters, responses, and any o
 
 ## Conclusion
 
-This simple setup organizes your API documentation neatly within your ASP.NET Core project, 
+This setup organizes your API documentation neatly within your ASP.NET Core project, 
 making it easily accessible while keeping it separate from your application logic
-and future-proof for the next breaking-changes in the .NET ecosystem.
+and safe from the next breaking-changes in the .NET ecosystem.
