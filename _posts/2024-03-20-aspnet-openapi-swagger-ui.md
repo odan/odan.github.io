@@ -87,7 +87,7 @@ you can easily deploy the same set of documentation files
 (index.html and the YAML OpenAPI schema) on external servers, 
 cloud storage services, or even on GitHub Pages.
 
-**Note:** I know, this method does not aligns with the direction of ASP.NET Core team,
+**💡 Note:** I know, this method does not aligns with the direction of ASP.NET Core team,
 but it offers a practical and efficient solution to the challenges of API documentation 
 in the evolving landscape of web development.
 
@@ -205,8 +205,7 @@ paths:
 
 Example project:
 
-![image](https://github.com/odan/odan.github.io/assets/781074/d4f10aea-eac8-4d75-a9f4-ce91dc2e6456)
-
+![project](https://github.com/odan/odan.github.io/assets/781074/ca3035b8-81ce-4ee2-8332-a0caba793c8b)
 
 To serve the static files you've placed in the `wwwroot` folder and its 
 subdirectories, you'll need to enable the static files middleware in your 
