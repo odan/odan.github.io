@@ -1,5 +1,5 @@
 ---
-title: Streamlining OpenAPI Documentation in ASP.NET Core
+title: ASP.NET - Streamlining OpenAPI Documentation
 layout: post
 comments: true
 published: true
@@ -31,7 +31,7 @@ without requiring the implementation of its server logic.
 
 This methodology is centered around the creation and distribution of two core elements:
 
-**Swagger-UI HTML Page:** A static HTML page that incorporates Swagger-UI,
+**Swagger-UI HTML Page:** A static HTML page that uses Swagger-UI,
 an interactive API documentation web tool that renders OpenAPI specifications
 into a user-friendly and interactive interface.
 
@@ -42,9 +42,34 @@ defined in YAML format, serves as the source of truth for the API documentation.
 
 Besides the accessibility, there are even more benefits such as:
 
-**Simplicity:** By relying on static assets like HTML and YAML, 
+**Enhanced Change Management:** By relying on static assets like HTML and YAML, 
 this approach minimizes the complexity involved in API documentation, 
 making it easier to maintain and update.
+
+The process of documenting your API and making updates to its specification 
+is now handled directly within the YAML file for each version of your API. 
+This means that the OpenAPI schema for your API 
+(including descriptions of endpoints, parameters, and responses) 
+will be manually written and updated in the YAML file, 
+rather than being automatically generated from the source code. 
+
+This approach allows for greater flexibility and control over the API documentation, 
+but it requires that changes to the API are carefully reflected in the YAML file 
+to ensure accuracy and consistency of the documentation. 
+
+It's essential to keep the documentation up to date with any modifications 
+or additions to the API to provide users with a reliable and comprehensive 
+understanding of the API's capabilities.
+
+Additionally, by incorporating the OpenAPI YAML 
+file into your version control system, you can precisely track and 
+manage changes over time. This setup enhances 
+collaboration and change management, allowing for a clear history 
+of modifications and facilitating easier rollback if needed.
+
+To modify a YAML file, you can use a variety of tools ranging from 
+[Swagger Editor](https://editor.swagger.io/) 
+to more sophisticated editors like [Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer).
 
 **Flexibility:** Developers can easily customize the Swagger-UI page 
 to fit their branding or add additional functionality, 
@@ -54,13 +79,15 @@ offering a tailor-made documentation experience.
 allowing for easy sharing, version control, and use in other tools or environments.
 
 By managing your API documentation through YAML files and a static Swagger UI, 
-you have the flexibility to host your documentation on any server or platform that supports static content. 
+you have the flexibility to host your documentation on any server or platform 
+that supports static content. 
+
 This approach is not limited to your ASP.NET Core application's server; 
 you can easily deploy the same set of documentation files 
 (index.html and the YAML OpenAPI schema) on external servers, 
-cloud storage services, or even on GitHub Pages
+cloud storage services, or even on GitHub Pages.
 
-I know, this method does not aligns with the direction of ASP.NET Core,
+**Note:** I know, this method does not aligns with the direction of ASP.NET Core team,
 but it offers a practical and efficient solution to the challenges of API documentation 
 in the evolving landscape of web development.
 
@@ -214,25 +241,6 @@ allowing you to interact with your API’s endpoints directly.
 ![swagger](https://github.com/odan/odan.github.io/assets/781074/cd5c106c-f918-4e12-b7f7-b5737442850e)
 
 
-## API Changes
-
-The process of documenting your API and making updates to its specification 
-is now handled directly within the YAML file for each version of your API. 
-This means that the OpenAPI schema for your API (including descriptions of endpoints, parameters, and responses) 
-will be manually written and updated in the YAML file, 
-rather than being automatically generated from the source code. 
-
-This approach allows for greater flexibility and control over the API documentation, 
-but it requires that changes to the API are carefully reflected in the YAML file 
-to ensure accuracy and consistency of the documentation. 
-
-It's essential to keep the documentation up to date with any modifications 
-or additions to the API to provide users with a reliable and comprehensive 
-understanding of the API's capabilities.
-
-To modify a YAML file, you can use a variety of tools ranging from [Swagger Editor](https://editor.swagger.io/) 
-to more sophisticated editors like Visual Studio or Visual Studio Code.
-
 ## New API Versions
 
 With this YAML-based documentation approach for your Swagger UI, 
@@ -257,5 +265,6 @@ This file should reflect all the new endpoints, parameters, responses, and any o
 
 ## Conclusion
 
-This straightforward setup organizes your API documentation neatly within your ASP.NET Core project, 
-making it easily accessible while keeping it separate from your application logic.
+This simple setup organizes your API documentation neatly within your ASP.NET Core project, 
+making it easily accessible while keeping it separate from your application logic
+and future-proof for the next breaking-changes in the .NET ecosystem.
