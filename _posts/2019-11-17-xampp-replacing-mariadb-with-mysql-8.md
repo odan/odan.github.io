@@ -60,6 +60,8 @@ ssl-mode=DISABLED
 
 Note: You need to open the console (cmd) as Administrator.
 
+Change into the `mysql\bin` directory.
+
 ```cmd
 cd c:\xampp\mysql\bin
 ```
@@ -69,6 +71,8 @@ Create a "data" directory.
 ```cmd
 mkdir c:\xampp\mysql\bin\data
 ```
+
+Initialize the data directory.
 
 ```cmd
 mysqld.exe --default-authentication-plugin=mysql_native_password --initialize-insecure --basedir=c:\xampp\mysql --datadir=c:\xampp\mysql\data
