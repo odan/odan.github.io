@@ -58,7 +58,7 @@ ssl-mode=DISABLED
 
 **<span style="color:red">Important: Don't skip this step!</span>**
 
-Note: You you admin persmissions.
+Note: You need to open the console (cmd) as Administrator.
 
 ```cmd
 cd c:\xampp\mysql\bin
