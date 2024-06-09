@@ -21,5 +21,5 @@ I'm looking forward to collaborating with the Slim Framework community, contribu
 *PS: Open-source contributions are a great way to improve your skills, collaborate with other developers, and give back to the community.*
 
 
-* https://github.com/slimphp
-* https://www.slimframework.com/
+* <https://github.com/slimphp>
+* <https://www.slimframework.com/>
