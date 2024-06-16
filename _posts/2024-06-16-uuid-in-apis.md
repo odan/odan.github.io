@@ -41,7 +41,7 @@ To benefit of UUIDs while avoiding their drawbacks, a hybrid approach could be u
 
 A client makes a request to your API with a UUID.
 
-```http
+```
 GET /api/v1/users/550e8400-e29b-41d4-a716-446655440000
 ```
 
@@ -61,7 +61,7 @@ retrieves the (user) data from the database using the internal ID.
 
 The application performs the necessary database operations using the internal ID.
 
-The service result object (DTO) is getting returned with the appropriate data and the associated external UUID (if needed).
+The service method returns a DTO which, if necessary, also contains the corresponding external UUID(s).
 
 ```cs
 // The service
