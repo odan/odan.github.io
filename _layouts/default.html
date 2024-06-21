@@ -21,6 +21,7 @@
     <script src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script>
         function toggleDark(r) {
+            const container = document.body;
             const dataTheme = container.getAttribute("data-theme");
             let theme_switch;
             if (dataTheme === "light") {
@@ -110,9 +111,8 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", (event) => {
-            const container = document.body;
             if (localStorage.getItem("data-theme")) {
-                container.setAttribute("data-theme", localStorage.getItem("data-theme"));
+                document.body.setAttribute("data-theme", localStorage.getItem("data-theme"));
                 toggleDark(1)
             }
         });
