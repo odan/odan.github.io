@@ -20,18 +20,16 @@
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
     <script src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <script>
-        const container = document.body;
-        if (localStorage.getItem("data-theme")) {
-            container.setAttribute("data-theme", localStorage.getItem("data-theme"));
-            toggleDark(1)
-        }
-        //actually use the saved value
-
-        function toggleDark(r) {//this function is executed when switching from the current theme to the other
+        function toggleDark(r) {
             const dataTheme = container.getAttribute("data-theme");
             let theme_switch;
-            if (dataTheme === "light") { theme_switch = 1 } else { theme_switch = 0 }
-            if (r) { theme_switch = !theme_switch }//so the oppisite of the theme stored is used when calling this function 
+            if (dataTheme === "light") {
+                theme_switch = 1
+            } else {
+                theme_switch = 0
+            }
+            if (r) { theme_switch = !theme_switch }
+
             if (theme_switch) {
                 container.setAttribute("data-theme", "dark");
                 document.getElementById("night").style.display = "block";
@@ -110,6 +108,15 @@
         <span id="light" class="material-icons">light_mode</span>
     </button>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", (event) => {
+            const container = document.body;
+            if (localStorage.getItem("data-theme")) {
+                container.setAttribute("data-theme", localStorage.getItem("data-theme"));
+                toggleDark(1)
+            }
+        });
+    </script>
 </body>
 
 </html>
