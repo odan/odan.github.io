@@ -132,7 +132,7 @@ Single action controllers can be named based on the specific action they perform
 The naming should be clear and descriptive to reflect their single responsibility. 
 Here are some naming conventions and examples for single action controllers:
 
-### 1. UTL Path + HTTPMethod
+### Example: Path + HTTP-Method
 
 This convention includes the route (url path), and the used HTTP method.
 
