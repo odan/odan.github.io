@@ -129,4 +129,6 @@ The controller returns the JSON response to the client.
 
 Using UUIDs at the API level provides the benefits of global uniqueness and enhanced security without compromising the performance and efficiency of your database. By mapping UUIDs to internal integer-based primary keys and using these keys for all database operations, you can achieve a balance between secure, scalable API design and high-performance database management. This approach ensures that your application can handle the demands of modern distributed systems while maintaining optimal performance.
 
+## Read more
 
+* [The Problem with Using a UUID Primary Key in MySQL](https://planetscale.com/blog/the-problem-with-using-a-uuid-primary-key-in-mysql)
