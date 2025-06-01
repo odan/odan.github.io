@@ -1,4 +1,3 @@
-
 ---
 title: PHP Development Setup on Windows with WSL2 and XDebug
 layout: post
