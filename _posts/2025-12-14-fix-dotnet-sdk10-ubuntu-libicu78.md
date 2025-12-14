@@ -77,22 +77,15 @@ sudo apt-get update
 sudo apt-get install -y dotnet-sdk-10.0
 ```
 
-To install runtime, run:
-
-```
-sudo apt-get install -y aspnetcore-runtime-10.0
-```
-
 Verify the SDK installation:
 
 ```
-dotnet --list-runtimes
+dotnet --list-sdks
 ```
 
 Expected result:
 
 ```
-Microsoft.AspNetCore.App 10.0.1 [/usr/share/dotnet/shared/Microsoft.AspNetCore.App]
-Microsoft.NETCore.App 10.0.1 [/usr/share/dotnet/shared/Microsoft.NETCore.App]
+10.0.101 [/usr/share/dotnet/sdk]
 ```
 
