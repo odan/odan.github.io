@@ -1,39 +1,35 @@
 ---
 title: About
-date: 2018-01-01
 layout: default
 comments: true
 published: true
-description: Webdeveloper
+description: Solution Architect, Software Architect, Developer, Web developer
 keywords: php, mysql, css, html, bootstrap, slim, framework, c#, csharp, dotnet
 ---
 
 # About me
 
-<p>
-<img src="https://odan.github.io/assets/images/dopitz2.png" width="120" alt="Daniel Opitz" class="avatar">
-</p>
-
 Hello, my name is Daniel Opitz.
 
-I create scalable web solutions for public services in Switzerland.
+I live in Switzerland 🇨🇭 and I create scalable web and IoT solutions with a strong focus on software architecture, 
+clean code, and long-term maintainability.
 
-In my spare time, I contribute to various open-source projects
-and write **[blog](https://odan.github.io/)** posts about PHP, Slim Framework, and .NET.
+In my spare time, I contribute to open-source projects and write blog posts about 
+software development, architecture, and modern programming practices.
 
 ## Skills
 
-* PHP, C#, JavaScript
-* MySQL, MariaDB, MS SQL, Oracle, SQLite, InterSystems Caché, Memcached, Redis, RabbitMQ
+* C#, Java, PHP, JavaScript
+* PostgreSQL, MySQL, MariaDB, MS SQL, Oracle, SQLite, InterSystems Caché, Memcached, Redis, RabbitMQ
 * HTML, CSS, Bootstrap
-* Slim Framework, CakePHP, Symfony, .NET Core
+* .NET, Javalin, Slim Framework, CakePHP, Symfony
 * RESTful, SOAP, XML, JSON
 * SOLID, DDD, Clean Code, Clean Architecture
-* Windows, Linux, Docker, Network, Web Security
+* Windows, Linux, Cloud, Network, Web Security
 
 ## Videos
 
-* My [YouTube Channel](https://www.youtube.com/@DanielOpitz)
+* [YouTube Channel](https://www.youtube.com/@DanielOpitz)
 
 ## Publications
 
@@ -71,7 +67,6 @@ and write **[blog](https://odan.github.io/)** posts about PHP, Slim Framework, a
 ## Contact
 
 * [E-Mail](mailto:d.opitz@outlook.com)
-* [Skype](skype:dali.o)
 * [Twitter](https://twitter.com/dopitz)
 * [GitHub](https://github.com/odan)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
