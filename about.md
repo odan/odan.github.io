@@ -11,7 +11,7 @@ keywords: php, mysql, css, html, bootstrap, slim, framework, c#, csharp, dotnet
 
 Hello, my name is Daniel Opitz.
 
-I live in Switzerland 🇨🇭 and I create scalable web and IoT solutions with a strong focus on software architecture, 
+I live in Switzerland and I create scalable web and IoT solutions with a strong focus on software architecture, 
 clean code, and long-term maintainability.
 
 In my spare time, I contribute to open-source projects and write blog posts about 
