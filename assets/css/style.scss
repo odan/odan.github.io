@@ -618,6 +618,14 @@ footer a:hover {
   margin-top: 2px;
 }
 
+/* Base list styles for non-article pages (about, donate) */
+ul, ol {
+  margin: 0 0 20px 24px;
+}
+li {
+  margin-bottom: 8px;
+}
+
 /* Section heading for regular pages */
 .page-heading {
   font-size: 28px;
