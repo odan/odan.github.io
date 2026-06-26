@@ -3,5 +3,15 @@
         issue-term="pathname"
         theme="github-light"
         crossorigin="anonymous"
-        async>
+        async
+        id="utterances-script">
+</script>
+<script>
+    (function() {
+        var theme = document.documentElement.getAttribute('data-theme');
+        if (theme === 'dark') {
+            var s = document.getElementById('utterances-script');
+            s.setAttribute('theme', 'github-dark');
+        }
+    })();
 </script>

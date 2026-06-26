@@ -2,28 +2,24 @@
 layout: default
 ---
 
-<h1>Search</h1>
+<h1 class="page-heading">Search</h1>
 
-<form id="search-form" action="">
-    <label class="label" for="search">Search term:</label>
-    <br/>
-    <input class="input" id="search" type="text" name="search" placeholder="e.g. History of"
-           autocomplete="off" tabindex="0">
-    <ul class="list  list--results" id="list">
-
-    </ul>
+<form class="search-form" action="">
+    <label for="search">Search term:</label>
+    <input id="search" type="text" name="search" placeholder="e.g. History of" autocomplete="off" tabindex="0">
+    <ul class="search-results" id="list"></ul>
 </form>
 
 {% include adsense.html %}
 
-<script type="text/javascript" src="./assets/fetch.js"></script>
-<script type="text/javascript" src="./assets/search.js"></script>
-<script type="text/javascript">
-    const search = new jekyllSearch(
-        './assets/search.json',
+<script src="{{ '/assets/fetch.js' | relative_url }}"></script>
+<script src="{{ '/assets/search.js' | relative_url }}"></script>
+<script>
+    var search = new jekyllSearch(
+        '{{ "/assets/search.json" | relative_url }}',
         '#search',
         '#list',
-        'https://odan.github.io'
+        '{{ site.url }}'
     );
     search.init();
 
@@ -33,29 +29,3 @@ layout: default
 </script>
 
 <noscript>Please enable JavaScript to use the search form.</noscript>
-
-<style media="screen">
-    form {
-        text-align: left;
-        display: flex;
-        flex-direction: column;
-        /* align-items: center; */
-        /* min-width: 300px; */
-        /* width: 20vw; */
-    }
-
-    input {
-        font-family: inherit;
-        font-size: inherit;
-        width: 100%;
-    }
-
-    ul {
-        list-style: none;
-        padding-left: 0;
-    }
-
-    .main-content ul, .main-content ol {
-        margin-top: 25px;
-    }
-</style>

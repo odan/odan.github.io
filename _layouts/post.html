@@ -2,25 +2,64 @@
 layout: default
 ---
 
-<h2 class="post_title">
-  <h1>{{ page.title }}</h1>
+<article>
+    <div class="breadcrumb">
+        <a href="{{ '/' | relative_url }}">Blog</a>
+        {% assign year = page.date | date: "%Y" %}
+        / <span>{{ year }}</span>
+        / <span>{{ page.title }}</span>
+    </div>
 
-  <img src="https://odan.github.io/assets/images/dopitz3.png" width="36" alt="Daniel Opitz" class="avatar">
-  <div>Daniel Opitz</div>
+    <h1>{{ page.title }}</h1>
 
-  {% if page.date %}
-    <small>{{ page.date | date_to_string }}</small>
-  {% endif %}
-</h2>
+    <div class="post-meta">
+        <img src="https://odan.github.io/assets/images/dopitz3.png" alt="Daniel Opitz" class="avatar">
+        <div class="post-meta-text">
+            <span class="author-name">Daniel Opitz</span>
+            <span class="post-date">
+                {% if page.date %}
+                    {{ page.date | date: "%d. %B %Y" }}
+                {% endif %}
+                {% if page.tags and page.tags.size > 0 %}
+                    &nbsp;·&nbsp; {{ page.tags | size }} min read
+                {% endif %}
+            </span>
+        </div>
+    </div>
 
-<p>
-{% include adsense.html %}
-</p>
+    {% if page.tags %}
+    <div class="tags">
+        {% for tag in page.tags %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-{{ content }}
+    <hr>
 
-{% include adsense.html %}
+    {{ content }}
 
-{% if site.comments and page.comments %}
-  {% include utterances.html %}
-{% endif %}
+    <div class="author-box">
+        <img src="https://odan.github.io/assets/images/dopitz3.png" alt="Daniel Opitz">
+        <div>
+            <h4>Daniel Opitz</h4>
+            <p>Developer, Trainer &amp; Open Source Contributor. Passionate about PHP, Slim Framework, and clean code.</p>
+        </div>
+    </div>
+
+    <div class="share">
+        <span>Share:</span>
+        <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ page.url | absolute_url | url_encode }}" target="_blank">Twitter</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ page.url | absolute_url | url_encode }}" target="_blank">Facebook</a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | url_encode }}&title={{ page.title | url_encode }}" target="_blank">LinkedIn</a>
+    </div>
+
+    {% if site.comments and page.comments %}
+    <div class="comments">
+        <h3>Comments</h3>
+        {% include utterances.html %}
+    </div>
+    {% endif %}
+</article>
+
+<a href="{{ '/' | relative_url }}" class="back-top">&uarr; Back to Blog</a>
