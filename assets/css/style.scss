@@ -145,6 +145,44 @@ nav {
   color: var(--link);
 }
 
+/* Hamburger */
+.hamburger {
+  display: none;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 18px;
+  line-height: 1;
+  transition: all .2s;
+}
+.hamburger:hover {
+  background: var(--bg-secondary);
+  color: var(--link);
+}
+
+/* Nav Overlay */
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(0,0,0,.3);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.nav-overlay.open {
+  display: block;
+  opacity: 1;
+}
+body.nav-open {
+  overflow: hidden;
+}
+
 /* Hero */
 .hero {
   background: linear-gradient(135deg, var(--hero-from) 0%, var(--hero-to) 100%);
@@ -643,7 +681,44 @@ li {
   padding: 4px 0;
 }
 
-/* Responsive */
+/* Responsive - Hamburger Menu */
+@media (max-width: 640px) {
+  .hamburger {
+    display: inline-block;
+  }
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    z-index: 45;
+    flex-direction: column;
+    gap: 0;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,.1);
+    padding: 8px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-links a {
+    padding: 12px 16px;
+    font-size: 15px;
+    border-radius: 8px;
+    width: 100%;
+  }
+  .theme-btn {
+    margin-left: auto;
+  }
+}
+
+/* Responsive - Tablet & Small */
 @media (max-width: 640px) {
   body {
     font-size: 16px;
@@ -652,9 +727,8 @@ li {
     padding: 0 16px;
     gap: 4px;
   }
-  .nav-links a {
-    padding: 6px 8px;
-    font-size: 13px;
+  .nav-logo {
+    font-size: 17px;
   }
   .container,
   .container-wide {
@@ -663,8 +737,15 @@ li {
   .card-grid {
     grid-template-columns: 1fr;
   }
+  .hero {
+    min-height: 160px;
+    padding: 32px 16px;
+  }
   .hero h1 {
     font-size: 24px;
+  }
+  .hero p {
+    font-size: 14px;
   }
   article h1 {
     font-size: 26px;
@@ -676,13 +757,155 @@ li {
   .post-meta {
     flex-wrap: wrap;
   }
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 16px;
+  }
+  table {
+    display: block;
+    overflow-x: auto;
+  }
 }
+
+/* Responsive - Phone */
 @media (max-width: 480px) {
+  .nav-logo {
+    font-size: 15px;
+  }
   .nav-links a {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+  .hero {
+    min-height: 140px;
+    padding: 24px 12px;
+  }
+  .hero h1 {
+    font-size: 22px;
+  }
+  .hero p {
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .container,
+  .container-wide {
+    padding: 20px 12px;
+  }
+  article h1 {
+    font-size: 22px;
+    letter-spacing: -.01em;
+  }
+  article h2 {
+    font-size: 20px;
+    margin: 28px 0 12px;
+  }
+  article h3 {
+    font-size: 18px;
+    margin: 24px 0 10px;
+  }
+  .page-heading {
+    font-size: 22px;
+  }
+  .year-heading {
+    font-size: 18px;
+    margin: 28px 0 12px;
+  }
+  .card-grid {
+    gap: 14px;
+  }
+  .card {
+    padding: 16px;
+  }
+  .card h3 {
+    font-size: 16px;
+  }
+  pre {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+  th, td {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  .author-box {
+    padding: 16px;
+    gap: 12px;
+    margin: 32px 0 16px;
+  }
+  .author-box img {
+    width: 48px;
+    height: 48px;
+  }
+  .share a {
+    padding: 5px 10px;
     font-size: 12px;
-    padding: 4px 6px;
+  }
+  .breadcrumb span:last-child {
+    max-width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: bottom;
+  }
+  .back-top {
+    margin-top: 32px;
+  }
+  footer {
+    font-size: 13px;
+    gap: 6px;
+    padding: 16px 12px;
+  }
+}
+
+/* Responsive - Very Small */
+@media (max-width: 360px) {
+  body {
+    font-size: 15px;
+  }
+  .nav-inner {
+    padding: 0 10px;
   }
   .nav-logo {
+    font-size: 14px;
+  }
+  .nav-links a {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  .hamburger {
+    padding: 5px 8px;
     font-size: 16px;
+  }
+  .theme-btn {
+    padding: 5px 8px;
+    font-size: 13px;
+  }
+  .hero {
+    min-height: 120px;
+    padding: 20px 10px;
+  }
+  .hero h1 {
+    font-size: 20px;
+  }
+  .card-grid {
+    gap: 10px;
+  }
+  .card {
+    padding: 12px;
+  }
+  .card h3 {
+    font-size: 15px;
+  }
+  pre {
+    padding: 10px 12px;
+    font-size: 12px;
+  }
+  .container,
+  .container-wide {
+    padding: 16px 10px;
   }
 }

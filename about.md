@@ -67,7 +67,7 @@ software development, architecture, and modern programming practices.
 ## Contact
 
 * [E-Mail](mailto:d.opitz@outlook.com)
-* [Twitter](https://twitter.com/dopitz)
+* [X](https://x.com/dopitz)
 * [GitHub](https://github.com/odan)
 * [LinkedIn](https://www.linkedin.com/in/daniel-opitz-493816111)
 * [Xing](https://www.xing.com/profile/Daniel_Opitz9)

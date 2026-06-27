@@ -20,18 +20,20 @@
     <nav>
         <div class="nav-inner">
             <a href="{{ '/' | relative_url }}" class="nav-logo">odan/blog</a>
-            <div class="nav-links">
+            <div class="nav-links" id="nav-links">
                 <a href="{{ '/' | relative_url }}">Blog</a>
                 <a href="{{ '/about.html' | relative_url }}">About</a>
                 <a href="{{ '/donate.html' | relative_url }}">Donate</a>
                 <a href="https://github.com/odan" target="_blank">GitHub</a>
-                {% if site.twitter.username %}
-                <a href="https://twitter.com/{{ site.twitter.username }}" target="_blank">Twitter</a>
+                {% if site.x.username %}
+                <a href="https://x.com/{{ site.x.username }}" target="_blank">X</a>
                 {% endif %}
                 <a href="{{ '/search.html' | relative_url }}">Search</a>
-                <button class="theme-btn" id="toggle-mode" aria-label="Toggle dark/light mode">&#9790;</button>
             </div>
+            <button class="theme-btn" id="toggle-mode" aria-label="Toggle dark/light mode">&#9790;</button>
+            <button class="hamburger" id="hamburger" aria-label="Menu">&#9776;</button>
         </div>
+        <div class="nav-overlay" id="nav-overlay"></div>
     </nav>
 
     <header class="hero" role="banner">
@@ -47,7 +49,7 @@
 
         <footer>
             &copy; {{ site.time | date: "%Y" }} Daniel Opitz
-            &nbsp;|&nbsp; <a href="https://twitter.com/dopitz" target="_blank">Twitter</a>
+            &nbsp;|&nbsp; <a href="https://x.com/dopitz" target="_blank">X</a>
             &nbsp;|&nbsp; <a href="https://github.com/odan" target="_blank">GitHub</a>
             &nbsp;|&nbsp; <a href="https://www.linkedin.com/in/daniel-opitz-493816111" target="_blank">LinkedIn</a>
             &nbsp;|&nbsp; <a href="https://odan.github.io/feed.xml" target="_blank">RSS</a>
@@ -68,6 +70,26 @@
                 document.documentElement.setAttribute('data-theme', next);
                 localStorage.setItem('theme', next);
             });
+
+            var hamburger = document.getElementById('hamburger');
+            var navLinks = document.getElementById('nav-links');
+            var overlay = document.getElementById('nav-overlay');
+            if (hamburger && navLinks) {
+                function closeMenu() {
+                    navLinks.classList.remove('open');
+                    overlay.classList.remove('open');
+                    document.body.classList.remove('nav-open');
+                }
+                hamburger.addEventListener('click', function() {
+                    navLinks.classList.toggle('open');
+                    overlay.classList.toggle('open');
+                    document.body.classList.toggle('nav-open');
+                });
+                overlay.addEventListener('click', closeMenu);
+                navLinks.querySelectorAll('a').forEach(function(link) {
+                    link.addEventListener('click', closeMenu);
+                });
+            }
         })();
     </script>
 </body>
