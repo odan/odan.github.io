@@ -1,5 +1,3 @@
----
----
 
 :root {
   background: var(--bg);
@@ -912,4 +910,24 @@ li {
   .container-wide {
     padding: 16px 10px;
   }
+}
+
+@view-transition {
+  navigation: auto;
+}
+
+main#content {
+  view-transition-name: page-content;
+}
+
+nav, header.hero, footer {
+  view-transition-name: none;
+}
+
+main#content {
+  animation: 0.2s ease both vt-in;
+}
+
+@keyframes vt-in {
+  from { opacity: 0; }
 }
