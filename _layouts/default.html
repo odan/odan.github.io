@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: "en-US" }}">
 <head>
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (!saved) {
+                saved = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.setAttribute('data-theme', saved);
+        })();
+    </script>
     <meta charset="UTF-8">
     {% seo %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark light">
     <meta name="theme-color" content="#1e293b">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     {% if page.keywords %}
@@ -15,15 +25,6 @@
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800|jetbrains-mono:400,500" rel="stylesheet" />
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
-    <script>
-        (function() {
-            var saved = localStorage.getItem('theme');
-            if (!saved) {
-                saved = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
-            }
-            document.documentElement.setAttribute('data-theme', saved);
-        })();
-    </script>
 </head>
 <body>
     <nav>
