@@ -1,6 +1,10 @@
 ---
 ---
 
+@view-transition {
+  navigation: auto;
+}
+
 :root {
   --bg: #ffffff;
   --bg-secondary: #f8fafc;
@@ -48,6 +52,15 @@
   --tag-text: #c4b5fd;
   --hero-from: #0f172a;
   --hero-to: #1e293b;
+}
+
+main#content {
+  view-transition-name: page-content;
+}
+
+/* Exclude persistent elements from view transition */
+nav, header.hero, footer {
+  view-transition-name: none;
 }
 
 * {
@@ -679,6 +692,21 @@ li {
 }
 .content-list li {
   padding: 4px 0;
+}
+
+/* View Transition animations */
+::view-transition-old(page-content) {
+  animation: 0.2s ease-out both vt-fade-out;
+}
+::view-transition-new(page-content) {
+  animation: 0.3s ease-in both vt-fade-in;
+}
+
+@keyframes vt-fade-out {
+  to { opacity: 0; }
+}
+@keyframes vt-fade-in {
+  from { opacity: 0; }
 }
 
 /* Responsive - Hamburger Menu */
