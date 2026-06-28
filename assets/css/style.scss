@@ -1,10 +1,6 @@
 ---
 ---
 
-@view-transition {
-  navigation: auto;
-}
-
 :root {
   background: var(--bg);
   --bg: #ffffff;
@@ -53,15 +49,6 @@
   --tag-text: #c4b5fd;
   --hero-from: #0f172a;
   --hero-to: #1e293b;
-}
-
-main#content {
-  view-transition-name: page-content;
-}
-
-/* Exclude persistent elements from view transition */
-nav, header.hero, footer {
-  view-transition-name: none;
 }
 
 * {
@@ -694,22 +681,6 @@ li {
 .content-list li {
   padding: 4px 0;
 }
-
-/* View Transition animations */
-::view-transition-old(page-content) {
-  animation: 0.2s ease both vt-out;
-}
-::view-transition-new(page-content) {
-  animation: 0.4s cubic-bezier(0.16, 1, 0.3, 1) both vt-in;
-  z-index: 1;
-}
-@keyframes vt-out {
-  to { opacity: 0; }
-}
-@keyframes vt-in {
-  from { opacity: 0; transform: translateY(24px); }
-}
-
 /* Responsive - Hamburger Menu */
 @media (max-width: 640px) {
   .hamburger {
