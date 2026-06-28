@@ -15,6 +15,15 @@
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800|jetbrains-mono:400,500" rel="stylesheet" />
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+    <script>
+        (function() {
+            var saved = localStorage.getItem('theme');
+            if (!saved) {
+                saved = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.setAttribute('data-theme', saved);
+        })();
+    </script>
 </head>
 <body>
     <nav>
@@ -55,12 +64,6 @@
 
     <script>
         (function() {
-            var saved = localStorage.getItem('theme');
-            if (!saved) {
-                saved = window.matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
-            }
-            document.documentElement.setAttribute('data-theme', saved);
-
             document.getElementById('toggle-mode').addEventListener('click', function(e) {
                 var cur = document.documentElement.getAttribute('data-theme');
                 var next = cur === 'dark' ? 'light' : 'dark';
