@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}" data-theme="dark">
+<html lang="{{ site.lang | default: " en-US" }}" data-theme="dark">
+
 <head>
     <script>
-        (function() {
+        (function () {
             var saved = localStorage.getItem('theme') || 'dark';
             document.documentElement.setAttribute('data-theme', saved);
         })();
@@ -21,11 +22,17 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800|jetbrains-mono:400,500" rel="stylesheet" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+    <script type="module"
+        src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@latest/dist/turbo.es2017-esm.min.js"></script>
     <meta name="view-transition" content="same-origin">
+    <meta name="turbo-prefetch" content="false">
+    <!-- <meta name="turbo-refresh-method" content="morph"> -->
+    <meta name="turbo-refresh-scroll" content="preserve">
 </head>
+
 <body>
     <nav>
-            <div class="nav-inner">
+        <div class="nav-inner">
             <a href="{{ '/' | relative_url }}" class="nav-logo">odan/blog</a>
             <div class="nav-links" id="nav-links">
                 <a href="{{ '/' | relative_url }}">Blog</a>
@@ -60,8 +67,8 @@
     </main>
 
     <script>
-        (function() {
-            document.getElementById('toggle-mode').addEventListener('click', function(e) {
+        (function () {
+            document.getElementById('toggle-mode').addEventListener('click', function (e) {
                 var cur = document.documentElement.getAttribute('data-theme');
                 var next = cur === 'dark' ? 'light' : 'dark';
                 document.documentElement.setAttribute('data-theme', next);
@@ -77,17 +84,18 @@
                     overlay.classList.remove('open');
                     document.body.classList.remove('nav-open');
                 }
-                hamburger.addEventListener('click', function() {
+                hamburger.addEventListener('click', function () {
                     navLinks.classList.toggle('open');
                     overlay.classList.toggle('open');
                     document.body.classList.toggle('nav-open');
                 });
                 overlay.addEventListener('click', closeMenu);
-                navLinks.querySelectorAll('a').forEach(function(link) {
+                navLinks.querySelectorAll('a').forEach(function (link) {
                     link.addEventListener('click', closeMenu);
                 });
             }
         })();
     </script>
 </body>
+
 </html>
