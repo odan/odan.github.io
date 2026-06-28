@@ -23,22 +23,10 @@
     <link rel="stylesheet" href="{{ '/assets/css/transitions.css?v=' | append: site.github.build_revision | relative_url }}">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800|jetbrains-mono:400,500" rel="stylesheet" />
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@latest/dist/turbo.es2017-esm.min.js"></script>
+    <meta name="view-transition" content="same-origin">
 </head>
 <body>
-<div id="page-overlay"></div>
-<script>
-    (function() {
-        var o = document.getElementById('page-overlay');
-        if (o) {
-            o.classList.add('active');
-            requestAnimationFrame(function() {
-                requestAnimationFrame(function() {
-                    o.classList.remove('active');
-                });
-            });
-        }
-    })();
-</script>
     <nav>
         <div class="nav-inner">
             <a href="{{ '/' | relative_url }}" class="nav-logo">odan/blog</a>
@@ -76,19 +64,6 @@
 
     <script>
         (function() {
-            document.addEventListener('click', function(e) {
-                if (e.button !== 0) return;
-                var link = e.target.closest('a[href]');
-                if (!link || link.target === '_blank' || link.getAttribute('download') !== null) return;
-                try {
-                    if (new URL(link.href).origin !== location.origin) return;
-                } catch(_) { return; }
-                e.preventDefault();
-                var o = document.getElementById('page-overlay');
-                if (o) o.classList.add('active');
-                setTimeout(function() { location.href = link.href; }, 220);
-            });
-
             document.getElementById('toggle-mode').addEventListener('click', function(e) {
                 var cur = document.documentElement.getAttribute('data-theme');
                 var next = cur === 'dark' ? 'light' : 'dark';

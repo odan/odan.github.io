@@ -1,12 +1,13 @@
-#page-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  background: var(--bg);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
+::view-transition-old(root) {
+  animation: 0.2s ease both vt-out;
 }
-#page-overlay.active {
-  opacity: 1;
+::view-transition-new(root) {
+  animation: 0.4s cubic-bezier(0.16, 1, 0.3, 1) both vt-in;
+  z-index: 1;
+}
+@keyframes vt-out {
+  to { opacity: 0; }
+}
+@keyframes vt-in {
+  from { opacity: 0; transform: translateY(24px); }
 }
