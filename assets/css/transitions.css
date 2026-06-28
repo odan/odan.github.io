@@ -1,12 +1,12 @@
-@view-transition {
-  navigation: auto;
+#page-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
 }
-
-
-main#content {
-  view-transition-name: page-content;
-}
-
-nav, header.hero, footer {
-  view-transition-name: none;
+#page-overlay.active {
+  opacity: 1;
 }
