@@ -3,7 +3,8 @@
 
 :root {
   background: var(--bg);
-  --bg: #ffffff;
+  color-scheme: dark;
+  --bg: #0f172a;
   --bg-secondary: #f8fafc;
   --text: #1a1a2e;
   --text-secondary: #64748b;
@@ -49,6 +50,9 @@
   --tag-text: #c4b5fd;
   --hero-from: #0f172a;
   --hero-to: #1e293b;
+}
+[data-theme="light"] {
+  color-scheme: light;
 }
 
 * {
