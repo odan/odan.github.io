@@ -912,14 +912,5 @@ li {
   }
 }
 
-@view-transition {
-  navigation: auto;
-}
 
-main#content {
-  view-transition-name: page-content;
-}
 
-nav, header.hero, footer {
-  view-transition-name: none;
-}
