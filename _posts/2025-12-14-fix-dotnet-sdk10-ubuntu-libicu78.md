@@ -44,8 +44,8 @@ The workaround is simple: install `libicu78` manually, then proceed with the .NE
 Download and install the missing deb package:
 
 ```
-wget https://ftp.debian.org/debian/pool/main/i/icu/libicu78_78.1-2_amd64.deb
-sudo dpkg -i libicu78_78.1-2_amd64.deb
+wget https://ftp.debian.org/debian/pool/main/i/icu/libicu78_78.3-2_amd64.deb
+sudo dpkg -i libicu78_78.3-2_amd64.deb
 ```
 
 Verify the installation:
@@ -57,7 +57,7 @@ dpkg -l | grep libicu
 Expected result:
 
 ```
-ii  libicu78:amd64                 78.1-2                                  amd64        International Components for Unicode
+ii  libicu78:amd64                 78.3-2                                  amd64        International Components for Unicode
 ```
 
 Now you can install .NET SDK 10:
